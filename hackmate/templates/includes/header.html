@@ -8,7 +8,7 @@
     {% with request.resolver_match.view_name as view_name %}
     <ul class="navbar-nav">
       <li>
-        <a class="nav-link {% if view_name == 'homepage:homepage' %}active disabled{% endif %}"href="{% url 'homepage:homepage' %}">Главная</a>
+        <a class="nav-link {% if view_name == 'homepage:homepage' %}{% endif %}"href="{% url 'homepage:homepage' %}">Главная</a>
       </li>
     </ul>
     {% endwith %}
