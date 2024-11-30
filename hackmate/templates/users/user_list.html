@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section class="container">
+		<article class="row">
+			{% for user in users %}
+				<article class="col-4 card" style="width: 18rem; margin: 20px;">
+					{% if user.profile.image %}
+						<img class="card-img-top" src="{{ user.profile.image.url }}" alt="">
+					{% endif %}
+					<div class="card-body">
+						{% if user.first_name %}
+							<h5 class="card-title">{{ user.first_name }}</h5>
+						{% endif %}
+						{% if user.profile.birthday %}
+							<p class="card-text">Дата рождения {{ user.profile.birthday|date:"d M" }}</p>
+						{% endif %}
+						<a href="{% url 'users:user_detail' user.pk %}" class="btn btn-primary">Перейти к пользователю</a>
+					</div>
+				</article>
+			{% endfor %}
+		</article>
+	</section>
+{% endblock content %}
