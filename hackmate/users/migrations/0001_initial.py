@@ -57,7 +57,9 @@ class Migration(django.db.migrations.Migration):
                 (
                     "image",
                     django.db.models.ImageField(
-                        blank=True, null=True, upload_to="uploads/profile",
+                        blank=True,
+                        null=True,
+                        upload_to="uploads/profile",
                     ),
                 ),
                 (

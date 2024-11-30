@@ -26,3 +26,9 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
             return user
 
         return None
+
+    def get_user(self, user_id):
+        try:
+            return django.contrib.auth.models.User.objects.get(pk=user_id)
+        except django.contrib.auth.models.User.DoesNotExist:
+            return None

@@ -1,8 +1,7 @@
 __all__ = ()
 
-import django.urls
-
 import about.views
+import django.urls
 
 
 app_name = "about"

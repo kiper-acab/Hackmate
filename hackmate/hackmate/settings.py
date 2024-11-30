@@ -3,7 +3,9 @@ __all__ = ()
 import os
 import pathlib
 
+import django.urls
 import dotenv
+
 
 dotenv.load_dotenv()
 
@@ -128,3 +130,12 @@ AUTHENTICATION_BACKENDS = [
     "users.backends.EmailOrUsernameModelBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "send_mail"
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+LOGIN_REDIRECT_URL = django.urls.reverse_lazy("homepage:homepage")
+LOGIN_URL = django.urls.reverse_lazy("users:login")
+LOGOUT_REDIRECT_URL = django.urls.reverse_lazy("users:login")
