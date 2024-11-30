@@ -1,0 +1,15 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'homepage:homepage' %}">
+    <img src="{% static 'logo/favicon.ico' %}" width="48">
+  </a>
+  {% with request.resolver_match.view_name as view_name %}
+  <article class="navbar-nav">
+    <a class="{% if view_name == 'homepage:homepage' %}list-group-item list-group-item-action active {% endif %}" href="{% url 'homepage:homepage' %}">Главная</a>
+    {% if request.user.is_superuser %}
+			<a href="/admin/" class="{% if view_name == 'homepage:homepage' %}list-group-item list-group-item-action active {% endif %}">Админка</a>
+		{% endif %}
+  </article>
+  {% endwith %}
+</nav>
