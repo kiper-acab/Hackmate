@@ -1,0 +1,110 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i);
+
+:root {
+  --black: #1d1f20;
+  --blue: #83e4e2;
+  --green: #a2ed56;
+  --yellow: #fddc32;
+  --white: #fafafa;
+  --box-shadow: 0.25rem 0.25rem 0.6rem rgba(0, 0, 0, 0.05),
+    0 0.5rem 1.125rem rgba(75, 0, 0, 0.05);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--black);
+  font-family: "Raleway", sans-serif;
+}
+
+main {
+  display: block;
+  margin: 0 auto;
+  max-width: 40rem;
+  padding: 1rem;
+}
+
+.container > section {
+  margin: 50px 0;
+  >h2, h1{
+    margin: 35px 0;
+  }
+  > ul, ol, p {
+    margin-left: 30px;
+  }
+}
+
+ol.gradient-list, ul.gradient-list {
+  counter-reset: gradient-counter;
+  list-style: none;
+  margin: 1.75rem 0;
+  padding-left: 1rem;
+}
+
+ol.gradient-list > li, ul.gradient-list > li {
+  background: white;
+  border-radius: 0 0.5rem 0.5rem 0.5rem;
+  box-shadow: var(--box-shadow);
+  counter-increment: gradient-counter;
+  margin-top: 1rem;
+  min-height: 3rem;
+  padding: 1rem 1rem 1rem 3rem;
+  position: relative;
+}
+
+ol.gradient-list > li::before,
+ol.gradient-list > li::after {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--green) 100%);
+  border-radius: 1rem 1rem 0 1rem;
+  content: "";
+  height: 3rem;
+  left: -1rem;
+  overflow: hidden;
+  position: absolute;
+  top: -1rem;
+  width: 3rem;
+}
+
+
+ul.gradient-list > li::after,
+ul.gradient-list > li::before {
+  background: linear-gradient(135deg, var(--yellow) 0%, var(--blue) 100%);
+  border-radius: 1rem 1rem 0 1rem;
+  content: "";
+  height: 3rem;
+  left: -1rem;
+  overflow: hidden;
+  position: absolute;
+  top: -1rem;
+  width: 3rem;
+}
+
+ol.gradient-list > li::before,
+ul.gradient-list > li::before {
+  align-items: flex-end;
+  box-shadow: var(--box-shadow);
+  content: counter(gradient-counter);
+  color: var(--black);
+  display: flex;
+  font: 900 1.5em/1 "Montserrat";
+  justify-content: flex-end;
+  padding: 0.125em 0.25em;
+  z-index: 1;
+}
+
+ol.gradient-list > li::before,
+ul.gradient-list > li::before{
+  background: linear-gradient(135deg, rgba(162, 237, 86, 0.2) 0%, rgba(253, 220, 50, 0.2) 100%);
+}
+
