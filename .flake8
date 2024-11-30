@@ -1,0 +1,13 @@
+[flake8]
+max-line-length = 79
+extend-select = B950
+import-order-style = google
+max-expression-complexity = 9
+application-import-names = hackmate, homepage,
+exclude =
+    .git,
+    env,
+    .gitignore,
+    venv/
+
+inline-quotes = "

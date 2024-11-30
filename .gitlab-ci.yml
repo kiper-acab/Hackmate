@@ -1,0 +1,20 @@
+stages:
+  - black
+  - flake
+
+black:
+    stage: black
+    image: registry.gitlab.com/pipeline-components/black:latest
+    script: 
+      - black --config pyproject.toml --check .
+    only:
+      - main
+
+flake:
+    stage: flake
+    image: registry.gitlab.com/pipeline-components/flake8:latest
+    script:
+        - pip3 install flake8-quotes -q
+        - pip3 install pep8-naming -q
+        - pip3 install flake8-import-style -q
+        - flake8 --verbose
