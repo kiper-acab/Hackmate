@@ -67,7 +67,33 @@ class ProfileView(
 class SignUpView(
     django.views.generic.FormView,
 ):
-    pass
+    template_name = "users/signup.html"
+    form_class = users.forms.UserCreateForm
+    success_url = django.urls.reverse_lazy("users:login")
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.email = users.models.UserManager().normalize_email(
+            form.cleaned_data["email"],
+        )
+        user.set_password(form.cleaned_data["password1"])
+
+        user.is_active = False
+        user.save()
+
+        django.contrib.messages.success(
+            self.request,
+            "Пользователь успешно создан",
+        )
+        django.contrib.messages.info(
+            self.request,
+            "Активируйте профиль в письме, которое придет вам на почту",
+        )
+
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class ActivateUserView(django.views.View):
