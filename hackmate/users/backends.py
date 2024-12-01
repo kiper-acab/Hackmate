@@ -70,12 +70,6 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
                     fail_silently=False,
                 )
 
-        else:
-            django.contrib.messages.error(
-                request,
-                "Неверный логин или пароль.",
-            )
-
         return None
 
     def get_user(self, user_id):

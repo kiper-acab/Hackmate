@@ -42,6 +42,7 @@ class UserManager(django.contrib.auth.models.UserManager):
         local_part = re.sub(r"\+.*", "", local_part)
         return f"{local_part}@{domain}"
 
+
     def active(self):
         return (
             self.get_queryset()

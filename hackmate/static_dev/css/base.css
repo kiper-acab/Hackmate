@@ -50,6 +50,22 @@ html, body {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.dropdown-toggle{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.dropdown-username{
+    margin: auto 10px;
+}
+
+.dropdown-image{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
 
 .footer {
     background-color: rgb(20, 20, 20);
