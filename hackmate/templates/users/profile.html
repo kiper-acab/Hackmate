@@ -2,10 +2,6 @@
 
 {% load static %}
 
-{% block links %}
-    <link rel="stylesheet" href="{% static 'css/feedback/feedback.css' %}">
-{% endblock %}
-
 {% block content %}
 	<section class="container">
 		{% if messages %}
@@ -26,13 +22,9 @@
 			{% endfor %}
 			<button type="submit" class="btn btn-primary">Сохранить</button>
 		</form>
-		<a href="{% url 'homepage:coffee' %}" class="btn btn-link">Выпить кофе</a>
 
 		<div>
 			<a href="{% url 'statistic:user_stats'%}" class="btn btn-link">Cтатистика профиля</a>
-		</div>
-		<div>
-			<a href="{% url 'statistic:user_rated_items'%}" class="btn btn-link">Оцененные товары</a>
 		</div>
 	</section>
 {% endblock %}
