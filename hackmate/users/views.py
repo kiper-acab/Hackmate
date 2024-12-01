@@ -23,45 +23,13 @@ User = django.contrib.auth.get_user_model()
 
 class ProfileView(
     django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.View,
+    django.views.generic.DetailView,
 ):
-    def get(self, request):
-        form = users.forms.UserChangeForm(instance=request.user)
-        profile_form = users.forms.ProfileChangeForm(
-            instance=request.user.profile,
-        )
-        return django.shortcuts.render(
-            request,
-            "users/profile.html",
-            {"form": form, "profile_form": profile_form},
-        )
+    template_name = "users/profile.html"
+    model = User
 
-    def post(self, request):
-        form = users.forms.UserChangeForm(request.POST, instance=request.user)
-        profile_form = users.forms.ProfileChangeForm(
-            request.POST,
-            request.FILES,
-            instance=request.user.profile,
-        )
-
-        if form.is_valid() and profile_form.is_valid():
-            user_form = form.save(commit=False)
-            user_form.mail = users.models.UserManager().normalize_email(
-                form.cleaned_data["email"],
-            )
-            user_form.save()
-            profile_form.save()
-            django.contrib.messages.success(
-                request,
-                "Форма успешно отправлена!",
-            )
-            return django.shortcuts.redirect("users:profile")
-
-        return django.shortcuts.render(
-            request,
-            "users/profile.html",
-            {"form": form, "profile_form": profile_form},
-        )
+    def get_object(self):
+        return self.request.user
 
 
 class ProfileEditView(
@@ -125,14 +93,15 @@ class SignUpView(
             user.is_active = True
         else:
             user.is_active = False
+            domain = self.request.get_host()
             url = django.urls.reverse("users:activate", args=[user.username])
             confirmation_link = (
                 "Чтобы подтвердить аккаунт перейдите по ссылке "
-                f"http://127.0.0.1:8000{url}"
+                f"http://{domain}/{url}"
             )
 
             django.core.mail.send_mail(
-                "Activate your account",
+                "Активируйте ваш аккаунт",
                 confirmation_link,
                 django.conf.settings.DJANGO_MAIL,
                 [user.email],
@@ -151,9 +120,6 @@ class SignUpView(
         )
 
         return super().form_valid(form)
-
-    def form_invalid(self, form):
-        return self.render_to_response(self.get_context_data(form=form))
 
 
 class ActivateUserView(django.views.View):

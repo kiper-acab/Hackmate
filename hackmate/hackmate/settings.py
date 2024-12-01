@@ -157,3 +157,11 @@ else:
         "DJANGO_DEFAULT_USER_IS_ACTIVE",
         default="False",
     )
+
+DEFAULT_USER_IS_ACTIVE = DEFAULT_USER_IS_ACTIVE.lower() in (
+    "true",
+    "yes",
+    "1",
+    "y",
+    "",
+)
