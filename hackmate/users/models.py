@@ -1,8 +1,8 @@
 __all__ = []
 
+import pathlib
 import re
 import sys
-import os
 
 import django.conf
 import django.contrib.auth.models
@@ -21,9 +21,8 @@ if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
 
 
 def user_directory_path(instance, filename):
-
     username = instance.user.username
-    return os.path.join('uploads', 'users_logos', username, filename)
+    return pathlib.Path("uploads") / "users_logos" / username / filename
 
 
 class UserManager(django.contrib.auth.models.UserManager):
