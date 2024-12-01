@@ -157,4 +157,3 @@ else:
         "DJANGO_DEFAULT_USER_IS_ACTIVE",
         default="False",
     )
-
