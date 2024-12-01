@@ -36,6 +36,33 @@ class ProfileView(
             {"form": form, "profile_form": profile_form},
         )
 
+    def post(self, request):
+        form = users.forms.UserChangeForm(request.POST, instance=request.user)
+        profile_form = users.forms.ProfileChangeForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.profile,
+        )
+
+        if form.is_valid() and profile_form.is_valid():
+            user_form = form.save(commit=False)
+            user_form.mail = users.models.UserManager().normalize_email(
+                form.cleaned_data["email"],
+            )
+            user_form.save()
+            profile_form.save()
+            django.contrib.messages.success(
+                request,
+                "Форма успешно отправлена!",
+            )
+            return django.shortcuts.redirect("users:profile")
+
+        return django.shortcuts.render(
+            request,
+            "users/profile.html",
+            {"form": form, "profile_form": profile_form},
+        )
+
 
 class ProfileEditView(
     django.contrib.auth.mixins.LoginRequiredMixin,
