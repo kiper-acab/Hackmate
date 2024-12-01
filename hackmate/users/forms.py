@@ -52,12 +52,6 @@ class ProfileChangeForm(BootstrapForm):
         for field in self.visible_fields():
             field.field.required = False
 
-        model = users.models.Profile
-
-        coffee_count_field = model.coffee_count.field.name
-
-        self.fields[coffee_count_field].disabled = True
-
     class Meta:
         model = users.models.Profile
         fields = (
