@@ -94,7 +94,24 @@ class SignUpView(
         )
         user.set_password(form.cleaned_data["password1"])
 
-        user.is_active = False
+        if django.conf.settings.DEFAULT_USER_IS_ACTIVE:
+            user.is_active = True
+        else:
+            user.is_active = False
+            url = django.urls.reverse("users:activate", args=[user.username])
+            confirmation_link = (
+                "Чтобы подтвердить аккаунт перейдите по ссылке "
+                f"http://127.0.0.1:8000{url}"
+            )
+
+            django.core.mail.send_mail(
+                "Activate your account",
+                confirmation_link,
+                django.conf.settings.DJANGO_MAIL,
+                [user.email],
+                fail_silently=False,
+            )
+
         user.save()
 
         django.contrib.messages.success(
@@ -113,4 +130,44 @@ class SignUpView(
 
 
 class ActivateUserView(django.views.View):
-    pass
+    def get(self, request, username):
+        user = django.shortcuts.get_object_or_404(
+            django.contrib.auth.models.User,
+            username=username,
+        )
+        now = django.utils.timezone.now()
+
+        if not user.profile.date_last_active:
+            time_difference = now - user.date_joined
+            allowed_activation_time = 12
+        else:
+            time_difference = now - user.profile.date_last_active
+            allowed_activation_time = 168
+
+        datediff = int(time_difference.total_seconds() // 3600)
+
+        if not user.is_active:
+            if datediff <= allowed_activation_time:
+                user.is_active = True
+                user.profile.save()
+                user.save()
+                django.contrib.messages.success(
+                    request,
+                    ("Пользователь успешно активирован"),
+                )
+            else:
+                django.contrib.messages.error(
+                    request,
+                    (
+                        "Активация профиля была "
+                        "доступна в течение {allowed_activation_time} "
+                        "часов после регистрации"
+                    ),
+                )
+        else:
+            django.contrib.messages.error(
+                request,
+                ("Пользователь уже активирован"),
+            )
+
+        return django.shortcuts.redirect(django.urls.reverse("users:login"))

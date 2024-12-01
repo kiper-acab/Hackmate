@@ -14,7 +14,7 @@
 			<a href="{% url 'users:profile' %}" class="{% if view_name == 'users:profile' %}list-group-item list-group-item-info {% endif %}">Профиль</a>
 		{% endif %}
     {% if request.user.is_superuser %}
-			<a href="/admin/" class="{% if view_name == 'homepage:homepage' %}list-group-item list-group-item-info {% endif %}">Админка</a>
+			<a href="/admin/">Админка</a>
 		{% endif %}
   </article>
   {% endwith %}

@@ -131,6 +131,11 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 
+DJANGO_MAIL = os.getenv("DJANGO_MAIL")
+
+MAX_AUTH_ATTEMPTS = os.getenv("DJANGO_MAX_AUTH_ATTEMPS", 5)
+
+
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "send_mail"
 
@@ -139,3 +144,16 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 LOGIN_REDIRECT_URL = django.urls.reverse_lazy("homepage:homepage")
 LOGIN_URL = django.urls.reverse_lazy("users:login")
 LOGOUT_REDIRECT_URL = django.urls.reverse_lazy("users:login")
+
+
+if DEBUG:
+    DEFAULT_USER_IS_ACTIVE = os.getenv(
+        "DJANGO_DEFAULT_USER_IS_ACTIVE",
+        default="True",
+    )
+
+else:
+    DEFAULT_USER_IS_ACTIVE = os.getenv(
+        "DJANGO_DEFAULT_USER_IS_ACTIVE",
+        default="False",
+    )
