@@ -1,0 +1,12 @@
+.container {
+    margin-top: 50px;
+}
+
+.form>div,
+.form-group{
+    margin: 20px 0;
+}
+
+.btn-primary{
+    margin-top: 20px;
+}
