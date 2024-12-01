@@ -51,6 +51,11 @@ urlpatterns = [
         name="profile",
     ),
     django.urls.path(
+        "profile_edit/",
+        users.views.ProfileEditView.as_view(),
+        name="profile_edit",
+    ),
+    django.urls.path(
         "login/",
         login_view,
         name="login",

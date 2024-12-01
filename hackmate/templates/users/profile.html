@@ -2,25 +2,37 @@
 
 {% load static %}
 
-{% block content %}
-	<section class="container">
-		{% if messages %}
-			<div class="messages" role="alert">
-				{% for message in messages %}
-					<p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
-				{% endfor %}
-			</div>
-		{% endif %}
-		<form method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			{% for field in form %}
-					{% include "includes/form.html" %}
-			{% endfor %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
+{% endblock %}
 
-			{% for field in profile_form %}
-					{% include "includes/form.html" %}
-			{% endfor %}
-			<button type="submit" class="btn btn-primary">Сохранить</button>
-		</form>
-	</section>
+{% block content %}
+<section class="container">
+    <div class="profile-header">
+        <div class="profile-avatar">
+            {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="{{ user.username }}" class="avatar">
+            {% else %}
+                <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="avatar">
+            {% endif %}
+        </div>
+        <div class="profile-info">
+            <h1>{{ user.username }}</h1>
+            <p>Email: {{ user.email }}</p>
+            {% if user.profile.description %}
+                <p>О себе: {{ user.profile.description }}</p>
+            {% else %}
+                <p>О себе: Информация не указана.</p>
+            {% endif %}
+            {% if user.profile.birthday %}
+                <p>День рождения: {{ user.profile.birthday }}</p>
+            {% else %}
+                <p>День рождения: Информация не указана.</p>
+            {% endif %}
+            <p>Дата регистрации: {{ user.date_joined|date:"d.m.Y" }}</p>
+        </div>
+    </div>
+     <div class="profile-actions">
+        <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">Редактировать профиль</a>
+    </div>
 {% endblock %}

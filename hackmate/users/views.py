@@ -36,6 +36,22 @@ class ProfileView(
             {"form": form, "profile_form": profile_form},
         )
 
+
+class ProfileEditView(
+    django.views.generic.View,
+    django.contrib.auth.mixins.LoginRequiredMixin,
+):
+    def get(self, request):
+        form = users.forms.UserChangeForm(instance=request.user)
+        profile_form = users.forms.ProfileChangeForm(
+            instance=request.user.profile,
+        )
+        return django.shortcuts.render(
+            request,
+            "users/profile_edit.html",
+            {"form": form, "profile_form": profile_form},
+        )
+
     def post(self, request):
         form = users.forms.UserChangeForm(request.POST, instance=request.user)
         profile_form = users.forms.ProfileChangeForm(
@@ -53,13 +69,13 @@ class ProfileView(
             profile_form.save()
             django.contrib.messages.success(
                 request,
-                "Форма успешно отправлена!",
+                "Профиль успешно изменен!",
             )
-            return django.shortcuts.redirect("users:profile")
+            return django.shortcuts.redirect("users:profile_edit")
 
         return django.shortcuts.render(
             request,
-            "users/profile.html",
+            "users/profile_edit.html",
             {"form": form, "profile_form": profile_form},
         )
 

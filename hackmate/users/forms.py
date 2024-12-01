@@ -55,8 +55,9 @@ class ProfileChangeForm(BootstrapForm):
     class Meta:
         model = users.models.Profile
         fields = (
-            users.models.Profile.birthday.field.name,
             users.models.Profile.image.field.name,
+            users.models.Profile.birthday.field.name,
+            users.models.Profile.description.field.name,
         )
 
         labels = {

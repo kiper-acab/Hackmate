@@ -8,6 +8,8 @@ import django.conf
 import django.contrib.auth.models
 import django.db.models
 
+import users.validators
+
 if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
     email_field = django.contrib.auth.models.User._meta.get_field("email")
     email_field._unique = True
@@ -73,6 +75,7 @@ class Profile(django.db.models.Model):
         blank=True,
         verbose_name="день рождения",
         help_text="Введите дату рождения",
+        validators=[users.validators.validate_birthday],
     )
 
     image = django.db.models.ImageField(
@@ -85,7 +88,12 @@ class Profile(django.db.models.Model):
         default=0,
     )
 
-    description = django.db.models.TextField(null=True, blank=True)
+    description = django.db.models.TextField(
+        null=True,
+        blank=True,
+        verbose_name="о себе",
+        help_text="Расскажите о себе",
+    )
 
     date_last_active = django.db.models.DateTimeField(null=True, blank=True)
 
