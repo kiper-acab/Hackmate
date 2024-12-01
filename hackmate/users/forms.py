@@ -52,8 +52,6 @@ class ProfileChangeForm(BootstrapForm):
         for field in self.visible_fields():
             field.field.required = False
 
-        model = users.models.Profile
-
 
     class Meta:
         model = users.models.Profile
