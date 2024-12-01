@@ -59,7 +59,7 @@ textarea {
 }
 
 button {
-    align-self: center;
+    align-self: flex-start;
     padding: 12px 25px;
     font-size: 1rem;
     font-weight: bold;
@@ -69,4 +69,6 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 20px;
 }
+

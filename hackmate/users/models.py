@@ -1,8 +1,8 @@
 __all__ = []
 
-
 import re
 import sys
+import os
 
 import django.conf
 import django.contrib.auth.models
@@ -18,6 +18,12 @@ if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
         "username",
     )
     username_field._unique = True
+
+
+def user_directory_path(instance, filename):
+
+    username = instance.user.username
+    return os.path.join('uploads', 'users_logos', username, filename)
 
 
 class UserManager(django.contrib.auth.models.UserManager):
@@ -79,7 +85,7 @@ class Profile(django.db.models.Model):
     )
 
     image = django.db.models.ImageField(
-        upload_to="uploads/profile",
+        upload_to=user_directory_path,
         null=True,
         blank=True,
     )

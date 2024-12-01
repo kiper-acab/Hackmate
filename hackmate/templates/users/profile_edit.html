@@ -25,6 +25,8 @@
             <label for="id_image">Аватар</label><br>
             {% if user.profile.image %}
                 <img src="{{ user.profile.image.url }}" alt="Текущий аватар" class="current-avatar"><br>
+	          {% else %}
+	            <p>Изображение отстутсвует</p>
             {% endif %}
         </div>
 			{% for field in form %}
