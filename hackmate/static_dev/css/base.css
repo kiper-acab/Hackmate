@@ -1,4 +1,6 @@
-*{
+@import url(https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i);
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,6 +11,7 @@ html, body {
     margin: 0;
     display: flex;
     flex-direction: column;
+    font-family: "Raleway", sans-serif;
 }
 
 .page-container {
@@ -21,33 +24,32 @@ html, body {
     flex: 1;
 }
 
-.navbar-nav > a{
-    margin: 0 15px;
+
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
 }
 
-
-.navbar>a>img{
-    width: 50px;
-    height: 50px;
+.navbar-brand img {
+    width: 48px;
+    height: 48px;
 }
 
-.navbar>a{
-    text-align: center;
+.navbar-nav {
+    display: flex;
     align-items: center;
-    margin: auto 0;
-    width: 200px;
+    gap: 15px;
+}
+
+.navbar-nav>a {
     text-decoration: none;
-    color: black;
+    color: #343a40;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.list-items{
-    margin-top: 100px;
-    align-items: center;
-}
-
-.active{
-    color: black;
-}
 
 .footer {
     background-color: rgb(20, 20, 20);
