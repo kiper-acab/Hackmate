@@ -11,10 +11,10 @@ def validate_birthday(value):
     oldest_allowed = today - datetime.timedelta(days=150 * 365)
     if value > today:
         raise django.core.exceptions.ValidationError(
-            "Дата рождения не может быть в будущем.",
+            "Укажите корректную дату рождения.",
         )
 
     if value < oldest_allowed:
         raise django.core.exceptions.ValidationError(
-            "Дата рождения не может быть более 150 лет назад.",
+            "Укажите корректную дату рождения.",
         )

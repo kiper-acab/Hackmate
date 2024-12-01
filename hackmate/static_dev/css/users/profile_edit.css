@@ -1,5 +1,5 @@
 .container > section {
-    margin: 20px auto;
+    margin: 30px;
     max-width: 900px;
     padding: 20px;
     background-color: #f9f9f9;
@@ -11,7 +11,7 @@ h1 {
     text-align: center;
     font-size: 1.8rem;
     color: #333;
-    margin-bottom: 20px;
+    margin: 30px;
 }
 
 
@@ -32,7 +32,6 @@ label {
     color: #555;
 }
 
-/* Поля ввода */
 input, textarea {
     width: 100%;
     padding: 8px;
