@@ -22,8 +22,8 @@ User = django.contrib.auth.get_user_model()
 
 
 class ProfileView(
-    django.views.generic.View,
     django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.View,
 ):
     def get(self, request):
         form = users.forms.UserChangeForm(instance=request.user)
@@ -38,8 +38,8 @@ class ProfileView(
 
 
 class ProfileEditView(
-    django.views.generic.View,
     django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.View,
 ):
     def get(self, request):
         form = users.forms.UserChangeForm(instance=request.user)
