@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/vacancies/vacancies.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="container">
+    <section class="vacancies">
+        {% for vacancy in vacancies %}
+            <div class="card w-75 mb-3">
+                <div class="card-body">
+                <h5 class="card-title">{{ vacancy.title }}</h5>
+                <p class="card-text">{{ vacancy.description|truncatewords:30 }}</p>
+                <figure class="user-info">
+                    {% if vacancy.creater.profile.image %}
+                        <img src="{{ vacancy.creater.profile.image.url }}" alt="" class="avatar">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.jpg' %}" class="avatar">
+                    {% endif %}
+                    <p class="username">{{ vacancy.creater.username|truncatewords:3 }}</p>
+                </figure>
+                <a href="#" class="grow-button">Детальнее</a>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+</section>
+
+{% endblock %}

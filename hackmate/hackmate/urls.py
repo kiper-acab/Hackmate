@@ -1,5 +1,3 @@
-__all__ = ()
-
 import django.conf
 import django.conf.urls.static
 import django.contrib.admin
@@ -9,6 +7,7 @@ import django.urls
 main_urlpatterns = [
     django.urls.path("", django.urls.include("homepage.urls")),
     django.urls.path("auth/", django.urls.include("users.urls")),
+    django.urls.path("vacancy/", django.urls.include("vacancies.urls")),
     django.urls.path("about/", django.urls.include("about.urls")),
     django.urls.path("admin/", django.contrib.admin.site.urls),
 ]
