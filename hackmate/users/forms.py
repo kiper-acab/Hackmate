@@ -57,6 +57,8 @@ class ProfileChangeForm(BootstrapForm):
         fields = (
             users.models.Profile.image.field.name,
             users.models.Profile.birthday.field.name,
+            users.models.Profile.country.field.name,
+            users.models.Profile.city.field.name,
             users.models.Profile.description.field.name,
         )
 
@@ -72,6 +74,17 @@ class ProfileChangeForm(BootstrapForm):
                 format=("%Y-%m-%d"),
             ),
         }
+
+
+class ProfileLinkForm(BootstrapForm):
+    class Meta:
+        model = users.models.ProfileLink
+        fields = ["site_type", "url"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["site_type"].label = "Тип сайта"
+        self.fields["url"].label = "Ссылка"
 
 
 class AuthenticateForm(

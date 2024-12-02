@@ -26,7 +26,7 @@
 				{% if user.profile.image %}
 					<img src="{{ user.profile.image.url }}" alt="Текущий аватар" class="current-avatar"><br>
 				{% else %}
-					<p>Изображение отстутсвует</p>
+					<p>Изображение отсутствует</p>
 				{% endif %}
 			</div>
 			{% for field in form %}
@@ -36,7 +36,30 @@
 			{% for field in profile_form %}
 				{% include "includes/form.html" %}
 			{% endfor %}
-			<button type="submit" class="btn btn-primary">Сохранить</button>
+
+			<h2>Добавить новую ссылку</h2>
+			{% for field in link_form %}
+				{% include "includes/form.html" %}
+			{% endfor %}
+			<button type="submit" name="add_link" class="btn btn-primary">Сохранить изменения</button>
 		</form>
-	</section>
+			<h2>Ссылки на сайты</h2>
+
+			{% if user.profile.links.exists %}
+				<ul>
+					{% for link in user.profile.links.all %}
+						<li>
+							{{ link.get_site_type_display }}:
+							<a href="{{ link.url }}" target="_blank">{{ link.url }}</a>
+							<form method="post" action="{% url 'users:delete_link' pk=link.pk %}" class="delete-rating">
+								{% csrf_token %}
+								<button type="submit" class="btn btn-danger">Удалить ссылку</button>
+							</form>
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p>Ссылки отсутствуют.</p>
+			{% endif %}
+		</section>
 {% endblock %}

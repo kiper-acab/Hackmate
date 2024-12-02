@@ -31,6 +31,24 @@
 				{% endif %}
 				<p>Дата регистрации: {{ user.date_joined|date:"d.m.Y" }}</p>
 			</div>
+			<section class="links-section">
+				<h2>Ссылки на сайты</h2>
+
+				{% if user.profile.links.exists %}
+					<ul>
+						{% for link in user.profile.links.all %}
+							<li>
+								<a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
+                        <i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
+                    </a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<p>Ссылки отсутствуют.</p>
+				{% endif %}
+			</section>
+
 		</div>
 		<div class="profile-actions">
 			<a href="{% url 'users:profile_edit' %}" class="btn btn-primary">Редактировать профиль</a>

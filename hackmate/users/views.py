@@ -21,6 +21,24 @@ import users.models
 User = django.contrib.auth.get_user_model()
 
 
+class DeleteLinkView(django.views.generic.DeleteView):
+    model = users.models.ProfileLink
+    pk_url_kwarg = "pk"
+    success_url = django.urls.reverse_lazy("users:profile_edit")
+
+    @django.utils.decorators.method_decorator(
+        django.contrib.auth.decorators.login_required,
+    )
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        success_url = django.urls.reverse(
+            "users:profile_edit",
+            args=[self.object.link.pk],
+        )
+        return django.shortcuts.redirect(success_url)
+
+
 class ProfileView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
@@ -30,10 +48,16 @@ class ProfileView(
         profile_form = users.forms.ProfileChangeForm(
             instance=request.user.profile,
         )
+        link_form = users.forms.ProfileLinkForm()
+
         return django.shortcuts.render(
             request,
             "users/profile.html",
-            {"form": form, "profile_form": profile_form},
+            {
+                "form": form,
+                "profile_form": profile_form,
+                "link_form": link_form,
+            },
         )
 
 
@@ -46,10 +70,20 @@ class ProfileEditView(
         profile_form = users.forms.ProfileChangeForm(
             instance=request.user.profile,
         )
+        link_form = users.forms.ProfileLinkForm()
+        links = users.models.ProfileLink.objects.filter(
+            profile=request.user.profile,
+        )
+
         return django.shortcuts.render(
             request,
             "users/profile_edit.html",
-            {"form": form, "profile_form": profile_form},
+            {
+                "form": form,
+                "profile_form": profile_form,
+                "link_form": link_form,
+                "links": links,
+            },
         )
 
     def post(self, request):
@@ -59,6 +93,8 @@ class ProfileEditView(
             request.FILES,
             instance=request.user.profile,
         )
+        link_form = users.forms.ProfileLinkForm(request.POST)
+
         if not form.data.get("email") or not form.data.get("username"):
             django.contrib.messages.error(
                 request,
@@ -70,11 +106,18 @@ class ProfileEditView(
                 {"form": form, "profile_form": profile_form},
             )
 
-        if form.is_valid() and profile_form.is_valid():
+        if (
+            form.is_valid()
+            and profile_form.is_valid()
+            and link_form.is_valid()
+        ):
             user_form = form.save(commit=False)
             user_form.mail = users.models.UserManager().normalize_email(
                 form.cleaned_data["email"],
             )
+            link = link_form.save(commit=False)
+            link.profile = request.user.profile
+            link.save()
             user_form.save()
             profile_form.save()
             django.contrib.messages.success(
@@ -86,7 +129,11 @@ class ProfileEditView(
         return django.shortcuts.render(
             request,
             "users/profile_edit.html",
-            {"form": form, "profile_form": profile_form},
+            {
+                "form": form,
+                "profile_form": profile_form,
+                "link_form": link_form,
+            },
         )
 
 
