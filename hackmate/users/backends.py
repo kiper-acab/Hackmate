@@ -55,11 +55,12 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
                     "users:activate",
                     args=[user.username],
                 )
+                domain = self.request.get_host()
                 confirmation_link = (
                     "Замечена подозрительная активность аккаунта. "
                     "Для того чтобы активировать свой аккаунт, "
                     "нажмите на ссылку ниже: "
-                    f"http://127.0.0.1:8000{activation_path}"
+                    f"http://{domain}{activation_path}"
                 )
 
                 django.core.mail.send_mail(
