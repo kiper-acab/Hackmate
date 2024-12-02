@@ -59,6 +59,16 @@ class ProfileEditView(
             request.FILES,
             instance=request.user.profile,
         )
+        if not form.data.get("email") or not form.data.get("username"):
+            django.contrib.messages.error(
+                request,
+                "Поля Email и Username обязательны для заполнения.",
+            )
+            return django.shortcuts.render(
+                request,
+                "users/profile_edit.html",
+                {"form": form, "profile_form": profile_form},
+            )
 
         if form.is_valid() and profile_form.is_valid():
             user_form = form.save(commit=False)
