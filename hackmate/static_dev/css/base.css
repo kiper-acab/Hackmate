@@ -51,13 +51,34 @@ html, body {
 }
 
 .dropdown-toggle{
+    color: black;
+    background-color: white;
     display: flex;
     align-items: center;
     margin: 10px;
+    border: none;
 }
+
+.dropdown-toggle[aria-expanded="true"],
+.dropdown-toggle:hover {
+    color: black;
+    background-color: white;
+}
+
 
 .dropdown-username{
     margin: auto 10px;
+}
+
+.dropdown-item{
+    padding: 7px 3px;
+    border-radius: 5%;
+}
+
+.dropdown-item:hover {
+    color: white;
+    background-color: rgb(51, 50, 50);
+    transition: .3s;
 }
 
 .dropdown-image{

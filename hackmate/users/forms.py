@@ -62,6 +62,7 @@ class ProfileChangeForm(BootstrapForm):
 
         labels = {
             users.models.Profile.image.field.name: "Выберите себе картинку",
+            users.models.Profile.description.field.name: "Описание",
         }
 
         widgets = {
