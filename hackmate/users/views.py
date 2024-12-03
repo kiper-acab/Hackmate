@@ -234,5 +234,7 @@ def load_cities(request):
         "name",
     )
     return django.shortcuts.render(
-        request, "hr/city_dropdown_list_options.html", {"cities": cities},
+        request,
+        "hr/city_dropdown_list_options.html",
+        {"cities": cities},
     )

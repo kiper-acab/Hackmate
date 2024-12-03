@@ -86,3 +86,25 @@ button {
     margin-bottom: 20px;
 }
 
+
+.li-links{
+    display: flex;
+    align-items: center;
+    
+}
+.li-links>p{
+    margin: auto 0;
+}
+
+.close{
+    margin: auto 10px;
+    color: rgb(255, 0, 0);
+    background: transparent;
+    font-size: 30px;
+}
+
+.close:hover{
+    color: rgba(255, 0, 0, 0.5);
+    cursor: pointer;
+    transition: .3s;
+}

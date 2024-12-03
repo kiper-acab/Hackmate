@@ -31,7 +31,8 @@ class Migration(django.db.migrations.Migration):
                 (
                     "name",
                     django.db.models.CharField(
-                        max_length=30, verbose_name="страна",
+                        max_length=30,
+                        verbose_name="страна",
                     ),
                 ),
             ],
@@ -131,7 +132,8 @@ class Migration(django.db.migrations.Migration):
                 (
                     "name",
                     django.db.models.CharField(
-                        max_length=30, verbose_name="город",
+                        max_length=30,
+                        verbose_name="город",
                     ),
                 ),
                 (

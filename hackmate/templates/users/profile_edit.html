@@ -43,18 +43,16 @@
 			{% endfor %}
 			<button type="submit" name="add_link" class="btn btn-primary">Сохранить изменения</button>
 		</form>
-			<h2>Ссылки на сайты</h2>
+			<h2>Ссылки на другие сети</h2>
 
 			{% if user.profile.links.exists %}
 				<ul>
 					{% for link in user.profile.links.all %}
-						<li>
-							{{ link.get_site_type_display }}:
-							<a href="{{ link.url }}" target="_blank">{{ link.url }}</a>
+						<li class="li-links">
+							<p>{{ link.get_site_type_display }}: <a href="{{ link.url }}" target="_blank">{{ link.url }}</a></p>
 							<form method="post" action="{% url 'users:delete_link' pk=link.pk %}" class="delete-rating">
 								{% csrf_token %}
-								<button type="submit" class="btn btn-danger btn-sm p-0 border-0" aria-label="Удалить ссылку" title="Удалить ссылку">
-                  ✖
+								<button type="submit" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							</form>
 						</li>
 					{% endfor %}
