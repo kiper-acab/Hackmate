@@ -11,4 +11,9 @@ urlpatterns = [
         vacancies.views.VacancyView.as_view(),
         name="vacancies",
     ),
+    django.urls.path(
+        "<int:pk>/",
+        vacancies.views.VacancyDetailView.as_view(),
+        name="vacancy_detail",
+    ),
 ]

@@ -41,6 +41,11 @@ password_reset_complete_view = (
 
 urlpatterns = [
     django.urls.path(
+        "profile/delete_link/<int:pk>/",
+        users.views.DeleteLinkView.as_view(),
+        name="delete_link",
+    ),
+    django.urls.path(
         "signup/",
         users.views.SignUpView.as_view(),
         name="signup",

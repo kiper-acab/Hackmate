@@ -22,7 +22,7 @@
                     {% endif %}
                     <p class="username">{{ vacancy.creater.username|truncatewords:3 }}</p>
                 </figure>
-                <a href="#" class="grow-button">Детальнее</a>
+                <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="grow-button">Детальнее</a>
                 </div>
             </div>
         {% endfor %}

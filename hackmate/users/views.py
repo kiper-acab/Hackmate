@@ -21,15 +21,44 @@ import users.models
 User = django.contrib.auth.get_user_model()
 
 
+class DeleteLinkView(django.views.generic.DeleteView):
+    model = users.models.ProfileLink
+    pk_url_kwarg = "pk"
+    success_url = django.urls.reverse_lazy("users:profile_edit")
+
+    @django.utils.decorators.method_decorator(
+        django.contrib.auth.decorators.login_required,
+    )
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        success_url = django.urls.reverse(
+            "users:profile_edit",
+            args=[self.object.link.pk],
+        )
+        return django.shortcuts.redirect(success_url)
+
+
 class ProfileView(
     django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.DetailView,
+    django.views.generic.View,
 ):
-    template_name = "users/profile.html"
-    model = User
+    def get(self, request):
+        form = users.forms.UserChangeForm(instance=request.user)
+        profile_form = users.forms.ProfileChangeForm(
+            instance=request.user.profile,
+        )
+        link_form = users.forms.ProfileLinkForm()
 
-    def get_object(self):
-        return self.request.user
+        return django.shortcuts.render(
+            request,
+            "users/profile.html",
+            {
+                "form": form,
+                "profile_form": profile_form,
+                "link_form": link_form,
+            },
+        )
 
 
 class ProfileEditView(
@@ -41,10 +70,20 @@ class ProfileEditView(
         profile_form = users.forms.ProfileChangeForm(
             instance=request.user.profile,
         )
+        link_form = users.forms.ProfileLinkForm()
+        links = users.models.ProfileLink.objects.filter(
+            profile=request.user.profile,
+        )
+
         return django.shortcuts.render(
             request,
             "users/profile_edit.html",
-            {"form": form, "profile_form": profile_form},
+            {
+                "form": form,
+                "profile_form": profile_form,
+                "link_form": link_form,
+                "links": links,
+            },
         )
 
     def post(self, request):
@@ -54,12 +93,31 @@ class ProfileEditView(
             request.FILES,
             instance=request.user.profile,
         )
+        link_form = users.forms.ProfileLinkForm(request.POST)
 
-        if form.is_valid() and profile_form.is_valid():
+        if not form.data.get("email") or not form.data.get("username"):
+            django.contrib.messages.error(
+                request,
+                "Поля Email и Username обязательны для заполнения.",
+            )
+            return django.shortcuts.render(
+                request,
+                "users/profile_edit.html",
+                {"form": form, "profile_form": profile_form},
+            )
+
+        if (
+            form.is_valid()
+            and profile_form.is_valid()
+            and link_form.is_valid()
+        ):
             user_form = form.save(commit=False)
             user_form.mail = users.models.UserManager().normalize_email(
                 form.cleaned_data["email"],
             )
+            link = link_form.save(commit=False)
+            link.profile = request.user.profile
+            link.save()
             user_form.save()
             profile_form.save()
             django.contrib.messages.success(
@@ -71,7 +129,11 @@ class ProfileEditView(
         return django.shortcuts.render(
             request,
             "users/profile_edit.html",
-            {"form": form, "profile_form": profile_form},
+            {
+                "form": form,
+                "profile_form": profile_form,
+                "link_form": link_form,
+            },
         )
 
 
@@ -93,15 +155,14 @@ class SignUpView(
             user.is_active = True
         else:
             user.is_active = False
-            domain = self.request.get_host()
             url = django.urls.reverse("users:activate", args=[user.username])
             confirmation_link = (
                 "Чтобы подтвердить аккаунт перейдите по ссылке "
-                f"http://{domain}/{url}"
+                f"http://127.0.0.1:8000{url}"
             )
 
             django.core.mail.send_mail(
-                "Активируйте ваш аккаунт",
+                "Activate your account",
                 confirmation_link,
                 django.conf.settings.DJANGO_MAIL,
                 [user.email],
@@ -120,6 +181,9 @@ class SignUpView(
         )
 
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class ActivateUserView(django.views.View):

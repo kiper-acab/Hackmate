@@ -14,3 +14,9 @@ class VacancyView(django.views.generic.ListView):
         return vacancies.models.Vacancy.objects.filter(
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
         )
+
+
+class VacancyDetailView(django.views.generic.DetailView):
+    model = vacancies.models.Vacancy
+    template_name = "vacancies/detail.html"
+    context_object_name = "vacancy"

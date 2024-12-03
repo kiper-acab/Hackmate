@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/vacancies/detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container vacancy-container">
+        <h1 class="vacancy-title">{{ vacancy.title }}</h1>
+        <p class="vacancy-description">{{ vacancy.description }}</p>
+        <div class="vacancy-info">
+            <p><strong>Создатель:</strong> {{ vacancy.creater }}</p>
+            <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
+            <p><strong>Обновлено:</strong> {{ vacancy.updated_at|date:"d.m.Y H:i" }}</p>
+        </div>
+    </div>
+{% endblock %}
