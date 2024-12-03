@@ -43,17 +43,3 @@
 .vacancy-info p strong {
     color: #007bff;
 }
-
-@media (max-width: 768px) {
-    .vacancy-container {
-        padding: 20px;
-    }
-
-    .vacancy-title {
-        font-size: 2rem;
-    }
-
-    .vacancy-description {
-        font-size: 1rem;
-    }
-}
