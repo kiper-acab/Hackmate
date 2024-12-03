@@ -44,16 +44,45 @@
     color: #007bff;
 }
 
-@media (max-width: 768px) {
-    .vacancy-container {
-        padding: 20px;
-    }
 
-    .vacancy-title {
-        font-size: 2rem;
+.grow-button {
+    border:none;
+    margin: 30px 10px 0 10px;
+    text-decoration: none;
+    background:transparent;
+    
+    --btn-width: 150px;
+    
+    width: var(--btn-width);
+    min-height:45px;
+    background-color:#007bff;
+    color:white;
+    font-weight:bold;
+    border-radius:50px;
+    
+    cursor: pointer;
+    box-sizing: content-box;
+    text-align:center;
+  
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  
+    --expand: 0px;
+    
+    position:relative;
+    transition: padding 0.5s, left 0.5s;
+    
+    padding-inline:var(--expand);
+    left: calc( var(--expand) * -1);
+  
+    &:hover, &:active {
+      transition: .3s;
+      --expand: calc( var(--btn-width) * .15);
+      background-color:rgb(71, 172, 255);
     }
+  }
 
-    .vacancy-description {
-        font-size: 1rem;
-    }
+.views{
+    margin: 20px;
 }

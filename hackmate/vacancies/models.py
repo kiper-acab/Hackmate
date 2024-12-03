@@ -4,6 +4,13 @@ import django.conf
 import django.db.models
 
 
+class Ip(django.db.models.Model):
+    ip = django.db.models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.ip
+
+
 class Vacancy(django.db.models.Model):
     class VacancyStatuses(django.db.models.TextChoices):
         ACTIVE = "active", "active"
@@ -30,6 +37,15 @@ class Vacancy(django.db.models.Model):
         max_length=255,
         choices=VacancyStatuses.choices,
     )
+
+    views = django.db.models.ManyToManyField(
+        Ip,
+        related_name="post_views",
+        blank=True,
+    )
+
+    def total_views(self):
+        return self.views.count()
 
     class Meta:
         verbose_name = "вакансия"

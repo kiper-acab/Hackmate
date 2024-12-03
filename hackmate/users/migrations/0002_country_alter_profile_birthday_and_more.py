@@ -32,7 +32,8 @@ class Migration(django.db.migrations.Migration):
                     "name",
                     django.db.models.CharField(
                         max_length=30,
-                        verbose_name="страна"),
+                        verbose_name="страна",
+                    ),
                 ),
             ],
         ),
@@ -97,7 +98,7 @@ class Migration(django.db.migrations.Migration):
                     "url",
                     django.db.models.URLField(
                         help_text="Полная ссылка, например, "
-                                  "https://example.com",
+                        "https://example.com",
                         verbose_name="URL",
                     ),
                 ),
@@ -132,7 +133,8 @@ class Migration(django.db.migrations.Migration):
                     "name",
                     django.db.models.CharField(
                         max_length=30,
-                        verbose_name="город"),
+                        verbose_name="город",
+                    ),
                 ),
                 (
                     "country",

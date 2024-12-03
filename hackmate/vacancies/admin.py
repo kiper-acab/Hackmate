@@ -13,3 +13,6 @@ class UserInfoAdmin(django.contrib.admin.ModelAdmin):
         vacancies.models.Vacancy.title.field.name,
         vacancies.models.Vacancy.status.field.name,
     )
+
+
+django.contrib.admin.site.register(vacancies.models.Ip)

@@ -15,5 +15,7 @@
             <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
             <p><strong>Обновлено:</strong> {{ vacancy.updated_at|date:"d.m.Y H:i" }}</p>
         </div>
+        <a href="#" class="grow-button">Откликнуться</a>
+        <p class="views"><i class="fa-regular fa-eye"></i>{{ vacancy.total_views }}</p>
     </div>
 {% endblock %}
