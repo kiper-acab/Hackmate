@@ -79,12 +79,21 @@ class ProfileChangeForm(BootstrapForm):
 class ProfileLinkForm(BootstrapForm):
     class Meta:
         model = users.models.ProfileLink
-        fields = ["site_type", "url"]
+        fields = [
+            users.models.ProfileLink.site_type.field.name,
+            users.models.ProfileLink.url.field.name,
+        ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["site_type"].label = "Тип сайта"
-        self.fields["url"].label = "Ссылка"
+        self.fields[users.models.ProfileLink.site_type.field.name].label = (
+            "Тип сайта"
+        )
+        self.fields[users.models.ProfileLink.url.field.name].label = "Ссылка"
+        self.fields[users.models.ProfileLink.site_type.field.name].required = (
+            False
+        )
+        self.fields[users.models.ProfileLink.url.field.name].required = False
 
 
 class AuthenticateForm(

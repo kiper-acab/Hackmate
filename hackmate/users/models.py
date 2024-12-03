@@ -20,7 +20,8 @@ class Country(django.db.models.Model):
 
 class City(django.db.models.Model):
     country = django.db.models.ForeignKey(
-        Country, on_delete=django.db.models.CASCADE,
+        Country,
+        on_delete=django.db.models.CASCADE,
     )
     name = django.db.models.CharField(max_length=30, verbose_name="город")
 
@@ -118,10 +119,14 @@ class Profile(django.db.models.Model):
         help_text="Расскажите о себе",
     )
     country = django.db.models.ForeignKey(
-        Country, on_delete=django.db.models.SET_NULL, null=True,
+        Country,
+        on_delete=django.db.models.SET_NULL,
+        null=True,
     )
     city = django.db.models.ForeignKey(
-        City, on_delete=django.db.models.SET_NULL, null=True,
+        City,
+        on_delete=django.db.models.SET_NULL,
+        null=True,
     )
 
     date_last_active = django.db.models.DateTimeField(null=True, blank=True)
@@ -148,11 +153,17 @@ class ProfileLink(django.db.models.Model):
         verbose_name="профиль",
     )
     site_type = django.db.models.CharField(
-        max_length=20, choices=SOCIAL_NETWORKS, verbose_name="тип сайта",
+        max_length=20,
+        choices=SOCIAL_NETWORKS,
+        verbose_name="тип сайта",
+        null=True,
+        blank=True,
     )
     url = django.db.models.URLField(
         verbose_name="URL",
         help_text="Полная ссылка, например, https://example.com",
+        null=True,
+        blank=True,
     )
 
     def get_fa_icon_class(self):

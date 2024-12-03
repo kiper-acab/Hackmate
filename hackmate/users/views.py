@@ -106,18 +106,16 @@ class ProfileEditView(
                 {"form": form, "profile_form": profile_form},
             )
 
-        if (
-            form.is_valid()
-            and profile_form.is_valid()
-            and link_form.is_valid()
-        ):
+        if form.is_valid() and profile_form.is_valid():
             user_form = form.save(commit=False)
             user_form.mail = users.models.UserManager().normalize_email(
                 form.cleaned_data["email"],
             )
-            link = link_form.save(commit=False)
-            link.profile = request.user.profile
-            link.save()
+            if link_form.is_valid() and link_form.cleaned_data.get("url"):
+                link = link_form.save(commit=False)
+                link.profile = request.user.profile
+                link.save()
+
             user_form.save()
             profile_form.save()
             django.contrib.messages.success(
@@ -228,3 +226,13 @@ class ActivateUserView(django.views.View):
             )
 
         return django.shortcuts.redirect(django.urls.reverse("users:login"))
+
+
+def load_cities(request):
+    country_id = request.GET.get("country")
+    cities = users.models.City.objects.filter(country_id=country_id).order_by(
+        "name",
+    )
+    return django.shortcuts.render(
+        request, "hr/city_dropdown_list_options.html", {"cities": cities},
+    )
