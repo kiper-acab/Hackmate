@@ -55,7 +55,7 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
                     "users:activate",
                     args=[user.username],
                 )
-                domain = self.request.get_host()
+                domain = request.get_host()
                 confirmation_link = (
                     "Замечена подозрительная активность аккаунта. "
                     "Для того чтобы активировать свой аккаунт, "
