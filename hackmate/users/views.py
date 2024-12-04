@@ -78,6 +78,12 @@ class ProfileEditView(
         links = users.models.ProfileLink.objects.filter(
             profile=request.user.profile,
         )
+        country_form = users.forms.CountryFrom(
+            instance=request.user.profile,
+        )
+        city_form = users.forms.CityFrom(
+            instance=request.user.profile,
+        )
 
         return django.shortcuts.render(
             request,
@@ -87,6 +93,8 @@ class ProfileEditView(
                 "profile_form": profile_form,
                 "link_form": link_form,
                 "links": links,
+                "country_form": country_form,
+                "city_form": city_form,
             },
         )
 
@@ -98,6 +106,12 @@ class ProfileEditView(
             instance=request.user.profile,
         )
         link_form = users.forms.ProfileLinkForm(request.POST)
+        country_form = users.forms.CountryFrom(
+            request.POST, instance=request.user.profile,
+        )
+        city_form = users.forms.CityFrom(
+            request.POST, instance=request.user.profile,
+        )
 
         if not form.data.get("email") or not form.data.get("username"):
             django.contrib.messages.error(
@@ -115,10 +129,17 @@ class ProfileEditView(
             user_form.mail = users.models.UserManager().normalize_email(
                 form.cleaned_data["email"],
             )
+
             if link_form.is_valid() and link_form.cleaned_data.get("url"):
                 link = link_form.save(commit=False)
                 link.profile = request.user.profile
                 link.save()
+
+            if country_form.is_valid():
+                country_form.save()
+
+            if city_form.is_valid():
+                city_form.save()
 
             user_form.save()
             profile_form.save()
@@ -135,6 +156,8 @@ class ProfileEditView(
                 "form": form,
                 "profile_form": profile_form,
                 "link_form": link_form,
+                "country_form": country_form,
+                "city_form": city_form,
             },
         )
 
@@ -230,15 +253,3 @@ class ActivateUserView(django.views.View):
             )
 
         return django.shortcuts.redirect(django.urls.reverse("users:login"))
-
-
-def load_cities(request):
-    country_id = request.GET.get("country")
-    cities = users.models.City.objects.filter(country_id=country_id).order_by(
-        "name",
-    )
-    return django.shortcuts.render(
-        request,
-        "hr/city_dropdown_list_options.html",
-        {"cities": cities},
-    )

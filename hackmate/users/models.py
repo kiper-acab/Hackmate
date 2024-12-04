@@ -4,29 +4,13 @@ import pathlib
 import re
 import sys
 
+import cities_light.models
 import django.conf
 import django.contrib.auth.models
 import django.db.models
+import smart_selects.db_fields
 
 import users.validators
-
-
-class Country(django.db.models.Model):
-    name = django.db.models.CharField(max_length=30, verbose_name="страна")
-
-    def __str__(self):
-        return self.name
-
-
-class City(django.db.models.Model):
-    country = django.db.models.ForeignKey(
-        Country,
-        on_delete=django.db.models.CASCADE,
-    )
-    name = django.db.models.CharField(max_length=30, verbose_name="город")
-
-    def __str__(self):
-        return self.name
 
 
 if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
@@ -87,6 +71,37 @@ class User(django.contrib.auth.models.User):
         proxy = True
 
 
+class Country(django.db.models.Model):
+    country = django.db.models.ForeignKey(
+        cities_light.models.Country,
+        on_delete=django.db.models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Country",
+    )
+
+
+class City(django.db.models.Model):
+    city = smart_selects.db_fields.ChainedForeignKey(
+        cities_light.models.City,
+        chained_field="country",
+        chained_model_field="country",
+        show_all=False,
+        auto_choose=True,
+        sort=True,
+        null=True,
+        blank=True,
+        on_delete=django.db.models.SET_NULL,
+    )
+    country = django.db.models.ForeignKey(
+        Country,
+        on_delete=django.db.models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Country",
+    )
+
+
 class Profile(django.db.models.Model):
     user = django.db.models.OneToOneField(
         django.conf.settings.AUTH_USER_MODEL,
@@ -111,22 +126,18 @@ class Profile(django.db.models.Model):
     attempts_count = django.db.models.PositiveIntegerField(
         default=0,
     )
+    country = django.db.models.OneToOneField(
+        Country, on_delete=django.db.models.SET_NULL, null=True,
+    )
+    city = django.db.models.OneToOneField(
+        City, on_delete=django.db.models.SET_NULL, null=True,
+    )
 
     description = django.db.models.TextField(
         null=True,
         blank=True,
         verbose_name="о себе",
         help_text="Расскажите о себе",
-    )
-    country = django.db.models.ForeignKey(
-        Country,
-        on_delete=django.db.models.SET_NULL,
-        null=True,
-    )
-    city = django.db.models.ForeignKey(
-        City,
-        on_delete=django.db.models.SET_NULL,
-        null=True,
     )
 
     date_last_active = django.db.models.DateTimeField(null=True, blank=True)

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
+    "smart_selects",
+    "cities_light",
     "sorl.thumbnail",
 ]
 
@@ -157,3 +159,31 @@ else:
         "DJANGO_DEFAULT_USER_IS_ACTIVE",
         default="False",
     )
+
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ["ru"]
+CITIES_LIGHT_INCLUDE_COUNTRIES = [
+    "RU",
+    "BY",
+    "KZ",
+    "UA",
+    "UZ",
+    "KG",
+    "AM",
+    "AZ",
+    "MD",
+    "TJ",
+]
+CITIES_LIGHT_INCLUDE_CITY_TYPES = [
+    "PPL",
+    "PPLA",
+    "PPLA2",
+    "PPLA3",
+    "PPLA4",
+    "PPLC",
+    "PPLF",
+    "PPLG",
+    "PPLL",
+    "PPLR",
+    "PPLS",
+    "STLMT",
+]

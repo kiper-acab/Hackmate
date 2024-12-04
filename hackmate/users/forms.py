@@ -4,6 +4,7 @@ import django.contrib.auth.forms
 import django.contrib.auth.models
 import django.forms
 
+
 import users.models
 
 
@@ -45,6 +46,18 @@ class UserCreateForm(
         }
 
 
+class CityFrom(BootstrapForm):
+    class Meta:
+        model = users.models.City
+        fields = [model.city.field.name]
+
+
+class CountryFrom(BootstrapForm):
+    class Meta:
+        model = users.models.Country
+        fields = [model.country.field.name]
+
+
 class ProfileChangeForm(BootstrapForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -57,8 +70,6 @@ class ProfileChangeForm(BootstrapForm):
         fields = (
             users.models.Profile.image.field.name,
             users.models.Profile.birthday.field.name,
-            users.models.Profile.country.field.name,
-            users.models.Profile.city.field.name,
             users.models.Profile.description.field.name,
         )
 
