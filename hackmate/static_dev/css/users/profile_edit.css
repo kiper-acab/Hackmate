@@ -55,7 +55,23 @@ textarea {
     object-fit: cover;
     background-color: #eaeaea;
 }
+.delete-link-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
 
+}
+
+
+.delete-link-btn:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: darkred;
+}
+
+.delete-link-form {
+    display: inline-block;
+    margin-left: 8px;
+}
 button {
     align-self: flex-start;
     padding: 12px 25px;
@@ -70,3 +86,25 @@ button {
     margin-bottom: 20px;
 }
 
+
+.li-links{
+    display: flex;
+    align-items: center;
+    
+}
+.li-links>p{
+    margin: auto 0;
+}
+
+.close{
+    margin: auto 10px;
+    color: rgb(255, 0, 0);
+    background: transparent;
+    font-size: 30px;
+}
+
+.close:hover{
+    color: rgba(255, 0, 0, 0.5);
+    cursor: pointer;
+    transition: .3s;
+}

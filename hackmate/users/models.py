@@ -160,6 +160,8 @@ class ProfileLink(django.db.models.Model):
     url = django.db.models.URLField(
         verbose_name="URL",
         help_text="Полная ссылка, например, https://example.com",
+        null=True,
+        blank=True,
     )
 
     def get_fa_icon_class(self):
