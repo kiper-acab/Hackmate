@@ -37,11 +37,12 @@
 				{% if user.profile.links.exists %}
 					<ul>
 						{% for link in user.profile.links.all %}
-							<li>
+							<p><h5>{{ link.site_type }}
 								<a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
-                        <i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
-                    </a>
-							</li>
+									<i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
+								</a>
+							</h5>
+							</p>
 						{% endfor %}
 					</ul>
 				{% else %}

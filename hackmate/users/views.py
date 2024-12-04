@@ -26,11 +26,14 @@ class DeleteLinkView(django.views.generic.DeleteView):
     pk_url_kwarg = "pk"
     success_url = django.urls.reverse_lazy("users:profile_edit")
 
-    @django.utils.decorators.method_decorator(
-        django.contrib.auth.decorators.login_required,
-    )
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
+        if self.object.profile.user != request.user:
+            django.contrib.messages.error(
+                request, "Вы не можете удалить эту ссылку."
+            )
+            return django.shortcuts.redirect(self.success_url)
+
         self.object.delete()
         success_url = django.urls.reverse(
             "users:profile_edit",
