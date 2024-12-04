@@ -46,16 +46,17 @@ class UserCreateForm(
         }
 
 
+class CountryFrom(BootstrapForm):
+
+    class Meta:
+        model = users.models.Country
+        fields = [model.country.field.name]
+
+
 class CityFrom(BootstrapForm):
     class Meta:
         model = users.models.City
         fields = [model.city.field.name]
-
-
-class CountryFrom(BootstrapForm):
-    class Meta:
-        model = users.models.Country
-        fields = [model.country.field.name]
 
 
 class ProfileChangeForm(BootstrapForm):

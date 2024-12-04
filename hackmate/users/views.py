@@ -137,9 +137,8 @@ class ProfileEditView(
 
             if country_form.is_valid():
                 country_form.save()
-
-            if city_form.is_valid():
-                city_form.save()
+                if city_form.is_valid():
+                    city_form.save()
 
             user_form.save()
             profile_form.save()
