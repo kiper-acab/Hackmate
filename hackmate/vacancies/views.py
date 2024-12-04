@@ -1,7 +1,10 @@
 __all__ = ()
 
+import django.contrib.auth.mixins
+import django.urls
 import django.views.generic
 
+import vacancies.forms
 import vacancies.models
 
 
@@ -36,3 +39,18 @@ class VacancyDetailView(django.views.generic.DetailView):
         vacancy.views.add(ip_instance)
 
         return super().get(request, *args, **kwargs)
+
+
+class VacancyCreateView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.CreateView,
+):
+    model = vacancies.models.Vacancy
+    form_class = vacancies.forms.VacancyForm
+    template_name = "vacancies/vacancy_form.html"
+    success_url = django.urls.reverse_lazy("vacancies:vacancies")
+
+    def form_valid(self, form):
+        form.instance.creater = self.request.user
+        form.instance.status = vacancies.models.Vacancy.VacancyStatuses.ACTIVE
+        return super().form_valid(form)
