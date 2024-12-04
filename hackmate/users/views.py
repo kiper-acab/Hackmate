@@ -30,7 +30,8 @@ class DeleteLinkView(django.views.generic.DeleteView):
         self.object = self.get_object()
         if self.object.profile.user != request.user:
             django.contrib.messages.error(
-                request, "Вы не можете удалить эту ссылку."
+                request,
+                "Вы не можете удалить эту ссылку.",
             )
             return django.shortcuts.redirect(self.success_url)
 
