@@ -1,0 +1,52 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.vacancy-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.vacancy-item {
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.vacancy-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.vacancy-title {
+    font-size: 1.2rem;
+    color: #0056b3;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.vacancy-title:hover {
+    text-decoration: underline;
+}
+
+.vacancy-description {
+    margin: 5px 0 10px;
+    color: #555;
+}
+
+.vacancy-stats {
+    font-size: 0.9rem;
+    color: #888;
+}

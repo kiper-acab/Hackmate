@@ -50,3 +50,33 @@ class Vacancy(django.db.models.Model):
     class Meta:
         verbose_name = "вакансия"
         verbose_name_plural = "вакансии"
+
+
+class Response(django.db.models.Model):
+    user = django.db.models.ForeignKey(
+        django.conf.settings.AUTH_USER_MODEL,
+        on_delete=django.db.models.CASCADE,
+        related_name="responses",
+        verbose_name="Пользователь",
+    )
+    vacancy = django.db.models.ForeignKey(
+        "Vacancy",
+        on_delete=django.db.models.CASCADE,
+        related_name="responses",
+        verbose_name="Вакансия",
+    )
+    created_at = django.db.models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Дата отклика",
+    )
+
+    class Meta:
+        verbose_name = "Отклик"
+        verbose_name_plural = "Отклики"
+        unique_together = (
+            "user",
+            "vacancy",
+        )
+
+    def __str__(self):
+        return f"{self.user} -> {self.vacancy}"

@@ -21,4 +21,14 @@ urlpatterns = [
         vacancies.views.VacancyDetailView.as_view(),
         name="vacancy_detail",
     ),
+    django.urls.path(
+        "my-responses/",
+        vacancies.views.UserResponsesView.as_view(),
+        name="user_responses",
+    ),
+    django.urls.path(
+        "my-vacancies/",
+        vacancies.views.UserVacanciesView.as_view(),
+        name="user_vacancies",
+    ),
 ]

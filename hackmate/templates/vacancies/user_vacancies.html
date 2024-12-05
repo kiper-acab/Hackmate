@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/vacancies/my_vacancies.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">Ваши вакансии</h1>
+    <div class="vacancy-list">
+        {% for vacancy in vacancies %}
+        <div class="vacancy-item">
+            <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="vacancy-title">
+                {{ vacancy.title }}
+            </a>
+            <p class="vacancy-description">{{ vacancy.description }}</p>
+            <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -12,6 +12,8 @@
 			<a href="{% url 'users:signup' %}" class="{% if view_name == 'users:signup' %}list-group-item list-group-item-info {% endif %}">Регистрация</a>
 			<a href="{% url 'users:login' %}" class="{% if view_name == 'users:login' %}list-group-item list-group-item-info {% endif %}">Авторизация</a>
 		{% else %}
+      <a href="{% url 'vacancies:user_responses' %}" class="{% if view_name == 'vacancies:user_responses' %}list-group-item list-group-item-info {% endif %}">Мои отклики</a>
+      <a href="{% url 'vacancies:user_vacancies' %}" class="{% if view_name == 'vacancies:user_vacancies' %}list-group-item list-group-item-info {% endif %}">Мои вакансии</a>
     {% if request.user.is_superuser %}
       <a href="/admin/">Админка</a>
     {% endif %}

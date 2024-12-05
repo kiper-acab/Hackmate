@@ -7,15 +7,46 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container vacancy-container">
-        <h1 class="vacancy-title">{{ vacancy.title }}</h1>
-        <p class="vacancy-description">{{ vacancy.description }}</p>
-        <div class="vacancy-info">
-            <p><strong>Создатель:</strong> {{ vacancy.creater }}</p>
-            <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
-            <p><strong>Обновлено:</strong> {{ vacancy.updated_at|date:"d.m.Y H:i" }}</p>
-        </div>
-        <a href="#" class="grow-button">Откликнуться</a>
-        <p class="views"><i class="fa-regular fa-eye"></i>{{ vacancy.total_views }}</p>
+<div class="container vacancy-container">
+    <h1 class="vacancy-title">{{ vacancy.title }}</h1>
+    <p class="vacancy-description">{{ vacancy.description }}</p>
+    
+    <div class="vacancy-info">
+        <p><strong>Создатель:</strong> {{ vacancy.creater }}</p>
+        <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
+        <p><strong>Обновлено:</strong> {{ vacancy.updated_at|date:"d.m.Y H:i" }}</p>
     </div>
+
+    <p class="views">
+        <i class="fa-regular fa-eye"></i> Просмотры: {{ vacancy.views.count }}
+    </p>
+
+    {% if user.is_authenticated %}
+        {% if user != vacancy.creater %}
+            <button id="respond-button" class="grow-button">Откликнуться</button>
+        {% else %}
+        {% endif %}
+    {% else %}
+    <p>Вы должны быть авторизованы, чтобы откликнуться.</p>
+    {% endif %}
+</div>
+
+<script>
+document.getElementById("respond-button")?.addEventListener("click", function () {
+    fetch("{% url 'vacancies:vacancy_detail' pk=vacancy.pk %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message || data.error);
+    })
+    .catch(error => {
+        console.error("Ошибка:", error);
+        alert("Произошла ошибка. Попробуйте еще раз.");
+    });
+});
+</script>
 {% endblock %}
