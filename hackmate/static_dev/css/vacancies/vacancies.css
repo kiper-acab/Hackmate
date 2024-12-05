@@ -55,3 +55,9 @@
       --expand: calc( var(--btn-width) * .15);
     }
   }
+
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 30px;
+}
