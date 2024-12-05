@@ -3,35 +3,34 @@
 {% load static %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'css/vacancies/vacancies.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vacancies/vacancies.css' %}">
 {% endblock %}
 
 {% block content %}
-<section class="container">
+  <section class="container">
     <div class="header d-flex justify-content-between align-items-center mb-4">
-        <h1>Список вакансий</h1>
-        <h3><a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-primary btn-circle">
-	        Создать вакансию </a></h3>
+      <h1>Список вакансий</h1>
+      <h3><a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-primary btn-circle">
+        Создать вакансию </a></h3>
     </div>
     <section class="vacancies">
-        {% for vacancy in vacancies %}
-            <div class="card w-75 mb-3">
-                <div class="card-body">
-                <h5 class="card-title">{{ vacancy.title }}</h5>
-                <p class="card-text">{{ vacancy.description|truncatewords:30 }}</p>
-                <figure class="user-info">
-                    {% if vacancy.creater.profile.image %}
-                        <img src="{{ vacancy.creater.profile.image.url }}" alt="" class="avatar">
-                    {% else %}
-                        <img src="{% static 'img/default-avatar.jpg' %}" alt="Default Avatar" class="dropdown-image avatar">
-                    {% endif %}
-                    <p class="username">{{ vacancy.creater.username|truncatewords:3 }}</p>
-                </figure>
-                <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="grow-button">Детальнее</a>
-                </div>
-            </div>
-        {% endfor %}
+      {% for vacancy in vacancies %}
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ vacancy.title }}</h5>
+            <p class="card-text">{{ vacancy.description|truncatewords:30 }}</p>
+            <figure class="user-info">
+              {% if vacancy.creater.profile.image %}
+                <img src="{{ vacancy.creater.profile.image.url }}" alt="" class="avatar">
+              {% else %}
+                <img src="{% static 'img/default-avatar.jpg' %}" alt="Default Avatar" class="dropdown-image avatar">
+              {% endif %}
+              <p class="username">{{ vacancy.creater.username|truncatewords:3 }}</p>
+            </figure>
+            <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="grow-button">Детальнее</a>
+          </div>
+        </div>
+      {% endfor %}
     </section>
-</section>
-
+  </section>
 {% endblock %}
