@@ -29,6 +29,17 @@
 				{% else %}
 					<p>День рождения: Информация не указана.</p>
 				{% endif %}
+				{% if user.profile.country %}
+					<p>Страна: {{ user.profile.country.country.alternate_names }}</p>
+				{% else %}
+					<p>Страна: Информация не указана.</p>
+				{% endif %}
+
+				{% if user.profile.city %}
+					<p>Город: {{ user.profile.city }}</p>
+				{% else %}
+					<p>Город: Информация не указана.</p>
+				{% endif %}
 				<p>Дата регистрации: {{ user.date_joined|date:"d.m.Y" }}</p>
 			</div>
 			<section class="links-section">
@@ -38,10 +49,10 @@
 					<ul>
 						{% for link in user.profile.links.all %}
 							<p><h5>{{ link.site_type }}
-								<a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
-									<i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
-								</a>
-							</h5>
+							<a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
+								<i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
+							</a>
+						</h5>
 							</p>
 						{% endfor %}
 					</ul>

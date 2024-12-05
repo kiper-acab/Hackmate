@@ -30,7 +30,6 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(
 INSTALLED_APPS = [
     "homepage.apps.HomepageConfig",
     "users.apps.UsersConfig",
-    "vacancies.apps.VacanciesConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,6 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
+    "smart_selects",
+    "cities_light",
     "sorl.thumbnail",
 ]
 
@@ -159,10 +160,30 @@ else:
         default="False",
     )
 
-DEFAULT_USER_IS_ACTIVE = DEFAULT_USER_IS_ACTIVE.lower() in (
-    "true",
-    "yes",
-    "1",
-    "y",
-    "",
-)
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ["ru"]
+CITIES_LIGHT_INCLUDE_COUNTRIES = [
+    "RU",
+    "BY",
+    "KZ",
+    "UA",
+    "UZ",
+    "KG",
+    "AM",
+    "AZ",
+    "MD",
+    "TJ",
+]
+CITIES_LIGHT_INCLUDE_CITY_TYPES = [
+    "PPL",
+    "PPLA",
+    "PPLA2",
+    "PPLA3",
+    "PPLA4",
+    "PPLC",
+    "PPLF",
+    "PPLG",
+    "PPLL",
+    "PPLR",
+    "PPLS",
+    "STLMT",
+]

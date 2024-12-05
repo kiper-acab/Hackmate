@@ -37,6 +37,9 @@
 				{% include "includes/form.html" %}
 			{% endfor %}
 
+			{{ country_form.as_p }}
+			{{ city_form.as_p }}
+
 			<h2>Добавить новую ссылку</h2>
 			{% for field in link_form %}
 				{% include "includes/form.html" %}
