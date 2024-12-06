@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
-    "smart_selects",
-    "cities_light",
     "sorl.thumbnail",
 ]
 
