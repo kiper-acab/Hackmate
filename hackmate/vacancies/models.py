@@ -51,6 +51,14 @@ class Vacancy(django.db.models.Model):
         blank=True,
     )
 
+    hackaton_title = django.db.models.CharField(
+        max_length=255,
+        verbose_name="название хакатона",
+        blank=True,
+        null=True,
+        help_text="Название хакатона, к которому относится вакансия",
+    )
+
     class Meta:
         verbose_name = "вакансия"
         verbose_name_plural = "вакансии"

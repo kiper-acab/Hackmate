@@ -10,6 +10,17 @@ class Migration(django.db.migrations.Migration):
     ]
 
     operations = [
+        django.db.migrations.AddField(
+            model_name="vacancy",
+            name="hackaton_title",
+            field=django.db.models.CharField(
+                blank=True,
+                help_text="Название хакатона, к которому относится вакансия",
+                max_length=255,
+                null=True,
+                verbose_name="название хакатона",
+            ),
+        ),
         django.db.migrations.AlterField(
             model_name="vacancy",
             name="created_at",
