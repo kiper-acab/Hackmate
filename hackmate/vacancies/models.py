@@ -29,13 +29,20 @@ class Vacancy(django.db.models.Model):
 
     description = django.db.models.TextField(verbose_name="описание вакансии")
 
-    created_at = django.db.models.DateTimeField(auto_now_add=True)
+    created_at = django.db.models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="создано",
+    )
 
-    updated_at = django.db.models.DateTimeField(auto_now=True)
+    updated_at = django.db.models.DateTimeField(
+        auto_now=True,
+        verbose_name="обновлено",
+    )
 
     status = django.db.models.CharField(
         max_length=255,
         choices=VacancyStatuses.choices,
+        verbose_name="cтатус",
     )
 
     views = django.db.models.ManyToManyField(
@@ -44,12 +51,15 @@ class Vacancy(django.db.models.Model):
         blank=True,
     )
 
-    def total_views(self):
-        return self.views.count()
-
     class Meta:
         verbose_name = "вакансия"
         verbose_name_plural = "вакансии"
+
+    def total_views(self):
+        return self.views.count()
+
+    def __str__(self):
+        return self.title
 
 
 class Response(django.db.models.Model):

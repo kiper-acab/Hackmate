@@ -8,10 +8,11 @@
 
 {% block content %}
   <section class="container">
-    <div class="header d-flex justify-content-between align-items-center mb-4">
+    <div class="header">
       <h1>Список вакансий</h1>
-      <h3><a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-primary btn-circle">
-        Создать вакансию </a></h3>
+      <figure>
+        <a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-primary btn-circle creaete_vacancy">Создать вакансию </a>
+      </figure>
     </div>
     <section class="vacancies">
       {% for vacancy in vacancies %}

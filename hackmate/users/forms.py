@@ -46,19 +46,6 @@ class UserCreateForm(
         }
 
 
-class CountryFrom(BootstrapForm):
-
-    class Meta:
-        model = users.models.Country
-        fields = [model.country.field.name]
-
-
-class CityFrom(BootstrapForm):
-    class Meta:
-        model = users.models.City
-        fields = [model.city.field.name]
-
-
 class ProfileChangeForm(BootstrapForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

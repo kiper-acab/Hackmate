@@ -39,7 +39,7 @@ class VacancyDetailView(django.views.generic.DetailView):
     def get(self, request, *args, **kwargs):
         vacancy = self.get_object()
 
-        ip = self.get_client_ip(request)
+        ip = get_client_ip(request)
         ip_instance, created = vacancies.models.Ip.objects.get_or_create(ip=ip)
         if not vacancy.views.filter(ip=ip_instance).exists():
             vacancy.views.add(ip_instance)
@@ -69,13 +69,6 @@ class VacancyDetailView(django.views.generic.DetailView):
         )
 
         return django.http.JsonResponse({"message": "Ваш отклик отправлен!"})
-
-    def get_client_ip(self, request):
-        x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
-        if x_forwarded_for:
-            return x_forwarded_for.split(",")[0]
-
-        return request.META.get("REMOTE_ADDR")
 
 
 class VacancyCreateView(

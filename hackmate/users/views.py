@@ -18,6 +18,7 @@ import django.views.generic
 import users.forms
 import users.models
 
+
 User = django.contrib.auth.get_user_model()
 
 
@@ -78,12 +79,6 @@ class ProfileEditView(
         links = users.models.ProfileLink.objects.filter(
             profile=request.user.profile,
         )
-        country_form = users.forms.CountryFrom(
-            instance=request.user.profile,
-        )
-        city_form = users.forms.CityFrom(
-            instance=request.user.profile,
-        )
 
         return django.shortcuts.render(
             request,
@@ -93,8 +88,6 @@ class ProfileEditView(
                 "profile_form": profile_form,
                 "link_form": link_form,
                 "links": links,
-                "country_form": country_form,
-                "city_form": city_form,
             },
         )
 
@@ -106,12 +99,6 @@ class ProfileEditView(
             instance=request.user.profile,
         )
         link_form = users.forms.ProfileLinkForm(request.POST)
-        country_form = users.forms.CountryFrom(
-            request.POST, instance=request.user.profile,
-        )
-        city_form = users.forms.CityFrom(
-            request.POST, instance=request.user.profile,
-        )
 
         if not form.data.get("email") or not form.data.get("username"):
             django.contrib.messages.error(
@@ -135,11 +122,6 @@ class ProfileEditView(
                 link.profile = request.user.profile
                 link.save()
 
-            if country_form.is_valid():
-                country_form.save()
-                if city_form.is_valid():
-                    city_form.save()
-
             user_form.save()
             profile_form.save()
             django.contrib.messages.success(
@@ -155,8 +137,6 @@ class ProfileEditView(
                 "form": form,
                 "profile_form": profile_form,
                 "link_form": link_form,
-                "country_form": country_form,
-                "city_form": city_form,
             },
         )
 
@@ -180,9 +160,10 @@ class SignUpView(
         else:
             user.is_active = False
             url = django.urls.reverse("users:activate", args=[user.username])
+            domain = self.request.get_host()
             confirmation_link = (
                 "Чтобы подтвердить аккаунт перейдите по ссылке "
-                f"http://127.0.0.1:8000{url}"
+                f"http://{domain}{url}"
             )
 
             django.core.mail.send_mail(

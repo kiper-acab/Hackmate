@@ -3,7 +3,6 @@ __all__ = ()
 import django.conf
 import django.db
 import django.db.models.deletion
-import smart_selects.db_fields
 
 import users.models
 import users.validators
@@ -14,64 +13,13 @@ class Migration(django.db.migrations.Migration):
     initial = True
 
     dependencies = [
-        ("cities_light", "0011_alter_city_country_alter_city_region_and_more"),
-        ("auth", "0016_alter_user_email"),
         django.db.migrations.swappable_dependency(
             django.conf.settings.AUTH_USER_MODEL,
         ),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
-        django.db.migrations.CreateModel(
-            name="City",
-            fields=[
-                (
-                    "id",
-                    django.db.models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "city",
-                    smart_selects.db_fields.ChainedForeignKey(
-                        auto_choose=True,
-                        blank=True,
-                        chained_field="country",
-                        chained_model_field="country",
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to="cities_light.city",
-                    ),
-                ),
-            ],
-        ),
-        django.db.migrations.CreateModel(
-            name="Country",
-            fields=[
-                (
-                    "id",
-                    django.db.models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "country",
-                    django.db.models.ForeignKey(
-                        blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to="cities_light.country",
-                        verbose_name="Country",
-                    ),
-                ),
-            ],
-        ),
         django.db.migrations.CreateModel(
             name="Profile",
             fields=[
@@ -118,22 +66,6 @@ class Migration(django.db.migrations.Migration):
                 (
                     "date_last_active",
                     django.db.models.DateTimeField(blank=True, null=True),
-                ),
-                (
-                    "city",
-                    django.db.models.OneToOneField(
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to="users.city",
-                    ),
-                ),
-                (
-                    "country",
-                    django.db.models.OneToOneField(
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to="users.country",
-                    ),
                 ),
                 (
                     "user",
@@ -193,8 +125,9 @@ class Migration(django.db.migrations.Migration):
                     "url",
                     django.db.models.URLField(
                         blank=True,
-                        help_text="Полная ссылка, например, "
-                        "https://example.com",
+                        help_text=(
+                            "Полная ссылка, например, https://example.com"
+                        ),
                         null=True,
                         verbose_name="URL",
                     ),
@@ -213,16 +146,5 @@ class Migration(django.db.migrations.Migration):
                 "verbose_name": "ссылка",
                 "verbose_name_plural": "ссылки",
             },
-        ),
-        django.db.migrations.AddField(
-            model_name="city",
-            name="country",
-            field=django.db.models.ForeignKey(
-                blank=True,
-                null=True,
-                on_delete=django.db.models.deletion.SET_NULL,
-                to="users.country",
-                verbose_name="Country",
-            ),
         ),
     ]

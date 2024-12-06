@@ -6,6 +6,11 @@ import vacancies.models
 
 
 class VacancyForm(django.forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control"
+
     class Meta:
         model = vacancies.models.Vacancy
         fields = [
@@ -15,21 +20,12 @@ class VacancyForm(django.forms.ModelForm):
         widgets = {
             model.title.field.name: django.forms.TextInput(
                 attrs={
-                    "class": "form-control",
                     "placeholder": "Введите название вакансии",
                 },
             ),
             model.description.field.name: django.forms.Textarea(
                 attrs={
-                    "class": "form-control",
                     "placeholder": "Введите описание",
                 },
             ),
         }
-        labels = {
-            "title": "Название вакансии",
-            "description": "Описание вакансии",
-        }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
