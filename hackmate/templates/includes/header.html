@@ -29,8 +29,8 @@
               <p class="dropdown-username">{{ request.user.username }}</p>
           </button>
           <ul class="dropdown-menu">
-            <li><a href="{% url 'users:profile' %}" class="dropdown-item">Профиль</a></li>
-            <li><a href="{% url 'users:profile_edit' %}" class="dropdown-item">Редактирование профиля</a></li>
+            <li><a href="{% url 'users:profile' username=user %}" class="dropdown-item">Профиль</a></li>
+            <li><a href="{% url 'users:profile_edit' username=user %}" class="dropdown-item">Редактирование профиля</a></li>
             <li><a href="{% url 'users:logout' %}" class="dropdown-item">Выйти</a></li>
           </ul>
         </li>

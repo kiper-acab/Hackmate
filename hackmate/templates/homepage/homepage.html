@@ -39,7 +39,7 @@
 	<hr>
 	<section class="ready">
 	  <h2>Готов начать?</h2>
-	  <p>Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для следующего хакатона. <a href="{% if not request.user.is_authenticated %}{% url 'users:signup' %}{% else %}{% url 'users:profile' %}{% endif %}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Создать профиль бесплатно</a></p>
+	  <p>Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для следующего хакатона. <a href="{% if not request.user.is_authenticated %}{% url 'users:signup' %}{% else %}{% url 'users:profile' username=user %}{% endif %}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Создать профиль бесплатно</a></p>
 	</section>
   </section>
 {% endblock %}

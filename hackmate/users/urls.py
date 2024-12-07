@@ -51,12 +51,12 @@ urlpatterns = [
         name="signup",
     ),
     django.urls.path(
-        "profile/",
+        "profile/<str:username>/",
         users.views.ProfileView.as_view(),
         name="profile",
     ),
     django.urls.path(
-        "profile_edit/",
+        "profile_edit/<str:username>/",
         users.views.ProfileEditView.as_view(),
         name="profile_edit",
     ),
