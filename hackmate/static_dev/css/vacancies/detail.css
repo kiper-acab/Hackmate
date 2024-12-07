@@ -85,3 +85,65 @@
 .views{
     margin: 20px;
 }
+
+.comments-header{
+    text-align: center;
+    margin-top: 100px;
+}
+
+
+.comments {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.comment-user {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-date {
+    font-style: italic;
+    color: #999;
+}
+
+.comment-text {
+    font-size: 1em;
+    line-height: 1.5;
+    color: #444;
+    margin-left: 40px;
+}
+
+.no-comments {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+}
+
+.user-image{
+    margin: 0 10px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}

@@ -1,11 +1,16 @@
 __all__ = ()
 
-import django.db.models
+import django.conf
+import django.db
+import django.db.models.deletion
 
 
 class Migration(django.db.migrations.Migration):
 
     dependencies = [
+        django.db.migrations.swappable_dependency(
+            django.conf.settings.AUTH_USER_MODEL,
+        ),
         ("vacancies", "0003_response"),
     ]
 
@@ -45,5 +50,50 @@ class Migration(django.db.migrations.Migration):
                 auto_now=True,
                 verbose_name="обновлено",
             ),
+        ),
+        django.db.migrations.CreateModel(
+            name="CommentVacancy",
+            fields=[
+                (
+                    "id",
+                    django.db.models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "comment",
+                    django.db.models.TextField(verbose_name="комментарий"),
+                ),
+                (
+                    "created_at",
+                    django.db.models.DateTimeField(
+                        auto_now_add=True,
+                        verbose_name="cоздано",
+                    ),
+                ),
+                (
+                    "user",
+                    django.db.models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=django.conf.settings.AUTH_USER_MODEL,
+                        verbose_name="пользователь",
+                    ),
+                ),
+                (
+                    "vacancy",
+                    django.db.models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="vacancies.vacancy",
+                        verbose_name="вакансия",
+                    ),
+                ),
+            ],
+            options={
+                "ordering": ["-created_at"],
+            },
         ),
     ]

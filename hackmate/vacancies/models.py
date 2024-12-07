@@ -10,6 +10,10 @@ class Ip(django.db.models.Model):
     def __str__(self):
         return self.ip
 
+    class Meta:
+        verbose_name = "IP адрес"
+        verbose_name_plural = "IP адреса"
+
 
 class Vacancy(django.db.models.Model):
     class VacancyStatuses(django.db.models.TextChoices):
@@ -68,6 +72,35 @@ class Vacancy(django.db.models.Model):
 
     def __str__(self):
         return self.title
+
+
+class CommentVacancy(django.db.models.Model):
+    vacancy = django.db.models.ForeignKey(
+        "Vacancy",
+        on_delete=django.db.models.CASCADE,
+        verbose_name="вакансия",
+        related_name="comments",
+    )
+
+    comment = django.db.models.TextField(
+        verbose_name="комментарий",
+    )
+
+    user = django.db.models.ForeignKey(
+        django.conf.settings.AUTH_USER_MODEL,
+        on_delete=django.db.models.CASCADE,
+        verbose_name="пользователь",
+    )
+
+    created_at = django.db.models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="cоздано",
+    )
+
+    class Meta:
+        verbose_name = "комментарий к вакансии"
+        verbose_name_plural = "комментарии к вакансиям"
+        ordering = ["-created_at"]
 
 
 class Response(django.db.models.Model):

@@ -31,10 +31,13 @@ class VacancyView(django.views.generic.ListView):
         )
 
 
-class VacancyDetailView(django.views.generic.DetailView):
+class VacancyDetailView(
+    django.views.generic.DetailView,
+):
     model = vacancies.models.Vacancy
     template_name = "vacancies/detail.html"
     context_object_name = "vacancy"
+    form_class = vacancies.forms.CommentForm
 
     def get(self, request, *args, **kwargs):
         vacancy = self.get_object()
@@ -55,6 +58,19 @@ class VacancyDetailView(django.views.generic.DetailView):
 
         vacancy = self.get_object()
 
+        form = vacancies.forms.CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.vacancy = vacancy
+            comment.user = request.user
+            comment.save()
+            return django.shortcuts.redirect(
+                django.urls.reverse(
+                    "vacancies:vacancy_detail",
+                    kwargs={"pk": vacancy.pk},
+                ),
+            )
+
         if vacancies.models.Response.objects.filter(
             vacancy=vacancy,
             user=request.user,
@@ -69,6 +85,11 @@ class VacancyDetailView(django.views.generic.DetailView):
         )
 
         return django.http.JsonResponse({"message": "Ваш отклик отправлен!"})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["comment_form"] = vacancies.forms.CommentForm()
+        return context
 
 
 class VacancyCreateView(
