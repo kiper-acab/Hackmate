@@ -14,7 +14,6 @@ import django.urls
 import django.utils.timezone
 import django.views
 import django.views.generic
-from django.shortcuts import get_object_or_404
 
 import users.forms
 import users.models
@@ -51,7 +50,9 @@ class ProfileView(
 ):
 
     def get(self, request, username):
-        user = get_object_or_404(users.models.User, username=username)
+        user = django.shortcuts.get_object_or_404(
+            users.models.User, username=username,
+        )
 
         is_own_profile = user == request.user
 
@@ -70,9 +71,13 @@ class ProfileEditView(
     django.views.generic.View,
 ):
     def get(self, request, username):
-        user = get_object_or_404(users.models.User, username=username)
+        user = django.shortcuts.get_object_or_404(
+            users.models.User, username=username,
+        )
         if user != request.user:
-            return django.shortcuts.redirect("homepage:homepage") # это для борьбы с нехорошими пользователями
+            return django.shortcuts.redirect(
+                "homepage:homepage",
+            )  # это для борьбы с нехорошими пользователями
 
         form = users.forms.UserChangeForm(instance=user)
         profile_form = users.forms.ProfileChangeForm(
