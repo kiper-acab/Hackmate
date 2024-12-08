@@ -1,71 +1,99 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load ratings %}
 
 {% block links %}
   <link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
 {% endblock %}
 
 {% block content %}
-  <section class="container">
+  <section class="container profile-section">
     <div class="profile-header">
-      <div class="profile-avatar">
+      <div class="profile-rating">
+        <div class="stars">
+          {% ratings user.profile %}
+        </div>
+      </div>
+    </div>
+    <div class="profile-avatar">
         {% if user.profile.image %}
           <img src="{{ user.profile.image.url }}" alt="{{ user.username }}" class="avatar">
         {% else %}
           <img src="{% static 'img/default-avatar.jpg' %}" alt="Default Avatar" class="avatar">
         {% endif %}
       </div>
-      <div class="profile-info">
-        <h1>{{ user.username }}</h1>
-        <p>Email: {{ user.email }}</p>
-        {% if user.profile.description %}
-          <p>О себе: {{ user.profile.description }}</p>
-        {% else %}
-          <p>О себе: Информация не указана.</p>
-        {% endif %}
-        {% if user.profile.birthday %}
-          <p>День рождения: {{ user.profile.birthday }}</p>
-        {% else %}
-          <p>День рождения: Информация не указана.</p>
-        {% endif %}
-        {% if user.profile.country %}
-          <p>Страна: {{ user.profile.country.country.alternate_names }}</p>
-        {% else %}
-          <p>Страна: Информация не указана.</p>
-        {% endif %}
+    <div class="profile-info">
 
-        {% if user.profile.city %}
-          <p>Город: {{ user.profile.city }}</p>
-        {% else %}
-          <p>Город: Информация не указана.</p>
-        {% endif %}
-        <p>Дата регистрации: {{ user.date_joined|date:"d.m.Y" }}</p>
+      <h1>{{ user.username }}</h1>
+      <p class="email">Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+
+      <div class="profile-details">
+        <div class="profile-item">
+          {% if user.profile.description %}
+            <p><strong>О себе:</strong> {{ user.profile.description }}</p>
+          {% else %}
+            <p><strong>О себе:</strong> Информация не указана.</p>
+          {% endif %}
+        </div>
+
+        <div class="profile-item">
+          {% if user.profile.birthday %}
+            <p><strong>День рождения:</strong> {{ user.profile.birthday }}</p>
+          {% else %}
+            <p><strong>День рождения:</strong> Информация не указана.</p>
+          {% endif %}
+        </div>
+
+        <div class="profile-item">
+          {% if user.profile.country %}
+            <p><strong>Страна:</strong> {{ user.profile.country.country.alternate_names }}</p>
+          {% else %}
+            <p><strong>Страна:</strong> Информация не указана.</p>
+          {% endif %}
+        </div>
+
+        <div class="profile-item">
+          {% if user.profile.city %}
+            <p><strong>Город:</strong> {{ user.profile.city }}</p>
+          {% else %}
+            <p><strong>Город:</strong> Информация не указана.</p>
+          {% endif %}
+        </div>
+
+        <div class="profile-item">
+          <p><strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+        </div>
       </div>
-      <section class="links-section">
-        <h2>Ссылки на другие сети</h2>
+    </div>
 
-        {% if user.profile.links.exists %}
-          <ul>
-            {% for link in user.profile.links.all %}
-              <p>
-                <h5>{{ link.site_type }}
-                  <a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
-                    <i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
-                  </a>
-                </h5>
-              </p>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>Ссылки отсутствуют.</p>
-        {% endif %}
-      </section>
+    <div class="links-section">
+      <h2>Ссылки на другие сети</h2>
+
+      {% if user.profile.links.exists %}
+        <ul class="social-links">
+          {% for link in user.profile.links.all %}
+            <li>
+              <h5>{{ link.site_type }}
+                <a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
+                  <i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
+                </a>
+              </h5>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Ссылки отсутствуют.</p>
+      {% endif %}
     </div>
+
     {% if is_own_profile %}
-    <div class="profile-actions">
-      <a href="{% url 'users:profile_edit' username=request.user %}" class="btn btn-primary">Редактировать профиль</a>
-	  {% endif %}
-    </div>
+      <div class="profile-actions">
+        <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">Редактировать профиль</a>
+      </div>
+    {% endif %}
   </section>
+
+  <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+  <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 {% endblock %}

@@ -51,7 +51,8 @@ class ProfileView(
 
     def get(self, request, username):
         user = django.shortcuts.get_object_or_404(
-            users.models.User, username=username,
+            users.models.User,
+            username=username,
         )
 
         is_own_profile = user == request.user
@@ -70,22 +71,14 @@ class ProfileEditView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
 ):
-    def get(self, request, username):
-        user = django.shortcuts.get_object_or_404(
-            users.models.User, username=username,
-        )
-        if user != request.user:
-            return django.shortcuts.redirect(
-                "homepage:homepage",
-            )  # это для борьбы с нехорошими пользователями
-
-        form = users.forms.UserChangeForm(instance=user)
+    def get(self, request):
+        form = users.forms.UserChangeForm(instance=request.user)
         profile_form = users.forms.ProfileChangeForm(
-            instance=user.profile,
+            instance=request.user.profile,
         )
         link_form = users.forms.ProfileLinkForm()
         links = users.models.ProfileLink.objects.filter(
-            profile=user.profile,
+            profile=request.user.profile,
         )
 
         return django.shortcuts.render(
@@ -136,7 +129,9 @@ class ProfileEditView(
                 request,
                 "Профиль успешно изменен!",
             )
-            return django.shortcuts.redirect("users:profile_edit")
+            return django.shortcuts.redirect(
+                "users:profile_edit", username=request.user,
+            )
 
         return django.shortcuts.render(
             request,

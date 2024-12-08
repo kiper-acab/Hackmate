@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
+    "star_ratings",
     "sorl.thumbnail",
 ]
 
@@ -186,3 +187,6 @@ CITIES_LIGHT_INCLUDE_CITY_TYPES = [
     "PPLS",
     "STLMT",
 ]
+
+STAR_RATINGS_STAR_HEIGHT = 20
+STAR_RATINGS_STAR_WIDTH = 20

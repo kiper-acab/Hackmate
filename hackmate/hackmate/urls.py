@@ -24,6 +24,10 @@ urlpatterns += [
     django.urls.path("about/", django.urls.include("about.urls")),
     django.urls.path("admin/", django.contrib.admin.site.urls),
     django.urls.path("chaining/", django.urls.include("smart_selects.urls")),
+    django.urls.path(
+        "ratings/",
+        django.urls.include("star_ratings.urls", namespace="ratings"),
+    ),
 ]
 
 urlpatterns += django.conf.urls.static.static(
