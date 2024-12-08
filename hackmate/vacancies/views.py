@@ -39,6 +39,14 @@ class VacancyDetailView(
     context_object_name = "vacancy"
     form_class = vacancies.forms.CommentForm
 
+    def get_object(self):
+        queryset = (
+            self.get_queryset()
+            .select_related("creater", "creater__profile")
+            .prefetch_related("comments__user")
+        )
+        return queryset.get(pk=self.kwargs["pk"])
+
     def get(self, request, *args, **kwargs):
         vacancy = self.get_object()
 
