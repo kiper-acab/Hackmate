@@ -14,18 +14,23 @@ import users.models
 
 class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
-        if "@" in username:
-            user = users.models.User.objects.by_mail(username)
+        user = None
 
+        if "@" in username:
+            user = users.models.User.objects.by_mail(username).select_related(
+                "profile",
+            )
         else:
             user = (
-                users.models.User.objects.filter(username=username).first()
-                or None
+                users.models.User.objects.filter(username=username)
+                .select_related("profile")
+                .first()
             )
 
         if user:
             if user.check_password(password):
                 user.profile.attempts_count = 0
+                user.profile.save()
                 return user
 
             if (
@@ -34,47 +39,48 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
             ):
                 user.profile.attempts_count += 1
                 user.profile.save()
-
             else:
-                user.is_active = False
-                user.profile.date_last_active = django.utils.timezone.now()
-                user.save()
-                user.profile.save()
-
-                django.contrib.messages.error(
-                    request,
-                    (
-                        "Вы превысили допустимое "
-                        "число попыток входа. Пожалйста "
-                        "активируйте свой аккаунт. "
-                        "Вам должно прийти письмо на почту c активацией."
-                    ),
-                )
-
-                activation_path = django.urls.reverse(
-                    "users:activate",
-                    args=[user.username],
-                )
-                domain = request.get_host()
-                confirmation_link = (
-                    "Замечена подозрительная активность аккаунта. "
-                    "Для того чтобы активировать свой аккаунт, "
-                    "нажмите на ссылку ниже: "
-                    f"http://{domain}{activation_path}"
-                )
-
-                django.core.mail.send_mail(
-                    "Активация аккаунта",
-                    confirmation_link,
-                    django.conf.settings.DJANGO_MAIL,
-                    [user.email],
-                    fail_silently=False,
-                )
+                self.deactivate_user(request, user)
 
         return None
 
+    def deactivate_user(self, request, user):
+        now = django.utils.timezone.now()
+        users.models.User.objects.filter(pk=user.pk).update(is_active=False)
+        user.profile.attempts_count = 0
+        user.profile.date_last_active = now
+        user.profile.save()
+
+        django.contrib.messages.error(
+            request,
+            (
+                "Вы превысили допустимое число попыток входа. "
+                "Пожалуйста, активируйте свой аккаунт. "
+                "Вам должно прийти письмо на почту с активацией."
+            ),
+        )
+
+        activation_path = django.urls.reverse(
+            "users:activate",
+            args=[user.username],
+        )
+        domain = request.get_host()
+        confirmation_link = (
+            "Замечена подозрительная активность аккаунта. "
+            "Для активации аккаунта нажмите на ссылку ниже: "
+            f"http://{domain}{activation_path}"
+        )
+
+        django.core.mail.send_mail(
+            "Активация аккаунта",
+            confirmation_link,
+            django.conf.settings.DJANGO_MAIL,
+            [user.email],
+            fail_silently=False,
+        )
+
     def get_user(self, user_id):
-        try:
-            return django.contrib.auth.models.User.objects.get(pk=user_id)
-        except django.contrib.auth.models.User.DoesNotExist:
-            return None
+        queryset = django.contrib.auth.models.User.objects.select_related(
+            "profile",
+        )
+        return queryset.filter(pk=user_id).first()

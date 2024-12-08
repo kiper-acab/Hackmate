@@ -41,10 +41,14 @@ class VacancyDetailView(
 
     def get(self, request, *args, **kwargs):
         vacancy = self.get_object()
-
         ip = get_client_ip(request)
-        ip_instance, created = vacancies.models.Ip.objects.get_or_create(ip=ip)
-        if not vacancy.views.filter(ip=ip_instance).exists():
+
+        ip_instance, _ = vacancies.models.Ip.objects.get_or_create(ip=ip)
+
+        if not vacancy.views.through.objects.filter(
+            vacancy=vacancy,
+            ip=ip_instance,
+        ).exists():
             vacancy.views.add(ip_instance)
 
         return super().get(request, *args, **kwargs)
@@ -71,18 +75,15 @@ class VacancyDetailView(
                 ),
             )
 
-        if vacancies.models.Response.objects.filter(
-            vacancy=vacancy,
-            user=request.user,
-        ).exists():
-            return django.http.JsonResponse(
-                {"message": "Вы уже откликнулись на эту вакансию"},
-            )
-
-        vacancies.models.Response.objects.create(
+        response, created = vacancies.models.Response.objects.get_or_create(
             vacancy=vacancy,
             user=request.user,
         )
+
+        if not created:
+            return django.http.JsonResponse(
+                {"message": "Вы уже откликнулись на эту вакансию"},
+            )
 
         return django.http.JsonResponse({"message": "Ваш отклик отправлен!"})
 
@@ -114,7 +115,10 @@ class UserResponsesView(django.views.generic.ListView):
     def get_queryset(self):
         return vacancies.models.Response.objects.filter(
             user=self.request.user,
-        ).select_related("vacancy")
+        ).select_related(
+            "vacancy",
+            "vacancy__creater",
+        )
 
 
 class UserVacanciesView(django.views.generic.ListView):
@@ -125,4 +129,7 @@ class UserVacanciesView(django.views.generic.ListView):
     def get_queryset(self):
         return vacancies.models.Vacancy.objects.filter(
             creater=self.request.user,
-        ).prefetch_related("responses")
+        ).prefetch_related(
+            "responses",
+            "responses__user",
+        )

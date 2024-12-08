@@ -21,7 +21,14 @@
       <i class="fa-regular fa-eye"></i>{{ vacancy.views.count }}
     </p>
 
-    <button id="respond-button" class="grow-button">Откликнуться</button>
+    {% if user.is_authenticated %}
+      {% if user != vacancy.creater %}
+        <button id="respond-button" class="grow-button">Откликнуться</button>
+      {% else %}
+      {% endif %}
+    {% else %}
+      <p>Вы должны быть авторизованы, чтобы откликнуться.</p>
+    {% endif %}
 
     <section class="commnets">
       <article class="create_comment">
