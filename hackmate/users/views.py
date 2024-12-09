@@ -45,13 +45,13 @@ class DeleteLinkView(django.views.generic.DeleteView):
 
 
 class ProfileView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
 ):
 
     def get(self, request, username):
         user = django.shortcuts.get_object_or_404(
-            users.models.User, username=username,
+            users.models.User,
+            username=username,
         )
 
         is_own_profile = user == request.user
@@ -72,7 +72,8 @@ class ProfileEditView(
 ):
     def get(self, request, username):
         user = django.shortcuts.get_object_or_404(
-            users.models.User, username=username,
+            users.models.User,
+            username=username,
         )
         if user != request.user:
             return django.shortcuts.redirect(
