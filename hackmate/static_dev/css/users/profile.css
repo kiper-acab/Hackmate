@@ -127,7 +127,7 @@ margin: 30px;
 
 .site-icon {
   font-size: 1.5rem;
-  color: #3b5998; /* Add color matching site icons */
+  color: #3b5998;
 }
 
 .profile-actions {
@@ -135,15 +135,9 @@ margin: 30px;
 }
 
 .btn {
-  background-color: #007bff;
-  color: white;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
-}
-
-.btn:hover {
-  background-color: #0056b3;
 }
 
 .star-ratings-rate-action{
