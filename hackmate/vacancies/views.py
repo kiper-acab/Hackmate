@@ -134,3 +134,27 @@ class UserVacanciesView(django.views.generic.ListView):
         return vacancies.models.Vacancy.objects.filter(
             creater=self.request.user,
         ).prefetch_related("responses")
+
+
+class DeleteCommentView(django.views.generic.DeleteView):
+    model = vacancies.models.CommentVacancy
+    pk_url_kwarg = "pk"
+    template_name = "vacancies/user_vacancies.html"
+
+    def get_success_url(self, *args, **kwargs):
+        return django.urls.reverse(
+            "vacancies:vacancy_detail",
+            args=[self.object.vacancy.pk],
+        )
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.user == request.user:
+            return super(DeleteCommentView, self).delete(
+                request,
+                *args,
+                **kwargs,
+            )
+
+        raise django.http.Http404("not found")

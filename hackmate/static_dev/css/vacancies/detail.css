@@ -147,3 +147,13 @@
     height: 40px;
     object-fit: cover;
 }
+
+.delete-link-form{
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.delete-link-form:hover{
+    transition: .3s;
+    color: rgba(255, 0, 0, .5);
+}
