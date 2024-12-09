@@ -72,22 +72,5 @@
     </section>
   </div>
 
-  <script>
-    document.getElementById("respond-button")?.addEventListener("click", function () {
-      fetch("{% url 'vacancies:vacancy_detail' pk=vacancy.pk %}", {
-        method: "POST",
-        headers: {
-          "X-CSRFToken": "{{ csrf_token }}",
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert(data.message || data.error);
-      })
-      .catch(error => {
-        console.error("Ошибка:", error);
-        alert("Произошла ошибка. Попробуйте еще раз.");
-      });
-    });
-  </script>
+  <script src="{% static 'js/button_detail.js' %}"></script>
 {% endblock %}

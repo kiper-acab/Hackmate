@@ -45,34 +45,37 @@ class VacancyDetailView(
 
         ip_instance, _ = vacancies.models.Ip.objects.get_or_create(ip=ip)
 
-        if not vacancy.views.through.objects.filter(
-            vacancy=vacancy,
-            ip=ip_instance,
-        ).exists():
+        if not vacancy.views.filter(ip=ip_instance).exists():
             vacancy.views.add(ip_instance)
 
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        vacancy = self.get_object()
+
         if not request.user.is_authenticated:
             return django.http.JsonResponse(
-                {"error": "Вы должны быть авторизованы"},
+                {
+                    "error": "Вы должны быть авторизованы "
+                    "для выполнения этого действия",
+                },
                 status=403,
             )
 
-        vacancy = self.get_object()
+        if "comment" in request.POST:
+            form = vacancies.forms.CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.vacancy = vacancy
+                comment.user = request.user
+                comment.save()
+                return django.http.JsonResponse(
+                    {"message": "Комментарий добавлен!"},
+                )
 
-        form = vacancies.forms.CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.vacancy = vacancy
-            comment.user = request.user
-            comment.save()
-            return django.shortcuts.redirect(
-                django.urls.reverse(
-                    "vacancies:vacancy_detail",
-                    kwargs={"pk": vacancy.pk},
-                ),
+            return django.http.JsonResponse(
+                {"error": "Форма комментария недействительна."},
+                status=400,
             )
 
         response, created = vacancies.models.Response.objects.get_or_create(
@@ -82,10 +85,12 @@ class VacancyDetailView(
 
         if not created:
             return django.http.JsonResponse(
-                {"message": "Вы уже откликнулись на эту вакансию"},
+                {"message": "Вы уже откликнулись на эту вакансию."},
             )
 
-        return django.http.JsonResponse({"message": "Ваш отклик отправлен!"})
+        return django.http.JsonResponse(
+            {"message": "Ваш отклик успешно отправлен!"},
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
