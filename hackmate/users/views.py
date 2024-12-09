@@ -78,7 +78,7 @@ class ProfileEditView(
         if user != request.user:
             return django.shortcuts.redirect(
                 "homepage:homepage",
-            )  # это для борьбы с нехорошими пользователями
+            )
 
         form = users.forms.UserChangeForm(instance=user)
         profile_form = users.forms.ProfileChangeForm(

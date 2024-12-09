@@ -141,6 +141,10 @@
     color: #888;
 }
 
+.user-a{
+    text-decoration: none;
+}
+
 .user-image{
     margin: 0 10px;
     width: 40px;
