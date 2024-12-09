@@ -18,7 +18,6 @@ import django.views.generic
 import users.forms
 import users.models
 
-
 User = django.contrib.auth.get_user_model()
 
 
@@ -42,6 +41,23 @@ class DeleteLinkView(django.views.generic.DeleteView):
             args=[self.object.link.pk],
         )
         return django.shortcuts.redirect(success_url)
+
+
+class DeleteImageView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.View,
+):
+    def post(self, request):
+        profile = request.user.profile
+        print(profile)
+        if profile.image:
+            print(profile.image)
+            profile.image.delete()
+            profile.save()
+
+        django.contrib.messages.success(request, "Аватар успешно удален")
+
+        return django.shortcuts.redirect("users:profile_edit")
 
 
 class ProfileView(
@@ -130,7 +146,7 @@ class ProfileEditView(
                 "Профиль успешно изменен!",
             )
             return django.shortcuts.redirect(
-                "users:profile_edit", username=request.user,
+                "users:profile_edit",
             )
 
         return django.shortcuts.render(

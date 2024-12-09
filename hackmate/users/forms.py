@@ -4,7 +4,6 @@ import django.contrib.auth.forms
 import django.contrib.auth.models
 import django.forms
 
-
 import users.models
 
 
@@ -73,6 +72,7 @@ class ProfileChangeForm(BootstrapForm):
                 },
                 format=("%Y-%m-%d"),
             ),
+            users.models.Profile.image.field.name: django.forms.FileInput(),
         }
 
 

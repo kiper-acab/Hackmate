@@ -56,6 +56,11 @@ urlpatterns = [
         name="profile_edit",
     ),
     django.urls.path(
+        "profile_edit/delete_image/",
+        users.views.DeleteImageView.as_view(),
+        name="delete_image",
+    ),
+    django.urls.path(
         "profile_edit/delete_link/<int:pk>/",
         users.views.DeleteLinkView.as_view(),
         name="delete_link",
