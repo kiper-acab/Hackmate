@@ -74,9 +74,10 @@
         <ul class="social-links">
           {% for link in user.profile.links.all %}
             <li>
-              <h5>{{ link.site_type }}
+              <h5>
                 <a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
                   <i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
+	                {{ link.site_type }}
                 </a>
               </h5>
             </li>
