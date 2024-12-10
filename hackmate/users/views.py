@@ -89,12 +89,16 @@ class ProfileEditView(
 ):
 
     def get(self, request):
-        user = users.models.User.objects.select_related("profile").get(pk=request.user.pk)
+        user = users.models.User.objects.select_related("profile").get(
+            pk=request.user.pk,
+        )
 
         form = users.forms.UserChangeForm(instance=user)
         profile_form = users.forms.ProfileChangeForm(instance=user.profile)
         link_form = users.forms.ProfileLinkForm()
-        links = users.models.ProfileLink.objects.filter(profile=user.profile).select_related("profile")
+        links = users.models.ProfileLink.objects.filter(
+            profile=user.profile,
+        ).select_related("profile")
 
         return django.shortcuts.render(
             request,
@@ -108,7 +112,9 @@ class ProfileEditView(
         )
 
     def post(self, request):
-        user = users.models.User.objects.select_related("profile").get(pk=request.user.pk)
+        user = users.models.User.objects.select_related("profile").get(
+            pk=request.user.pk,
+        )
 
         form = users.forms.UserChangeForm(request.POST, instance=user)
         profile_form = users.forms.ProfileChangeForm(
