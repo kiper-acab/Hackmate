@@ -2,11 +2,13 @@ __all__ = ()
 
 import django.contrib
 import django.contrib.auth.mixins
+import django.core.paginator
 import django.http
 import django.shortcuts
 import django.urls
 import django.views
 import django.views.generic
+
 
 import vacancies.forms
 import vacancies.models
@@ -154,6 +156,18 @@ class UserVacanciesView(django.views.generic.ListView):
             "responses",
             "responses__user",
         )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        paginated_responses = {}
+        for vacancy in context["vacancies"]:
+            responses = vacancy.responses.all()
+            paginator = django.core.paginator.Paginator(responses, 5)
+            page_number = self.request.GET.get(f"page_{vacancy.id}", 1)
+            paginated_responses[vacancy.id] = paginator.get_page(page_number)
+
+        context["paginated_responses"] = paginated_responses
+        return context
 
 
 class DeleteCommentView(django.views.generic.DeleteView):

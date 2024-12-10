@@ -1,6 +1,7 @@
 __all__ = ()
 
 import django.conf
+import django.core.validators
 import django.db.models
 
 
@@ -75,6 +76,7 @@ class Vacancy(django.db.models.Model):
         null=True,
         blank=True,
         help_text="Укажите количество лет опыта, необходимого для кандидата",
+        validators=[django.core.validators.MinValueValidator(0)],
     )
 
     class Meta:

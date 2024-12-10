@@ -14,7 +14,6 @@
     <div class="vacancy-info">
       <p><strong>Создатель:</strong> {{ vacancy.creater }}</p>
       <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
-      <p><strong>Обновлено:</strong> {{ vacancy.updated_at|date:"d.m.Y H:i" }}</p>
       {% if vacancy.hackaton_title %}
         <p><strong>Хакатон:</strong> {{ vacancy.hackaton_title }}</p>
       {% endif %}

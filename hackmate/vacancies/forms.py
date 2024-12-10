@@ -11,6 +11,24 @@ class VacancyForm(django.forms.ModelForm):
         for field in self.visible_fields():
             field.field.widget.attrs["class"] = "form-control"
 
+    def clean_deadline(self):
+        deadline = self.cleaned_data.get("deadline")
+        if deadline and deadline < django.utils.timezone.now().date():
+            raise django.forms.ValidationError(
+                "Дедлайн не может быть в прошлом.",
+            )
+
+        return deadline
+
+    def clean_experience(self):
+        experience = self.cleaned_data.get("required_experience")
+        if experience is not None and experience < 0:
+            raise django.forms.ValidationError(
+                "Опыт работы не может быть отрицательным.",
+            )
+
+        return experience
+
     class Meta:
         model = vacancies.models.Vacancy
         fields = [

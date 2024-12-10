@@ -6,29 +6,37 @@
   <link rel="stylesheet" href="{% static 'css/vacancies/my_vacancies.css' %}">
 {% endblock %}
 
+
 {% block content %}
-  <div class="container">
-    <h1 class="page-title">Ваши вакансии</h1>
-    <div class="vacancy-list">
-      {% for vacancy in vacancies %}
-        <div class="vacancy-item">
-          <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="vacancy-title">
-            {{ vacancy.title }}
-          </a>
-          <p class="vacancy-description">{{ vacancy.description }}</p>
-          <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
-          <div class="vacancy-responses">
-            <h3>Откликнувшиеся пользователи:</h3>
-            <ul>
-              {% for response in vacancy.responses.all %}
+<div class="container">
+  <h1 class="page-title">Ваши вакансии</h1>
+  <div class="vacancy-list">
+    {% for vacancy in vacancies %}
+      <div class="vacancy-item">
+        <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="vacancy-title">
+          {{ vacancy.title }}
+        </a>
+        <p class="vacancy-description">{{ vacancy.description }}</p>
+        <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
+        <div class="vacancy-responses">
+          <h3>Откликнувшиеся пользователи:</h3>
+          <ul>
+             {% for response in vacancy.responses.all %}
                 <li>{{ response.user.username }}</li>
               {% empty %}
                 <li>Пока никто не откликнулся</li>
               {% endfor %}
-            </ul>
+          </ul>
+          <div class="pagination">
+            {% for page_num in paginated_responses.vacancy.id.paginator.page_range %}
+              <a href="?page_{{ vacancy.id }}={{ page_num }}" class="{% if paginated_responses.vacancy.id.number == page_num %}active{% endif %}">
+                {{ page_num }}
+              </a>
+            {% endfor %}
           </div>
         </div>
-      {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
   </div>
+</div>
 {% endblock %}
