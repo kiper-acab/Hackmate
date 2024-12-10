@@ -23,7 +23,6 @@ urlpatterns += [
     django.urls.path("vacancy/", django.urls.include("vacancies.urls")),
     django.urls.path("about/", django.urls.include("about.urls")),
     django.urls.path("admin/", django.contrib.admin.site.urls),
-    django.urls.path("chaining/", django.urls.include("smart_selects.urls")),
 ]
 
 urlpatterns += django.conf.urls.static.static(

@@ -39,6 +39,14 @@ class VacancyDetailView(
     context_object_name = "vacancy"
     form_class = vacancies.forms.CommentForm
 
+    def get_object(self):
+        queryset = (
+            self.get_queryset()
+            .select_related("creater", "creater__profile")
+            .prefetch_related("comments__user")
+        )
+        return queryset.get(pk=self.kwargs["pk"])
+
     def get(self, request, *args, **kwargs):
         vacancy = self.get_object()
         ip = get_client_ip(request)
@@ -138,3 +146,27 @@ class UserVacanciesView(django.views.generic.ListView):
             "responses",
             "responses__user",
         )
+
+
+class DeleteCommentView(django.views.generic.DeleteView):
+    model = vacancies.models.CommentVacancy
+    pk_url_kwarg = "pk"
+    template_name = "vacancies/user_vacancies.html"
+
+    def get_success_url(self, *args, **kwargs):
+        return django.urls.reverse(
+            "vacancies:vacancy_detail",
+            args=[self.object.vacancy.pk],
+        )
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.user == request.user:
+            return super(DeleteCommentView, self).delete(
+                request,
+                *args,
+                **kwargs,
+            )
+
+        raise django.http.Http404("not found")

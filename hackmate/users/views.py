@@ -44,23 +44,23 @@ class DeleteLinkView(django.views.generic.DeleteView):
 
 
 class ProfileView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
 ):
-    def get(self, request):
-        form = users.forms.UserChangeForm(instance=request.user)
-        profile_form = users.forms.ProfileChangeForm(
-            instance=request.user.profile,
+
+    def get(self, request, username):
+        user = django.shortcuts.get_object_or_404(
+            users.models.User,
+            username=username,
         )
-        link_form = users.forms.ProfileLinkForm()
+
+        is_own_profile = user == request.user
 
         return django.shortcuts.render(
             request,
             "users/profile.html",
             {
-                "form": form,
-                "profile_form": profile_form,
-                "link_form": link_form,
+                "user": user,
+                "is_own_profile": is_own_profile,
             },
         )
 
@@ -69,10 +69,19 @@ class ProfileEditView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
 ):
-    def get(self, request):
-        form = users.forms.UserChangeForm(instance=request.user)
+    def get(self, request, username):
+        user = django.shortcuts.get_object_or_404(
+            users.models.User,
+            username=username,
+        )
+        if user != request.user:
+            return django.shortcuts.redirect(
+                "homepage:homepage",
+            )
+
+        form = users.forms.UserChangeForm(instance=user)
         profile_form = users.forms.ProfileChangeForm(
-            instance=request.user.profile,
+            instance=user.profile,
         )
         link_form = users.forms.ProfileLinkForm()
         links = users.models.ProfileLink.objects.filter(

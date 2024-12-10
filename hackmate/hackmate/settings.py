@@ -9,19 +9,21 @@ import dotenv
 
 dotenv.load_dotenv()
 
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
+def check_boolean(value):
+    return value.lower() in (
+        "true",
+        "1",
+        "y",
+        "yes",
+    )
+
+
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", default="123456")
 
-DEBUG_ENV = os.getenv("DJANGO_DEBUG", default="False")
-
-DEBUG = DEBUG_ENV.lower() in (
-    "true",
-    "1",
-    "y",
-    "yes",
-)
+DEBUG = check_boolean(os.getenv("DJANGO_DEBUG", default="False"))
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(
     ",",

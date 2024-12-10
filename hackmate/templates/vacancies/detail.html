@@ -56,12 +56,19 @@
         {% for comment in vacancy.comments.all %}
             <div class="comment">
                 <header class="comment-header">
+                  <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
                     {% if comment.user.profile.image %}
-                      <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user }}</span>
+                    <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user }}</span>
                     {% else %}
                     <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user }}</span>
                     {% endif %}
-                    <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
+                  </a>
+                    <figure>
+                      <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
+                      {% if comment.user == request.user or request.user.is_superuser %}
+                      <a href="{% url 'vacancies:delete_comment' comment.pk %}" class="delete-link-form">❌</a>
+                      {% endif %}
+                    </figure>
                 </header>
                 <p class="comment-text">{{ comment.comment }}</p>
             </div>

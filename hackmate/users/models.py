@@ -20,6 +20,11 @@ if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
     )
     username_field._unique = True
 
+    username_field = django.contrib.auth.models.User._meta.get_field(
+        "password",
+    )
+    username_field._max_length = 128
+
 
 def user_directory_path(instance, filename):
     username = instance.user.username
