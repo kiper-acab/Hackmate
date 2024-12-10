@@ -18,7 +18,7 @@ class UserChangeForm(BootstrapForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
-            field.field.required = False
+            field.field.required = True
 
     class Meta(django.contrib.auth.forms.UserChangeForm.Meta):
         model = django.contrib.auth.models.User
