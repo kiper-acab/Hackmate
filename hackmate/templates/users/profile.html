@@ -75,7 +75,7 @@
           {% for link in user.profile.links.all %}
             <li>
               <h5>
-                <a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
+                <a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}" class="btn btn-link">
                   <i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
 	                {{ link.site_type }}
                 </a>
