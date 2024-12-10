@@ -150,7 +150,7 @@ class DeleteCommentView(django.views.generic.DeleteView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
 
-        if self.object.user == request.user:
+        if self.object.user == request.user or request.user.is_superuser:
             return super(DeleteCommentView, self).delete(
                 request,
                 *args,
