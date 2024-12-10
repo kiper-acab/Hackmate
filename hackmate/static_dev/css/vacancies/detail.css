@@ -161,3 +161,7 @@
     transition: .3s;
     color: rgba(255, 0, 0, .5);
 }
+
+.send-comment{
+    margin: 20px 0;
+}
