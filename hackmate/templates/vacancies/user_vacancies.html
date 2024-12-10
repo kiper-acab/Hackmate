@@ -17,6 +17,16 @@
           </a>
           <p class="vacancy-description">{{ vacancy.description }}</p>
           <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
+          <div class="vacancy-responses">
+            <h3>Откликнувшиеся пользователи:</h3>
+            <ul>
+              {% for response in vacancy.responses.all %}
+                <li>{{ response.user.username }}</li>
+              {% empty %}
+                <li>Пока никто не откликнулся</li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
       {% endfor %}
     </div>

@@ -63,6 +63,20 @@ class Vacancy(django.db.models.Model):
         help_text="Название хакатона, к которому относится вакансия",
     )
 
+    deadline = django.db.models.DateField(
+        verbose_name="дедлайн",
+        null=True,
+        blank=True,
+        help_text="Крайний срок подачи заявок",
+    )
+
+    required_experience = django.db.models.IntegerField(
+        verbose_name="требуемый опыт (в годах)",
+        null=True,
+        blank=True,
+        help_text="Укажите количество лет опыта, необходимого для кандидата",
+    )
+
     class Meta:
         verbose_name = "вакансия"
         verbose_name_plural = "вакансии"

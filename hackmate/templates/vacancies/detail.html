@@ -15,6 +15,15 @@
       <p><strong>Создатель:</strong> {{ vacancy.creater }}</p>
       <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
       <p><strong>Обновлено:</strong> {{ vacancy.updated_at|date:"d.m.Y H:i" }}</p>
+      {% if vacancy.hackaton_title %}
+        <p><strong>Хакатон:</strong> {{ vacancy.hackaton_title }}</p>
+      {% endif %}
+      {% if vacancy.deadline %}
+        <p><strong>Дедлайн:</strong> {{ vacancy.deadline|date:"d.m.Y" }}</p>
+      {% endif %}
+      {% if vacancy.required_experience %}
+        <p><strong>Требуемый опыт:</strong> {{ vacancy.required_experience }} лет</p>
+      {% endif %}
     </div>
 
     <p class="views">
@@ -23,8 +32,11 @@
 
     {% if user.is_authenticated %}
       {% if user != vacancy.creater %}
-        <button id="respond-button" class="grow-button">Откликнуться</button>
-      {% else %}
+        {% if not is_deadline_passed %}
+          <button id="respond-button" class="grow-button">Откликнуться</button>
+        {% else %}
+          <p class="deadline-message">Дедлайн истёк. Вы больше не можете откликнуться на эту вакансию.</p>
+        {% endif %}
       {% endif %}
     {% else %}
       <p>Вы должны быть авторизованы, чтобы откликнуться.</p>

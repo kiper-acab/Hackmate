@@ -16,17 +16,28 @@ class VacancyForm(django.forms.ModelForm):
         fields = [
             model.title.field.name,
             model.description.field.name,
+            model.hackaton_title.field.name,
+            model.deadline.field.name,
+            model.required_experience.field.name,
         ]
         widgets = {
             model.title.field.name: django.forms.TextInput(
-                attrs={
-                    "placeholder": "Введите название вакансии",
-                },
+                attrs={"placeholder": "Введите название вакансии"},
             ),
             model.description.field.name: django.forms.Textarea(
+                attrs={"placeholder": "Введите описание"},
+            ),
+            model.hackaton_title.field.name: django.forms.TextInput(
+                attrs={"placeholder": "Введите название хакатона"},
+            ),
+            model.deadline.field.name: django.forms.DateInput(
                 attrs={
-                    "placeholder": "Введите описание",
+                    "type": "date",
+                    "placeholder": "Выберите дедлайн",
                 },
+            ),
+            model.required_experience.field.name: django.forms.NumberInput(
+                attrs={"placeholder": "Введите требуемый опыт (в годах)"},
             ),
         }
 

@@ -102,7 +102,15 @@ class VacancyDetailView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        vacancy = self.get_object()
+
         context["comment_form"] = vacancies.forms.CommentForm()
+
+        context["is_deadline_passed"] = (
+            vacancy.deadline
+            and vacancy.deadline < django.utils.timezone.now().date()
+        )
+
         return context
 
 
