@@ -32,6 +32,11 @@ class UserCreateForm(
     django.contrib.auth.forms.UserCreationForm,
     BootstrapForm,
 ):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        namefield = django.contrib.auth.models.User.email.field.name
+        self.fields[namefield].required = True
+
     class Meta(django.contrib.auth.forms.UserCreationForm.Meta):
         fields = (
             UserChangeForm.Meta.model.email.field.name,

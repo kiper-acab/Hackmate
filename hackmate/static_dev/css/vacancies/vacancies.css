@@ -3,17 +3,16 @@
 }
 
 .user-info{
+    text-decoration: none;
+    color: black;
     margin: 20px;
     display: flex;
     align-items: center;
-
 }
 
 .username{
     margin: 0 5px;
 }
-
-
 
 .avatar{
     height: 40px;

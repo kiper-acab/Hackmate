@@ -23,6 +23,53 @@
 
     <button id="respond-button" class="grow-button">Откликнуться</button>
 
+    <section class="commnets">
+      <article class="create_comment">
+        <h2 class="comments-header">Комментарии</h2>
+        <form method="post" action="">
+          {% csrf_token %}
+          <div class="form-group">
+            {% for field in comment_form %}
+              <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                  <div class="form-text">{{ field.help_text }}</div>
+                {% endif %}
+                {% for error in field.errors %}
+                  <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+          <button type="submit" class="btn btn-primary send-comment">Отправить</button>
+        </form>
+      </article>
+      <article class="comments">
+        {% for comment in vacancy.comments.all %}
+            <div class="comment">
+                <header class="comment-header">
+                  <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
+                    {% if comment.user.profile.image %}
+                    <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user }}</span>
+                    {% else %}
+                    <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user }}</span>
+                    {% endif %}
+                  </a>
+                    <figure>
+                      <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
+                      {% if comment.user == request.user or request.user.is_superuser %}
+                      <a href="{% url 'vacancies:delete_comment' comment.pk %}" class="delete-link-form">❌</a>
+                      {% endif %}
+                    </figure>
+                </header>
+                <p class="comment-text">{{ comment.comment }}</p>
+            </div>
+        {% empty %}
+            <p class="no-comments">Комментариев пока нет.</p>
+        {% endfor %}
+    </article>
+    </section>
   </div>
 
   <script>

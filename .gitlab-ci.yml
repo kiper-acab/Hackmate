@@ -1,14 +1,13 @@
 stages:
   - black
   - flake
+  - tests
 
 black:
     stage: black
     image: registry.gitlab.com/pipeline-components/black:latest
     script: 
       - black --config pyproject.toml --check .
-    only:
-      - main
 
 flake:
     stage: flake
@@ -18,3 +17,12 @@ flake:
         - pip3 install pep8-naming -q
         - pip3 install flake8-import-style -q
         - flake8 --verbose
+
+tests:
+  stage: tests
+  image: python:3.10
+  script:
+    - pip3 install -r requirements/test.txt -q
+    - cd hackmate
+    - python manage.py migrate
+    - python manage.py test
