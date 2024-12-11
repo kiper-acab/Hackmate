@@ -43,23 +43,6 @@ class DeleteLinkView(django.views.generic.DeleteView):
         return django.shortcuts.redirect(success_url)
 
 
-class DeleteImageView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.View,
-):
-    def post(self, request):
-        profile = request.user.profile
-        print(profile)
-        if profile.image:
-            print(profile.image)
-            profile.image.delete()
-            profile.save()
-
-        django.contrib.messages.success(request, "Аватар успешно удален")
-
-        return django.shortcuts.redirect("users:profile_edit")
-
-
 class ProfileView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
@@ -133,6 +116,17 @@ class ProfileEditView(
                 request,
                 "users/profile_edit.html",
                 {"form": form, "profile_form": profile_form},
+            )
+
+        if "delete_image" in request.POST:
+            user.profile.image.delete()
+            user.profile.image = None
+            user.profile.save()
+            django.contrib.messages.success(
+                request, "Изображение профиля успешно удалено.",
+            )
+            return django.shortcuts.redirect(
+                django.urls.reverse_lazy("users:profile_edit"),
             )
 
         if form.is_valid() and profile_form.is_valid():

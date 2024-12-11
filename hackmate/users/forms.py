@@ -51,12 +51,6 @@ class UserCreateForm(
 
 
 class ProfileChangeForm(BootstrapForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        for field in self.visible_fields():
-            field.field.required = False
-
     class Meta:
         model = users.models.Profile
         fields = (
@@ -79,6 +73,17 @@ class ProfileChangeForm(BootstrapForm):
             ),
             users.models.Profile.image.field.name: django.forms.FileInput(),
         }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if self.data.get("delete_image"):
+            instance.image.delete(save=False)
+            instance.image = None
+
+        if commit:
+            instance.save()
+
+        return instance
 
 
 class ProfileLinkForm(BootstrapForm):
