@@ -12,7 +12,7 @@
     <p class="vacancy-description">{{ vacancy.description }}</p>
 
     <div class="vacancy-info">
-      <p><strong>Создатель:</strong> {{ vacancy.creater }}</p>
+      <p><strong>Создатель:</strong> {{ vacancy.creater.username }}</p>
       <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
       <p><strong>Обновлено:</strong> {{ vacancy.updated_at|date:"d.m.Y H:i" }}</p>
     </div>
@@ -29,9 +29,9 @@
         <form method="post" action="">
           {% csrf_token %}
           <div class="form-group">
+            {{ field.as_p }}
             {% for field in comment_form %}
               <div class="mb-3">
-                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
                 {{ field }}
                 {% if field.help_text %}
                   <div class="form-text">{{ field.help_text }}</div>

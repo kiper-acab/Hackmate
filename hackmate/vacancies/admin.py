@@ -16,4 +16,5 @@ class UserInfoAdmin(django.contrib.admin.ModelAdmin):
 
 
 django.contrib.admin.site.register(vacancies.models.Ip)
+django.contrib.admin.site.register(vacancies.models.Response)
 django.contrib.admin.site.register(vacancies.models.CommentVacancy)

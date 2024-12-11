@@ -87,6 +87,49 @@ html, body {
     border-radius: 50%;
 }
 
+.fa-bell{
+    color: #8599a1;
+}
+
+.fa-bell:hover{
+    transition: .3s;
+    color: #8ed2ec;
+}
+
+.dropdown-item-notify{
+    margin: auto;
+}
+
+.dropdown-item-notify:hover{
+    background-color: white !important;
+    color: black !important;
+}
+
+.notification-dropdown-item-li{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+
+.readone_notification{
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+}
+
+.readone_notification:hover{
+    transition: .3s;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.bell-link{
+    text-decoration: none;
+}
+
+.text-muted{
+    margin: auto 0;
+}
 
 .footer {
     background-color: rgb(20, 20, 20);
