@@ -14,14 +14,32 @@
     <div class="vacancy-info">
       <p><strong>Создатель:</strong> {{ vacancy.creater.username }}</p>
       <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
-      <p><strong>Обновлено:</strong> {{ vacancy.updated_at|date:"d.m.Y H:i" }}</p>
+      {% if vacancy.hackaton_title %}
+        <p><strong>Хакатон:</strong> {{ vacancy.hackaton_title }}</p>
+      {% endif %}
+      {% if vacancy.deadline %}
+        <p><strong>Дедлайн:</strong> {{ vacancy.deadline|date:"d.m.Y" }}</p>
+      {% endif %}
+      {% if vacancy.required_experience %}
+        <p><strong>Требуемый опыт:</strong> {{ vacancy.required_experience }} лет</p>
+      {% endif %}
     </div>
 
     <p class="views">
       <i class="fa-regular fa-eye"></i>{{ vacancy.views.count }}
     </p>
 
-    <button id="respond-button" class="grow-button">Откликнуться</button>
+    {% if user.is_authenticated %}
+      {% if user != vacancy.creater %}
+        {% if not is_deadline_passed %}
+          <button id="respond-button" class="grow-button">Откликнуться</button>
+        {% else %}
+          <p class="deadline-message">Дедлайн истёк. Вы больше не можете откликнуться на эту вакансию.</p>
+        {% endif %}
+      {% endif %}
+    {% else %}
+      <p>Вы должны быть авторизованы, чтобы откликнуться.</p>
+    {% endif %}
 
     <section class="commnets">
       <article class="create_comment">
@@ -72,22 +90,5 @@
     </section>
   </div>
 
-  <script>
-    document.getElementById("respond-button")?.addEventListener("click", function () {
-      fetch("{% url 'vacancies:vacancy_detail' pk=vacancy.pk %}", {
-        method: "POST",
-        headers: {
-          "X-CSRFToken": "{{ csrf_token }}",
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert(data.message || data.error);
-      })
-      .catch(error => {
-        console.error("Ошибка:", error);
-        alert("Произошла ошибка. Попробуйте еще раз.");
-      });
-    });
-  </script>
+  <script src="{% static 'js/button_detail.js' %}"></script>
 {% endblock %}

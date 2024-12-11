@@ -57,7 +57,7 @@ class VacancyDetailView(
         if not self.object.views.filter(ip=ip_instance).exists():
             self.object.views.add(ip_instance)
 
-        return response  # noqa W291 Я поставил noqa т.к. response необходимо для оптимизации запросов
+        return response  # noqa ругается falke на то что пресваиваю response, хотя по его мнению можно было избежать этого было, но для оптимизации запросы мы должны брать объект из self.object, а если мы
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:

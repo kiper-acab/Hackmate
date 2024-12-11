@@ -26,6 +26,9 @@ class DeleteLinkView(django.views.generic.DeleteView):
     pk_url_kwarg = "pk"
     success_url = django.urls.reverse_lazy("users:profile_edit")
 
+    def get_queryset(self):
+        return super().get_queryset().select_related("profile__user")
+
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         if self.object.profile.user != request.user:
@@ -36,11 +39,7 @@ class DeleteLinkView(django.views.generic.DeleteView):
             return django.shortcuts.redirect(self.success_url)
 
         self.object.delete()
-        success_url = django.urls.reverse(
-            "users:profile_edit",
-            args=[self.object.link.pk],
-        )
-        return django.shortcuts.redirect(success_url)
+        return django.shortcuts.redirect(self.success_url)
 
 
 class ProfileView(
@@ -80,7 +79,7 @@ class ProfileEditView(
         profile_form = users.forms.ProfileChangeForm(instance=user.profile)
         link_form = users.forms.ProfileLinkForm()
         links = users.models.ProfileLink.objects.filter(
-            profile=user.profile,
+            profile=request.user.profile,
         ).select_related("profile")
 
         return django.shortcuts.render(
@@ -118,27 +117,15 @@ class ProfileEditView(
                 {"form": form, "profile_form": profile_form},
             )
 
-        if "delete_image" in request.POST:
-            user.profile.image.delete()
-            user.profile.image = None
-            user.profile.save()
-            django.contrib.messages.success(
-                request,
-                "Изображение профиля успешно удалено.",
-            )
-            return django.shortcuts.redirect(
-                django.urls.reverse_lazy("users:profile_edit"),
-            )
-
         if form.is_valid() and profile_form.is_valid():
             user_form = form.save(commit=False)
-            user_form.email = users.models.UserManager().normalize_email(
+            user_form.mail = users.models.UserManager().normalize_email(
                 form.cleaned_data["email"],
             )
 
             if link_form.is_valid() and link_form.cleaned_data.get("url"):
                 link = link_form.save(commit=False)
-                link.profile = user.profile
+                link.profile = request.user.profile
                 link.save()
 
             user_form.save()
@@ -147,9 +134,7 @@ class ProfileEditView(
                 request,
                 "Профиль успешно изменен!",
             )
-            return django.shortcuts.redirect(
-                "users:profile_edit",
-            )
+            return django.shortcuts.redirect("users:profile_edit")
 
         return django.shortcuts.render(
             request,
@@ -214,43 +199,39 @@ class SignUpView(
 
 class ActivateUserView(django.views.View):
     def get(self, request, username):
-        user = django.shortcuts.get_object_or_404(
-            django.contrib.auth.models.User,
-            username=username,
-        )
-        now = django.utils.timezone.now()
+        user = django.shortcuts.get_object_or_404(User, username=username)
 
-        if not user.profile.date_last_active:
-            time_difference = now - user.date_joined
-            allowed_activation_time = 12
-        else:
-            time_difference = now - user.profile.date_last_active
-            allowed_activation_time = 168
+        if user.is_active:
+            django.contrib.messages.error(
+                request,
+                "Пользователь уже активирован",
+            )
+            return django.shortcuts.redirect("users:login")
 
-        datediff = int(time_difference.total_seconds() // 3600)
-
-        if not user.is_active:
-            if datediff <= allowed_activation_time:
-                user.is_active = True
-                user.profile.save()
-                user.save()
-                django.contrib.messages.success(
-                    request,
-                    ("Пользователь успешно активирован"),
-                )
-            else:
-                django.contrib.messages.error(
-                    request,
-                    (
-                        "Активация профиля была "
-                        "доступна в течение {allowed_activation_time} "
-                        "часов после регистрации"
-                    ),
-                )
+        if self.can_activate_user(user):
+            user.is_active = True
+            user.save()
+            django.contrib.messages.success(
+                request,
+                "Пользователь успешно активирован",
+            )
         else:
             django.contrib.messages.error(
                 request,
-                ("Пользователь уже активирован"),
+                "Активация профиля была доступна в течение "
+                f"{self.get_allowed_activation_time(user)} "
+                "часов после регистрации",
             )
 
-        return django.shortcuts.redirect(django.urls.reverse("users:login"))
+        return django.shortcuts.redirect("users:login")
+
+    def can_activate_user(self, user):
+        now = django.utils.timezone.now()
+        time_difference = now - (
+            user.profile.date_last_active or user.date_joined
+        )
+        allowed_hours = self.get_allowed_activation_time(user)
+        return time_difference.total_seconds() // 3600 <= allowed_hours
+
+    def get_allowed_activation_time(self, user):
+        return 168 if user.profile.date_last_active else 12

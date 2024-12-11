@@ -1,6 +1,7 @@
 __all__ = ()
 
 import django.conf
+import django.core.validators
 import django.db.models
 
 
@@ -63,9 +64,25 @@ class Vacancy(django.db.models.Model):
         help_text="Название хакатона, к которому относится вакансия",
     )
 
+    deadline = django.db.models.DateField(
+        verbose_name="дедлайн",
+        null=True,
+        blank=True,
+        help_text="Крайний срок подачи заявок",
+    )
+
+    required_experience = django.db.models.IntegerField(
+        verbose_name="требуемый опыт (в годах)",
+        null=True,
+        blank=True,
+        help_text="Укажите количество лет опыта, необходимого для кандидата",
+        validators=[django.core.validators.MinValueValidator(0)],
+    )
+
     class Meta:
         verbose_name = "вакансия"
         verbose_name_plural = "вакансии"
+        ordering = ["-created_at"]
 
     def total_views(self):
         return self.views.count()
@@ -108,22 +125,22 @@ class Response(django.db.models.Model):
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
         related_name="responses",
-        verbose_name="Пользователь",
+        verbose_name="пользователь",
     )
     vacancy = django.db.models.ForeignKey(
         "Vacancy",
         on_delete=django.db.models.CASCADE,
         related_name="responses",
-        verbose_name="Вакансия",
+        verbose_name="вакансия",
     )
     created_at = django.db.models.DateTimeField(
         auto_now_add=True,
-        verbose_name="Дата отклика",
+        verbose_name="дата отклика",
     )
 
     class Meta:
-        verbose_name = "Отклик"
-        verbose_name_plural = "Отклики"
+        verbose_name = "отклик"
+        verbose_name_plural = "отклики"
         unique_together = (
             "user",
             "vacancy",

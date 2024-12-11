@@ -1,22 +1,12 @@
 __all__ = ()
 
 import django.conf
+import django.core.validators
 import django.db
 import django.db.models.deletion
 
 
 class Migration(django.db.migrations.Migration):
-
-    replaces = [
-        ("vacancies", "0001_initial"),
-        ("vacancies", "0002_ip_vacancy_views"),
-        ("vacancies", "0003_response"),
-        (
-            "vacancies",
-            "0004_vacancy_hackaton_title_alter_vacancy_created_at_and_more",
-        ),
-        ("vacancies", "0005_alter_commentvacancy_options_alter_ip_options"),
-    ]
 
     initial = True
 
@@ -97,6 +87,42 @@ class Migration(django.db.migrations.Migration):
                     ),
                 ),
                 (
+                    "hackaton_title",
+                    django.db.models.CharField(
+                        blank=True,
+                        help_text=(
+                            "Название хакатона, к которому относится вакансия"
+                        ),
+                        max_length=255,
+                        null=True,
+                        verbose_name="название хакатона",
+                    ),
+                ),
+                (
+                    "deadline",
+                    django.db.models.DateField(
+                        blank=True,
+                        help_text="Крайний срок подачи заявок",
+                        null=True,
+                        verbose_name="дедлайн",
+                    ),
+                ),
+                (
+                    "required_experience",
+                    django.db.models.IntegerField(
+                        blank=True,
+                        help_text=(
+                            "Укажите количество лет опыта, "
+                            "необходимого для кандидата"
+                        ),
+                        null=True,
+                        validators=[
+                            django.core.validators.MinValueValidator(0),
+                        ],
+                        verbose_name="требуемый опыт (в годах)",
+                    ),
+                ),
+                (
                     "creater",
                     django.db.models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
@@ -112,66 +138,11 @@ class Migration(django.db.migrations.Migration):
                         to="vacancies.ip",
                     ),
                 ),
-                (
-                    "hackaton_title",
-                    django.db.models.CharField(
-                        blank=True,
-                        help_text=(
-                            "Название хакатона, к которому относится вакансия"
-                        ),
-                        max_length=255,
-                        null=True,
-                        verbose_name="название хакатона",
-                    ),
-                ),
             ],
             options={
                 "verbose_name": "вакансия",
                 "verbose_name_plural": "вакансии",
-            },
-        ),
-        django.db.migrations.CreateModel(
-            name="Response",
-            fields=[
-                (
-                    "id",
-                    django.db.models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "created_at",
-                    django.db.models.DateTimeField(
-                        auto_now_add=True,
-                        verbose_name="Дата отклика",
-                    ),
-                ),
-                (
-                    "user",
-                    django.db.models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="responses",
-                        to=django.conf.settings.AUTH_USER_MODEL,
-                        verbose_name="Пользователь",
-                    ),
-                ),
-                (
-                    "vacancy",
-                    django.db.models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="responses",
-                        to="vacancies.vacancy",
-                        verbose_name="Вакансия",
-                    ),
-                ),
-            ],
-            options={
-                "verbose_name": "Отклик",
-                "verbose_name_plural": "Отклики",
-                "unique_together": {("user", "vacancy")},
+                "ordering": ["-created_at"],
             },
         ),
         django.db.migrations.CreateModel(
@@ -216,9 +187,53 @@ class Migration(django.db.migrations.Migration):
                 ),
             ],
             options={
-                "ordering": ["-created_at"],
                 "verbose_name": "комментарий к вакансии",
                 "verbose_name_plural": "комментарии к вакансиям",
+                "ordering": ["-created_at"],
+            },
+        ),
+        django.db.migrations.CreateModel(
+            name="Response",
+            fields=[
+                (
+                    "id",
+                    django.db.models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    django.db.models.DateTimeField(
+                        auto_now_add=True,
+                        verbose_name="дата отклика",
+                    ),
+                ),
+                (
+                    "user",
+                    django.db.models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="responses",
+                        to=django.conf.settings.AUTH_USER_MODEL,
+                        verbose_name="пользователь",
+                    ),
+                ),
+                (
+                    "vacancy",
+                    django.db.models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="responses",
+                        to="vacancies.vacancy",
+                        verbose_name="вакансия",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "отклик",
+                "verbose_name_plural": "отклики",
+                "unique_together": {("user", "vacancy")},
             },
         ),
     ]
