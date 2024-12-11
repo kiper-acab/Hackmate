@@ -1,4 +1,5 @@
 import django.urls
+
 import notify.views
 
 
