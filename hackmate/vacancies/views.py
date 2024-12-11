@@ -26,7 +26,10 @@ class VacancyView(django.views.generic.ListView):
     context_object_name = "vacancies"
 
     def get_queryset(self):
-        return vacancies.models.Vacancy.objects.filter(
+        return vacancies.models.Vacancy.objects.select_related(
+            "creater",
+            "creater__profile",
+        ).filter(
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
         )
 
@@ -40,22 +43,21 @@ class VacancyDetailView(
     form_class = vacancies.forms.CommentForm
 
     def get_object(self):
-        queryset = (
-            self.get_queryset()
-            .select_related("creater", "creater__profile")
-            .prefetch_related("comments__user")
+        queryset = self.get_queryset().select_related("creater")
+        return django.shortcuts.get_object_or_404(
+            queryset,
+            pk=self.kwargs["pk"],
         )
-        return queryset.get(pk=self.kwargs["pk"])
 
     def get(self, request, *args, **kwargs):
-        vacancy = self.get_object()
+        response = super().get(request, *args, **kwargs)
 
         ip = get_client_ip(request)
         ip_instance, created = vacancies.models.Ip.objects.get_or_create(ip=ip)
-        if not vacancy.views.filter(ip=ip_instance).exists():
-            vacancy.views.add(ip_instance)
+        if not self.object.views.filter(ip=ip_instance).exists():
+            self.object.views.add(ip_instance)
 
-        return super().get(request, *args, **kwargs)
+        return response  # noqa W291 Я поставил noqa т.к. response необходимо для оптимизации запросов
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:

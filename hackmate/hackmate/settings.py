@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "homepage.apps.HomepageConfig",
     "users.apps.UsersConfig",
     "vacancies.apps.VacanciesConfig",
+    "notify.apps.NotifyConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
     "sorl.thumbnail",
+    "notifications",
 ]
 
 
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "users.middleware.ProxyUserMiddleware",
 ]
 
 if DEBUG:
@@ -161,30 +164,10 @@ else:
         default="False",
     )
 
-CITIES_LIGHT_TRANSLATION_LANGUAGES = ["ru"]
-CITIES_LIGHT_INCLUDE_COUNTRIES = [
-    "RU",
-    "BY",
-    "KZ",
-    "UA",
-    "UZ",
-    "KG",
-    "AM",
-    "AZ",
-    "MD",
-    "TJ",
-]
-CITIES_LIGHT_INCLUDE_CITY_TYPES = [
-    "PPL",
-    "PPLA",
-    "PPLA2",
-    "PPLA3",
-    "PPLA4",
-    "PPLC",
-    "PPLF",
-    "PPLG",
-    "PPLL",
-    "PPLR",
-    "PPLS",
-    "STLMT",
-]
+DJANGO_NOTIFICATIONS_CONFIG = {
+    "USE_JSONFIELD": True,
+}
+
+DJANGO_NOTIFICATIONS_CONFIG = {
+    "SOFT_DELETE": True,
+}
