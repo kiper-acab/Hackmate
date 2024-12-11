@@ -123,7 +123,8 @@ class ProfileEditView(
             user.profile.image = None
             user.profile.save()
             django.contrib.messages.success(
-                request, "Изображение профиля успешно удалено.",
+                request,
+                "Изображение профиля успешно удалено.",
             )
             return django.shortcuts.redirect(
                 django.urls.reverse_lazy("users:profile_edit"),
