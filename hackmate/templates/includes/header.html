@@ -32,7 +32,7 @@
               <li><a href="/admin/" class="dropdown-item">Админка</a></li>
             {% endif %}
             <li><a href="{% url 'users:profile' username=user %}" class="dropdown-item">Профиль</a></li>
-            <li><a href="{% url 'users:profile_edit' username=user %}" class="dropdown-item">Редактирование профиля</a></li>
+            <li><a href="{% url 'users:profile_edit' %}" class="dropdown-item">Редактирование профиля</a></li>
             <li><a href="{% url 'users:logout' %}" class="dropdown-item">Выйти</a></li>
           </ul>
         </li>

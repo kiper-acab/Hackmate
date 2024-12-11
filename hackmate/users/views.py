@@ -18,7 +18,6 @@ import django.views.generic
 import users.forms
 import users.models
 
-
 User = django.contrib.auth.get_user_model()
 
 
@@ -45,12 +44,13 @@ class DeleteLinkView(django.views.generic.DeleteView):
 
 
 class ProfileView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
 ):
 
     def get(self, request, username):
         user = django.shortcuts.get_object_or_404(
-            users.models.User,
+            users.models.User.objects.select_related("profile"),
             username=username,
         )
 
@@ -70,24 +70,18 @@ class ProfileEditView(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
 ):
-    def get(self, request, username):
-        user = django.shortcuts.get_object_or_404(
-            users.models.User,
-            username=username,
+
+    def get(self, request):
+        user = users.models.User.objects.select_related("profile").get(
+            pk=request.user.pk,
         )
-        if user != request.user:
-            return django.shortcuts.redirect(
-                "homepage:homepage",
-            )
 
         form = users.forms.UserChangeForm(instance=user)
-        profile_form = users.forms.ProfileChangeForm(
-            instance=user.profile,
-        )
+        profile_form = users.forms.ProfileChangeForm(instance=user.profile)
         link_form = users.forms.ProfileLinkForm()
         links = users.models.ProfileLink.objects.filter(
             profile=user.profile,
-        )
+        ).select_related("profile")
 
         return django.shortcuts.render(
             request,
@@ -101,11 +95,15 @@ class ProfileEditView(
         )
 
     def post(self, request):
-        form = users.forms.UserChangeForm(request.POST, instance=request.user)
+        user = users.models.User.objects.select_related("profile").get(
+            pk=request.user.pk,
+        )
+
+        form = users.forms.UserChangeForm(request.POST, instance=user)
         profile_form = users.forms.ProfileChangeForm(
             request.POST,
             request.FILES,
-            instance=request.user.profile,
+            instance=user.profile,
         )
         link_form = users.forms.ProfileLinkForm(request.POST)
 
@@ -120,15 +118,27 @@ class ProfileEditView(
                 {"form": form, "profile_form": profile_form},
             )
 
+        if "delete_image" in request.POST:
+            user.profile.image.delete()
+            user.profile.image = None
+            user.profile.save()
+            django.contrib.messages.success(
+                request,
+                "Изображение профиля успешно удалено.",
+            )
+            return django.shortcuts.redirect(
+                django.urls.reverse_lazy("users:profile_edit"),
+            )
+
         if form.is_valid() and profile_form.is_valid():
             user_form = form.save(commit=False)
-            user_form.mail = users.models.UserManager().normalize_email(
+            user_form.email = users.models.UserManager().normalize_email(
                 form.cleaned_data["email"],
             )
 
             if link_form.is_valid() and link_form.cleaned_data.get("url"):
                 link = link_form.save(commit=False)
-                link.profile = request.user.profile
+                link.profile = user.profile
                 link.save()
 
             user_form.save()
@@ -137,7 +147,9 @@ class ProfileEditView(
                 request,
                 "Профиль успешно изменен!",
             )
-            return django.shortcuts.redirect("users:profile_edit")
+            return django.shortcuts.redirect(
+                "users:profile_edit",
+            )
 
         return django.shortcuts.render(
             request,

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
+    "star_ratings",
     "sorl.thumbnail",
     "notifications",
 ]
@@ -171,3 +172,6 @@ DJANGO_NOTIFICATIONS_CONFIG = {
 DJANGO_NOTIFICATIONS_CONFIG = {
     "SOFT_DELETE": True,
 }
+
+STAR_RATINGS_STAR_HEIGHT = 20
+STAR_RATINGS_STAR_WIDTH = 20

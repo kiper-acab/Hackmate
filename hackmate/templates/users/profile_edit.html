@@ -3,72 +3,78 @@
 {% load static %}
 
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/users/profile_edit.css' %}">
+	<link rel="stylesheet" href="{% static 'css/users/profile_edit.css' %}">
 {% endblock %}
 
 {% block content %}
-  <section class="container">
-    <h1>Редактирование профиля</h1>
+	<section class="container">
+		<h1>Редактирование профиля</h1>
 
-    {% if messages %}
-      <div class="messages" role="alert">
-        {% for message in messages %}
-          <p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
-        {% endfor %}
-      </div>
-    {% endif %}
+		{% if messages %}
+			<div class="messages" role="alert">
+				{% for message in messages %}
+					<p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
+				{% endfor %}
+			</div>
+		{% endif %}
 
-    <form method="post" enctype="multipart/form-data" class="edit-profile-form">
-      {% csrf_token %}
+		<form method="post" enctype="multipart/form-data" class="edit-profile-form">
+			{% csrf_token %}
 
-      <div class="form-group">
-        <label for="id_image">Аватар</label><br>
-        {% if user.profile.image %}
-          <img src="{{ user.profile.image.url }}" alt="Текущий аватар" class="current-avatar"><br>
-        {% else %}
-          <p>Изображение отсутствует</p>
-        {% endif %}
-      </div>
-      {% for field in form %}
-        {% include "includes/form.html" %}
-      {% endfor %}
+			<div class="form-group">
+				<label for="id_image">Аватар</label><br>
 
-      {% for field in profile_form %}
-        {% include "includes/form.html" %}
-      {% endfor %}
-
-      {{ country_form.as_p }}
-      {{ city_form.as_p }}
-
-      <h2>Добавить новую ссылку</h2>
-      {% for field in link_form %}
-        {% include "includes/form.html" %}
-      {% endfor %}
-      <button type="submit" name="add_link" class="btn btn-primary">Сохранить изменения</button>
+				{% if user.profile.image %}
+					<img src="{{ user.profile.image.url }}" alt="Текущий аватар" class="img-thumbnail mb-3 current-avatar">
+					<form method="post">
+        {% csrf_token %}
+        <button type="submit" name="delete_image" value="true" class="btn btn-danger">
+            Удалить изображение
+        </button>
     </form>
-    <h2>Ссылки на другие сети</h2>
 
-    {% if user.profile.links.exists %}
-      <ul>
-        {% for link in user.profile.links.all %}
-          <li class="li-links">
-            <p>
-              {{ link.site_type }}
-              <a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
-                <i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
-              </a>
-            </p>
-            <form method="post" action="{% url 'users:delete_link' pk=link.pk %}" class="delete-link-form">
-              {% csrf_token %}
-              <button type="submit" class="close delete-link-button" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </form>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>Ссылки отсутствуют.</p>
-    {% endif %}
-  </section>
+				{% else %}
+					<p class="text-muted">Аватар отсутствует</p>
+				{% endif %}
+
+
+				{% for field in form %}
+					{% include "includes/form.html" %}
+				{% endfor %}
+				{% for field in profile_form %}
+					{% include "includes/form.html" %}
+				{% endfor %}
+
+				{{ country_form.as_p }}
+				{{ city_form.as_p }}
+
+				<h2>Добавить новую ссылку</h2>
+				{% for field in link_form %}
+					{% include "includes/form.html" %}
+				{% endfor %}
+				<button type="submit" name="add_link" class="btn btn-primary">Сохранить изменения</button>
+		</form>
+		<h2>Ссылки на другие сети</h2>
+
+		{% if user.profile.links.exists %}
+			<ul>
+				{% for link in user.profile.links.all %}
+					<li class="li-links">
+						<a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
+							<i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
+							{{ link.site_type }}
+						</a>
+						<form method="post" action="{% url 'users:delete_link' pk=link.pk %}" class="delete-link-form">
+							{% csrf_token %}
+							<button type="submit" class="close delete-link-button" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</form>
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p>Ссылки отсутствуют.</p>
+		{% endif %}
+	</section>
 {% endblock %}

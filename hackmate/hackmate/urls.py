@@ -29,6 +29,10 @@ urlpatterns += [
         "^inbox/notifications/",
         django.urls.include(notifications.urls, namespace="notifications"),
     ),
+    django.urls.path(
+        "ratings/",
+        django.urls.include("star_ratings.urls", namespace="ratings"),
+    ),
 ]
 
 urlpatterns += django.conf.urls.static.static(
