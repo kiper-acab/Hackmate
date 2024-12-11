@@ -3,6 +3,7 @@ __all__ = ()
 import django.contrib
 import django.contrib.auth.mixins
 import django.core.paginator
+import django.db.models
 import django.http
 import django.shortcuts
 import django.urls
@@ -28,35 +29,56 @@ class VacancyView(django.views.generic.ListView):
     context_object_name = "vacancies"
 
     def get_queryset(self):
-        return vacancies.models.Vacancy.objects.filter(
-            status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+        return (
+            vacancies.models.Vacancy.objects.filter(
+                status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+            )
+            .select_related("creater", "creater__profile")
+            .prefetch_related("views", "comments__user")
         )
 
 
-class VacancyDetailView(
-    django.views.generic.DetailView,
-):
+class VacancyDetailView(django.views.generic.DetailView):
     model = vacancies.models.Vacancy
     template_name = "vacancies/detail.html"
     context_object_name = "vacancy"
     form_class = vacancies.forms.CommentForm
 
-    def get_object(self):
-        queryset = (
-            self.get_queryset()
-            .select_related("creater", "creater__profile")
-            .prefetch_related("comments__user")
+    def get_queryset(self):
+        return (
+            super()
+            .get_queryset()
+            .select_related(
+                "creater",
+            )
+            .prefetch_related(
+                django.db.models.Prefetch(
+                    "views",
+                    queryset=vacancies.models.Ip.objects.only(
+                        "id",
+                        "ip",
+                    ),
+                ),
+            )
+            .annotate(
+                view_count=django.db.models.Count(
+                    "views",
+                    distinct=True,
+                ),
+            )
         )
-        return queryset.get(pk=self.kwargs["pk"])
+
+    def get_object(self):
+        return self.get_queryset().get(pk=self.kwargs["pk"])
 
     def get(self, request, *args, **kwargs):
         vacancy = self.get_object()
         ip = get_client_ip(request)
 
-        ip_instance, _ = vacancies.models.Ip.objects.get_or_create(ip=ip)
-
-        if not vacancy.views.filter(ip=ip_instance).exists():
-            vacancy.views.add(ip_instance)
+        ip_views_queryset = vacancy.views.only("id", "ip")
+        view_exists = ip_views_queryset.filter(ip=ip).exists()
+        if not view_exists:
+            vacancy.views.create(ip=ip)
 
         return super().get(request, *args, **kwargs)
 
@@ -73,12 +95,11 @@ class VacancyDetailView(
             )
 
         if "comment" in request.POST:
-            form = vacancies.forms.CommentForm(request.POST)
+            form = self.form_class(request.POST)
             if form.is_valid():
-                comment = form.save(commit=False)
-                comment.vacancy = vacancy
-                comment.user = request.user
-                comment.save()
+                form.instance.vacancy = vacancy
+                form.instance.user = request.user
+                form.save()
                 return django.http.JsonResponse(
                     {"message": "Комментарий добавлен!"},
                 )
@@ -104,16 +125,29 @@ class VacancyDetailView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        vacancy = self.get_object()
+        vacancy = self.object
 
-        context["comment_form"] = vacancies.forms.CommentForm()
-
-        context["is_deadline_passed"] = (
-            vacancy.deadline
-            and vacancy.deadline < django.utils.timezone.now().date()
+        context.update(
+            {
+                "comment_form": self.form_class(),
+                "is_deadline_passed": vacancy.deadline
+                and vacancy.deadline < django.utils.timezone.now().date(),
+                "comments": vacancy.comments.all(),
+                "view_count": vacancy.view_count,
+                "similar_vacancies": self.get_similar_vacancies(vacancy),
+            },
         )
-
         return context
+
+    def get_similar_vacancies(self, vacancy):
+        return (
+            self.model.objects.filter(
+                status=self.model.VacancyStatuses.ACTIVE,
+                hackaton_title=vacancy.hackaton_title,
+            )
+            .exclude(id=vacancy.id)
+            .select_related("creater")[:5]
+        )
 
 
 class VacancyCreateView(
