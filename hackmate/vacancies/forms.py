@@ -37,6 +37,7 @@ class VacancyForm(django.forms.ModelForm):
             model.hackaton_title.field.name,
             model.deadline.field.name,
             model.required_experience.field.name,
+            model.role.field.name,
         ]
         widgets = {
             model.title.field.name: django.forms.TextInput(
@@ -56,6 +57,9 @@ class VacancyForm(django.forms.ModelForm):
             ),
             model.required_experience.field.name: django.forms.NumberInput(
                 attrs={"placeholder": "Введите требуемый опыт (в годах)"},
+            ),
+            model.role.field.name: django.forms.Select(
+                attrs={"placeholder": "Введите роль человека"},
             ),
         }
 

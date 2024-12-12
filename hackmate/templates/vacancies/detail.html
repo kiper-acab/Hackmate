@@ -23,6 +23,9 @@
       {% if vacancy.required_experience %}
         <p><strong>Требуемый опыт:</strong> {{ vacancy.required_experience }} лет</p>
       {% endif %}
+      {% if vacancy.role %}
+        <p><strong>Роль человека:</strong> {{ vacancy.role }}</p>
+      {% endif %}
     </div>
 
     <p class="views">

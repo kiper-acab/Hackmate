@@ -21,6 +21,13 @@ class Vacancy(django.db.models.Model):
         ACTIVE = "active", "active"
         FINISHED = "finished", "finished"
 
+    class Roles(django.db.models.TextChoices):
+        DEVELOPER = "Разработчик", "Разработчик"
+        DESIGNER = "Дизайнер", "Дизайнер"
+        PROJECT_MANAGER = "Проектный менеджер", "Проектный менеджер"
+        TESTER = "Тестировщик", "Тестировщик"
+        OTHER = "Другая роль", "Другая роль"
+
     creater = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
@@ -77,6 +84,13 @@ class Vacancy(django.db.models.Model):
         blank=True,
         help_text="Укажите количество лет опыта, необходимого для кандидата",
         validators=[django.core.validators.MinValueValidator(0)],
+    )
+
+    role = django.db.models.CharField(
+        max_length=50,
+        choices=Roles.choices,
+        verbose_name="Роль",
+        default=Roles.OTHER,
     )
 
     class Meta:
