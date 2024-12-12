@@ -41,7 +41,11 @@ class VacancyDetailView(
     form_class = vacancies.forms.CommentForm
 
     def get_object(self):
-        queryset = self.get_queryset().select_related("creater")
+        queryset = (
+            self.get_queryset()
+            .select_related("creater")
+            .prefetch_related("comments", "comments__user")
+        )
         return django.shortcuts.get_object_or_404(
             queryset,
             pk=self.kwargs["pk"],
