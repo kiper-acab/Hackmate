@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-
 {% load static %}
+{% load infinite_scroll %}
 
 {% block links %}
 	<link rel="stylesheet" href="{% static 'css/vacancies/vacancies.css' %}">
@@ -16,6 +16,7 @@
 			</figure>
 		</div>
 		<section class="vacancies">
+			{% infinite_scroll %}
 			{% for vacancy in vacancies %}
 				<div class="card w-75 mb-3">
 					<div class="card-body">

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "vacancies.apps.VacanciesConfig",
     "notify.apps.NotifyConfig",
+    "api.apps.ApiConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

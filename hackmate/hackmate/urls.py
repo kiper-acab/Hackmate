@@ -23,6 +23,7 @@ urlpatterns += [
     django.urls.path("auth/", django.urls.include("users.urls")),
     django.urls.path("vacancy/", django.urls.include("vacancies.urls")),
     django.urls.path("notification/", django.urls.include("notify.urls")),
+    django.urls.path("api/", django.urls.include("api.urls")),
     django.urls.path("about/", django.urls.include("about.urls")),
     django.urls.path("admin/", django.contrib.admin.site.urls),
     django.urls.re_path(

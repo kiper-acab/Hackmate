@@ -3,7 +3,7 @@ max-line-length = 79
 extend-select = B950
 import-order-style = google
 max-expression-complexity = 9
-application-import-names = hackmate, homepage, users, vacancies, notify
+application-import-names = hackmate, homepage, users, vacancies, notify, api
 exclude =
     .git,
     env,

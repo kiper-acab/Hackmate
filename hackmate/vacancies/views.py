@@ -29,9 +29,7 @@ class VacancyView(django.views.generic.ListView):
         return vacancies.models.Vacancy.objects.select_related(
             "creater",
             "creater__profile",
-        ).filter(
-            status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
-        )
+        ).filter(status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE)[:10]
 
 
 class VacancyDetailView(
