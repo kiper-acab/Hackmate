@@ -19,7 +19,10 @@ class LoadMoreView(django.views.generic.View):
             vacancies_variable = (
                 vacancies.models.Vacancy.objects.select_related(
                     "creater__profile",
-                ).filter(status="active")[offset : offset + limit]
+                ).filter(status="active")[
+                    offset : offset + limit  # noqa Flake8: E203
+                ]
+                # noqa конфликт black и flake8
             )
             data = [
                 {

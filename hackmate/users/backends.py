@@ -31,6 +31,13 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
                 user.profile.attempts_count
                 < django.conf.settings.MAX_AUTH_ATTEMPTS - 1
             ):
+                django.contrib.messages.error(
+                    request,
+                    (
+                        "Неправильный логин/пароль. "
+                        "Убедитесь в корректности данных."
+                    ),
+                )
                 user.profile.attempts_count += 1
                 user.profile.save()
             else:
