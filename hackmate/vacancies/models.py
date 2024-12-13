@@ -19,7 +19,7 @@ class Ip(django.db.models.Model):
 class Vacancy(django.db.models.Model):
     class VacancyStatuses(django.db.models.TextChoices):
         ACTIVE = "active", "active"
-        FINISHED = "finished", "finished"
+        INACTIVE = "inactive", "inactive"
 
     creater = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,

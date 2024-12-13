@@ -7,7 +7,7 @@ import django.views.generic
 import vacancies.models
 
 
-class LoadMoreView(django.views.generic.View):
+class LoadMoreVacacncies(django.views.generic.View):
     def get(self, request, *args, **kwargs):
         offset = int(request.GET.get("offset", 0))
         limit = int(request.GET.get("limit", 10))
@@ -16,14 +16,12 @@ class LoadMoreView(django.views.generic.View):
         data = django.core.cache.cache.get(cache_key)
 
         if data is None:
-            vacancies_variable = (
-                vacancies.models.Vacancy.objects.select_related(
-                    "creater__profile",
-                ).filter(status="active")[
-                    offset : offset + limit  # noqa Flake8: E203
-                ]
-                # noqa конфликт black и flake8
-            )
+            qs = vacancies.models.Vacancy.objects.select_related(
+                "creater__profile",
+            ).filter(status="active")
+            # fmt: off
+            vacancies_variable = qs[offset:offset + limit]
+            # fmt: on
             data = [
                 {
                     "id": vacancy.id,

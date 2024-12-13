@@ -8,6 +8,14 @@
 
 {% block content %}
   <div class="container vacancy-container">
+    {% if request.user == vacancy.creater %}
+      <div class="dropdown">
+        <button class="btn-vacancy-menu" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'vacancies:delete_vacancy' vacancy.pk %}">Удалить вакансию</a></li>
+        </ul>
+      </div>
+    {% endif %}
     <h1 class="vacancy-title">{{ vacancy.title }}</h1>
     <p class="vacancy-description">{{ vacancy.description }}</p>
 
@@ -40,8 +48,7 @@
     {% else %}
       <p>Вы должны быть авторизованы, чтобы откликнуться.</p>
     {% endif %}
-
-    <section class="commnets">
+    <section class="commnets" id="comments-container">
       <article class="create_comment">
         <h2 class="comments-header">Комментарии</h2>
         <form method="post" action="">
@@ -63,32 +70,33 @@
           <button type="submit" class="btn btn-primary send-comment">Отправить</button>
         </form>
       </article>
-      <article class="comments">
+      <article class="comments-list">
         {% for comment in vacancy.comments.all %}
-            <div class="comment">
-                <header class="comment-header">
-                  <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
-                    {% if comment.user.profile.image %}
-                    <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user }}</span>
-                    {% else %}
-                    <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user }}</span>
+          <div class="comment">
+              <header class="comment-header">
+                <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
+                  {% if comment.user.profile.image %}
+                  <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user }}</span>
+                  {% else %}
+                  <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user }}</span>
+                  {% endif %}
+                </a>
+                  <figure>
+                    <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
+                    {% if comment.user == request.user or request.user.is_superuser %}
+                    <a href="{% url 'vacancies:delete_comment' comment.pk %}" class="delete-link-form">❌</a>
                     {% endif %}
-                  </a>
-                    <figure>
-                      <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
-                      {% if comment.user == request.user or request.user.is_superuser %}
-                      <a href="{% url 'vacancies:delete_comment' comment.pk %}" class="delete-link-form">❌</a>
-                      {% endif %}
-                    </figure>
-                </header>
-                <p class="comment-text">{{ comment.comment }}</p>
-            </div>
+                  </figure>
+              </header>
+              <p class="comment-text">{{ comment.comment }}</p>
+          </div>
         {% empty %}
-            <p class="no-comments">Комментариев пока нет.</p>
+          <p class="no-comments">Комментариев пока нет.</p>
         {% endfor %}
     </article>
     </section>
   </div>
+  <input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
 
   <script src="{% static 'js/button_detail.js' %}"></script>
 {% endblock %}

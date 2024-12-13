@@ -20,6 +20,10 @@
           </div>
           <a href="{% url 'vacancies:vacancy_detail' response.vacancy.pk %}" class="view-button">Посмотреть вакансию</a>
         </div>
+      {% empty %}
+      <article class="nothing-container">
+				<h2 class="nothing">У вас нету откликов.</h2>
+			</article>
       {% endfor %}
     </div>
   </div>

@@ -10,7 +10,7 @@ window.onscroll = function () {
 };
 
 function loadMoreVacancies() {
-    isLoading = true; // Установить флаг, чтобы предотвратить повторный вызов
+    isLoading = true;
     offset += limit;
 
     fetch(`/api/vacancies/?offset=${offset}&limit=${limit}`)
@@ -25,11 +25,11 @@ function loadMoreVacancies() {
                 const vacancyElement = createVacancyElement(vacancy);
                 vacanciesContainer.appendChild(vacancyElement);
             });
-            isLoading = false; // Сбросить флаг после завершения
+            isLoading = false;
         })
         .catch(error => {
             console.error('Ошибка загрузки вакансий:', error);
-            isLoading = false; // Сбросить флаг в случае ошибки
+            isLoading = false;
         });
 }
 

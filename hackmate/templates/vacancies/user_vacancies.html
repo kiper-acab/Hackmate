@@ -36,6 +36,11 @@
           </div>
         </div>
       </div>
+    {% empty %}
+    <article class="nothing-container">
+      <h2 class="nothing">У вас нет вакансий</h2>
+      <p class="nothing">Если хотите создать анкету, то <a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-link">перейдите сюда</a></p>
+    </article>
     {% endfor %}
   </div>
 </div>

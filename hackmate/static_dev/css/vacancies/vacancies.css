@@ -75,3 +75,12 @@ h1 {
     align-items: end;
     position: absolute;
 }
+
+.nothing-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 200px;
+    align-items: center;
+    color: rgba(0, 0, 0, .6);
+}

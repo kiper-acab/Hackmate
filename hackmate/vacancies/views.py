@@ -119,7 +119,10 @@ class VacancyCreateView(
         return super().form_valid(form)
 
 
-class UserResponsesView(django.views.generic.ListView):
+class UserResponsesView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.ListView,
+):
     template_name = "vacancies/user_responses.html"
     context_object_name = "responses"
 
@@ -129,7 +132,10 @@ class UserResponsesView(django.views.generic.ListView):
         ).select_related("vacancy")
 
 
-class UserVacanciesView(django.views.generic.ListView):
+class UserVacanciesView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.ListView,
+):
     model = vacancies.models.Vacancy
     template_name = "vacancies/user_vacancies.html"
     context_object_name = "vacancies"
@@ -137,6 +143,7 @@ class UserVacanciesView(django.views.generic.ListView):
     def get_queryset(self):
         return vacancies.models.Vacancy.objects.filter(
             creater=self.request.user,
+            status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
         ).prefetch_related("responses")
 
 
@@ -160,5 +167,27 @@ class DeleteCommentView(django.views.generic.DeleteView):
                 *args,
                 **kwargs,
             )
+
+        raise django.http.Http404("not found")
+
+
+class DeleteVacancy(django.views.generic.DeleteView):
+    model = vacancies.models.Vacancy
+    pk_url_kwarg = "pk"
+
+    def get_success_url(self, *args, **kwargs):
+        return django.urls.reverse(
+            "vacancies:vacancies",
+        )
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.creater == request.user or request.user.is_superuser:
+            self.object.status = (
+                vacancies.models.Vacancy.VacancyStatuses.INACTIVE
+            )
+            self.object.save()
+            return django.shortcuts.redirect(self.get_success_url())
 
         raise django.http.Http404("not found")

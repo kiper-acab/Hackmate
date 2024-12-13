@@ -32,8 +32,13 @@ urlpatterns = [
         name="user_vacancies",
     ),
     django.urls.path(
-        "delete_comment/<int:pk>",
+        "delete_comment/<int:pk>/",
         vacancies.views.DeleteCommentView.as_view(),
         name="delete_comment",
+    ),
+    django.urls.path(
+        "delete_vacancy/<int:pk>/",
+        vacancies.views.DeleteVacancy.as_view(),
+        name="delete_vacancy",
     ),
 ]

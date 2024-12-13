@@ -8,7 +8,7 @@ app_name = "api"
 urlpatterns = [
     django.urls.path(
         "vacancies/",
-        api.views.LoadMoreView.as_view(),
+        api.views.LoadMoreVacacncies.as_view(),
         name="vacancies",
     ),
 ]

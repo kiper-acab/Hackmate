@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load infinite_scroll %}
 
 {% block links %}
 	<link rel="stylesheet" href="{% static 'css/vacancies/vacancies.css' %}">
@@ -16,7 +15,6 @@
 			</figure>
 		</div>
 		<section class="vacancies">
-			{% infinite_scroll %}
 			{% for vacancy in vacancies %}
 				<div class="card w-75 mb-3">
 					<div class="card-body">
@@ -35,7 +33,13 @@
 						<a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="grow-button">Детальнее</a>
 					</div>
 				</div>
+			{% empty %}
+			<article class="nothing-container">
+				<h2 class="nothing">Ещё ни кто не разместил объявление о поиске.</h2>
+				<p class="nothing">Стань первым!</p>
+			</article>
 			{% endfor %}
 		</section>
 	</section>
+	<script src="{% static 'js/load_more_vacancies.js' %}"></script>
 {% endblock %}

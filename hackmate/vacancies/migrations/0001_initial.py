@@ -80,7 +80,7 @@ class Migration(django.db.migrations.Migration):
                     django.db.models.CharField(
                         choices=[
                             ("active", "active"),
-                            ("finished", "finished"),
+                            ("inactive", "inactive"),
                         ],
                         max_length=255,
                         verbose_name="cтатус",
