@@ -300,3 +300,219 @@ class NormalEmailTests(django.test.TestCase):
                 for m in messages
             ),
         )
+
+
+class DeleteLinkViewTest(django.test.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.data = {
+            "email": "test@test.com",
+            "username": "testuser",
+            "password": "testpassword",
+        }
+        cls.user = users.models.User.objects.create_user(
+            email=cls.data["email"],
+            password=cls.data["password"],
+            username=cls.data["username"],
+            is_active=True,
+        )
+        profile = users.models.Profile.objects.get(
+            user=cls.user,
+        )
+        cls.link = users.models.ProfileLink.objects.create(
+            profile=profile,
+            site_type="GitLab",
+            url="http://example.com",
+        )
+
+        cls.owner_data = {
+            "email": "owner@test.com",
+            "username": "owneruser",
+            "password": "ownerpassword",
+        }
+        cls.owner = users.models.User.objects.create_user(
+            email=cls.owner_data["email"],
+            password=cls.owner_data["password"],
+            username=cls.owner_data["username"],
+            is_active=True,
+        )
+        cls.profile_owner = users.models.Profile.objects.get(user=cls.owner)
+        cls.owner_link = users.models.ProfileLink.objects.create(
+            profile=cls.profile_owner,
+            site_type="GitLab",
+            url="http://example.com",
+        )
+
+        cls.other_user_data = {
+            "email": "other@test.com",
+            "username": "otheruser",
+            "password": "password123",
+        }
+        cls.other_user = users.models.User.objects.create_user(
+            email=cls.other_user_data["email"],
+            password=cls.other_user_data["password"],
+            username=cls.other_user_data["username"],
+            is_active=True,
+        )
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.link.delete()
+        cls.owner_link.delete()
+        cls.user.delete()
+        cls.owner.delete()
+        cls.other_user.delete()
+        super().tearDownClass()
+
+    def test_delete_link(self):
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.get(
+            django.urls.reverse("users:delete_link", args=[self.link.pk]),
+        )
+        self.assertRedirects(
+            response,
+            django.urls.reverse("users:profile_edit"),
+        )
+        self.assertFalse(
+            users.models.ProfileLink.objects.filter(pk=self.link.pk).exists(),
+        )
+
+    def test_delete_link_other_user(self):
+        self.client.login(
+            username=self.other_user_data["username"],
+            password=self.other_user_data["password"],
+        )
+
+        response = self.client.get(
+            django.urls.reverse("users:delete_link", args=[self.link.pk]),
+        )
+
+        self.assertRedirects(
+            response,
+            django.urls.reverse("users:profile_edit"),
+        )
+
+        self.assertTrue(
+            users.models.ProfileLink.objects.filter(pk=self.link.pk).exists(),
+        )
+
+
+class ProfileViewTest(django.test.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user_data = {
+            "email": "test@test.com",
+            "username": "testuser",
+            "password": "testpassword",
+        }
+        cls.other_user_data = {
+            "email": "other@test.com",
+            "username": "otheruser",
+            "password": "password123",
+        }
+
+        cls.user = users.models.User.objects.create_user(
+            email=cls.user_data["email"],
+            password=cls.user_data["password"],
+            username=cls.user_data["username"],
+        )
+        cls.profile = users.models.Profile.objects.get(user=cls.user)
+
+        cls.other_user = users.models.User.objects.create_user(
+            email=cls.other_user_data["email"],
+            password=cls.other_user_data["password"],
+            username=cls.other_user_data["username"],
+        )
+        cls.other_profile = users.models.Profile.objects.get(
+            user=cls.other_user,
+        )
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.user.delete()
+        cls.profile.delete()
+        cls.other_user.delete()
+        cls.other_profile.delete()
+        super().tearDownClass()
+
+    def test_profile_view_profile(self):
+        url = django.urls.reverse(
+            "users:profile",
+            kwargs={"username": self.user.username},
+        )
+        self.client.login(
+            username=self.user_data["username"],
+            password=self.user_data["password"],
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.user.username)
+        self.assertTrue(response.context["is_own_profile"])
+
+    def test_profile_view_other_user(self):
+        url = django.urls.reverse(
+            "users:profile",
+            kwargs={"username": self.other_user.username},
+        )
+        self.client.login(
+            username=self.user_data["username"],
+            password=self.user_data["password"],
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.other_user.username)
+        self.assertFalse(response.context["is_own_profile"])
+
+
+class ProfileEditViewTest(django.test.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user = users.models.User.objects.create_user(
+            username="testuser",
+            email="test@test.com",
+            password="testpassword",
+        )
+        cls.profile = users.models.Profile.objects.get(user=cls.user)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.user.delete()
+        cls.profile.delete()
+        super().tearDownClass()
+
+    def test_get_profile_edit_view(self):
+        url = django.urls.reverse("users:profile_edit")
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "users/profile_edit.html")
+        self.assertIn("form", response.context)
+        self.assertIn("profile_form", response.context)
+        self.assertIn("link_form", response.context)
+
+    def test_update_profile(self):
+        data = {
+            "email": "newemail@test.com",
+            "username": "newusername",
+        }
+        url = django.urls.reverse("users:profile_edit")
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.post(url, data=data)
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.email, "newemail@test.com")
+        self.assertEqual(self.user.username, "newusername")
+        self.assertRedirects(response, url)
+
+    def test_missing_required_fields(self):
+        data = {"email": "", "username": ""}
+        url = django.urls.reverse("users:profile_edit")
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.post(url, data=data)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, "Поля Email и Username обязательны для заполнения.",
+        )

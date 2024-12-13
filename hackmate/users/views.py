@@ -36,11 +36,7 @@ class DeleteLinkView(django.views.generic.DeleteView):
             return django.shortcuts.redirect(self.success_url)
 
         self.object.delete()
-        success_url = django.urls.reverse(
-            "users:profile_edit",
-            args=[self.object.link.pk],
-        )
-        return django.shortcuts.redirect(success_url)
+        return django.shortcuts.redirect(self.success_url)
 
 
 class ProfileView(
