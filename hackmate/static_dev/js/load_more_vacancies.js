@@ -49,7 +49,7 @@ function createVacancyElement(vacancy) {
     description.textContent = vacancy.description;
 
     const userInfo = document.createElement('a');
-    userInfo.href = `/profile/${vacancy.creater.username}`;
+    userInfo.href = `/auth/profile/${vacancy.creater.username}/`;
     userInfo.classList.add('user-info');
 
     const avatar = document.createElement('img');
@@ -64,7 +64,7 @@ function createVacancyElement(vacancy) {
     userInfo.appendChild(username);
 
     const detailLink = document.createElement('a');
-    detailLink.href = `/vacancies/${vacancy.id}`;
+    detailLink.href = `/vacancy/${vacancy.id}/`;
     detailLink.classList.add('grow-button');
     detailLink.textContent = 'Детальнее';
 
