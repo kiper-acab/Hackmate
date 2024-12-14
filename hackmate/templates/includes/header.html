@@ -52,7 +52,7 @@
           {% for notification in unread_notifications %}
             <li class="notification-dropdown-item-li">
               <p class="dropdown-item dropdown-item-notify" href="#">
-                {{ notification.actor }} {{ notification.verb }} - {{ notification.timestamp|date:"d.m.Y H:i" }}
+                <a href="{% url 'users:profile' notification.actor %}" class="notification-profile-link">{{ notification.actor }}</a> {{ notification.verb }} - {{ notification.timestamp|date:"d.m.Y H:i" }}
               </p>
               <a href="{% url 'notify:readone_notification' notification.pk %}" class="readone_notification">⨯</a>
             </li>

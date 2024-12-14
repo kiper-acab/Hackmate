@@ -43,7 +43,6 @@ class DeleteLinkView(django.views.generic.DeleteView):
 
 
 class ProfileView(
-    django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.View,
 ):
 

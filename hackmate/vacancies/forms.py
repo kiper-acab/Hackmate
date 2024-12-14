@@ -12,6 +12,8 @@ class VacancyForm(django.forms.ModelForm):
         for field in self.visible_fields():
             field.field.widget.attrs["class"] = "form-control"
 
+        self.fields["deadline"].widget.format = "%Y-%m-%d"
+
     def clean_deadline(self):
         deadline = self.cleaned_data.get("deadline")
         if deadline and deadline < django.utils.timezone.now().date():

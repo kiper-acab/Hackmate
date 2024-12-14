@@ -2,12 +2,26 @@ let offset = 0;
 const limit = 10;
 const vacanciesContainer = document.querySelector('.vacancies');
 let isLoading = false;
+let lastScrollTop = 0;
+let scrollThreshold = 40;
 
-window.onscroll = function () {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && !isLoading) {
+window.addEventListener('scroll', handleScroll);
+
+function handleScroll() {
+    const scrollTop = window.scrollY;
+    const isScrollingDown = scrollTop - lastScrollTop > 0;
+    const scrolledEnough = scrollTop - lastScrollTop > scrollThreshold;
+
+    if (isScrollingDown && scrolledEnough && isBottomOfPage() && !isLoading) {
         loadMoreVacancies();
     }
-};
+
+    lastScrollTop = scrollTop;
+}
+
+function isBottomOfPage() {
+    return window.innerHeight + window.scrollY >= document.body.offsetHeight;
+}
 
 function loadMoreVacancies() {
     isLoading = true;
@@ -49,7 +63,7 @@ function createVacancyElement(vacancy) {
     description.textContent = vacancy.description;
 
     const userInfo = document.createElement('a');
-    userInfo.href = `/auth/profile/${vacancy.creater.username}/`;
+    userInfo.href = vacancy.creater.profile_url;
     userInfo.classList.add('user-info');
 
     const avatar = document.createElement('img');
@@ -64,7 +78,7 @@ function createVacancyElement(vacancy) {
     userInfo.appendChild(username);
 
     const detailLink = document.createElement('a');
-    detailLink.href = `/vacancy/${vacancy.id}/`;
+    detailLink.href = vacancy.vacancy_url;
     detailLink.classList.add('grow-button');
     detailLink.textContent = 'Детальнее';
 

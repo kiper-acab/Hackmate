@@ -35,6 +35,10 @@ class LoadMoreVacacncies(django.views.generic.View):
                             if vacancy.creater.profile.image
                             else None
                         ),
+                        "profile_url": django.urls.reverse(
+                            "users:profile",
+                            args=[vacancy.creater.username],
+                        ),
                     },
                     "deadline": (
                         vacancy.deadline.strftime("%Y-%m-%d")
@@ -42,6 +46,10 @@ class LoadMoreVacacncies(django.views.generic.View):
                         else None
                     ),
                     "required_experience": vacancy.required_experience,
+                    "vacancy_url": django.urls.reverse(
+                        "vacancies:vacancy_detail",
+                        args=[vacancy.pk],
+                    ),
                 }
                 for vacancy in vacancies_variable
             ]
