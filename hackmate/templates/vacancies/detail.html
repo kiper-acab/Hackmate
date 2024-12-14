@@ -70,8 +70,9 @@
           <button type="submit" class="btn btn-primary send-comment">Отправить</button>
         </form>
       </article>
-      <article class="comments-list">
-        {% for comment in vacancy.comments.all %}
+      <input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
+      <article class="comments">
+        {% for comment in vacancy.comments.all|slice:":10" %}
           <div class="comment">
               <header class="comment-header">
                 <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
@@ -97,6 +98,6 @@
     </section>
   </div>
   <input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
-
+  <script src="{% static 'js/load_more_comments.js' %}"></script>
   <script src="{% static 'js/button_detail.js' %}"></script>
 {% endblock %}

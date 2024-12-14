@@ -2,6 +2,7 @@ __all__ = ()
 
 import django.core.cache
 import django.http
+import django.urls
 import django.views.generic
 
 import vacancies.models
@@ -46,4 +47,50 @@ class LoadMoreVacacncies(django.views.generic.View):
             ]
             django.core.cache.cache.set(cache_key, data, 3600)
 
+        return django.http.JsonResponse(data, safe=False)
+
+
+class LoadMoreComments(django.views.generic.View):
+    def get(self, request, *args, **kwargs):
+        vacancy_id = kwargs.get("pk")
+        offset = int(request.GET.get("offset", 0))
+        limit = int(request.GET.get("limit", 10))
+
+        vacancy_model = vacancies.models.CommentVacancy
+        comments = (
+            vacancy_model.objects.select_related(
+                "user",
+                "user__profile",
+            )
+            .filter(vacancy_id=vacancy_id)
+            .order_by("-created_at")
+            # fmt: off
+            [offset:offset + limit]
+            # fmt: on
+        )
+
+        data = [
+            {
+                "id": comment.id,
+                "user": comment.user.username,
+                "user_url": django.urls.reverse(
+                    "users:profile",
+                    args=[comment.user.username],
+                ),
+                "delete_url": django.urls.reverse(
+                    "vacancies:delete_comment",
+                    args=[comment.id],
+                ),
+                "comment": comment.comment,
+                "created_at": comment.created_at.strftime("%Y-%m-%d %H:%M"),
+                "current_user": request.user.username,
+                "is_admin": request.user.is_superuser,
+                "avatar": (
+                    comment.user.profile.image.url
+                    if comment.user.profile.image
+                    else None
+                ),
+            }
+            for comment in comments
+        ]
         return django.http.JsonResponse(data, safe=False)

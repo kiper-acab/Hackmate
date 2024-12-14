@@ -11,4 +11,9 @@ urlpatterns = [
         api.views.LoadMoreVacacncies.as_view(),
         name="vacancies",
     ),
+    django.urls.path(
+        "comments/<int:pk>/",
+        api.views.LoadMoreComments.as_view(),
+        name="comments",
+    ),
 ]
