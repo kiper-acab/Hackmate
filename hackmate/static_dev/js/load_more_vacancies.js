@@ -13,7 +13,7 @@ function loadMoreVacancies() {
     isLoading = true;
     offset += limit;
 
-    fetch(`/api/comments/?offset=${offset}&limit=${limit}`)
+    fetch(`/api/vacancies/?offset=${offset}&limit=${limit}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
