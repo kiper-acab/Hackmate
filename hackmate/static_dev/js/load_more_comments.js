@@ -2,18 +2,26 @@ let offset = 0;
 const limit = 10;
 const commentsContainer = document.querySelector('.comments');
 let isLoading = false;
+let lastScrollTop = 0;
+let scrollThreshold = 40;
 const vacancyId = document.getElementById('vacancy-id').value;
 
 window.addEventListener('scroll', handleScroll);
 
 function handleScroll() {
-    if (isBottomOfPage() && !isLoading) {
+    const scrollTop = window.scrollY;
+    const isScrollingDown = scrollTop - lastScrollTop > 0;
+    const scrolledEnough = scrollTop - lastScrollTop > scrollThreshold;
+
+    if (isScrollingDown && scrolledEnough && isBottomOfPage() && !isLoading) {
         loadMoreData(`/api/comments/${vacancyId}/?offset=${offset}&limit=${limit}`, appendVacancies);
     }
 
-    if (commentsContainer && isBottomOfElement(commentsContainer) && !isLoading) {
+    if (isScrollingDown && scrolledEnough && commentsContainer && isBottomOfElement(commentsContainer) && !isLoading) {
         loadMoreData(`/api/comments/?vacancy_id=${vacancyId}&offset=${offset}&limit=${limit}`, appendComments);
     }
+
+    lastScrollTop = scrollTop;
 }
 
 function isBottomOfPage() {
@@ -94,7 +102,7 @@ function createCommentElement(comment, currentUser = '', isSuperuser = false) {
 
     if (comment.user === currentUser || comment.user === isSuperuser) {
         const deleteLink = document.createElement('a');
-        deleteLink.href = `/vacancy/delete_comment/${comment.id}/`;
+        deleteLink.href = comment.delete_url;
         deleteLink.classList.add('delete-link-form');
         deleteLink.textContent = '❌';
         figure.appendChild(deleteLink);
