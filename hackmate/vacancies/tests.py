@@ -5,6 +5,7 @@ import json
 import django.contrib.auth
 import django.test
 import django.urls
+import django.utils
 import parametrize
 
 import vacancies.models
@@ -76,12 +77,13 @@ class VacanciesTests(django.test.TestCase):
         self.assertEqual(vacancy_count, vacancy_count_after_create - 1)
 
     def test_create_vacancy_not_authenticate_user(self):
+        model = vacancies.models.Vacancy
         data = {
-            vacancies.models.Vacancy.title.field.name: "title",
-            vacancies.models.Vacancy.description.field.name: "description",
+            model.title.field.name: "title",
+            model.description.field.name: "description",
+            model.hackaton_title.field.name: "hackaton_title",
         }
         vacancy_count = vacancies.models.Vacancy.objects.all().count()
-
         self.client.post(
             django.urls.reverse("vacancies:vacancy_create"),
             data=data,

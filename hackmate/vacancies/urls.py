@@ -41,4 +41,9 @@ urlpatterns = [
         vacancies.views.DeleteVacancy.as_view(),
         name="delete_vacancy",
     ),
+    django.urls.path(
+        "change_vacancy/<int:pk>/",
+        vacancies.views.ChangeVacancyView.as_view(),
+        name="change_vacancy",
+    ),
 ]

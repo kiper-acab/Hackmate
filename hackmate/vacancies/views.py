@@ -191,3 +191,25 @@ class DeleteVacancy(django.views.generic.DeleteView):
             return django.shortcuts.redirect(self.get_success_url())
 
         raise django.http.Http404("not found")
+
+
+class ChangeVacancyView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.UpdateView,
+):
+    template_name = "vacancies/change_vacancy.html"
+    form_class = vacancies.forms.VacancyForm
+    model = vacancies.models.Vacancy
+    pk_url_kwarg = "pk"
+
+    def get(self, request, *args, **kwargs):
+        if request.user != self.get_object().creater:
+            raise django.http.Http404("not found")
+
+        return super().get(request, *args, **kwargs)
+
+    def get_success_url(self, *args, **kwargs):
+        return django.urls.reverse(
+            "vacancies:vacancy_detail",
+            args=[self.get_object().pk],
+        )
