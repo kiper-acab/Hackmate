@@ -40,8 +40,15 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
                 )
                 user.profile.attempts_count += 1
                 user.profile.save()
+
             else:
                 self.deactivate_user(request, user)
+
+        else:
+            django.contrib.messages.error(
+                request,
+                "Пользователь с таким логином/почтой не найден.",
+            )
 
         return None
 
@@ -75,7 +82,7 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
         django.core.mail.send_mail(
             "Активация аккаунта",
             confirmation_link,
-            django.conf.settings.DJANGO_MAIL,
+            django.conf.settings.EMAIL_HOST_USER,
             [user.email],
             fail_silently=False,
         )

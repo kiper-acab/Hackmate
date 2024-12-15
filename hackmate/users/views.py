@@ -174,7 +174,7 @@ class SignUpView(
             django.core.mail.send_mail(
                 "Activate your account",
                 confirmation_link,
-                django.conf.settings.DJANGO_MAIL,
+                django.conf.settings.EMAIL_HOST_USER,
                 [user.email],
                 fail_silently=False,
             )

@@ -16,15 +16,15 @@
         <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="vacancy-title">
           {{ vacancy.title }}
         </a>
-        <p class="vacancy-description">{{ vacancy.description }}</p>
+        <p class="vacancy-description">{{ vacancy.description|truncatechars:200 }}</p>
         <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
         <div class="vacancy-responses">
           <h3>Откликнувшиеся пользователи:</h3>
           <ul>
              {% for response in vacancy.responses.all %}
-                <li>{{ response.user.username }}</li>
+                <a href="{% url 'users:profile' response.user.username %}" class="user-profile-link"><li>{{ response.user.username }}</li></a>
               {% empty %}
-                <li>Пока никто не откликнулся</li>
+                <a>Пока никто не откликнулся</a>
               {% endfor %}
           </ul>
           <div class="pagination">
@@ -38,7 +38,7 @@
       </div>
     {% empty %}
     <article class="nothing-container">
-      <h2 class="nothing">У вас нет вакансий</h2>
+      <h2 class="nothing">У вас нет вакансий.</h2>
       <p class="nothing">Если хотите создать анкету, то <a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-link">перейдите сюда</a></p>
     </article>
     {% endfor %}

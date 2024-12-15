@@ -120,6 +120,7 @@
 }
 
 .comment {
+    overflow: hidden;
     padding: 15px;
     margin-bottom: 15px;
     background-color: #ffffff;
@@ -151,6 +152,7 @@
     line-height: 1.5;
     color: #444;
     margin-left: 40px;
+
 }
 
 .no-comments {

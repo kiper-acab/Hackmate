@@ -52,7 +52,7 @@
     <section class="commnets" id="comments-container">
       <article class="create_comment">
         <h2 class="comments-header">Комментарии</h2>
-        <form method="post" action="">
+        <form method="post" action="{% url 'vacancies:create_comment' vacancy.pk %}">
           {% csrf_token %}
           <div class="form-group">
             {{ field.as_p }}
