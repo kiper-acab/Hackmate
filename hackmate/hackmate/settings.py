@@ -144,10 +144,17 @@ DJANGO_MAIL = os.getenv("DJANGO_MAIL")
 MAX_AUTH_ATTEMPTS = os.getenv("DJANGO_MAX_AUTH_ATTEMPS", 5)
 
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "send_mail"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+EMAIL_HOST = os.getenv("EMAIL_HOST", "your_email_host")
+EMAIL_PORT = os.getenv("EMAIL_PORT", "your_email_port")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "your_email")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "your_password")
+EMAIL_USE_SSL = check_boolean(os.getenv("DJANGO_EMAIL_USE_SSL", "True"))
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
 
 LOGIN_REDIRECT_URL = django.urls.reverse_lazy("homepage:homepage")
 LOGIN_URL = django.urls.reverse_lazy("users:login")

@@ -82,7 +82,7 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
         django.core.mail.send_mail(
             "Активация аккаунта",
             confirmation_link,
-            django.conf.settings.DJANGO_MAIL,
+            django.conf.settings.EMAIL_HOST_USER,
             [user.email],
             fail_silently=False,
         )
