@@ -5,44 +5,22 @@ let isLoading = false;
 const vacancyId = document.getElementById('vacancy-id').value;
 
 window.onscroll = function () {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && !isLoading) {
-        loadMoreVacancies();
-    }
-
     if (commentsContainer && window.innerHeight + window.scrollY >= commentsContainer.offsetHeight && !isLoading) {
         loadMoreComments();
     }
 };
 
-function loadMoreVacancies() {
-    isLoading = true;
-    offset += limit;
-    fetch(`/api/comments/${vacancyId}/?offset=${offset}&limit=${limit}`)
-        .then(response => response.json())
-        .then(data => { 
-            console.log()
-            data.forEach(vacancy => {
-                const vacancyElement = createCommentElement(vacancy, vacancy.current_user, vacancy.is_admin);
-                commentsContainer.appendChild(vacancyElement);
-            });
-            isLoading = false;
-        })
-        .catch(error => {
-            console.error('Ошибка загрузки вакансий:', error);
-            isLoading = false;
-        });
-}
 
 function loadMoreComments() {
     isLoading = true;
     offset += limit;
 
     const vacancyId = document.getElementById('vacancy-id').value;
-    fetch(`/api/comments/?vacancy_id=${vacancyId}&offset=${offset}&limit=${limit}`)
+    fetch(`/api/comments/${vacancyId}/?offset=${offset}&limit=${limit}`)
         .then(response => response.json())
         .then(data => {
             data.forEach(comment => {
-                const commentElement = createCommentElement(comment, data.current_user, data.is_admin);
+                const commentElement = createCommentElement(comment, comment.current_user, comment.is_admin);
                 commentsContainer.appendChild(commentElement);
             });
             isLoading = false;

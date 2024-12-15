@@ -22,9 +22,9 @@
           <h3>Откликнувшиеся пользователи:</h3>
           <ul>
              {% for response in vacancy.responses.all %}
-                <li>{{ response.user.username }}</li>
+                <a href="{% url 'users:profile' response.user.username %}" class="user-profile-link"><li>{{ response.user.username }}</li></a>
               {% empty %}
-                <li>Пока никто не откликнулся</li>
+                <a>Пока никто не откликнулся</a>
               {% endfor %}
           </ul>
           <div class="pagination">

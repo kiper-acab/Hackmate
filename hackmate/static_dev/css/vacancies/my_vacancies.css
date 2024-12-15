@@ -59,3 +59,13 @@
     align-items: center;
     color: rgba(0, 0, 0, .6);
 }
+
+.user-profile-link{
+    color: #0056b3;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.user-profile-link:hover {
+    text-decoration: underline;
+}
