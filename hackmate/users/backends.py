@@ -30,6 +30,7 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
             if (
                 user.profile.attempts_count
                 < django.conf.settings.MAX_AUTH_ATTEMPTS - 1
+                and user.is_active
             ):
                 django.contrib.messages.error(
                     request,
@@ -54,9 +55,10 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
 
     def deactivate_user(self, request, user):
         now = django.utils.timezone.now()
-        users.models.User.objects.filter(pk=user.pk).update(is_active=False)
+        user = users.models.User.objects.filter(pk=user.pk).first()
         user.profile.attempts_count = 0
         user.profile.date_last_active = now
+
         user.profile.save()
 
         django.contrib.messages.error(
@@ -68,24 +70,28 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
             ),
         )
 
-        activation_path = django.urls.reverse(
-            "users:activate",
-            args=[user.username],
-        )
-        domain = request.get_host()
-        confirmation_link = (
-            "Замечена подозрительная активность аккаунта. "
-            "Для активации аккаунта нажмите на ссылку ниже: "
-            f"http://{domain}{activation_path}"
-        )
+        if user.is_active:
+            activation_path = django.urls.reverse(
+                "users:activate",
+                args=[user.username],
+            )
+            domain = request.get_host()
+            confirmation_link = (
+                "Замечена подозрительная активность аккаунта. "
+                "Для активации аккаунта нажмите на ссылку ниже: "
+                f"http://{domain}{activation_path}"
+            )
 
-        django.core.mail.send_mail(
-            "Активация аккаунта",
-            confirmation_link,
-            django.conf.settings.EMAIL_HOST_USER,
-            [user.email],
-            fail_silently=False,
-        )
+            django.core.mail.send_mail(
+                "Активация аккаунта",
+                confirmation_link,
+                django.conf.settings.EMAIL_HOST_USER,
+                [user.email],
+                fail_silently=False,
+            )
+
+        user.is_active = False
+        user.save()
 
     def get_user(self, user_id):
         queryset = django.contrib.auth.models.User.objects.select_related(
