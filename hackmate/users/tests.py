@@ -399,7 +399,6 @@ class DeleteLinkViewTest(django.test.TestCase):
 
 
 class ProfileViewTest(django.test.TestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -506,6 +505,46 @@ class ProfileEditViewTest(django.test.TestCase):
         self.assertEqual(self.user.email, "newemail@test.com")
         self.assertEqual(self.user.username, "newusername")
         self.assertRedirects(response, url)
+
+    def test_correct_birthday(self):
+        norm_date = datetime.date(2000, 9, 1)
+        data = {
+            "email": "newemail@test.com",
+            "username": "newusername",
+            "birthday": norm_date,
+        }
+        url = django.urls.reverse("users:profile_edit")
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.post(url, data=data)
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.profile.birthday, norm_date)
+        self.assertRedirects(response, url)
+
+    def test_uncorrected_birthday(self):
+        future_date = datetime.date(2100, 9, 1)
+        data = {
+            "email": "newemail@test.com",
+            "username": "newusername",
+            "birthday": future_date,
+        }
+        url = django.urls.reverse("users:profile_edit")
+        self.client.login(username="testuser", password="testpassword")
+        self.client.post(url, data=data)
+        self.user.refresh_from_db()
+        self.assertNotEqual(self.user.profile.birthday, future_date)
+
+    def test_uncorrected_birthday_before(self):
+        before_date = datetime.date(1500, 9, 1)
+        data = {
+            "email": "newemail@test.com",
+            "username": "newusername",
+            "birthday": before_date,
+        }
+        url = django.urls.reverse("users:profile_edit")
+        self.client.login(username="testuser", password="testpassword")
+        self.client.post(url, data=data)
+        self.user.refresh_from_db()
+        self.assertNotEqual(self.user.profile.birthday, before_date)
 
     def test_missing_required_fields(self):
         data = {"email": "", "username": ""}

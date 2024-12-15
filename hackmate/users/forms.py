@@ -120,3 +120,17 @@ class AuthenticateForm(
     class Meta:
         model = django.contrib.auth.models.User
         fields = ["username", "password"]
+
+
+class PasswordChangeForm(django.contrib.auth.forms.PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control"
+
+
+class PasswordResetForm(django.contrib.auth.forms.PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control"
