@@ -76,7 +76,6 @@ class LoadMoreComments(django.views.generic.View):
             [offset:offset + limit]
             # fmt: on
         )
-
         data = [
             {
                 "id": comment.id,

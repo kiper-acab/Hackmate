@@ -147,7 +147,34 @@ class UserVacanciesView(
         ).prefetch_related("responses")
 
 
-class DeleteCommentView(django.views.generic.DeleteView):
+class CreateCommentView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.CreateView,
+):
+    model = vacancies.models.CommentVacancy
+
+    def get_success_url(self, requst, *args, **kwargs):
+        return django.urls.reverse(
+            "vacancies:vacancy_detail",
+            args=[kwargs.get("pk")],
+        )
+
+    def post(self, request, *args, **kwargs):
+        vacancy = vacancies.models.Vacancy.objects.get(pk=kwargs.get("pk"))
+        vacancies.models.CommentVacancy.objects.create(
+            vacancy=vacancy,
+            user=request.user,
+            comment=request.POST.get("comment"),
+        )
+        return django.shortcuts.redirect(
+            self.get_success_url(request, *args, **kwargs),
+        )
+
+
+class DeleteCommentView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.DeleteView,
+):
     model = vacancies.models.CommentVacancy
     pk_url_kwarg = "pk"
     template_name = "vacancies/user_vacancies.html"

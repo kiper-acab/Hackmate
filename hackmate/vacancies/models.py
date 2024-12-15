@@ -32,7 +32,20 @@ class Vacancy(django.db.models.Model):
         verbose_name="название вакансии",
     )
 
-    description = django.db.models.TextField(verbose_name="описание вакансии")
+    description = django.db.models.TextField(
+        verbose_name="описание вакансии",
+        validators=[
+            django.core.validators.MinLengthValidator(
+                5,
+                "Описание не может быть таким коротким",
+            ),
+            django.core.validators.MaxLengthValidator(
+                10000,
+                "Описание не может быть таким длинным",
+            ),
+        ],
+        help_text="Описание вакансии должно быть от 5 до 10000 символов",
+    )
 
     created_at = django.db.models.DateTimeField(
         auto_now_add=True,
@@ -75,8 +88,19 @@ class Vacancy(django.db.models.Model):
         verbose_name="требуемый опыт (в годах)",
         null=True,
         blank=True,
-        help_text="Укажите количество лет опыта, необходимого для кандидата",
-        validators=[django.core.validators.MinValueValidator(0)],
+        help_text=(
+            "Укажите количество лет опыта " "необходимого для кандидата"
+        ),
+        validators=[
+            django.core.validators.MinValueValidator(
+                0,
+                "Введите корректное значение",
+            ),
+            django.core.validators.MaxValueValidator(
+                100,
+                "Введите корректное значение",
+            ),
+        ],
     )
 
     class Meta:
@@ -101,6 +125,16 @@ class CommentVacancy(django.db.models.Model):
 
     comment = django.db.models.TextField(
         verbose_name="комментарий",
+        validators=[
+            django.core.validators.MinLengthValidator(
+                5,
+                "Слишком короткий комментарий!",
+            ),
+            django.core.validators.MaxLengthValidator(
+                3000,
+                "Комментарий не может привышать 3000 символов!",
+            ),
+        ],
     )
 
     user = django.db.models.ForeignKey(

@@ -40,8 +40,15 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
                 )
                 user.profile.attempts_count += 1
                 user.profile.save()
+
             else:
                 self.deactivate_user(request, user)
+
+        else:
+            django.contrib.messages.error(
+                request,
+                "Пользователь с таким логином/почтой не найден.",
+            )
 
         return None
 

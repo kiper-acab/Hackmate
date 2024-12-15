@@ -172,3 +172,8 @@ DJANGO_NOTIFICATIONS_CONFIG = {
 
 STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_STAR_WIDTH = 20
+
+
+MIGRATION_MODULES = {
+    "star_ratings": "hackmate.star_ratings_migrations",
+}
