@@ -1,5 +1,5 @@
 __all__ = []
-
+import django.core.exceptions
 import django.conf
 import django.contrib.auth
 import django.contrib.auth.decorators
@@ -10,6 +10,7 @@ import django.contrib.messages
 import django.core.mail
 import django.forms
 import django.shortcuts
+import star_ratings.models
 import django.urls
 import django.utils.timezone
 import django.views
@@ -51,6 +52,10 @@ class ProfileView(
         )
 
         is_own_profile = user == request.user
+        try:
+            rating_user = star_ratings.models.Rating.objects.get(object_id=user.id)
+        except django.core.exceptions.ObjectDoesNotExist:
+            rating_user = star_ratings.models.Rating.objects.create(content_object=user)
 
         return django.shortcuts.render(
             request,
@@ -58,6 +63,7 @@ class ProfileView(
             {
                 "user": user,
                 "is_own_profile": is_own_profile,
+                "rating_count": rating_user,
             },
         )
 

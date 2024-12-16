@@ -11,9 +11,16 @@
   <section class="container profile-section">
     <div class="profile-header">
       <div class="profile-rating">
-        <div class="stars">
-          {% ratings user.profile %}
+       <div class="stars">
+          {% if request.user.username != profile.user.username %}
+	          <h4>Рейтинг {{ rating_count.average|floatformat:1 }}<br>
+	          Количество оценок {{ rating_count.count }}
+</h4>
+          {% else %}
+            {% ratings user.profile %}
+          {% endif %}
         </div>
+
       </div>
     </div>
     <div class="profile-avatar">
@@ -42,22 +49,6 @@
             <p><strong>День рождения:</strong> {{ user.profile.birthday }}</p>
           {% else %}
             <p><strong>День рождения:</strong> Информация не указана.</p>
-          {% endif %}
-        </div>
-
-        <div class="profile-item">
-          {% if user.profile.country %}
-            <p><strong>Страна:</strong> {{ user.profile.country.country.alternate_names }}</p>
-          {% else %}
-            <p><strong>Страна:</strong> Информация не указана.</p>
-          {% endif %}
-        </div>
-
-        <div class="profile-item">
-          {% if user.profile.city %}
-            <p><strong>Город:</strong> {{ user.profile.city }}</p>
-          {% else %}
-            <p><strong>Город:</strong> Информация не указана.</p>
           {% endif %}
         </div>
 
