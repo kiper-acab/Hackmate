@@ -20,13 +20,19 @@
         <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
         <div class="vacancy-responses">
           <h3>Откликнувшиеся пользователи:</h3>
-          <ul>
-             {% for response in vacancy.responses.all %}
-                <a href="{% url 'users:profile' response.user.username %}" class="user-profile-link"><li>{{ response.user.username }}</li></a>
-              {% empty %}
-                <a>Пока никто не откликнулся</a>
-              {% endfor %}
-          </ul>
+          <article class="responses-users">
+            {% for response in vacancy.responses.all %}
+              <article class="">
+                <a href="{% url 'users:profile' response.user.username %}" class="user-profile-link">{{ response.user.username }}</a>
+              </article>
+              <article>
+                <a href="" class="btn btn-success">Принять</a>
+                <a href="" class="btn btn-danger">Оклонить</a>
+              </article>
+            {% empty %}
+              <a>Пока никто не откликнулся</a>
+            {% endfor %}
+          </article>
           <div class="pagination">
             {% for page_num in paginated_responses.vacancy.id.paginator.page_range %}
               <a href="?page_{{ vacancy.id }}={{ page_num }}" class="{% if paginated_responses.vacancy.id.number == page_num %}active{% endif %}">

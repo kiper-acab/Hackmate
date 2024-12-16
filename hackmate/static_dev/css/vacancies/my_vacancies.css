@@ -69,3 +69,16 @@
 .user-profile-link:hover {
     text-decoration: underline;
 }
+
+.responses-users{
+    display: flex;
+    justify-content: space-between;
+}
+
+.responses-users>article{
+    margin: 0 30px;
+}
+
+.responses-users>article>a{
+    margin: 0 20px;
+}
