@@ -155,10 +155,11 @@ class ProfileLink(django.db.models.Model):
     def clean(self):
         super().clean()
         if self.url and self.site_type:
-            users.validators.validate_social_network_url(self.url, self.site_type)
+            users.validators.validate_social_network_url(
+                self.url,
+                self.site_type,
+            )
 
     class Meta:
         verbose_name = "ссылка"
         verbose_name_plural = "ссылки"
-
-

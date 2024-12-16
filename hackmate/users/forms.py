@@ -53,16 +53,13 @@ class UserCreateForm(
 class ProfileImageChangeForm(BootstrapForm):
     class Meta:
         model = users.models.Profile
-        fields = (
-            users.models.Profile.image.field.name,
-        )
+        fields = (users.models.Profile.image.field.name,)
 
         labels = {
             users.models.Profile.image.field.name: "Выберите себе аватар",
         }
 
         widgets = {
-
             users.models.Profile.image.field.name: django.forms.FileInput(),
         }
 

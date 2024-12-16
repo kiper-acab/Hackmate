@@ -3,7 +3,6 @@ import django.conf.urls.static
 import django.contrib.admin
 import django.urls
 
-import users.views
 
 if django.conf.settings.DEBUG:
     import debug_toolbar
@@ -26,7 +25,10 @@ urlpatterns += [
     django.urls.path("admin/", django.contrib.admin.site.urls),
     django.urls.path(
         "ratings/",
-        django.urls.include(("star_ratings.urls", "ratings"), namespace="ratings"),
+        django.urls.include(
+            ("star_ratings.urls"),
+            namespace="ratings",
+        ),
     ),
 ]
 
