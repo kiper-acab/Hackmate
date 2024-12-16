@@ -50,27 +50,19 @@ class UserCreateForm(
         }
 
 
-class ProfileChangeForm(BootstrapForm):
+class ProfileImageChangeForm(BootstrapForm):
     class Meta:
         model = users.models.Profile
         fields = (
             users.models.Profile.image.field.name,
-            users.models.Profile.birthday.field.name,
-            users.models.Profile.description.field.name,
         )
 
         labels = {
-            users.models.Profile.image.field.name: "Выберите себе картинку",
-            users.models.Profile.description.field.name: "Описание",
+            users.models.Profile.image.field.name: "Выберите себе аватар",
         }
 
         widgets = {
-            users.models.Profile.birthday.field.name: django.forms.DateInput(
-                attrs={
-                    "type": "date",
-                },
-                format=("%Y-%m-%d"),
-            ),
+
             users.models.Profile.image.field.name: django.forms.FileInput(),
         }
 
@@ -84,6 +76,28 @@ class ProfileChangeForm(BootstrapForm):
             instance.save()
 
         return instance
+
+
+class ProfileChangeForm(BootstrapForm):
+    class Meta:
+        model = users.models.Profile
+        fields = (
+            users.models.Profile.birthday.field.name,
+            users.models.Profile.description.field.name,
+        )
+
+        labels = {
+            users.models.Profile.description.field.name: "Описание",
+        }
+
+        widgets = {
+            users.models.Profile.birthday.field.name: django.forms.DateInput(
+                attrs={
+                    "type": "date",
+                },
+                format=("%Y-%m-%d"),
+            ),
+        }
 
 
 class ProfileLinkForm(BootstrapForm):

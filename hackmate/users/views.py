@@ -71,7 +71,7 @@ class ProfileEditView(
         user = users.models.User.objects.select_related("profile").get(
             pk=request.user.pk,
         )
-
+        image_form = users.forms.ProfileImageChangeForm(instance=user.profile)
         form = users.forms.UserChangeForm(instance=user)
         profile_form = users.forms.ProfileChangeForm(instance=user.profile)
         link_form = users.forms.ProfileLinkForm()
@@ -83,6 +83,7 @@ class ProfileEditView(
             request,
             "users/profile_edit.html",
             {
+                "image_form": image_form,
                 "form": form,
                 "profile_form": profile_form,
                 "link_form": link_form,
@@ -94,11 +95,14 @@ class ProfileEditView(
         user = users.models.User.objects.select_related("profile").get(
             pk=request.user.pk,
         )
-
+        image_form = users.forms.ProfileImageChangeForm(
+            request.POST,
+            request.FILES,
+            instance=user.profile,
+        )
         form = users.forms.UserChangeForm(request.POST, instance=user)
         profile_form = users.forms.ProfileChangeForm(
             request.POST,
-            request.FILES,
             instance=user.profile,
         )
         link_form = users.forms.ProfileLinkForm(request.POST)
@@ -139,6 +143,7 @@ class ProfileEditView(
 
             user_form.save()
             profile_form.save()
+            image_form.save()
             django.contrib.messages.success(
                 request,
                 "Профиль успешно изменен!",
@@ -151,6 +156,7 @@ class ProfileEditView(
             request,
             "users/profile_edit.html",
             {
+                "image_form": image_form,
                 "form": form,
                 "profile_form": profile_form,
                 "link_form": link_form,

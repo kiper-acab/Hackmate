@@ -36,7 +36,9 @@
 				{% else %}
 					<p class="text-muted">Аватар отсутствует</p>
 				{% endif %}
-
+				{% for field in image_form %}
+					{% include "includes/form.html" %}
+				{% endfor %}
 
 				{% for field in form %}
 					{% include "includes/form.html" %}

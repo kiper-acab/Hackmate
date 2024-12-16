@@ -112,6 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
             ".password_validation.NumericPasswordValidator"
         ),
     },
+    {
+        "NAME": "users.validators.MaximumLengthValidator",
+    },
 ]
 
 LANGUAGE_CODE = "ru"
@@ -190,6 +193,9 @@ CITIES_LIGHT_INCLUDE_CITY_TYPES = [
     "PPLS",
     "STLMT",
 ]
+
+STAR_RATINGS_USER_RATING_MODEL = "users.CustomUserRating"
+STAR_RATINGS_RERATE_SAME_DELETE = True
 
 STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_STAR_WIDTH = 20

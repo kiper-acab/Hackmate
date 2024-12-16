@@ -119,7 +119,7 @@ class ProfileLink(django.db.models.Model):
         ("twitter", "Twitter"),
         ("instagram", "Instagram"),
         ("vk", "VK"),
-        ("gitlub", "GitLub"),
+        ("gitlab", "GitLab"),
         ("github", "GitHub"),
     ]
 
@@ -147,11 +147,18 @@ class ProfileLink(django.db.models.Model):
             "twitter": "fa-twitter",
             "instagram": "fa-instagram",
             "vk": "fa-vk",
-            "gitlub": "fa-gitlab",
+            "gitlab": "fa-gitlab",
             "github": "fa-github",
         }
         return fa_icons.get(self.site_type, "fa-link")
 
+    def clean(self):
+        super().clean()
+        if self.url and self.site_type:
+            users.validators.validate_social_network_url(self.url, self.site_type)
+
     class Meta:
         verbose_name = "ссылка"
         verbose_name_plural = "ссылки"
+
+
