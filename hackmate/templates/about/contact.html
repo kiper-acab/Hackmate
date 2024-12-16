@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block links %}
   <link rel="stylesheet" href="{% static 'css/pages.css' %}">
@@ -8,16 +9,15 @@
 {% block content %}
 <section class="page-content">
   <div class="container my-5">
-    <h1 class="text-center">Контакты</h1>
+    <h1 class="text-center">{% trans "Контакты" %}</h1>
     <ul>
-      <li>Email: <a href="mailto:support@hackmate.ru">support@hackmate.ru</a></li>
-      <li>Телефон: +7 (999) 123-45-67</li>
-      <li>Адрес: Москва, ул. Программистов, д. 1</li>
-      <li>Телеграм руководителя: @KIPERQW</li>
-      <li>Телеграм службы поддержки: @l_kharazyan</li>
-      <li>Телеграм секретаря: @shel_makar</li>
+      <li>{% trans "Email: " %}<a href="mailto:support@hackmate.ru">support@hackmate.ru</a></li>
+      <li>{% trans "Телефон: " %}+7 (999) 123-45-67</li>
+      <li>{% trans "Адрес: " %}Москва, ул. Программистов, д. 1</li>
+      <li>{% trans "Телеграм руководителя: " %}@KIPERQW</li>
+      <li>{% trans "Телеграм службы поддержки: " %}@l_kharazyan</li>
+      <li>{% trans "Телеграм секретаря: " %}@shel_makar</li>
     </ul>
   </div>
 </section>
 {% endblock %}
-

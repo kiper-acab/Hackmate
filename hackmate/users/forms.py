@@ -3,7 +3,7 @@ __all__ = []
 import django.contrib.auth.forms
 import django.contrib.auth.models
 import django.forms
-
+import django.utils.translation
 
 import users.models
 
@@ -19,7 +19,7 @@ class UserChangeForm(BootstrapForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
-            field.field.required = False
+            field.field.required = True
 
     class Meta(django.contrib.auth.forms.UserChangeForm.Meta):
         model = django.contrib.auth.models.User
@@ -47,17 +47,13 @@ class UserCreateForm(
         )
 
         labels = {
-            UserChangeForm.Meta.model.username.field.name: "Введите логин",
+            UserChangeForm.Meta.model.username.field.name: (
+                django.utils.translation.gettext_lazy("Введите логин")
+            ),
         }
 
 
 class ProfileChangeForm(BootstrapForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        for field in self.visible_fields():
-            field.field.required = False
-
     class Meta:
         model = users.models.Profile
         fields = (
@@ -67,18 +63,32 @@ class ProfileChangeForm(BootstrapForm):
         )
 
         labels = {
-            users.models.Profile.image.field.name: "Выберите себе картинку",
-            users.models.Profile.description.field.name: "Описание",
+            users.models.Profile.image.field.name: (
+                django.utils.translation.gettext_lazy("Выберите себе картинку")
+            ),
+            users.models.Profile.description.field.name: (
+                django.utils.translation.gettext_lazy("Описание")
+            ),
         }
 
         widgets = {
             users.models.Profile.birthday.field.name: django.forms.DateInput(
-                attrs={
-                    "type": "date",
-                },
+                attrs={"type": "date"},
                 format=("%Y-%m-%d"),
             ),
+            users.models.Profile.image.field.name: django.forms.FileInput(),
         }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if self.data.get("delete_image"):
+            instance.image.delete(save=False)
+            instance.image = None
+
+        if commit:
+            instance.save()
+
+        return instance
 
 
 class ProfileLinkForm(BootstrapForm):
@@ -92,9 +102,11 @@ class ProfileLinkForm(BootstrapForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields[users.models.ProfileLink.site_type.field.name].label = (
-            "Тип сайта"
+            django.utils.translation.gettext_lazy("Тип сайта")
         )
-        self.fields[users.models.ProfileLink.url.field.name].label = "Ссылка"
+        self.fields[users.models.ProfileLink.url.field.name].label = (
+            django.utils.translation.gettext_lazy("Ссылка")
+        )
         self.fields[users.models.ProfileLink.site_type.field.name].required = (
             False
         )
@@ -107,9 +119,15 @@ class AuthenticateForm(
 ):
     def __init__(self, request, *args, **kwargs):
         super().__init__(request, *args, **kwargs)
-        self.fields["password"].widget.label = "Пароль"
+        self.fields["password"].widget.label = (
+            django.utils.translation.gettext_lazy("Пароль")
+        )
 
-    username = django.forms.CharField(label="Введите электронную почту/логин")
+    username = django.forms.CharField(
+        label=django.utils.translation.gettext_lazy(
+            "Введите электронную почту/логин",
+        ),
+    )
     password = django.forms.PasswordInput()
 
     class Meta:

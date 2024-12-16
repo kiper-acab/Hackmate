@@ -4,6 +4,7 @@ import os
 import pathlib
 
 import django.urls
+import django.utils.translation
 import dotenv
 
 
@@ -33,6 +34,8 @@ INSTALLED_APPS = [
     "homepage.apps.HomepageConfig",
     "users.apps.UsersConfig",
     "vacancies.apps.VacanciesConfig",
+    "notify.apps.NotifyConfig",
+    "api.apps.ApiConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,7 +43,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
+    "star_ratings",
     "sorl.thumbnail",
+    "notifications",
 ]
 
 
@@ -52,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "users.middleware.ProxyUserMiddleware",
 ]
 
 if DEBUG:
@@ -113,6 +119,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "ru"
+LOCALE_PATHS = (BASE_DIR / "locale/",)
+LANGUAGES = [
+    ("ru", django.utils.translation.gettext_lazy("Русский")),
+    ("en", django.utils.translation.gettext_lazy("English")),
+]
 
 TIME_ZONE = "UTC"
 
@@ -161,30 +172,9 @@ else:
         default="False",
     )
 
-CITIES_LIGHT_TRANSLATION_LANGUAGES = ["ru"]
-CITIES_LIGHT_INCLUDE_COUNTRIES = [
-    "RU",
-    "BY",
-    "KZ",
-    "UA",
-    "UZ",
-    "KG",
-    "AM",
-    "AZ",
-    "MD",
-    "TJ",
-]
-CITIES_LIGHT_INCLUDE_CITY_TYPES = [
-    "PPL",
-    "PPLA",
-    "PPLA2",
-    "PPLA3",
-    "PPLA4",
-    "PPLC",
-    "PPLF",
-    "PPLG",
-    "PPLL",
-    "PPLR",
-    "PPLS",
-    "STLMT",
-]
+DJANGO_NOTIFICATIONS_CONFIG = {
+    "USE_JSONFIELD": True,
+}
+
+STAR_RATINGS_STAR_HEIGHT = 20
+STAR_RATINGS_STAR_WIDTH = 20

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block links %}
   <link rel="stylesheet" href="{% static 'css/vacancies/detail.css' %}">
@@ -8,23 +9,29 @@
 
 {% block content %}
   <div class="container vacancy-container">
+    {% if request.user == vacancy.creater %}
+      <div class="dropdown">
+        <button class="btn-vacancy-menu" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'vacancies:change_vacancy' vacancy.pk %}">{% trans 'Изменить вакансию' %}</a></li>
+          <li><a class="dropdown-item" href="{% url 'vacancies:delete_vacancy' vacancy.pk %}">{% trans 'Удалить вакансию' %}</a></li>
+        </ul>
+      </div>
+    {% endif %}
     <h1 class="vacancy-title">{{ vacancy.title }}</h1>
     <p class="vacancy-description">{{ vacancy.description }}</p>
 
     <div class="vacancy-info">
-      <p><strong>Создатель:</strong> {{ vacancy.creater }}</p>
-      <p><strong>Создано:</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
+      <p><strong>{% trans 'Создатель:' %}</strong> {{ vacancy.creater.username }}</p>
+      <p><strong>{% trans 'Создано:' %}</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
       {% if vacancy.hackaton_title %}
-        <p><strong>Хакатон:</strong> {{ vacancy.hackaton_title }}</p>
+        <p><strong>{% trans 'Хакатон:' %}</strong> {{ vacancy.hackaton_title }}</p>
       {% endif %}
       {% if vacancy.deadline %}
-        <p><strong>Дедлайн:</strong> {{ vacancy.deadline|date:"d.m.Y" }}</p>
+        <p><strong>{% trans 'Дедлайн:' %}</strong> {{ vacancy.deadline|date:"d.m.Y" }}</p>
       {% endif %}
       {% if vacancy.required_experience %}
-        <p><strong>Требуемый опыт:</strong> {{ vacancy.required_experience }} лет</p>
-      {% endif %}
-      {% if vacancy.role %}
-        <p><strong>Роль человека:</strong> {{ vacancy.role }}</p>
+        <p><strong>{% trans 'Требуемый опыт:' %}</strong> {{ vacancy.required_experience }} лет</p>
       {% endif %}
     </div>
 
@@ -35,24 +42,24 @@
     {% if user.is_authenticated %}
       {% if user != vacancy.creater %}
         {% if not is_deadline_passed %}
-          <button id="respond-button" class="grow-button">Откликнуться</button>
+          <button id="respond-button" class="grow-button">{% trans 'Откликнуться' %}</button>
         {% else %}
-          <p class="deadline-message">Дедлайн истёк. Вы больше не можете откликнуться на эту вакансию.</p>
+          <p class="deadline-message">{% trans 'Дедлайн истёк. Вы больше не можете откликнуться на эту вакансию.' %}</p>
         {% endif %}
       {% endif %}
     {% else %}
-      <p>Вы должны быть авторизованы, чтобы откликнуться.</p>
+      <p>{% trans 'Вы должны быть авторизованы, чтобы откликнуться.' %}</p>
     {% endif %}
-
-    <section class="commnets">
+    
+    <section class="commnets" id="comments-container">
       <article class="create_comment">
-        <h2 class="comments-header">Комментарии</h2>
+        <h2 class="comments-header">{% trans 'Комментарии' %}</h2>
         <form method="post" action="">
           {% csrf_token %}
           <div class="form-group">
+            {{ field.as_p }}
             {% for field in comment_form %}
               <div class="mb-3">
-                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
                 {{ field }}
                 {% if field.help_text %}
                   <div class="form-text">{{ field.help_text }}</div>
@@ -63,35 +70,37 @@
               </div>
             {% endfor %}
           </div>
-          <button type="submit" class="btn btn-primary">Отправить</button>
+          <button type="submit" class="btn btn-primary send-comment">{% trans 'Отправить' %}</button>
         </form>
       </article>
+      <input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
       <article class="comments">
-        {% for comment in vacancy.comments.all %}
-            <div class="comment">
-                <header class="comment-header">
-                  <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
-                    {% if comment.user.profile.image %}
-                    <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user }}</span>
-                    {% else %}
-                    <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user }}</span>
+        {% for comment in vacancy.comments.all|slice:":10" %}
+          <div class="comment">
+              <header class="comment-header">
+                <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
+                  {% if comment.user.profile.image %}
+                  <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user }}</span>
+                  {% else %}
+                  <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user }}</span>
+                  {% endif %}
+                </a>
+                  <figure>
+                    <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
+                    {% if comment.user == request.user or request.user.is_superuser %}
+                    <a href="{% url 'vacancies:delete_comment' comment.pk %}" class="delete-link-form">❌</a>
                     {% endif %}
-                  </a>
-                    <figure>
-                      <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
-                      {% if comment.user == request.user or request.user.is_superuser %}
-                      <a href="{% url 'vacancies:delete_comment' comment.pk %}" class="delete-link-form">❌</a>
-                      {% endif %}
-                    </figure>
-                </header>
-                <p class="comment-text">{{ comment.comment }}</p>
-            </div>
+                  </figure>
+              </header>
+              <p class="comment-text">{{ comment.comment }}</p>
+          </div>
         {% empty %}
-            <p class="no-comments">Комментариев пока нет.</p>
+          <p class="no-comments">{% trans 'Комментариев пока нет.' %}</p>
         {% endfor %}
     </article>
     </section>
   </div>
-
+  <input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
+  <script src="{% static 'js/load_more_comments.js' %}"></script>
   <script src="{% static 'js/button_detail.js' %}"></script>
 {% endblock %}

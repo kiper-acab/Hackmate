@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block links %}
   <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
@@ -22,7 +23,7 @@
 		  {% for field in form %}
 			{% include "includes/form.html" %}
 		  {% endfor %}
-		<button type="submit" class="btn btn-primary">Отравить</button>
+		<button type="submit" class="btn btn-primary">{% trans "Отправить" %}</button>
 	  </form>
 	</article>
   </section>

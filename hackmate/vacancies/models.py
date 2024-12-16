@@ -19,14 +19,7 @@ class Ip(django.db.models.Model):
 class Vacancy(django.db.models.Model):
     class VacancyStatuses(django.db.models.TextChoices):
         ACTIVE = "active", "active"
-        FINISHED = "finished", "finished"
-
-    class Roles(django.db.models.TextChoices):
-        DEVELOPER = "Разработчик", "Разработчик"
-        DESIGNER = "Дизайнер", "Дизайнер"
-        PROJECT_MANAGER = "Проектный менеджер", "Проектный менеджер"
-        TESTER = "Тестировщик", "Тестировщик"
-        OTHER = "Другая роль", "Другая роль"
+        INACTIVE = "inactive", "inactive"
 
     creater = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
@@ -86,16 +79,10 @@ class Vacancy(django.db.models.Model):
         validators=[django.core.validators.MinValueValidator(0)],
     )
 
-    role = django.db.models.CharField(
-        max_length=50,
-        choices=Roles.choices,
-        verbose_name="Роль",
-        default=Roles.OTHER,
-    )
-
     class Meta:
         verbose_name = "вакансия"
         verbose_name_plural = "вакансии"
+        ordering = ["-created_at"]
 
     def total_views(self):
         return self.views.count()
@@ -138,22 +125,22 @@ class Response(django.db.models.Model):
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
         related_name="responses",
-        verbose_name="Пользователь",
+        verbose_name="пользователь",
     )
     vacancy = django.db.models.ForeignKey(
         "Vacancy",
         on_delete=django.db.models.CASCADE,
         related_name="responses",
-        verbose_name="Вакансия",
+        verbose_name="вакансия",
     )
     created_at = django.db.models.DateTimeField(
         auto_now_add=True,
-        verbose_name="Дата отклика",
+        verbose_name="дата отклика",
     )
 
     class Meta:
-        verbose_name = "Отклик"
-        verbose_name_plural = "Отклики"
+        verbose_name = "отклик"
+        verbose_name_plural = "отклики"
         unique_together = (
             "user",
             "vacancy",
