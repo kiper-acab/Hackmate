@@ -5,6 +5,7 @@ import django.contrib.auth.mixins
 import django.http
 import django.shortcuts
 import django.urls
+import django.utils.translation
 import django.views
 import django.views.generic
 
@@ -65,7 +66,7 @@ class VacancyDetailView(
         if not request.user.is_authenticated:
             return django.http.JsonResponse(
                 {
-                    "error": django.utils.translation.gettext(
+                    "error": django.utils.translation.gettext_lazy(
                         "Вы должны быть авторизованы",
                     ),
                 },
@@ -93,7 +94,7 @@ class VacancyDetailView(
         ).exists():
             return django.http.JsonResponse(
                 {
-                    "message": django.utils.translation.gettext(
+                    "message": django.utils.translation.gettext_lazy(
                         "Вы уже откликнулись на эту вакансию",
                     ),
                 },
@@ -106,7 +107,7 @@ class VacancyDetailView(
 
         return django.http.JsonResponse(
             {
-                "message": django.utils.translation.gettext(
+                "message": django.utils.translation.gettext_lazy(
                     "Ваш отклик отправлен!",
                 ),
             },
@@ -183,7 +184,7 @@ class DeleteCommentView(django.views.generic.DeleteView):
             )
 
         raise django.http.Http404(
-            django.utils.translation.gettext("not found"),
+            django.utils.translation.gettext_lazy("not found"),
         )
 
 
@@ -207,7 +208,7 @@ class DeleteVacancy(django.views.generic.DeleteView):
             return django.shortcuts.redirect(self.get_success_url())
 
         raise django.http.Http404(
-            django.utils.translation.gettext("not found"),
+            django.utils.translation.gettext_lazy("not found"),
         )
 
 
@@ -223,7 +224,7 @@ class ChangeVacancyView(
     def get(self, request, *args, **kwargs):
         if request.user != self.get_object().creater:
             raise django.http.Http404(
-                django.utils.translation.gettext("not found"),
+                django.utils.translation.gettext_lazy("not found"),
             )
 
         return super().get(request, *args, **kwargs)

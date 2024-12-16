@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 18:54+0400\n"
+"POT-Creation-Date: 2024-12-17 00:37+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,11 +27,11 @@ msgstr "About the project"
 msgid "Апи"
 msgstr "API"
 
-#: hackmate/settings.py:124
+#: hackmate/settings.py:125
 msgid "Русский"
 msgstr "Russian"
 
-#: hackmate/settings.py:125
+#: hackmate/settings.py:126
 msgid "English"
 msgstr "English"
 
@@ -568,11 +568,15 @@ msgstr "Reset password"
 msgid "Выйти"
 msgstr "Log out"
 
-#: templates/includes/header.html:67
+#: templates/includes/header.html:53 templates/users/password_change.html:12
+msgid "Сменить"
+msgstr "Change"
+
+#: templates/includes/header.html:77
 msgid "Отметить все как прочитанные"
 msgstr "Mark all as read"
 
-#: templates/includes/header.html:71
+#: templates/includes/header.html:81
 msgid "Нет новых уведомлений"
 msgstr "No new notifications"
 
@@ -584,10 +588,6 @@ msgstr "Send"
 #: templates/users/logout.html:8
 msgid "Вы вышли из аккаунта"
 msgstr "You have logged out"
-
-#: templates/users/password_change.html:12
-msgid "Сменить"
-msgstr "Change"
 
 #: templates/users/password_change_done.html:8
 msgid "Пароль успешно поменяли"
@@ -1125,18 +1125,18 @@ msgstr "Applications"
 msgid "отклики"
 msgstr "My applications"
 
-#: vacancies/views.py:69
+#: vacancies/views.py:70
 msgid "Вы должны быть авторизованы"
 msgstr "You must be authorized"
 
-#: vacancies/views.py:97
+#: vacancies/views.py:98
 msgid "Вы уже откликнулись на эту вакансию"
 msgstr "You have already applied for this vacancy"
 
-#: vacancies/views.py:110
+#: vacancies/views.py:111
 msgid "Ваш отклик отправлен!"
 msgstr "Your application has been sent!"
 
-#: vacancies/views.py:186 vacancies/views.py:210 vacancies/views.py:226
+#: vacancies/views.py:187 vacancies/views.py:211 vacancies/views.py:227
 msgid "not found"
 msgstr "not found"

@@ -19,7 +19,7 @@ class VacancyForm(django.forms.ModelForm):
         deadline = self.cleaned_data.get("deadline")
         if deadline and deadline < django.utils.timezone.now().date():
             raise django.forms.ValidationError(
-                django.utils.translation.gettext(
+                django.utils.translation.gettext_lazy(
                     "Дедлайн не может быть в прошлом.",
                 ),
             )
@@ -30,7 +30,7 @@ class VacancyForm(django.forms.ModelForm):
         experience = self.cleaned_data.get("required_experience")
         if experience is not None and experience < 0:
             raise django.forms.ValidationError(
-                django.utils.translation.gettext(
+                django.utils.translation.gettext_lazy(
                     "Опыт работы не может быть отрицательным.",
                 ),
             )
@@ -49,21 +49,21 @@ class VacancyForm(django.forms.ModelForm):
         widgets = {
             model.title.field.name: django.forms.TextInput(
                 attrs={
-                    "placeholder": django.utils.translation.gettext(
+                    "placeholder": django.utils.translation.gettext_lazy(
                         "Введите название вакансии",
                     ),
                 },
             ),
             model.description.field.name: django.forms.Textarea(
                 attrs={
-                    "placeholder": django.utils.translation.gettext(
+                    "placeholder": django.utils.translation.gettext_lazy(
                         "Введите описание",
                     ),
                 },
             ),
             model.hackaton_title.field.name: django.forms.TextInput(
                 attrs={
-                    "placeholder": django.utils.translation.gettext(
+                    "placeholder": django.utils.translation.gettext_lazy(
                         "Введите название хакатона",
                     ),
                 },
@@ -71,14 +71,14 @@ class VacancyForm(django.forms.ModelForm):
             model.deadline.field.name: django.forms.DateInput(
                 attrs={
                     "type": "date",
-                    "placeholder": django.utils.translation.gettext(
+                    "placeholder": django.utils.translation.gettext_lazy(
                         "Выберите дедлайн",
                     ),
                 },
             ),
             model.required_experience.field.name: django.forms.NumberInput(
                 attrs={
-                    "placeholder": django.utils.translation.gettext(
+                    "placeholder": django.utils.translation.gettext_lazy(
                         "Введите требуемый опыт (в годах)",
                     ),
                 },
@@ -105,7 +105,7 @@ class CommentForm(django.forms.ModelForm):
         widgets = {
             model.comment.field.name: django.forms.Textarea(
                 attrs={
-                    "placeholder": django.utils.translation.gettext(
+                    "placeholder": django.utils.translation.gettext_lazy(
                         "Введите ваш комментарий",
                     ),
                     "rows": 3,

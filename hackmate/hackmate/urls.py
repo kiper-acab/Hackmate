@@ -26,6 +26,7 @@ urlpatterns += [
     django.urls.path("api/", django.urls.include("api.urls")),
     django.urls.path("about/", django.urls.include("about.urls")),
     django.urls.path("admin/", django.contrib.admin.site.urls),
+    django.urls.path("i18n/", django.urls.include("django.conf.urls.i18n")),
     django.urls.re_path(
         "^inbox/notifications/",
         django.urls.include(notifications.urls, namespace="notifications"),

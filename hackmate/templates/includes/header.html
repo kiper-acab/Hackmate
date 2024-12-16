@@ -42,6 +42,16 @@
       </ul>
     </div>
   </article>
+  <form action="{% url 'set_language' %}" method="post" class="d-flex">
+		{% csrf_token %}
+		<input name="next" type="hidden" value="{{ request.get_full_path }}">
+		<select name="language" class="form-select">
+			{% get_current_language as LANGUAGE_CODE %}
+			<option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>Русский</option>
+			<option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+		</select>
+		<button type="submit" class="btn border-white ms-2 btn-dark">{% trans "Сменить" %}</button>
+	</form>
   <div class="dropdown">
     {% with request.user.notifications.unread as unread_notifications %}
       <a href="#" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false" class="bell-link">
