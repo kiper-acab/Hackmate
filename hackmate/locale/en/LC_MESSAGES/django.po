@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-15 15:11+0400\n"
+"POT-Creation-Date: 2024-12-16 18:54+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: about/apps.py:10 templates/about/about.html:12
+#: templates/includes/footer.html:16
+msgid "О проекте"
+msgstr "About the project"
+
+#: api/apps.py:10
+msgid "Апи"
+msgstr "API"
+
 #: hackmate/settings.py:124
 msgid "Русский"
 msgstr "Russian"
@@ -24,6 +34,18 @@ msgstr "Russian"
 #: hackmate/settings.py:125
 msgid "English"
 msgstr "English"
+
+#: homepage/apps.py:10
+#, fuzzy
+#| msgid "Главная"
+msgid "Главная страница"
+msgstr "Home"
+
+#: notify/apps.py:10
+#, fuzzy
+#| msgid "День рождения"
+msgid "Уведомления"
+msgstr "Birthday"
 
 #: notify/signals.py:20
 msgid "оставил отклик на вашу вакансию"
@@ -33,10 +55,6 @@ msgstr "left a response to your vacancy"
 #, python-brace-format
 msgid "Пользователь {username} откликнулся на вакансию {vacancy_title}."
 msgstr "User {username} responded to the vacancy {vacancy_title}."
-
-#: templates/about/about.html:12 templates/includes/footer.html:16
-msgid "О проекте"
-msgstr "About the project"
 
 #: templates/about/about.html:14
 msgid ""
@@ -50,8 +68,7 @@ msgstr ""
 msgid ""
 "Мы помогаем разработчикам, дизайнерам, аналитикам и другим профессионалам "
 "находить"
-msgstr ""
-"We help developers, designers, analysts, and other professionals find"
+msgstr "We help developers, designers, analysts, and other professionals find"
 
 #: templates/about/about.html:16
 msgid "единомышленников для совместной работы и реализации крутых идей."
@@ -163,7 +180,8 @@ msgstr "Profile information (e.g., skills, interests, projects)."
 #: templates/about/privacy.html:31
 msgid ""
 "История взаимодействий с Сайтом (оценки, сообщения, отклики на проекты)."
-msgstr "History of interactions with the Site (ratings, messages, project responses)."
+msgstr ""
+"History of interactions with the Site (ratings, messages, project responses)."
 
 #: templates/about/privacy.html:32
 msgid "Лог-файлы, IP-адреса, данные о браузере и операционной системе."
@@ -226,8 +244,7 @@ msgstr "Data transfer with your consent."
 msgid ""
 "Необходимости передачи данных для выполнения обязательств перед "
 "пользователем (например,"
-msgstr ""
-"Necessary data transfer to fulfill obligations to the user (e.g.,"
+msgstr "Necessary data transfer to fulfill obligations to the user (e.g.,"
 
 #: templates/about/privacy.html:52
 msgid "интеграция с внешними сервисами для участия в хакатонах)."
@@ -284,8 +301,7 @@ msgstr "You have the right to:"
 msgid ""
 "Запросить информацию о своих персональных данных, которые обрабатываются на "
 "Сайте."
-msgstr ""
-"Request information about your personal data processed on the Site."
+msgstr "Request information about your personal data processed on the Site."
 
 #: templates/about/privacy.html:69
 msgid "Требовать изменения, удаления или ограничения обработки данных."
@@ -305,8 +321,7 @@ msgstr ""
 msgid ""
 "Для реализации этих прав свяжитесь с нами по указанным ниже контактным "
 "данным."
-msgstr ""
-"To exercise these rights, contact us using the details provided below."
+msgstr "To exercise these rights, contact us using the details provided below."
 
 #: templates/about/privacy.html:77
 msgid "Безопасность"
@@ -340,8 +355,7 @@ msgstr "Contact Details"
 msgid ""
 "Если у вас есть вопросы относительно Политики конфиденциальности, обратитесь "
 "к нам:"
-msgstr ""
-"If you have questions about the Privacy Policy, contact us at:"
+msgstr "If you have questions about the Privacy Policy, contact us at:"
 
 #: templates/about/privacy.html:87
 msgid "Электронная почта: "
@@ -359,8 +373,7 @@ msgstr "Policy Changes"
 msgid ""
 "HackMate оставляет за собой право обновлять настоящую Политику "
 "конфиденциальности. Изменения"
-msgstr ""
-"HackMate reserves the right to update this Privacy Policy. Changes"
+msgstr "HackMate reserves the right to update this Privacy Policy. Changes"
 
 #: templates/about/privacy.html:95
 msgid ""
@@ -392,8 +405,8 @@ msgid ""
 "маркетологи, аналитики и другие энтузиасты, готовые создавать инновационные "
 "решения вместе."
 msgstr ""
-"HackMate is a platform where developers, designers, marketers, analysts, "
-"and other enthusiasts come together to create innovative solutions."
+"HackMate is a platform where developers, designers, marketers, analysts, and "
+"other enthusiasts come together to create innovative solutions."
 
 #: templates/homepage/homepage.html:17
 msgid "Что такое HackMate?"
@@ -436,7 +449,8 @@ msgid ""
 "Используй фильтры для поиска участников с нужными компетенциями или найди "
 "уже сформированные команды."
 msgstr ""
-"Use filters to find participants with the required skills or discover pre-formed teams."
+"Use filters to find participants with the required skills or discover pre-"
+"formed teams."
 
 #: templates/homepage/homepage.html:25
 msgid "Готовься к победе."
@@ -467,7 +481,8 @@ msgid ""
 "Получите опыт работы в команде, покажите свои навыки и привлеките внимание "
 "работодателей."
 msgstr ""
-"Gain teamwork experience, showcase your skills, and attract the attention of employers."
+"Gain teamwork experience, showcase your skills, and attract the attention of "
+"employers."
 
 #: templates/homepage/homepage.html:34
 msgid "Шанс на успех."
@@ -478,7 +493,8 @@ msgid ""
 "Вдохновляйтесь, учитесь у других и создавайте проекты, которые смогут "
 "изменить мир."
 msgstr ""
-"Get inspired, learn from others, and create projects that can change the world."
+"Get inspired, learn from others, and create projects that can change the "
+"world."
 
 #: templates/homepage/homepage.html:39
 msgid "Готов начать?"
@@ -488,8 +504,7 @@ msgstr "Ready to start?"
 msgid ""
 "Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для "
 "следующего хакатона."
-msgstr ""
-"Don't wait! Sign up now and find your team for the next hackathon."
+msgstr "Don't wait! Sign up now and find your team for the next hackathon."
 
 #: templates/homepage/homepage.html:40
 msgid "Создать профиль бесплатно"
@@ -705,4 +720,423 @@ msgid "Комментарии"
 msgstr "Comments"
 
 #: templates/vacancies/detail.html:98
-msgid "Комментар
+msgid "Комментариев пока нет."
+msgstr "No comments yet."
+
+#: templates/vacancies/user_responses.html:22
+msgid "Посмотреть вакансию"
+msgstr "View vacancy"
+
+#: templates/vacancies/user_responses.html:26
+msgid "У вас нету откликов."
+msgstr "You have no applications."
+
+#: templates/vacancies/user_vacancies.html:12
+msgid "Ваши вакансии"
+msgstr "Your vacancies"
+
+#: templates/vacancies/user_vacancies.html:20
+msgid "Откликов"
+msgstr "Applications"
+
+#: templates/vacancies/user_vacancies.html:22
+msgid "Откликнувшиеся пользователи:"
+msgstr "Applicants:"
+
+#: templates/vacancies/user_vacancies.html:27
+msgid "Пока никто не откликнулся"
+msgstr "No one has applied yet."
+
+#: templates/vacancies/user_vacancies.html:41
+msgid "У вас нет вакансий"
+msgstr "You have no vacancies."
+
+#: templates/vacancies/user_vacancies.html:42
+msgid "Если хотите создать анкету, то"
+msgstr "If you want to create a profile,"
+
+#: templates/vacancies/user_vacancies.html:42
+msgid "перейдите сюда"
+msgstr "click here"
+
+#: templates/vacancies/vacancies.html:12
+msgid "Список вакансий"
+msgstr "Vacancy list"
+
+#: templates/vacancies/vacancies.html:14
+#: templates/vacancies/vacancy_form.html:39
+msgid "Создать вакансию"
+msgstr "Create vacancy"
+
+#: templates/vacancies/vacancies.html:33
+msgid "Детальнее"
+msgstr "Details"
+
+#: templates/vacancies/vacancies.html:38
+msgid "Ещё ни кто не разместил объявление о поиске."
+msgstr "No one has posted a vacancy yet."
+
+#: templates/vacancies/vacancies.html:39
+msgid "Стань первым!"
+msgstr "Be the first!"
+
+#: templates/vacancies/vacancy_form.html:11
+msgid "Создание вакансии"
+msgstr "Creating a vacancy"
+
+#: users/apps.py:10
+#, fuzzy
+#| msgid "Права пользователя"
+msgid "Пользователи"
+msgstr "User Rights"
+
+#: users/backends.py:38
+msgid "Неправильный логин/пароль. Убедитесь в корректности данных."
+msgstr "Invalid username/password. Please check your details."
+
+#: users/backends.py:59
+msgid ""
+"Вы превысили допустимое число попыток входа. Пожалуйста, активируйте свой "
+"аккаунт. Вам должно прийти письмо на почту с активацией."
+msgstr ""
+"You have exceeded the allowed number of login attempts. Please activate your "
+"account. An activation email has been sent to your mailbox."
+
+#: users/backends.py:71
+#, python-brace-format
+msgid ""
+"Замечена подозрительная активность аккаунта. Для активации аккаунта нажмите "
+"на ссылку ниже: http://{domain}{activation_path}"
+msgstr ""
+"Suspicious account activity detected. To activate your account, click the "
+"link below: http://{domain}{activation_path}"
+
+#: users/backends.py:80
+msgid "Активация аккаунта"
+msgstr "Account activation"
+
+#: users/forms.py:51
+msgid "Введите логин"
+msgstr "Enter username"
+
+#: users/forms.py:67
+msgid "Выберите себе картинку"
+msgstr "Choose an image for yourself"
+
+#: users/forms.py:70
+msgid "Описание"
+msgstr "Description"
+
+#: users/forms.py:105
+msgid "Тип сайта"
+msgstr "Site type"
+
+#: users/forms.py:108
+msgid "Ссылка"
+msgstr "Link"
+
+#: users/forms.py:123
+msgid "Пароль"
+msgstr "Password"
+
+#: users/forms.py:128
+msgid "Введите электронную почту/логин"
+msgstr "Enter email/username"
+
+#: users/models.py:88
+#, fuzzy
+#| msgid "День рождения"
+msgid "день рождения"
+msgstr "Birthday"
+
+#: users/models.py:90
+#, fuzzy
+#| msgid "Введите ваш комментарий"
+msgid "Введите дату рождения"
+msgstr "Enter your comment"
+
+#: users/models.py:108
+#, fuzzy
+#| msgid "О себе"
+msgid "о себе"
+msgstr "About me"
+
+#: users/models.py:109
+#, fuzzy
+#| msgid "Введите описание"
+msgid "Расскажите о себе"
+msgstr "Enter description"
+
+#: users/models.py:116
+msgid "дополнительная информация"
+msgstr "additional information"
+
+#: users/models.py:119
+#, fuzzy
+#| msgid "Контактные данные"
+msgid "дополнительные данные"
+msgstr "Contact Details"
+
+#: users/models.py:137
+#, fuzzy
+#| msgid "Профиль"
+msgid "профиль"
+msgstr "Profile"
+
+#: users/models.py:142
+#, fuzzy
+#| msgid "Тип сайта"
+msgid "тип сайта"
+msgstr "Site type"
+
+#: users/models.py:145
+msgid "URL"
+msgstr "URL"
+
+#: users/models.py:147
+msgid "Полная ссылка, например, https://example.com"
+msgstr "Full reference, e.g., https://example.com"
+
+#: users/models.py:165
+#, fuzzy
+#| msgid "Ссылка"
+msgid "ссылка"
+msgstr "Link"
+
+#: users/models.py:166
+#, fuzzy
+#| msgid "Ссылка"
+msgid "ссылки"
+msgstr "Link"
+
+#: users/validators.py:16 users/validators.py:23
+msgid "Укажите корректную дату рождения."
+msgstr "Enter a valid date of birth."
+
+#: users/views.py:39
+msgid "Вы не можете удалить эту ссылку."
+msgstr "You cannot delete this link."
+
+#: users/views.py:112
+msgid "Поля Email и Username обязательны для заполнения."
+msgstr "The Email and Username fields are required."
+
+#: users/views.py:137
+msgid "Профиль успешно изменен!"
+msgstr "Profile successfully updated!"
+
+#: users/views.py:173
+msgid "Чтобы подтвердить аккаунт перейдите по ссылке "
+msgstr "To confirm your account, follow the link "
+
+#: users/views.py:179
+msgid "Activate your account"
+msgstr "Activate your account"
+
+#: users/views.py:191
+msgid "Пользователь успешно создан"
+msgstr "User successfully created"
+
+#: users/views.py:197
+msgid "Активируйте профиль в письме, которое придет вам на почту"
+msgstr "Activate your profile through the email sent to your mailbox."
+
+#: users/views.py:215
+msgid "Пользователь уже активирован"
+msgstr "User already activated"
+
+#: users/views.py:226
+msgid "Пользователь успешно активирован"
+msgstr "User successfully activated"
+
+#: users/views.py:233
+msgid "Активация профиля была доступна в течение "
+msgstr "Profile activation was available for "
+
+#: vacancies/apps.py:10
+#, fuzzy
+#| msgid "Ваши вакансии"
+msgid "Вакансии"
+msgstr "Your vacancies"
+
+#: vacancies/forms.py:23
+msgid "Дедлайн не может быть в прошлом."
+msgstr "The deadline cannot be in the past."
+
+#: vacancies/forms.py:34
+msgid "Опыт работы не может быть отрицательным."
+msgstr "Experience cannot be negative."
+
+#: vacancies/forms.py:53
+msgid "Введите название вакансии"
+msgstr "Enter vacancy title"
+
+#: vacancies/forms.py:60
+msgid "Введите описание"
+msgstr "Enter description"
+
+#: vacancies/forms.py:67
+msgid "Введите название хакатона"
+msgstr "Enter hackathon name"
+
+#: vacancies/forms.py:75
+msgid "Выберите дедлайн"
+msgstr "Choose deadline"
+
+#: vacancies/forms.py:82
+msgid "Введите требуемый опыт (в годах)"
+msgstr "Enter required experience (in years)"
+
+#: vacancies/forms.py:109
+msgid "Введите ваш комментарий"
+msgstr "Enter your comment"
+
+#: vacancies/models.py:16
+#, fuzzy
+#| msgid "Адрес: "
+msgid "IP адрес"
+msgstr "Address: "
+
+#: vacancies/models.py:18
+#, fuzzy
+#| msgid "Адрес: "
+msgid "IP адреса"
+msgstr "Address: "
+
+#: vacancies/models.py:31
+#, fuzzy
+#| msgid "Создать вакансию"
+msgid "создатель вакансии"
+msgstr "Create vacancy"
+
+#: vacancies/models.py:38
+#, fuzzy
+#| msgid "Создание вакансии"
+msgid "название вакансии"
+msgstr "Creating a vacancy"
+
+#: vacancies/models.py:44
+#, fuzzy
+#| msgid "Создание вакансии"
+msgid "описание вакансии"
+msgstr "Creating a vacancy"
+
+#: vacancies/models.py:50
+#, fuzzy
+#| msgid "Создано:"
+msgid "создано"
+msgstr "Created:"
+
+#: vacancies/models.py:55
+msgid "обновлено"
+msgstr "updated"
+
+#: vacancies/models.py:61
+msgid "cтатус"
+msgstr "status"
+
+#: vacancies/models.py:73
+#, fuzzy
+#| msgid "Введите название хакатона"
+msgid "название хакатона"
+msgstr "Enter hackathon name"
+
+#: vacancies/models.py:78
+msgid "Название хакатона, к которому относится вакансия"
+msgstr "Name of the hackathon to which the vacancy relates"
+
+#: vacancies/models.py:83
+#, fuzzy
+#| msgid "Дедлайн:"
+msgid "дедлайн"
+msgstr "Deadline:"
+
+#: vacancies/models.py:87
+msgid "Крайний срок подачи заявок"
+msgstr "Крайний срок подачи заявок"
+
+#: vacancies/models.py:93
+#, fuzzy
+#| msgid "Введите требуемый опыт (в годах)"
+msgid "требуемый опыт (в годах)"
+msgstr "Enter required experience (in years)"
+
+#: vacancies/models.py:98
+msgid "Укажите количество лет опыта, необходимого для кандидата"
+msgstr "Indicate the number of years of experience required for the candidate"
+
+#: vacancies/models.py:104 vacancies/models.py:119 vacancies/models.py:159
+#, fuzzy
+#| msgid "Мои вакансии"
+msgid "вакансия"
+msgstr "My vacancies"
+
+#: vacancies/models.py:105
+#, fuzzy
+#| msgid "Мои вакансии"
+msgid "вакансии"
+msgstr "My vacancies"
+
+#: vacancies/models.py:124
+#, fuzzy
+#| msgid "Комментарии"
+msgid "комментарий"
+msgstr "Comments"
+
+#: vacancies/models.py:130 vacancies/models.py:153
+#, fuzzy
+#| msgid "Права пользователя"
+msgid "пользователь"
+msgstr "User Rights"
+
+#: vacancies/models.py:135
+#, fuzzy
+#| msgid "Создано:"
+msgid "cоздано"
+msgstr "Created:"
+
+#: vacancies/models.py:140
+#, fuzzy
+#| msgid "Комментариев пока нет."
+msgid "комментарий к вакансии"
+msgstr "No comments yet."
+
+#: vacancies/models.py:143
+#, fuzzy
+#| msgid "Комментариев пока нет."
+msgid "комментарии к вакансиям"
+msgstr "No comments yet."
+
+#: vacancies/models.py:163
+#, fuzzy
+#| msgid "Мои отклики"
+msgid "дата отклика"
+msgstr "My applications"
+
+#: vacancies/models.py:167
+#, fuzzy
+#| msgid "Откликов"
+msgid "отклик"
+msgstr "Applications"
+
+#: vacancies/models.py:168
+#, fuzzy
+#| msgid "Мои отклики"
+msgid "отклики"
+msgstr "My applications"
+
+#: vacancies/views.py:69
+msgid "Вы должны быть авторизованы"
+msgstr "You must be authorized"
+
+#: vacancies/views.py:97
+msgid "Вы уже откликнулись на эту вакансию"
+msgstr "You have already applied for this vacancy"
+
+#: vacancies/views.py:110
+msgid "Ваш отклик отправлен!"
+msgstr "Your application has been sent!"
+
+#: vacancies/views.py:186 vacancies/views.py:210 vacancies/views.py:226
+msgid "not found"
+msgstr "not found"
