@@ -1,5 +1,5 @@
 __all__ = []
-import django.core.exceptions
+
 import django.conf
 import django.contrib.auth
 import django.contrib.auth.decorators
@@ -7,17 +7,19 @@ import django.contrib.auth.mixins
 import django.contrib.auth.models
 import django.contrib.auth.views
 import django.contrib.messages
+import django.core.exceptions
 import django.core.mail
 import django.forms
 import django.shortcuts
-import star_ratings.models
 import django.urls
 import django.utils.timezone
 import django.views
 import django.views.generic
+import star_ratings.models
 
 import users.forms
 import users.models
+import vacancies.models
 
 User = django.contrib.auth.get_user_model()
 
@@ -50,12 +52,24 @@ class ProfileView(
             users.models.User.objects.select_related("profile"),
             username=username,
         )
+        finished_vacancies = (
+            vacancies.models.Vacancy.objects.filter(
+                creater_id=user.id,
+                status=vacancies.models.Vacancy.VacancyStatuses.FINISHED,
+            )
+            .select_related("creater")
+            .prefetch_related("responses")
+        )
 
         is_own_profile = user == request.user
         try:
-            rating_user = star_ratings.models.Rating.objects.get(object_id=user.id)
+            rating_user = star_ratings.models.Rating.objects.get(
+                object_id=user.id,
+            )
         except django.core.exceptions.ObjectDoesNotExist:
-            rating_user = star_ratings.models.Rating.objects.create(content_object=user)
+            rating_user = star_ratings.models.Rating.objects.create(
+                content_object=user,
+            )
 
         return django.shortcuts.render(
             request,
@@ -64,6 +78,7 @@ class ProfileView(
                 "user": user,
                 "is_own_profile": is_own_profile,
                 "rating_count": rating_user,
+                "finished_vacancies": finished_vacancies,
             },
         )
 
