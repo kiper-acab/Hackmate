@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     "star_ratings",
     "sorl.thumbnail",
+    "tinymce",
     "notifications",
 ]
 

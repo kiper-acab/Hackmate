@@ -5,6 +5,7 @@ import django.utils.timezone
 import django.utils.translation
 
 import vacancies.models
+import tinymce.widgets
 
 
 class VacancyForm(django.forms.ModelForm):
@@ -40,35 +41,34 @@ class VacancyForm(django.forms.ModelForm):
     class Meta:
         model = vacancies.models.Vacancy
         fields = [
-            model.title.field.name,
-            model.description.field.name,
-            model.hackaton_title.field.name,
-            model.deadline.field.name,
-            model.required_experience.field.name,
+            "title",
+            "description",
+            "hackaton_title",
+            "deadline",
+            "required_experience",
         ]
         widgets = {
-            model.title.field.name: django.forms.TextInput(
+            "title": django.forms.TextInput(
                 attrs={
                     "placeholder": django.utils.translation.gettext_lazy(
                         "Введите название вакансии",
                     ),
                 },
             ),
-            model.description.field.name: django.forms.Textarea(
+            "description": tinymce.widgets.TinyMCE(
                 attrs={
-                    "placeholder": django.utils.translation.gettext_lazy(
-                        "Введите описание",
-                    ),
+                    "cols": 80,
+                    "rows": 20,
                 },
             ),
-            model.hackaton_title.field.name: django.forms.TextInput(
+            "hackaton_title": django.forms.TextInput(
                 attrs={
                     "placeholder": django.utils.translation.gettext_lazy(
                         "Введите название хакатона",
                     ),
                 },
             ),
-            model.deadline.field.name: django.forms.DateInput(
+            "deadline": django.forms.DateInput(
                 attrs={
                     "type": "date",
                     "placeholder": django.utils.translation.gettext_lazy(
@@ -76,7 +76,7 @@ class VacancyForm(django.forms.ModelForm):
                     ),
                 },
             ),
-            model.required_experience.field.name: django.forms.NumberInput(
+            "required_experience": django.forms.NumberInput(
                 attrs={
                     "placeholder": django.utils.translation.gettext_lazy(
                         "Введите требуемый опыт (в годах)",

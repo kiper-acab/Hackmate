@@ -4,6 +4,7 @@ import django.conf
 import django.core.validators
 import django.db.models
 import django.utils.translation
+import tinymce.models
 
 
 class Ip(django.db.models.Model):
@@ -39,7 +40,7 @@ class Vacancy(django.db.models.Model):
         ),
     )
 
-    description = django.db.models.TextField(
+    description = tinymce.models.HTMLField(
         verbose_name=django.utils.translation.gettext_lazy(
             "описание вакансии",
         ),
