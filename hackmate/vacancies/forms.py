@@ -18,7 +18,11 @@ class VacancyForm(django.forms.ModelForm):
 
     def clean_deadline(self):
         deadline = self.cleaned_data.get("deadline")
-        if deadline and deadline < django.utils.timezone.now().date():
+        current_date = django.utils.timezone.localdate(
+            django.utils.timezone.now(),
+        )
+
+        if deadline and deadline < current_date:
             raise django.forms.ValidationError(
                 django.utils.translation.gettext_lazy(
                     "Дедлайн не может быть в прошлом.",
@@ -41,34 +45,35 @@ class VacancyForm(django.forms.ModelForm):
     class Meta:
         model = vacancies.models.Vacancy
         fields = [
-            "title",
-            "description",
-            "hackaton_title",
-            "deadline",
-            "required_experience",
+            model.title.field.name,
+            model.description.field.name,
+            model.hackaton_title.field.name,
+            model.deadline.field.name,
+            model.required_experience.field.name,
         ]
         widgets = {
-            "title": django.forms.TextInput(
+            model.title.field.name: django.forms.TextInput(
                 attrs={
                     "placeholder": django.utils.translation.gettext_lazy(
                         "Введите название вакансии",
                     ),
                 },
             ),
-            "description": tinymce.widgets.TinyMCE(
+            model.description.field.name: tinymce.widgets.TinyMCE(
                 attrs={
-                    "cols": 80,
-                    "rows": 20,
+                    "placeholder": django.utils.translation.gettext_lazy(
+                        "Введите описание",
+                    ),
                 },
             ),
-            "hackaton_title": django.forms.TextInput(
+            model.hackaton_title.field.name: django.forms.TextInput(
                 attrs={
                     "placeholder": django.utils.translation.gettext_lazy(
                         "Введите название хакатона",
                     ),
                 },
             ),
-            "deadline": django.forms.DateInput(
+            model.deadline.field.name: django.forms.DateInput(
                 attrs={
                     "type": "date",
                     "placeholder": django.utils.translation.gettext_lazy(
@@ -76,7 +81,7 @@ class VacancyForm(django.forms.ModelForm):
                     ),
                 },
             ),
-            "required_experience": django.forms.NumberInput(
+            model.required_experience.field.name: django.forms.NumberInput(
                 attrs={
                     "placeholder": django.utils.translation.gettext_lazy(
                         "Введите требуемый опыт (в годах)",

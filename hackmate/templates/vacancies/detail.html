@@ -19,7 +19,7 @@
       </div>
     {% endif %}
     <h1 class="vacancy-title">{{ vacancy.title }}</h1>
-    <p class="vacancy-description">{{ vacancy.description }}</p>
+    <p class="vacancy-description">{{ vacancy.description|safe }}</p>
 
     <div class="vacancy-info">
       <p><strong>{% trans 'Создатель:' %}</strong> {{ vacancy.creater.username }}</p>

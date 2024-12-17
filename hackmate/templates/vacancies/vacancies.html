@@ -19,7 +19,7 @@
 				<div class="card w-75 mb-3">
 					<div class="card-body">
 						<h5 class="card-title">{{ vacancy.title }}</h5>
-						<p class="card-text">{{ vacancy.description|truncatewords:30 }}</p>
+						<p class="card-text">{{ vacancy.description|truncatewords:30|safe }}</p>
 						<a href="{% url 'users:profile' vacancy.creater.username %}" class="user-info">
 							{% if vacancy.creater.profile.image %}
 								<img src="{{ vacancy.creater.profile.image.url }}" alt="" class="avatar">

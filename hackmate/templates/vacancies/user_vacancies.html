@@ -16,7 +16,7 @@
         <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="vacancy-title">
           {{ vacancy.title }}
         </a>
-        <p class="vacancy-description">{{ vacancy.description }}</p>
+        <p class="vacancy-description">{{ vacancy.description|safe }}</p>
         <p class="vacancy-stats">{% trans 'Откликов' %}: {{ vacancy.responses.count }}</p>
         <div class="vacancy-responses">
           <h3>{% trans 'Откликнувшиеся пользователи:' %}</h3>
