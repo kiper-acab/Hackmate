@@ -10,6 +10,13 @@
 {% block content %}
 <div class="container">
   <h1 class="page-title">Ваши вакансии</h1>
+  {% if messages %}
+    <div class="messages" role="alert">
+      {% for message in messages %}
+        <p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
   <div class="vacancy-list">
     {% for vacancy in vacancies %}
       <div class="vacancy-item">
@@ -26,20 +33,13 @@
                 <a href="{% url 'users:profile' response.user.username %}" class="user-profile-link">{{ response.user.username }}</a>
               </article>
               <article>
-                <a href="" class="btn btn-success">Принять</a>
-                <a href="" class="btn btn-danger">Оклонить</a>
+                <a href="{% url 'vacancies:invite_user' response.id %}" class=""><i class="fa-solid fa-check accept-user"></i></a>
+                <a href="{% url 'vacancies:reject_user' response.id %}" class=""><i class="fa-solid fa-ban decline-user"></i></a>
               </article>
             {% empty %}
               <a>Пока никто не откликнулся</a>
             {% endfor %}
           </article>
-          <div class="pagination">
-            {% for page_num in paginated_responses.vacancy.id.paginator.page_range %}
-              <a href="?page_{{ vacancy.id }}={{ page_num }}" class="{% if paginated_responses.vacancy.id.number == page_num %}active{% endif %}">
-                {{ page_num }}
-              </a>
-            {% endfor %}
-          </div>
         </div>
       </div>
     {% empty %}

@@ -82,3 +82,29 @@
 .responses-users>article>a{
     margin: 0 20px;
 }
+
+
+.accept-user{
+    color: rgb(0, 129, 0);
+}
+
+.accept-user:hover{
+    transition: .3s;
+    color: rgba(16, 214, 16, .5);
+}
+
+.decline-user{
+    color: red;
+}
+
+.decline-user:hover{
+    transition:.3s;
+    color: rgba(255, 0, 0, .5);
+}
+
+.decline-user,
+.accept-user{
+    font-size: 20px;
+    cursor: pointer;
+
+}

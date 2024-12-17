@@ -103,6 +103,12 @@ class Vacancy(django.db.models.Model):
         ],
     )
 
+    team_composition = django.db.models.ManyToManyField(
+        django.conf.settings.AUTH_USER_MODEL,
+        related_name="team_composition",
+        verbose_name="состав команды",
+    )
+
     class Meta:
         verbose_name = "вакансия"
         verbose_name_plural = "вакансии"
@@ -155,30 +161,39 @@ class CommentVacancy(django.db.models.Model):
 
 
 class Response(django.db.models.Model):
+    class ResponseStatuses(django.db.models.TextChoices):
+        ACCEPTED = "accepted", "accepted"
+        REJECTED = "rejected", "rejected"
+        NOT_ANSWERED = "not_answered", "not_answered"
+
     user = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
         related_name="responses",
         verbose_name="пользователь",
+        unique=False,
     )
     vacancy = django.db.models.ForeignKey(
         "Vacancy",
         on_delete=django.db.models.CASCADE,
         related_name="responses",
         verbose_name="вакансия",
+        unique=False,
     )
     created_at = django.db.models.DateTimeField(
         auto_now_add=True,
         verbose_name="дата отклика",
     )
 
+    status = django.db.models.CharField(
+        choices=ResponseStatuses.choices,
+        max_length=255,
+        default=ResponseStatuses.NOT_ANSWERED,
+    )
+
     class Meta:
         verbose_name = "отклик"
         verbose_name_plural = "отклики"
-        unique_together = (
-            "user",
-            "vacancy",
-        )
 
     def __str__(self):
         return f"{self.user} -> {self.vacancy}"

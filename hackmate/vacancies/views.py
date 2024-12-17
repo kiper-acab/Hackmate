@@ -2,6 +2,9 @@ __all__ = ()
 
 import django.contrib
 import django.contrib.auth.mixins
+import django.contrib.messages
+import django.db
+import django.db.models
 import django.http
 import django.shortcuts
 import django.urls
@@ -10,6 +13,9 @@ import django.views.generic
 
 import vacancies.forms
 import vacancies.models
+
+
+user_model = django.contrib.auth.get_user_model()
 
 
 def get_client_ip(request):
@@ -43,8 +49,14 @@ class VacancyDetailView(
     def get_object(self):
         queryset = (
             self.get_queryset()
-            .select_related("creater")
-            .prefetch_related("comments", "comments__user")
+            .select_related("creater", "creater__profile")
+            .prefetch_related(
+                "comments",
+                django.db.models.Prefetch(
+                    "comments__user",
+                    queryset=user_model.objects.select_related("profile"),
+                ),
+            )
         )
         return django.shortcuts.get_object_or_404(
             queryset,
@@ -86,6 +98,10 @@ class VacancyDetailView(
         if vacancies.models.Response.objects.filter(
             vacancy=vacancy,
             user=request.user,
+            status__in=[
+                "not_answered",
+                "accepted",
+            ],
         ).exists():
             return django.http.JsonResponse(
                 {"message": "Вы уже откликнулись на эту вакансию"},
@@ -144,7 +160,16 @@ class UserVacanciesView(
         return vacancies.models.Vacancy.objects.filter(
             creater=self.request.user,
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
-        ).prefetch_related("responses")
+        ).prefetch_related(
+            django.db.models.Prefetch(
+                "responses",
+                queryset=vacancies.models.Response.objects.filter(
+                    status=(
+                        vacancies.models.Response.ResponseStatuses.NOT_ANSWERED
+                    ),
+                ),
+            ),
+        )
 
 
 class CreateCommentView(
@@ -240,3 +265,94 @@ class ChangeVacancyView(
             "vacancies:vacancy_detail",
             args=[self.get_object().pk],
         )
+
+
+class AcceptInviteUserVacancy(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.edit.BaseUpdateView,
+):
+    model = vacancies.models.Response
+    success_url = django.urls.reverse_lazy("vacancies:user_vacancies")
+    pk_url_kwargs = "pk"
+
+    def get(self, request, *args, **kwargs):
+        response = self.get_object()
+        if (
+            request.user == response.vacancy.creater
+            and request.user != response.user
+        ):
+            response.vacancy.team_composition.add(response.user)
+            response.status = (
+                vacancies.models.Response.ResponseStatuses.ACCEPTED
+            )
+            response.save()
+
+            django.contrib.messages.success(
+                request,
+                "Пользователь успешно приглашён в команду",
+            )
+
+            return django.shortcuts.redirect(self.success_url)
+
+        return django.http.HttpResponseNotFound("not found")
+
+
+class RejectInviteUserVacancy(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.edit.BaseDeleteView,
+):
+    model = vacancies.models.Response
+    success_url = django.urls.reverse_lazy("vacancies:user_vacancies")
+    pk_url_kwargs = "pk"
+
+    def get(self, request, *args, **kwargs):
+        response = self.get_object()
+        if (
+            request.user == response.vacancy.creater
+            and request.user != response.user
+        ):
+            response.status = (
+                vacancies.models.Response.ResponseStatuses.REJECTED
+            )
+            response.save()
+
+            django.contrib.messages.success(
+                request,
+                "Пользователь отклонён",
+            )
+
+            return django.shortcuts.redirect(self.success_url)
+
+        return django.http.HttpResponseNotFound("not found")
+
+
+class KickUserFromVacancy(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.edit.BaseDeleteView,
+):
+    model = vacancies.models.Vacancy
+    pk_url_kwarg = "pk"
+
+    def get(self, request, *args, **kwargs):
+        vacancy = self.get_object()
+
+        if request.user == vacancy.creater:
+            user_id = kwargs.get("user_id")
+            user = django.contrib.auth.get_user_model().objects.get(
+                id=user_id,
+            )
+            vacancy.team_composition.remove(user)
+
+            django.contrib.messages.success(
+                request,
+                f"Пользователь {user} удалён из команды",
+            )
+
+            return django.shortcuts.redirect(
+                django.urls.reverse(
+                    "vacancies:vacancy_detail",
+                    args=[vacancy.pk],
+                ),
+            )
+
+        return django.http.HttpResponseNotFound("not found")
