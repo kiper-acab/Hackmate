@@ -85,19 +85,20 @@
       </div>
     {% endif %}
   <h2>Завершённые вакансии</h2>
-<ul>
-    {% for vacancy in finished_vacancies %}
-        <li>
+{% for vacancy in finished_vacancies %}
+    <div class="vacancy-card">
+        <h3 class="vacancy-title">
             <a href="{% url 'vacancies:vacancy_detail' pk=vacancy.pk %}">
                 {{ vacancy.title }}
             </a>
-            <p>{{ vacancy.description }}</p>
-            <p>Дата завершения: {{ vacancy.deadline|date:"d.m.Y" }}</p>
-        </li>
-    {% empty %}
-        <p>У пользователя {{ profile_user.username }} нет завершённых вакансий.</p>
-    {% endfor %}
-</ul>
+        </h3>
+        <p class="vacancy-description">{{ vacancy.description }}</p>
+        <p class="vacancy-deadline">Дата завершения: {{ vacancy.deadline|date:"d.m.Y" }}</p>
+    </div>
+{% empty %}
+    <p class="no-vacancies">У пользователя {{ profile_user.username }} нет завершённых вакансий.</p>
+{% endfor %}
+
   </section>
 
   <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
