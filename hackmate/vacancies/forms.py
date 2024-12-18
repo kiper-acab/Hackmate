@@ -13,6 +13,7 @@ class VacancyForm(django.forms.ModelForm):
             field.field.widget.attrs["class"] = "form-control"
 
         self.fields["deadline"].widget.format = "%Y-%m-%d"
+        self.fields["need_count_users"].required = True
 
     def clean_deadline(self):
         deadline = self.cleaned_data.get("deadline")
@@ -37,6 +38,7 @@ class VacancyForm(django.forms.ModelForm):
         fields = [
             model.title.field.name,
             model.description.field.name,
+            model.need_count_users.field.name,
             model.hackaton_title.field.name,
             model.deadline.field.name,
             model.required_experience.field.name,

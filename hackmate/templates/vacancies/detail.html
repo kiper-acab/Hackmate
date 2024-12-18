@@ -33,6 +33,7 @@
       {% if vacancy.required_experience %}
         <p><strong>Требуемый опыт:</strong> {{ vacancy.required_experience }} лет</p>
       {% endif %}
+      <p><strong>Необходимое количество человек в группе для участия в хакатоне</strong> {{ vacancy.need_count_users }}</p>
       <article class="command">
         <p><strong>Текущий состав команды:</strong></p>
         <article class="teammates">
@@ -54,7 +55,9 @@
                 {% endif %}
                 <p class="teammate-username">{{ member.username }}</p>
               </a>
-              <a href="{% url 'vacancies:kick_user' vacancy.id member.pk %}"><i class="fa-solid fa-ban decline-user kick-teammate"></i></a>
+              {% if request.user == vacancy.creater %}
+                <a href="{% url 'vacancies:kick_user' vacancy.id member.pk %}"><i class="fa-solid fa-ban decline-user kick-teammate"></i></a>
+              {% endif %}
             </article>
           {% endfor %}
         </article>
@@ -67,10 +70,10 @@
 
     {% if user.is_authenticated %}
       {% if user != vacancy.creater %}
-        {% if not is_deadline_passed %}
+        {% if not is_deadline_passed and vacancy.need_count_users != 0 %}
           <button id="respond-button" class="grow-button">Откликнуться</button>
         {% else %}
-          <p class="deadline-message">Дедлайн истёк. Вы больше не можете откликнуться на эту вакансию.</p>
+          <p class="deadline-message">Вы больше не можете откликнуться на эту вакансию.</p>
         {% endif %}
       {% endif %}
     {% else %}

@@ -22,3 +22,30 @@ def add_notification(sender, instance, created, **kwargs):
                 f"откликнулся на вакансию {instance.vacancy.title}."
             ),
         )
+    else:
+        if (
+            instance.status
+            == vacancies.models.Response.ResponseStatuses.ACCEPTED
+        ):
+            notifications.signals.notify.send(
+                instance.vacancy.creater,
+                recipient=instance.user,
+                verb="принял вас в команду",
+                description=(
+                    f"Пользователь {instance.user.username}"
+                    f"принял вас в команду."
+                ),
+            )
+        elif (
+            instance.status
+            == vacancies.models.Response.ResponseStatuses.REJECTED
+        ):
+            notifications.signals.notify.send(
+                instance.vacancy.creater,
+                recipient=instance.user,
+                verb="отклонил ваш отклик",
+                description=(
+                    f"Пользователь {instance.user.username}"
+                    f"отклонил ваш отклик."
+                ),
+            )

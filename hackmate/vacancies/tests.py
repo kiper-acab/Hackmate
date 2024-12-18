@@ -3,6 +3,7 @@ __all__ = ()
 import json
 
 import django.contrib.auth
+import django.contrib.messages
 import django.test
 import django.urls
 import django.utils
@@ -42,6 +43,7 @@ class VacanciesTests(django.test.TestCase):
             description="Test vacancy description",
             creater=cls.user,
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+            need_count_users=2,
         )
 
         cls.comment = vacancies.models.CommentVacancy.objects.create(
@@ -64,6 +66,7 @@ class VacanciesTests(django.test.TestCase):
         data = {
             vacancies.models.Vacancy.title.field.name: "title",
             vacancies.models.Vacancy.description.field.name: "description",
+            vacancies.models.Vacancy.need_count_users.field.name: 2,
         }
         vacancy_count = vacancies.models.Vacancy.objects.all().count()
 
@@ -286,4 +289,110 @@ class VacanciesTests(django.test.TestCase):
         self.assertIn(
             "Вы уже откликнулись на эту вакансию",
             response_json["message"],
+        )
+
+
+class InviteUserTestCase(django.test.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user = user_model.objects.create_user(
+            username="testuser",
+            email="testuser@example.com",
+            password="testuser123",
+        )
+
+        cls.user2 = user_model.objects.create_user(
+            username="testuser2",
+            email="testuser2@example.com",
+            password="testuser123",
+        )
+
+        cls.vacancy = vacancies.models.Vacancy.objects.create(
+            title="Test vacancy",
+            description="Test vacancy description",
+            creater=cls.user,
+            status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+            need_count_users=2,
+        )
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.user.delete()
+        cls.user2.delete()
+        cls.vacancy.delete()
+
+    def test_invite_user(self):
+        self.client.force_login(self.user2)
+
+        count_temmates = self.vacancy.team_composition.count()
+
+        self.client.post(
+            django.urls.reverse(
+                "vacancies:vacancy_detail",
+                args=[self.vacancy.id],
+            ),
+        )
+
+        response = vacancies.models.Response.objects.get(
+            vacancy=self.vacancy,
+            user=self.user2,
+        )
+
+        self.client.force_login(self.user)
+        self.client.get(
+            django.urls.reverse(
+                "vacancies:invite_user",
+                args=[response.id],
+            ),
+        )
+
+        response.refresh_from_db()
+
+        self.assertEqual(
+            response.status,
+            vacancies.models.Response.ResponseStatuses.ACCEPTED,
+        )
+
+        self.assertEqual(
+            self.vacancy.team_composition.count(),
+            count_temmates + 1,
+        )
+
+    def test_reject_invite(self):
+        self.client.force_login(self.user2)
+
+        count_temmates = self.vacancy.team_composition.count()
+
+        self.client.post(
+            django.urls.reverse(
+                "vacancies:vacancy_detail",
+                args=[self.vacancy.id],
+            ),
+        )
+
+        response = vacancies.models.Response.objects.get(
+            vacancy=self.vacancy,
+            user=self.user2,
+        )
+
+        self.client.force_login(self.user)
+        self.client.get(
+            django.urls.reverse(
+                "vacancies:reject_user",
+                args=[response.id],
+            ),
+        )
+
+        response.refresh_from_db()
+
+        self.assertEqual(
+            response.status,
+            vacancies.models.Response.ResponseStatuses.REJECTED,
+        )
+
+        self.assertEqual(
+            self.vacancy.team_composition.count(),
+            count_temmates,
         )

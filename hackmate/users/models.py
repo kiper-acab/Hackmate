@@ -7,6 +7,7 @@ import sys
 import django.conf
 import django.contrib.auth.models
 import django.db.models
+import sorl.thumbnail
 
 import users.validators
 
@@ -107,6 +108,28 @@ class Profile(django.db.models.Model):
     )
 
     date_last_active = django.db.models.DateTimeField(null=True, blank=True)
+
+    def get_image_x300(self):
+        return sorl.thumbnail.get_thumbnail(
+            self.image,
+            "300x300",
+            crop="center",
+            quality=100,
+            format="PNG",
+        )
+
+    def image_tmb(self):
+        if self.image:
+            return django.utils.safestring.mark_safe(
+                f"<img src='{self.image}' width='50'>",
+            )
+
+        return "Нет изображения"
+
+    image_tmb.short_description = "аватарка"
+    image_tmb.allow_tags = True
+
+    list_display = "image_tmb"
 
     class Meta:
         verbose_name = "дополнительная информация"

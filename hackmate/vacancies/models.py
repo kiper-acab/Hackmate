@@ -20,6 +20,8 @@ class Vacancy(django.db.models.Model):
     class VacancyStatuses(django.db.models.TextChoices):
         ACTIVE = "active", "active"
         INACTIVE = "inactive", "inactive"
+        EQUIPPED = "equipped", "equipped"
+        DELETED = "deleted", "deleted"
 
     creater = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
@@ -107,6 +109,22 @@ class Vacancy(django.db.models.Model):
         django.conf.settings.AUTH_USER_MODEL,
         related_name="team_composition",
         verbose_name="состав команды",
+    )
+
+    need_count_users = django.db.models.PositiveSmallIntegerField(
+        verbose_name=(
+            "необходимое количество человек в группе для участия в хакатоне"
+        ),
+        validators=[
+            django.core.validators.MinValueValidator(
+                2,
+                "Введите корректное значение",
+            ),
+            django.core.validators.MaxValueValidator(
+                100,
+                "Введите корректное значение",
+            ),
+        ],
     )
 
     class Meta:

@@ -145,7 +145,20 @@ class UserResponsesView(
     def get_queryset(self):
         return vacancies.models.Response.objects.filter(
             user=self.request.user,
-        ).select_related("vacancy")
+            status__in=[
+                vacancies.models.Response.ResponseStatuses.NOT_ANSWERED,
+                vacancies.models.Response.ResponseStatuses.ACCEPTED,
+            ],
+        ).annotate(
+            active_vacancy=django.db.models.FilteredRelation(
+                "vacancy",
+                condition=django.db.models.Q(
+                    vacancy__status=(
+                        vacancies.models.Vacancy.VacancyStatuses.ACTIVE
+                    ),
+                ),
+            ),
+        )
 
 
 class UserVacanciesView(
@@ -237,7 +250,7 @@ class DeleteVacancy(django.views.generic.DeleteView):
 
         if self.object.creater == request.user or request.user.is_superuser:
             self.object.status = (
-                vacancies.models.Vacancy.VacancyStatuses.INACTIVE
+                vacancies.models.Vacancy.VacancyStatuses.DELETED
             )
             self.object.save()
             return django.shortcuts.redirect(self.get_success_url())
@@ -267,7 +280,7 @@ class ChangeVacancyView(
         )
 
 
-class AcceptInviteUserVacancy(
+class AcceptInvite(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.edit.BaseUpdateView,
 ):
@@ -287,17 +300,21 @@ class AcceptInviteUserVacancy(
             )
             response.save()
 
+            response.vacancy.save()
+
             django.contrib.messages.success(
                 request,
                 "Пользователь успешно приглашён в команду",
             )
-
             return django.shortcuts.redirect(self.success_url)
 
         return django.http.HttpResponseNotFound("not found")
 
+    def get_queryset(self):
+        return super().get_queryset().select_related("vacancy")
 
-class RejectInviteUserVacancy(
+
+class RejectInvite(
     django.contrib.auth.mixins.LoginRequiredMixin,
     django.views.generic.edit.BaseDeleteView,
 ):
@@ -336,12 +353,17 @@ class KickUserFromVacancy(
     def get(self, request, *args, **kwargs):
         vacancy = self.get_object()
 
-        if request.user == vacancy.creater:
+        if (
+            request.user == vacancy.creater
+            and vacancy.status
+            == vacancies.models.Vacancy.VacancyStatuses.ACTIVE
+        ):
             user_id = kwargs.get("user_id")
             user = django.contrib.auth.get_user_model().objects.get(
                 id=user_id,
             )
             vacancy.team_composition.remove(user)
+            vacancy.save()
 
             django.contrib.messages.success(
                 request,

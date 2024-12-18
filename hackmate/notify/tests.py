@@ -32,6 +32,7 @@ class NotificationsTests(django.test.TestCase):
             description="Test vacancy description",
             creater=cls.user,
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+            need_count_users=2,
         )
 
         cls.vacancy2 = vacancies.models.Vacancy.objects.create(
@@ -39,6 +40,7 @@ class NotificationsTests(django.test.TestCase):
             description="Test vacancy description2",
             creater=cls.user,
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+            need_count_users=2,
         )
 
     @classmethod

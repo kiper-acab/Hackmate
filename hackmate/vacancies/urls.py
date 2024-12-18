@@ -53,12 +53,12 @@ urlpatterns = [
     ),
     django.urls.path(
         "invite_user/<int:pk>/",
-        vacancies.views.AcceptInviteUserVacancy.as_view(),
+        vacancies.views.AcceptInvite.as_view(),
         name="invite_user",
     ),
     django.urls.path(
         "reject_user/<int:pk>/",
-        vacancies.views.RejectInviteUserVacancy.as_view(),
+        vacancies.views.RejectInvite.as_view(),
         name="reject_user",
     ),
     django.urls.path(
