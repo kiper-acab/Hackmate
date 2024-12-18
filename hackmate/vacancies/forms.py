@@ -31,17 +31,6 @@ class VacancyForm(django.forms.ModelForm):
 
         return deadline
 
-    def clean_experience(self):
-        experience = self.cleaned_data.get("required_experience")
-        if experience is not None and experience < 0:
-            raise django.forms.ValidationError(
-                django.utils.translation.gettext_lazy(
-                    "Опыт работы не может быть отрицательным.",
-                ),
-            )
-
-        return experience
-
     class Meta:
         model = vacancies.models.Vacancy
         fields = [

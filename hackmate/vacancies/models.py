@@ -98,7 +98,10 @@ class Vacancy(django.db.models.Model):
         help_text=django.utils.translation.gettext_lazy(
             "Укажите количество лет опыта, необходимого для кандидата",
         ),
-        validators=[django.core.validators.MinValueValidator(0)],
+        validators=[
+            django.core.validators.MinValueValidator(0),
+            django.core.validators.MaxValueValidator(10),
+        ],
     )
 
     class Meta:
