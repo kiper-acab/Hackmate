@@ -6,6 +6,24 @@
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
+    position: relative;
+}
+
+.vacancy-container>.dropdown{
+    position: absolute;
+    right: calc(1px  - 25px);
+}
+
+.btn-vacancy-menu{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.btn-vacancy-menu:hover,
+.btn-vacancy-menu:focus{
+    transition: .3s;
+    color: rgba(0,0,0, .5);
 }
 
 .vacancy-title {
@@ -160,4 +178,8 @@
 .delete-link-form:hover{
     transition: .3s;
     color: rgba(255, 0, 0, .5);
+}
+
+.send-comment{
+    margin: 20px 0;
 }

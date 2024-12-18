@@ -24,7 +24,6 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    border: 4px solid #007bff;
     object-fit: cover;
     background-color: #fff;
 }
@@ -48,6 +47,98 @@
 .profile-info p:first-child {
     margin-top: 0;
 }
+.user-rating {
+    display: flex;
+    font-size: 24px;
+}
+
+.star {
+    color: #ffd700;
+    margin-right: 2px;
+}
+
+.star.empty {
+    color: #dcdcdc;
+}
+
+
 button {
 margin: 30px;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.profile-avatar img.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile-rating .stars {
+  display: flex;
+  gap: 5px;
+}
+
+.profile-info {
+  font-size: 1.1rem;
+}
+
+.profile-info h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.profile-item {
+  margin-bottom: 15px;
+}
+
+.links-section {
+  margin-top: 30px;
+}
+
+.social-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.social-links li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.site-icon {
+  font-size: 1.5rem;
+  color: #3b5998;
+}
+
+.profile-actions {
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.star-ratings-rate-action{
+  width: 50px;
+  height: 50px;
 }

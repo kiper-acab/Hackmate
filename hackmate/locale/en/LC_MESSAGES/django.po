@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 00:37+0400\n"
+"POT-Creation-Date: 2024-12-18 22:38+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,11 +27,11 @@ msgstr "About the project"
 msgid "Апи"
 msgstr "API"
 
-#: hackmate/settings.py:125
+#: hackmate/settings.py:126
 msgid "Русский"
 msgstr "Russian"
 
-#: hackmate/settings.py:126
+#: hackmate/settings.py:127
 msgid "English"
 msgstr "English"
 
@@ -764,7 +764,7 @@ msgid "Список вакансий"
 msgstr "Vacancy list"
 
 #: templates/vacancies/vacancies.html:14
-#: templates/vacancies/vacancy_form.html:39
+#: templates/vacancies/vacancy_form.html:40
 msgid "Создать вакансию"
 msgstr "Create vacancy"
 
@@ -959,167 +959,163 @@ msgstr "Profile activation was available for "
 msgid "Вакансии"
 msgstr "Your vacancies"
 
-#: vacancies/forms.py:23
+#: vacancies/forms.py:28
 msgid "Дедлайн не может быть в прошлом."
 msgstr "The deadline cannot be in the past."
 
-#: vacancies/forms.py:34
-msgid "Опыт работы не может быть отрицательным."
-msgstr "Experience cannot be negative."
-
-#: vacancies/forms.py:53
+#: vacancies/forms.py:47
 msgid "Введите название вакансии"
 msgstr "Enter vacancy title"
 
-#: vacancies/forms.py:60
+#: vacancies/forms.py:54
 msgid "Введите описание"
 msgstr "Enter description"
 
-#: vacancies/forms.py:67
+#: vacancies/forms.py:61
 msgid "Введите название хакатона"
 msgstr "Enter hackathon name"
 
-#: vacancies/forms.py:75
+#: vacancies/forms.py:69
 msgid "Выберите дедлайн"
 msgstr "Choose deadline"
 
-#: vacancies/forms.py:82
+#: vacancies/forms.py:76
 msgid "Введите требуемый опыт (в годах)"
 msgstr "Enter required experience (in years)"
 
-#: vacancies/forms.py:109
+#: vacancies/forms.py:103
 msgid "Введите ваш комментарий"
 msgstr "Enter your comment"
 
-#: vacancies/models.py:16
+#: vacancies/models.py:17
 #, fuzzy
 #| msgid "Адрес: "
 msgid "IP адрес"
 msgstr "Address: "
 
-#: vacancies/models.py:18
+#: vacancies/models.py:19
 #, fuzzy
 #| msgid "Адрес: "
 msgid "IP адреса"
 msgstr "Address: "
 
-#: vacancies/models.py:31
+#: vacancies/models.py:32
 #, fuzzy
 #| msgid "Создать вакансию"
 msgid "создатель вакансии"
 msgstr "Create vacancy"
 
-#: vacancies/models.py:38
+#: vacancies/models.py:39
 #, fuzzy
 #| msgid "Создание вакансии"
 msgid "название вакансии"
 msgstr "Creating a vacancy"
 
-#: vacancies/models.py:44
+#: vacancies/models.py:45
 #, fuzzy
 #| msgid "Создание вакансии"
 msgid "описание вакансии"
 msgstr "Creating a vacancy"
 
-#: vacancies/models.py:50
+#: vacancies/models.py:51
 #, fuzzy
 #| msgid "Создано:"
 msgid "создано"
 msgstr "Created:"
 
-#: vacancies/models.py:55
+#: vacancies/models.py:56
 msgid "обновлено"
 msgstr "updated"
 
-#: vacancies/models.py:61
+#: vacancies/models.py:62
 msgid "cтатус"
 msgstr "status"
 
-#: vacancies/models.py:73
+#: vacancies/models.py:74
 #, fuzzy
 #| msgid "Введите название хакатона"
 msgid "название хакатона"
 msgstr "Enter hackathon name"
 
-#: vacancies/models.py:78
+#: vacancies/models.py:79
 msgid "Название хакатона, к которому относится вакансия"
 msgstr "Name of the hackathon to which the vacancy relates"
 
-#: vacancies/models.py:83
+#: vacancies/models.py:84
 #, fuzzy
 #| msgid "Дедлайн:"
 msgid "дедлайн"
 msgstr "Deadline:"
 
-#: vacancies/models.py:87
+#: vacancies/models.py:88
 msgid "Крайний срок подачи заявок"
 msgstr "Крайний срок подачи заявок"
 
-#: vacancies/models.py:93
+#: vacancies/models.py:94
 #, fuzzy
 #| msgid "Введите требуемый опыт (в годах)"
 msgid "требуемый опыт (в годах)"
 msgstr "Enter required experience (in years)"
 
-#: vacancies/models.py:98
+#: vacancies/models.py:99
 msgid "Укажите количество лет опыта, необходимого для кандидата"
 msgstr "Indicate the number of years of experience required for the candidate"
 
-#: vacancies/models.py:104 vacancies/models.py:119 vacancies/models.py:159
+#: vacancies/models.py:108 vacancies/models.py:123 vacancies/models.py:163
 #, fuzzy
 #| msgid "Мои вакансии"
 msgid "вакансия"
 msgstr "My vacancies"
 
-#: vacancies/models.py:105
+#: vacancies/models.py:109
 #, fuzzy
 #| msgid "Мои вакансии"
 msgid "вакансии"
 msgstr "My vacancies"
 
-#: vacancies/models.py:124
+#: vacancies/models.py:128
 #, fuzzy
 #| msgid "Комментарии"
 msgid "комментарий"
 msgstr "Comments"
 
-#: vacancies/models.py:130 vacancies/models.py:153
+#: vacancies/models.py:134 vacancies/models.py:157
 #, fuzzy
 #| msgid "Права пользователя"
 msgid "пользователь"
 msgstr "User Rights"
 
-#: vacancies/models.py:135
+#: vacancies/models.py:139
 #, fuzzy
 #| msgid "Создано:"
 msgid "cоздано"
 msgstr "Created:"
 
-#: vacancies/models.py:140
+#: vacancies/models.py:144
 #, fuzzy
 #| msgid "Комментариев пока нет."
 msgid "комментарий к вакансии"
 msgstr "No comments yet."
 
-#: vacancies/models.py:143
+#: vacancies/models.py:147
 #, fuzzy
 #| msgid "Комментариев пока нет."
 msgid "комментарии к вакансиям"
 msgstr "No comments yet."
 
-#: vacancies/models.py:163
+#: vacancies/models.py:167
 #, fuzzy
 #| msgid "Мои отклики"
 msgid "дата отклика"
 msgstr "My applications"
 
-#: vacancies/models.py:167
+#: vacancies/models.py:171
 #, fuzzy
 #| msgid "Откликов"
 msgid "отклик"
 msgstr "Applications"
 
-#: vacancies/models.py:168
+#: vacancies/models.py:172
 #, fuzzy
 #| msgid "Мои отклики"
 msgid "отклики"
@@ -1140,3 +1136,6 @@ msgstr "Your application has been sent!"
 #: vacancies/views.py:187 vacancies/views.py:211 vacancies/views.py:227
 msgid "not found"
 msgstr "not found"
+
+#~ msgid "Опыт работы не может быть отрицательным."
+#~ msgstr "Experience cannot be negative."

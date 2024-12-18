@@ -64,3 +64,12 @@
 .view-button:hover {
     background-color: #0056b3;
 }
+
+.nothing-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 200px;
+    align-items: center;
+    color: rgba(0, 0, 0, .6);
+}

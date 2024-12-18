@@ -50,3 +50,12 @@
     font-size: 0.9rem;
     color: #888;
 }
+
+.nothing-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 200px;
+    align-items: center;
+    color: rgba(0, 0, 0, .6);
+}
