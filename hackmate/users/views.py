@@ -10,6 +10,7 @@ import django.contrib.messages
 import django.core.exceptions
 import django.core.mail
 import django.forms
+import django.http
 import django.shortcuts
 import django.urls
 import django.utils.timezone
@@ -277,3 +278,30 @@ class ActivateUserView(django.views.View):
             )
 
         return django.shortcuts.redirect(django.urls.reverse("users:login"))
+
+
+class CustomPasswordResetCompleteView(
+    django.contrib.auth.views.PasswordResetCompleteView,
+):
+    template_name = "users/password_reset_complete.html"
+    form_class = users.forms.PasswordResetCompleteForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = self.form_class()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            feedback = form.cleaned_data["feedback"]
+            print(f"Отзыв получен: {feedback}")
+            return django.http.HttpResponseRedirect(
+                django.urls.reverse_lazy("users:password_reset_complete"),
+            )
+
+        return django.shortcuts.render(
+            request,
+            self.template_name,
+            {"form": form},
+        )

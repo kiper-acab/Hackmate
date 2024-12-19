@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
         ),
     },
     {
-        "NAME": "users.validators.MaximumLengthValidator",
+        "NAME": "users.validators.MaxLengthPasswordValidator",
     },
 ]
 

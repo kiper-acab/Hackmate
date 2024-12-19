@@ -21,7 +21,7 @@ def validate_birthday(value):
         )
 
 
-class MaximumLengthValidator:
+class MaxLengthPasswordValidator:
     def __init__(self, max_length=128):
         self.max_length = max_length
 
