@@ -95,7 +95,7 @@ class Vacancy(django.db.models.Model):
     required_experience = django.db.models.CharField(
         max_length=300,
         verbose_name="требуемый опыт",
-        help_text=("Укажите количество опыта необходимого для кандидата"),
+        help_text="Укажите количество опыта необходимого для кандидата",
         choices=RequiredExperienceСhoices.choices,
         default=RequiredExperienceСhoices.NO_EXPIRIENCE,
     )
@@ -207,6 +207,7 @@ class Response(django.db.models.Model):
     class Meta:
         verbose_name = "отклик"
         verbose_name_plural = "отклики"
+        ordering = ["-created_at", "id"]
 
     def __str__(self):
         return f"{self.user} -> {self.vacancy}"

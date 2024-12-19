@@ -67,6 +67,9 @@ class VacanciesTests(django.test.TestCase):
             vacancies.models.Vacancy.title.field.name: "title",
             vacancies.models.Vacancy.description.field.name: "description",
             vacancies.models.Vacancy.need_count_users.field.name: 2,
+            vacancies.models.Vacancy.required_experience.field.name: (
+                vacancies.models.Vacancy.RequiredExperienceСhoices.BIGGINER,
+            ),
         }
         vacancy_count = vacancies.models.Vacancy.objects.all().count()
 

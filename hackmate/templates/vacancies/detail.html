@@ -33,7 +33,7 @@
         <p><strong>Дедлайн:</strong> {{ vacancy.deadline|date:"d.m.Y" }}</p>
       {% endif %}
       {% if vacancy.required_experience %}
-        <p><strong>Требуемый опыт:</strong> {{ vacancy.required_experience }} лет</p>
+        <p><strong>Требуемый опыт:</strong> {{ vacancy.get_required_experience_display }}</p>
       {% endif %}
       <p><strong>Необходимое количество человек в группе для участия в хакатоне</strong> {{ vacancy.need_count_users }}</p>
       <article class="command">

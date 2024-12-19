@@ -11,6 +11,14 @@ class Migration(django.db.migrations.Migration):
     ]
 
     operations = [
+        django.db.migrations.AlterModelOptions(
+            name="response",
+            options={
+                "ordering": ["-created_at", "id"],
+                "verbose_name": "отклик",
+                "verbose_name_plural": "отклики",
+            },
+        ),
         django.db.migrations.AlterField(
             model_name="vacancy",
             name="required_experience",
