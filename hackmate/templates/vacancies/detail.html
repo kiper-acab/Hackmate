@@ -30,7 +30,7 @@
         <p><strong>{% trans 'Хакатон:' %}</strong> {{ vacancy.hackaton_title }}</p>
       {% endif %}
       {% if vacancy.hackaton_date %}
-        <p><strong>{% trans 'Дедлайн:' %}</strong> {{ vacancy.hackaton_date|date:"d.m.Y" }}</p>
+        <p><strong>{% trans 'Дата проведения хакатона' %}</strong>: {{ vacancy.hackaton_date|date:"d.m.Y" }}</p>
       {% endif %}
       {% if vacancy.required_experience %}
         <p><strong>{% trans 'Требуемый опыт:' %}</strong> {{ vacancy.get_required_experience_display }}</p>

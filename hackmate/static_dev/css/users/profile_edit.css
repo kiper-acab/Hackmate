@@ -69,6 +69,10 @@ h1 {
     background: none;
 }
 
+.delete-profile-image{
+    width: 200px;
+}
+
 .btn-confirm-changes {
     border:none;
     margin: 50px 20px 20px 20px;

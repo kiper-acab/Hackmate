@@ -173,15 +173,19 @@ LOGOUT_REDIRECT_URL = django.urls.reverse_lazy("users:login")
 
 
 if DEBUG:
-    DEFAULT_USER_IS_ACTIVE = os.getenv(
-        "DJANGO_DEFAULT_USER_IS_ACTIVE",
-        default="True",
+    DEFAULT_USER_IS_ACTIVE = check_boolean(
+        os.getenv(
+            "DJANGO_DEFAULT_USER_IS_ACTIVE",
+            default="True",
+        ),
     )
 
 else:
-    DEFAULT_USER_IS_ACTIVE = os.getenv(
-        "DJANGO_DEFAULT_USER_IS_ACTIVE",
-        default="False",
+    DEFAULT_USER_IS_ACTIVE = check_boolean(
+        os.getenv(
+            "DJANGO_DEFAULT_USER_IS_ACTIVE",
+            default="False",
+        ),
     )
 
 DJANGO_NOTIFICATIONS_CONFIG = {

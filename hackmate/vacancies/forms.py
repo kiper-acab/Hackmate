@@ -26,7 +26,7 @@ class VacancyForm(django.forms.ModelForm):
         if hackaton_date and hackaton_date < current_date:
             raise django.forms.ValidationError(
                 django.utils.translation.gettext_lazy(
-                    "Дедлайн не может быть в прошлом.",
+                    "Хакатон может быть в прошлом.",
                 ),
             )
 
@@ -68,7 +68,7 @@ class VacancyForm(django.forms.ModelForm):
                 attrs={
                     "type": "date",
                     "placeholder": django.utils.translation.gettext_lazy(
-                        "Выберите дедлайн",
+                        "Выберите дату проведения хакатона",
                     ),
                 },
             ),

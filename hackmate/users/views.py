@@ -66,7 +66,7 @@ class ProfileView(django.views.generic.View):
         is_own_profile = user == request.user
         rating_user = star_ratings.models.Rating.objects.filter(
             object_id=user.id,
-        )
+        ).first()
 
         return django.shortcuts.render(
             request,
@@ -74,7 +74,7 @@ class ProfileView(django.views.generic.View):
             {
                 "user": user,
                 "is_own_profile": is_own_profile,
-                "rating_count": rating_user,
+                "rating_user": rating_user,
                 "finished_vacancies": finished_vacancies,
             },
         )
@@ -200,7 +200,7 @@ class SignUpView(django.views.generic.FormView):
             django.core.mail.send_mail(
                 django.utils.translation.gettext_lazy("Activate your account"),
                 confirmation_link,
-                django.conf.settings.DJANGO_MAIL,
+                django.conf.settings.EMAIL_HOST_USER,
                 [user.email],
                 fail_silently=False,
             )

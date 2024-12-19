@@ -15,8 +15,8 @@
        <div class="stars">
           {% if is_own_profile %}
             <article>
-              <h4>{% trans 'Рейтинг' %} {{ rating_count.average|floatformat:1 }}</h4>
-              <h4>{% trans 'Количество оценок' %} {{ rating_count.count }}</h4>
+              <h4>{% trans 'Рейтинг' %} {{ rating_user.average|floatformat:1 }}</h4>
+              <h4>{% trans 'Количество оценок' %} {{ rating_user.count }}</h4>
             </article>
           {% else %}
             {% ratings user.profile %}
@@ -97,7 +97,7 @@
         </div>
       </div>
     {% empty %}
-        <p class="no-vacancies">{% trans 'У пользователя' %} {{ profile_user.username }} {% trans 'нет завершённых вакансий' %}.</p>
+        <p class="no-vacancies">{% trans 'У пользователя' %} {{ user.username }} {% trans 'нет завершённых вакансий' %}.</p>
     {% endfor %}
   </section>
 
