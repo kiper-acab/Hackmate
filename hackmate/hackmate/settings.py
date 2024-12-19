@@ -166,34 +166,6 @@ else:
         default="False",
     )
 
-CITIES_LIGHT_TRANSLATION_LANGUAGES = ["ru"]
-CITIES_LIGHT_INCLUDE_COUNTRIES = [
-    "RU",
-    "BY",
-    "KZ",
-    "UA",
-    "UZ",
-    "KG",
-    "AM",
-    "AZ",
-    "MD",
-    "TJ",
-]
-CITIES_LIGHT_INCLUDE_CITY_TYPES = [
-    "PPL",
-    "PPLA",
-    "PPLA2",
-    "PPLA3",
-    "PPLA4",
-    "PPLC",
-    "PPLF",
-    "PPLG",
-    "PPLL",
-    "PPLR",
-    "PPLS",
-    "STLMT",
-]
-
 STAR_RATINGS_RERATE_SAME_DELETE = True
 
 STAR_RATINGS_STAR_HEIGHT = 20
