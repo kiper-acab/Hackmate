@@ -2,8 +2,8 @@ __all__ = ()
 
 import django.db.models.signals
 import django.dispatch
+import django.utils.translation
 import notifications.signals
-
 
 import vacancies.models
 
@@ -17,10 +17,14 @@ def add_notification(sender, instance, created, **kwargs):
         notifications.signals.notify.send(
             instance.user,
             recipient=instance.vacancy.creater,
-            verb="оставил отклик на вашу вакансию",
+            verb=django.utils.translation.gettext_lazy(
+                "оставил отклик на вашу вакансию",
+            ),
             description=(
-                f"Пользователь {instance.user.username}"
-                f"откликнулся на вакансию {instance.vacancy.title}."
+                django.utils.translation.gettext_lazy(
+                    f"Пользователь {instance.user.username}"
+                    f"откликнулся на вакансию {instance.vacancy.title}.",
+                )
             ),
         )
     else:
@@ -31,10 +35,14 @@ def add_notification(sender, instance, created, **kwargs):
             notifications.signals.notify.send(
                 instance.vacancy.creater,
                 recipient=instance.user,
-                verb="принял вас в команду",
+                verb=django.utils.translation.gettext_lazy(
+                    "принял вас в команду",
+                ),
                 description=(
-                    f"Пользователь {instance.user.username}"
-                    f"принял вас в команду."
+                    django.utils.translation.gettext_lazy(
+                        f"Пользователь {instance.user.username}"
+                        f"принял вас в команду.",
+                    )
                 ),
             )
         elif (
@@ -44,9 +52,13 @@ def add_notification(sender, instance, created, **kwargs):
             notifications.signals.notify.send(
                 instance.vacancy.creater,
                 recipient=instance.user,
-                verb="отклонил ваш отклик",
+                verb=django.utils.translation.gettext_lazy(
+                    "отклонил ваш отклик",
+                ),
                 description=(
-                    f"Пользователь {instance.user.username}"
-                    f"отклонил ваш отклик."
+                    django.utils.translation.gettext_lazy(
+                        f"Пользователь {instance.user.username}"
+                        f"отклонил ваш отклик.",
+                    )
                 ),
             )

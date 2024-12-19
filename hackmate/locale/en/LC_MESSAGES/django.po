@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-18 22:38+0400\n"
+"POT-Creation-Date: 2024-12-19 17:17+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,14 +47,27 @@ msgstr "Home"
 msgid "Уведомления"
 msgstr "Birthday"
 
-#: notify/signals.py:20
+#: notify/signals.py:21
 msgid "оставил отклик на вашу вакансию"
 msgstr "left a response to your vacancy"
 
-#: notify/signals.py:23
-#, python-brace-format
-msgid "Пользователь {username} откликнулся на вакансию {vacancy_title}."
-msgstr "User {username} responded to the vacancy {vacancy_title}."
+#: notify/signals.py:25 notify/signals.py:43 notify/signals.py:60
+#, fuzzy, python-brace-format
+#| msgid "Права пользователя"
+msgid "Пользователь {instance.user.username}"
+msgstr "User Rights"
+
+#: notify/signals.py:39
+#, fuzzy
+#| msgid "Найти команду"
+msgid "принял вас в команду"
+msgstr "Find a team"
+
+#: notify/signals.py:56
+#, fuzzy
+#| msgid "Мои отклики"
+msgid "отклонил ваш отклик"
+msgstr "My applications"
 
 #: templates/about/about.html:14
 msgid ""
@@ -581,7 +594,7 @@ msgid "Нет новых уведомлений"
 msgstr "No new notifications"
 
 #: templates/users/login.html:26 templates/users/signup.html:24
-#: templates/vacancies/detail.html:73
+#: templates/vacancies/detail.html:104
 msgid "Отправить"
 msgstr "Send"
 
@@ -671,7 +684,7 @@ msgid "Сохранить изменения"
 msgstr "Save changes"
 
 #: templates/vacancies/change_vacancy.html:12
-#: templates/vacancies/detail.html:16
+#: templates/vacancies/detail.html:17
 msgid "Изменить вакансию"
 msgstr "Edit vacancy"
 
@@ -679,47 +692,47 @@ msgstr "Edit vacancy"
 msgid "Сохранить"
 msgstr "Save"
 
-#: templates/vacancies/detail.html:17
+#: templates/vacancies/detail.html:18
 msgid "Удалить вакансию"
 msgstr "Delete vacancy"
 
-#: templates/vacancies/detail.html:25
+#: templates/vacancies/detail.html:27
 msgid "Создатель:"
 msgstr "Creator:"
 
-#: templates/vacancies/detail.html:26
+#: templates/vacancies/detail.html:28
 msgid "Создано:"
 msgstr "Created:"
 
-#: templates/vacancies/detail.html:28
+#: templates/vacancies/detail.html:30
 msgid "Хакатон:"
 msgstr "Hackathon:"
 
-#: templates/vacancies/detail.html:31
+#: templates/vacancies/detail.html:33
 msgid "Дедлайн:"
 msgstr "Deadline:"
 
-#: templates/vacancies/detail.html:34
+#: templates/vacancies/detail.html:36
 msgid "Требуемый опыт:"
 msgstr "Required experience:"
 
-#: templates/vacancies/detail.html:45
+#: templates/vacancies/detail.html:76
 msgid "Откликнуться"
 msgstr "Apply"
 
-#: templates/vacancies/detail.html:47
+#: templates/vacancies/detail.html:78
 msgid "Дедлайн истёк. Вы больше не можете откликнуться на эту вакансию."
 msgstr "The deadline has passed. You can no longer apply for this vacancy."
 
-#: templates/vacancies/detail.html:51
+#: templates/vacancies/detail.html:82
 msgid "Вы должны быть авторизованы, чтобы откликнуться."
 msgstr "You must be logged in to apply."
 
-#: templates/vacancies/detail.html:56
+#: templates/vacancies/detail.html:87
 msgid "Комментарии"
 msgstr "Comments"
 
-#: templates/vacancies/detail.html:98
+#: templates/vacancies/detail.html:129
 msgid "Комментариев пока нет."
 msgstr "No comments yet."
 
@@ -735,27 +748,27 @@ msgstr "You have no applications."
 msgid "Ваши вакансии"
 msgstr "Your vacancies"
 
-#: templates/vacancies/user_vacancies.html:20
+#: templates/vacancies/user_vacancies.html:27
 msgid "Откликов"
 msgstr "Applications"
 
-#: templates/vacancies/user_vacancies.html:22
+#: templates/vacancies/user_vacancies.html:30
 msgid "Откликнувшиеся пользователи:"
 msgstr "Applicants:"
 
-#: templates/vacancies/user_vacancies.html:27
+#: templates/vacancies/user_vacancies.html:41
 msgid "Пока никто не откликнулся"
 msgstr "No one has applied yet."
 
-#: templates/vacancies/user_vacancies.html:41
+#: templates/vacancies/user_vacancies.html:49
 msgid "У вас нет вакансий"
 msgstr "You have no vacancies."
 
-#: templates/vacancies/user_vacancies.html:42
+#: templates/vacancies/user_vacancies.html:50
 msgid "Если хотите создать анкету, то"
 msgstr "If you want to create a profile,"
 
-#: templates/vacancies/user_vacancies.html:42
+#: templates/vacancies/user_vacancies.html:50
 msgid "перейдите сюда"
 msgstr "click here"
 
@@ -790,11 +803,11 @@ msgstr "Creating a vacancy"
 msgid "Пользователи"
 msgstr "User Rights"
 
-#: users/backends.py:38
+#: users/backends.py:39
 msgid "Неправильный логин/пароль. Убедитесь в корректности данных."
 msgstr "Invalid username/password. Please check your details."
 
-#: users/backends.py:59
+#: users/backends.py:68
 msgid ""
 "Вы превысили допустимое число попыток входа. Пожалуйста, активируйте свой "
 "аккаунт. Вам должно прийти письмо на почту с активацией."
@@ -802,7 +815,7 @@ msgstr ""
 "You have exceeded the allowed number of login attempts. Please activate your "
 "account. An activation email has been sent to your mailbox."
 
-#: users/backends.py:71
+#: users/backends.py:81
 #, python-brace-format
 msgid ""
 "Замечена подозрительная активность аккаунта. Для активации аккаунта нажмите "
@@ -811,7 +824,7 @@ msgstr ""
 "Suspicious account activity detected. To activate your account, click the "
 "link below: http://{domain}{activation_path}"
 
-#: users/backends.py:80
+#: users/backends.py:90
 msgid "Активация аккаунта"
 msgstr "Account activation"
 
@@ -843,67 +856,67 @@ msgstr "Password"
 msgid "Введите электронную почту/логин"
 msgstr "Enter email/username"
 
-#: users/models.py:88
+#: users/models.py:89
 #, fuzzy
 #| msgid "День рождения"
 msgid "день рождения"
 msgstr "Birthday"
 
-#: users/models.py:90
+#: users/models.py:91
 #, fuzzy
 #| msgid "Введите ваш комментарий"
 msgid "Введите дату рождения"
 msgstr "Enter your comment"
 
-#: users/models.py:108
+#: users/models.py:109
 #, fuzzy
 #| msgid "О себе"
 msgid "о себе"
 msgstr "About me"
 
-#: users/models.py:109
+#: users/models.py:110
 #, fuzzy
 #| msgid "Введите описание"
 msgid "Расскажите о себе"
 msgstr "Enter description"
 
-#: users/models.py:116
+#: users/models.py:139
 msgid "дополнительная информация"
 msgstr "additional information"
 
-#: users/models.py:119
+#: users/models.py:142
 #, fuzzy
 #| msgid "Контактные данные"
 msgid "дополнительные данные"
 msgstr "Contact Details"
 
-#: users/models.py:137
+#: users/models.py:160
 #, fuzzy
 #| msgid "Профиль"
 msgid "профиль"
 msgstr "Profile"
 
-#: users/models.py:142
+#: users/models.py:165
 #, fuzzy
 #| msgid "Тип сайта"
 msgid "тип сайта"
 msgstr "Site type"
 
-#: users/models.py:145
+#: users/models.py:168
 msgid "URL"
 msgstr "URL"
 
-#: users/models.py:147
+#: users/models.py:170
 msgid "Полная ссылка, например, https://example.com"
 msgstr "Full reference, e.g., https://example.com"
 
-#: users/models.py:165
+#: users/models.py:188
 #, fuzzy
 #| msgid "Ссылка"
 msgid "ссылка"
 msgstr "Link"
 
-#: users/models.py:166
+#: users/models.py:189
 #, fuzzy
 #| msgid "Ссылка"
 msgid "ссылки"
@@ -959,31 +972,27 @@ msgstr "Profile activation was available for "
 msgid "Вакансии"
 msgstr "Your vacancies"
 
-#: vacancies/forms.py:28
+#: vacancies/forms.py:29
 msgid "Дедлайн не может быть в прошлом."
 msgstr "The deadline cannot be in the past."
 
-#: vacancies/forms.py:47
+#: vacancies/forms.py:49
 msgid "Введите название вакансии"
 msgstr "Enter vacancy title"
 
-#: vacancies/forms.py:54
+#: vacancies/forms.py:56
 msgid "Введите описание"
 msgstr "Enter description"
 
-#: vacancies/forms.py:61
+#: vacancies/forms.py:63
 msgid "Введите название хакатона"
 msgstr "Enter hackathon name"
 
-#: vacancies/forms.py:69
+#: vacancies/forms.py:71
 msgid "Выберите дедлайн"
 msgstr "Choose deadline"
 
-#: vacancies/forms.py:76
-msgid "Введите требуемый опыт (в годах)"
-msgstr "Enter required experience (in years)"
-
-#: vacancies/forms.py:103
+#: vacancies/forms.py:98
 msgid "Введите ваш комментарий"
 msgstr "Enter your comment"
 
@@ -1000,142 +1009,230 @@ msgid "IP адреса"
 msgstr "Address: "
 
 #: vacancies/models.py:32
+msgid "Нет опыта"
+msgstr "No experience"
+
+#: vacancies/models.py:35
+msgid "До 6 месяцев"
+msgstr "Up to 6 months"
+
+#: vacancies/models.py:38
+msgid "От 6 до 12 месяцев"
+msgstr "6 to 12 months"
+
+#: vacancies/models.py:41
+msgid "Более 1 года"
+msgstr "More than 1 year"
+
+#: vacancies/models.py:48
 #, fuzzy
 #| msgid "Создать вакансию"
 msgid "создатель вакансии"
 msgstr "Create vacancy"
 
-#: vacancies/models.py:39
+#: vacancies/models.py:55
 #, fuzzy
 #| msgid "Создание вакансии"
 msgid "название вакансии"
 msgstr "Creating a vacancy"
 
-#: vacancies/models.py:45
+#: vacancies/models.py:61
 #, fuzzy
 #| msgid "Создание вакансии"
 msgid "описание вакансии"
 msgstr "Creating a vacancy"
 
-#: vacancies/models.py:51
+#: vacancies/models.py:67
+#, fuzzy
+#| msgid "Дедлайн не может быть в прошлом."
+msgid "Описание не может быть таким коротким"
+msgstr "The deadline cannot be in the past."
+
+#: vacancies/models.py:73
+#, fuzzy
+#| msgid "Опыт работы не может быть отрицательным."
+msgid "Описание не может быть таким длинным"
+msgstr "Experience cannot be negative."
+
+#: vacancies/models.py:82
 #, fuzzy
 #| msgid "Создано:"
 msgid "создано"
 msgstr "Created:"
 
-#: vacancies/models.py:56
+#: vacancies/models.py:87
 msgid "обновлено"
 msgstr "updated"
 
-#: vacancies/models.py:62
+#: vacancies/models.py:93
 msgid "cтатус"
 msgstr "status"
 
-#: vacancies/models.py:74
+#: vacancies/models.py:105
 #, fuzzy
 #| msgid "Введите название хакатона"
 msgid "название хакатона"
 msgstr "Enter hackathon name"
 
-#: vacancies/models.py:79
+#: vacancies/models.py:110
 msgid "Название хакатона, к которому относится вакансия"
 msgstr "Name of the hackathon to which the vacancy relates"
 
-#: vacancies/models.py:84
+#: vacancies/models.py:115
 #, fuzzy
 #| msgid "Дедлайн:"
 msgid "дедлайн"
 msgstr "Deadline:"
 
-#: vacancies/models.py:88
+#: vacancies/models.py:119
 msgid "Крайний срок подачи заявок"
 msgstr "Крайний срок подачи заявок"
 
-#: vacancies/models.py:94
+#: vacancies/models.py:125
 #, fuzzy
-#| msgid "Введите требуемый опыт (в годах)"
-msgid "требуемый опыт (в годах)"
-msgstr "Enter required experience (in years)"
+#| msgid "Требуемый опыт:"
+msgid "требуемый опыт"
+msgstr "Required experience:"
 
-#: vacancies/models.py:99
-msgid "Укажите количество лет опыта, необходимого для кандидата"
+#: vacancies/models.py:127
+#, fuzzy
+#| msgid "Укажите количество лет опыта, необходимого для кандидата"
+msgid "Укажите количество опыта необходимого для кандидата"
 msgstr "Indicate the number of years of experience required for the candidate"
 
-#: vacancies/models.py:108 vacancies/models.py:123 vacancies/models.py:163
+#: vacancies/models.py:136
+#, fuzzy
+#| msgid "Найти команду"
+msgid "состав команды"
+msgstr "Find a team"
+
+#: vacancies/models.py:142
+#, fuzzy
+#| msgid "интеграция с внешними сервисами для участия в хакатонах."
+msgid "необходимое количество человек в группе для участия в хакатоне"
+msgstr "integration with external services for hackathon participation."
+
+#: vacancies/models.py:150 vacancies/models.py:156
+#, fuzzy
+#| msgid "Укажите корректную дату рождения."
+msgid "Введите корректное значение"
+msgstr "Enter a valid date of birth."
+
+#: vacancies/models.py:163 vacancies/models.py:178 vacancies/models.py:238
 #, fuzzy
 #| msgid "Мои вакансии"
 msgid "вакансия"
 msgstr "My vacancies"
 
-#: vacancies/models.py:109
+#: vacancies/models.py:164
 #, fuzzy
 #| msgid "Мои вакансии"
 msgid "вакансии"
 msgstr "My vacancies"
 
-#: vacancies/models.py:128
+#: vacancies/models.py:183
 #, fuzzy
 #| msgid "Комментарии"
 msgid "комментарий"
 msgstr "Comments"
 
-#: vacancies/models.py:134 vacancies/models.py:157
+#: vacancies/models.py:188
+#, fuzzy
+#| msgid "Введите ваш комментарий"
+msgid "Слишком короткий комментарий!"
+msgstr "Enter your comment"
+
+#: vacancies/models.py:194
+#, fuzzy
+#| msgid "Дедлайн не может быть в прошлом."
+msgid "Комментарий не может привышать 3000 символов!"
+msgstr "The deadline cannot be in the past."
+
+#: vacancies/models.py:203 vacancies/models.py:231
 #, fuzzy
 #| msgid "Права пользователя"
 msgid "пользователь"
 msgstr "User Rights"
 
-#: vacancies/models.py:139
+#: vacancies/models.py:208
 #, fuzzy
 #| msgid "Создано:"
 msgid "cоздано"
 msgstr "Created:"
 
-#: vacancies/models.py:144
+#: vacancies/models.py:213
 #, fuzzy
 #| msgid "Комментариев пока нет."
 msgid "комментарий к вакансии"
 msgstr "No comments yet."
 
-#: vacancies/models.py:147
+#: vacancies/models.py:216
 #, fuzzy
 #| msgid "Комментариев пока нет."
 msgid "комментарии к вакансиям"
 msgstr "No comments yet."
 
-#: vacancies/models.py:167
+#: vacancies/models.py:243
 #, fuzzy
 #| msgid "Мои отклики"
 msgid "дата отклика"
 msgstr "My applications"
 
-#: vacancies/models.py:171
+#: vacancies/models.py:253
 #, fuzzy
 #| msgid "Откликов"
 msgid "отклик"
 msgstr "Applications"
 
-#: vacancies/models.py:172
+#: vacancies/models.py:254
 #, fuzzy
 #| msgid "Мои отклики"
 msgid "отклики"
 msgstr "My applications"
 
-#: vacancies/views.py:70
+#: vacancies/views.py:82
 msgid "Вы должны быть авторизованы"
 msgstr "You must be authorized"
 
-#: vacancies/views.py:98
+#: vacancies/views.py:114
 msgid "Вы уже откликнулись на эту вакансию"
 msgstr "You have already applied for this vacancy"
 
-#: vacancies/views.py:111
+#: vacancies/views.py:127
 msgid "Ваш отклик отправлен!"
 msgstr "Your application has been sent!"
 
-#: vacancies/views.py:187 vacancies/views.py:211 vacancies/views.py:227
+#: vacancies/views.py:256 vacancies/views.py:280 vacancies/views.py:301
+#: vacancies/views.py:344 vacancies/views.py:378 vacancies/views.py:419
 msgid "not found"
 msgstr "not found"
 
-#~ msgid "Опыт работы не может быть отрицательным."
-#~ msgstr "Experience cannot be negative."
+#: vacancies/views.py:338
+#, fuzzy
+#| msgid "Пользователь успешно активирован"
+msgid "Пользователь успешно приглашён в команду"
+msgstr "User successfully activated"
+
+#: vacancies/views.py:372
+#, fuzzy
+#| msgid "Пользователь уже активирован"
+msgid "Пользователь отклонён"
+msgstr "User already activated"
+
+#: vacancies/views.py:407
+#, fuzzy, python-brace-format
+#| msgid "Пользователь уже активирован"
+msgid "Пользователь {user} удалён из команды"
+msgstr "User already activated"
+
+#, python-brace-format
+#~ msgid "Пользователь {username} откликнулся на вакансию {vacancy_title}."
+#~ msgstr "User {username} responded to the vacancy {vacancy_title}."
+
+#~ msgid "Введите требуемый опыт (в годах)"
+#~ msgstr "Enter required experience (in years)"
+
+#, fuzzy
+#~| msgid "Введите требуемый опыт (в годах)"
+#~ msgid "требуемый опыт (в годах)"
+#~ msgstr "Enter required experience (in years)"

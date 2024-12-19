@@ -28,10 +28,18 @@ class Vacancy(django.db.models.Model):
         DELETED = "deleted", "deleted"
 
     class RequiredExperienceСhoices(django.db.models.TextChoices):
-        NO_EXPIRIENCE = "no_expirience", "Нет опыта"
-        BIGGINER = "up_to_6_months", "До 6 месяцев"
-        MIDDLE = "6_to_12_months", "От 6 до 12 месяцев"
-        EXPERT = "more_than_12_months", "Более 1 года"
+        NO_EXPIRIENCE = "no_expirience", django.utils.translation.gettext_lazy(
+            "Нет опыта",
+        )
+        BIGGINER = "up_to_6_months", django.utils.translation.gettext_lazy(
+            "До 6 месяцев",
+        )
+        MIDDLE = "6_to_12_months", django.utils.translation.gettext_lazy(
+            "От 6 до 12 месяцев",
+        )
+        EXPERT = "more_than_12_months", django.utils.translation.gettext_lazy(
+            "Более 1 года",
+        )
 
     creater = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
@@ -49,19 +57,21 @@ class Vacancy(django.db.models.Model):
     )
 
     description = tinymce.models.HTMLField(
-        
         verbose_name=django.utils.translation.gettext_lazy(
             "описание вакансии",
         ),
-    ,
         validators=[
             django.core.validators.MinLengthValidator(
                 5,
-                "Описание не может быть таким коротким",
+                django.utils.translation.gettext_lazy(
+                    "Описание не может быть таким коротким",
+                ),
             ),
             django.core.validators.MaxLengthValidator(
                 10000,
-                "Описание не может быть таким длинным",
+                django.utils.translation.gettext_lazy(
+                    "Описание не может быть таким длинным",
+                ),
             ),
         ],
         help_text="Описание вакансии должно быть от 5 до 10000 символов",
@@ -112,8 +122,10 @@ class Vacancy(django.db.models.Model):
 
     required_experience = django.db.models.CharField(
         max_length=300,
-        verbose_name="требуемый опыт",
-        help_text=("Укажите количество опыта необходимого для кандидата"),
+        verbose_name=django.utils.translation.gettext_lazy("требуемый опыт"),
+        help_text=django.utils.translation.gettext_lazy(
+            "Укажите количество опыта необходимого для кандидата",
+        ),
         choices=RequiredExperienceСhoices.choices,
         default=RequiredExperienceСhoices.NO_EXPIRIENCE,
     )
@@ -121,21 +133,28 @@ class Vacancy(django.db.models.Model):
     team_composition = django.db.models.ManyToManyField(
         django.conf.settings.AUTH_USER_MODEL,
         related_name="team_composition",
-        verbose_name="состав команды",
+        verbose_name=django.utils.translation.gettext_lazy("состав команды"),
     )
 
     need_count_users = django.db.models.PositiveSmallIntegerField(
         verbose_name=(
-            "необходимое количество человек в группе для участия в хакатоне"
+            django.utils.translation.gettext_lazy(
+                "необходимое количество человек "
+                "в группе для участия в хакатоне",
+            )
         ),
         validators=[
             django.core.validators.MinValueValidator(
                 2,
-                "Введите корректное значение",
+                django.utils.translation.gettext_lazy(
+                    "Введите корректное значение",
+                ),
             ),
             django.core.validators.MaxValueValidator(
                 100,
-                "Введите корректное значение",
+                django.utils.translation.gettext_lazy(
+                    "Введите корректное значение",
+                ),
             ),
         ],
     )
@@ -165,11 +184,15 @@ class CommentVacancy(django.db.models.Model):
         validators=[
             django.core.validators.MinLengthValidator(
                 5,
-                "Слишком короткий комментарий!",
+                django.utils.translation.gettext_lazy(
+                    "Слишком короткий комментарий!",
+                ),
             ),
             django.core.validators.MaxLengthValidator(
                 3000,
-                "Комментарий не может привышать 3000 символов!",
+                django.utils.translation.gettext_lazy(
+                    "Комментарий не может привышать 3000 символов!",
+                ),
             ),
         ],
     )
@@ -205,19 +228,19 @@ class Response(django.db.models.Model):
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
         related_name="responses",
-        verbose_name="пользователь",
+        verbose_name=django.utils.translation.gettext_lazy("пользователь"),
         unique=False,
     )
     vacancy = django.db.models.ForeignKey(
         "Vacancy",
         on_delete=django.db.models.CASCADE,
         related_name="responses",
-        verbose_name="вакансия",
+        verbose_name=django.utils.translation.gettext_lazy("вакансия"),
         unique=False,
     )
     created_at = django.db.models.DateTimeField(
         auto_now_add=True,
-        verbose_name="дата отклика",
+        verbose_name=django.utils.translation.gettext_lazy("дата отклика"),
     )
 
     status = django.db.models.CharField(
@@ -227,8 +250,8 @@ class Response(django.db.models.Model):
     )
 
     class Meta:
-        verbose_name = "отклик"
-        verbose_name_plural = "отклики"
+        verbose_name = django.utils.translation.gettext_lazy("отклик")
+        verbose_name_plural = django.utils.translation.gettext_lazy("отклики")
 
     def __str__(self):
         return f"{self.user} -> {self.vacancy}"

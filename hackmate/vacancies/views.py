@@ -252,7 +252,9 @@ class DeleteCommentView(
                 **kwargs,
             )
 
-        raise django.http.Http404("not found")
+        raise django.http.Http404(
+            django.utils.translation.gettext_lazy("not found"),
+        )
 
 
 class DeleteVacancy(django.views.generic.DeleteView):
@@ -274,7 +276,9 @@ class DeleteVacancy(django.views.generic.DeleteView):
             self.object.save()
             return django.shortcuts.redirect(self.get_success_url())
 
-        raise django.http.Http404("not found")
+        raise django.http.Http404(
+            django.utils.translation.gettext_lazy("not found"),
+        )
 
 
 class ChangeVacancyView(
@@ -293,7 +297,9 @@ class ChangeVacancyView(
             or vacancy.status
             != vacancies.models.Vacancy.VacancyStatuses.ACTIVE
         ):
-            raise django.http.Http404("not found")
+            raise django.http.Http404(
+                django.utils.translation.gettext_lazy("not found"),
+            )
 
         return super().get(request, *args, **kwargs)
 
@@ -328,11 +334,15 @@ class AcceptInvite(
 
             django.contrib.messages.success(
                 request,
-                "Пользователь успешно приглашён в команду",
+                django.utils.translation.gettext_lazy(
+                    "Пользователь успешно приглашён в команду",
+                ),
             )
             return django.shortcuts.redirect(self.success_url)
 
-        return django.http.HttpResponseNotFound("not found")
+        return django.http.HttpResponseNotFound(
+            django.utils.translation.gettext_lazy("not found"),
+        )
 
     def get_queryset(self):
         return super().get_queryset().select_related("vacancy")
@@ -359,12 +369,14 @@ class RejectInvite(
 
             django.contrib.messages.success(
                 request,
-                "Пользователь отклонён",
+                django.utils.translation.gettext_lazy("Пользователь отклонён"),
             )
 
             return django.shortcuts.redirect(self.success_url)
 
-        return django.http.HttpResponseNotFound("not found")
+        return django.http.HttpResponseNotFound(
+            django.utils.translation.gettext_lazy("not found"),
+        )
 
 
 class KickUserFromVacancy(
@@ -391,7 +403,9 @@ class KickUserFromVacancy(
 
             django.contrib.messages.success(
                 request,
-                f"Пользователь {user} удалён из команды",
+                django.utils.translation.gettext_lazy(
+                    f"Пользователь {user} удалён из команды",
+                ),
             )
 
             return django.shortcuts.redirect(
@@ -401,4 +415,6 @@ class KickUserFromVacancy(
                 ),
             )
 
-        return django.http.HttpResponseNotFound("not found")
+        return django.http.HttpResponseNotFound(
+            django.utils.translation.gettext_lazy("not found"),
+        )
