@@ -3,9 +3,9 @@ __all__ = ()
 import django.forms
 import django.utils.timezone
 import django.utils.translation
+import tinymce.widgets
 
 import vacancies.models
-import tinymce.widgets
 
 
 class VacancyForm(django.forms.ModelForm):

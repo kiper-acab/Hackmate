@@ -73,7 +73,9 @@ class Vacancy(django.db.models.Model):
                 ),
             ),
         ],
-        help_text="Описание вакансии должно быть от 5 до 10000 символов",
+        help_text=django.utils.translation.gettext_lazy(
+            "Описание вакансии должно быть от 5 до 10000 символов",
+        ),
     )
 
     created_at = django.db.models.DateTimeField(
@@ -112,8 +114,6 @@ class Vacancy(django.db.models.Model):
 
     hackaton_date = django.db.models.DateField(
         verbose_name=django.utils.translation.gettext_lazy("дедлайн"),
-        null=True,
-        blank=True,
         help_text=django.utils.translation.gettext_lazy(
             "Крайний срок подачи заявок",
         ),

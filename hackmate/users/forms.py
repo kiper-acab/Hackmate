@@ -62,16 +62,9 @@ class ProfileImageChangeForm(BootstrapForm):
             users.models.Profile.image.field.name: (
                 django.utils.translation.gettext_lazy("Выберите себе картинку")
             ),
-            users.models.Profile.description.field.name: (
-                django.utils.translation.gettext_lazy("Описание")
-            ),
         }
 
         widgets = {
-            users.models.Profile.birthday.field.name: django.forms.DateInput(
-                attrs={"type": "date"},
-                format=("%Y-%m-%d"),
-            ),
             users.models.Profile.image.field.name: django.forms.FileInput(),
         }
 
@@ -96,7 +89,11 @@ class ProfileChangeForm(BootstrapForm):
         )
 
         labels = {
-            users.models.Profile.description.field.name: "Описание",
+            users.models.Profile.description.field.name: (
+                django.utils.translation.gettext_lazy(
+                    "Описание",
+                )
+            ),
         }
 
         widgets = {

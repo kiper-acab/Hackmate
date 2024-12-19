@@ -7,6 +7,7 @@ import django.contrib.messages
 import django.test
 import django.urls
 import django.utils
+import django.utils.timezone
 import parametrize
 
 import vacancies.models
@@ -44,6 +45,7 @@ class VacanciesTests(django.test.TestCase):
             creater=cls.user,
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
             need_count_users=2,
+            hackaton_date=django.utils.timezone.now().strftime("%Y-%m-%d"),
         )
 
         cls.comment = vacancies.models.CommentVacancy.objects.create(
@@ -69,6 +71,9 @@ class VacanciesTests(django.test.TestCase):
             vacancies.models.Vacancy.need_count_users.field.name: 2,
             vacancies.models.Vacancy.required_experience.field.name: (
                 vacancies.models.Vacancy.RequiredExperienceСhoices.BIGGINER,
+            ),
+            vacancies.models.Vacancy.hackaton_date.field.name: (
+                django.utils.timezone.now().strftime("%Y-%m-%d")
             ),
         }
         vacancy_count = vacancies.models.Vacancy.objects.all().count()
@@ -317,6 +322,7 @@ class InviteUserTestCase(django.test.TestCase):
             creater=cls.user,
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
             need_count_users=2,
+            hackaton_date=django.utils.timezone.now().strftime("%Y-%m-%d"),
         )
 
     @classmethod

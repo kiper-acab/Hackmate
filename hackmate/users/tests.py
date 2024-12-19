@@ -554,5 +554,5 @@ class ProfileEditViewTest(django.test.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            "Поля Email и Username обязательны для заполнения.",
+            "Поля Email и Username обязательны",
         )

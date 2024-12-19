@@ -64,14 +64,9 @@ class ProfileView(django.views.generic.View):
         )
 
         is_own_profile = user == request.user
-        try:
-            rating_user = star_ratings.models.Rating.objects.get(
-                object_id=user.id,
-            )
-        except django.core.exceptions.ObjectDoesNotExist:
-            rating_user = star_ratings.models.Rating.objects.create(
-                content_object=user,
-            )
+        rating_user = star_ratings.models.Rating.objects.filter(
+            object_id=user.id,
+        )
 
         return django.shortcuts.render(
             request,

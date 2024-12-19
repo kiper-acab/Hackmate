@@ -24,7 +24,7 @@
     <p class="vacancy-description">{{ vacancy.description|safe }}</p>
 
     <div class="vacancy-info">
-      <p><strong>{% trans 'Создатель:' %}</strong> {{ vacancy.creater.username }}</p>
+      <p><strong>{% trans 'Создатель:' %}</strong> {{ vacancy.creater.username|truncatechars:200 }}</p>
       <p><strong>{% trans 'Создано:' %}</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
       {% if vacancy.hackaton_title %}
         <p><strong>{% trans 'Хакатон:' %}</strong> {{ vacancy.hackaton_title }}</p>
@@ -35,9 +35,9 @@
       {% if vacancy.required_experience %}
         <p><strong>{% trans 'Требуемый опыт:' %}</strong> {{ vacancy.get_required_experience_display }}</p>
       {% endif %}
-      <p><strong>Необходимое количество человек в группе для участия в хакатоне</strong> {{ vacancy.need_count_users }}</p>
+      <p><strong>{% trans 'Необходимое количество человек в группе для участия в хакатоне' %}:</strong> {{ vacancy.need_count_users }}</p>
       <article class="command">
-        <p><strong>Текущий состав команды:</strong></p>
+        <p><strong>{% trans 'Текущий состав команды' %}:</strong></p>
         <article class="teammates">
           <a href="{% url 'users:profile' vacancy.creater.username %}" class="teammate">
             {% if vacancy.creater.profile.image %}
@@ -45,7 +45,7 @@
             {% else %}
               <img src="{% static 'img/default-avatar.jpg' %}" class="teammate-image">
             {% endif %}
-            <p class="teammate-username teammate-admin-username">{{ vacancy.creater.username }}</p>
+            <p class="teammate-username teammate-admin-username">{{ vacancy.creater.username|truncatechars:50 }}</p>
           </a>
           {% for member in vacancy.team_composition.all %}
             <article class="teammate-article">
@@ -55,7 +55,7 @@
                 {% else %}
                   <img src="{% static 'img/default-avatar.jpg' %}" class="teammate-image">
                 {% endif %}
-                <p class="teammate-username">{{ member.username }}</p>
+                <p class="teammate-username">{{ member.username|truncatechars:50 }}</p>
               </a>
               {% if request.user == vacancy.creater and vacancy.status == 'active' %}
                 <a href="{% url 'vacancies:kick_user' vacancy.id member.pk %}"><i class="fa-solid fa-ban decline-user kick-teammate"></i></a>
@@ -75,7 +75,7 @@
         {% if not is_deadline_passed and vacancy.need_count_users != 0  and request.user not in vacancy.team_composition.all %}
           <button id="respond-button" class="grow-button">{% trans 'Откликнуться' %}</button>
         {% else %}
-          <p class="deadline-message">{% trans 'Дедлайн истёк. Вы больше не можете откликнуться на эту вакансию.' %}</p>
+          <p class="deadline-message">{% trans 'Вы больше не можете откликнуться на эту вакансию.' %}</p>
         {% endif %}
       {% endif %}
     {% else %}
@@ -111,9 +111,9 @@
               <header class="comment-header">
                 <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
                   {% if comment.user.profile.image %}
-                  <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user }}</span>
+                  <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user.username|truncatechars:50 }}</span>
                   {% else %}
-                  <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user }}</span>
+                  <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user.username|truncatechars:50 }}</span>
                   {% endif %}
                 </a>
                   <figure>

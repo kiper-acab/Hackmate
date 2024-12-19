@@ -17,7 +17,7 @@
 }
 
 .profile-avatar {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .profile-avatar .avatar {
@@ -62,9 +62,7 @@
 }
 
 
-button {
-margin: 30px;
-}
+
 
 .profile-section {
   display: flex;
@@ -141,4 +139,46 @@ margin: 30px;
 .star-ratings-rate-action{
   width: 50px;
   height: 50px;
+}
+
+.finished-vacancies-title{
+  margin-top: 50px;
+}
+
+.card{
+  margin: 50px auto;
+}
+
+.grow-button {
+  border:none;
+  margin: 10px;
+  text-decoration: none;
+  background:transparent;
+  --btn-width: 120px;
+  width: var(--btn-width);
+  min-height:45px;
+  background-color:rgb(71, 172, 255);
+  color:white;
+  font-weight:bold;
+  border-radius:50px;
+  
+  cursor: pointer;
+  box-sizing: content-box;
+  text-align:center;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  --expand: 0px;
+  
+  position:relative;
+  transition: padding 0.5s, left 0.5s;
+  
+  padding-inline:var(--expand);
+  left: calc( var(--expand) * -1);
+
+  &:hover, &:active {
+    --expand: calc( var(--btn-width) * .15);
+  }
 }

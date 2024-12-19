@@ -13,10 +13,11 @@
     <div class="profile-header">
       <div class="profile-rating">
        <div class="stars">
-          {% if request.user.username != profile.user.username %}
-	          <h4>Рейтинг {{ rating_count.average|floatformat:1 }}<br>
-	          Количество оценок {{ rating_count.count }}
-</h4>
+          {% if is_own_profile %}
+            <article>
+              <h4>{% trans 'Рейтинг' %} {{ rating_count.average|floatformat:1 }}</h4>
+              <h4>{% trans 'Количество оценок' %} {{ rating_count.count }}</h4>
+            </article>
           {% else %}
             {% ratings user.profile %}
           {% endif %}
@@ -85,21 +86,19 @@
         <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">{% trans 'Редактировать профиль' %}</a>
       </div>
     {% endif %}
-  <h2>Завершённые вакансии</h2>
-{% for vacancy in finished_vacancies %}
-    <div class="vacancy-card">
-        <h3 class="vacancy-title">
-            <a href="{% url 'vacancies:vacancy_detail' pk=vacancy.pk %}">
-                {{ vacancy.title }}
-            </a>
-        </h3>
-        <p class="vacancy-description">{{ vacancy.description }}</p>
-        <p class="vacancy-deadline">Дата хакатона: {{ vacancy.hackaton_date|date:"d.m.Y" }}</p>
-    </div>
-{% empty %}
-    <p class="no-vacancies">У пользователя {{ profile_user.username }} нет завершённых вакансий.</p>
-{% endfor %}
 
+    <h2 class="finished-vacancies-title">{% trans 'Завершённые вакансии' %}</h2>
+    {% for vacancy in finished_vacancies %}
+      <div class="card w-75 mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ vacancy.title }}</h5>
+          <p class="card-text">{{ vacancy.description|truncatechars:200|safe }}</p>
+          <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="grow-button">{% trans 'Детальнее' %}</a>
+        </div>
+      </div>
+    {% empty %}
+        <p class="no-vacancies">{% trans 'У пользователя' %} {{ profile_user.username }} {% trans 'нет завершённых вакансий' %}.</p>
+    {% endfor %}
   </section>
 
   <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">

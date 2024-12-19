@@ -3,6 +3,7 @@ __all__ = ()
 import django.contrib.auth
 import django.test
 import django.urls
+import django.utils.timezone
 import notifications.models
 
 import vacancies.models
@@ -33,6 +34,7 @@ class NotificationsTests(django.test.TestCase):
             creater=cls.user,
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
             need_count_users=2,
+            hackaton_date=django.utils.timezone.now().strftime("%Y-%m-%d"),
         )
 
         cls.vacancy2 = vacancies.models.Vacancy.objects.create(
@@ -41,6 +43,7 @@ class NotificationsTests(django.test.TestCase):
             creater=cls.user,
             status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
             need_count_users=2,
+            hackaton_date=django.utils.timezone.now().strftime("%Y-%m-%d"),
         )
 
     @classmethod

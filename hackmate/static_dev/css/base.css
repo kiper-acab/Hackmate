@@ -30,6 +30,10 @@ html, body {
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .navbar-brand img {
@@ -135,6 +139,21 @@ html, body {
 .notification-profile-link{
     padding: 0;
     text-decoration: none;
+}
+
+.set-language-form{
+    display: flex;
+    justify-content: end;
+    margin: 0 50px;
+    width: 500px;
+}
+
+.set-language-btn{
+    border-radius: 5%;
+}
+
+.form-select{
+    width: 200px;
 }
 
 .footer {

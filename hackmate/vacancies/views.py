@@ -1,5 +1,7 @@
 __all__ = ()
 
+import datetime
+
 import django.contrib
 import django.contrib.auth.mixins
 import django.contrib.messages
@@ -8,6 +10,7 @@ import django.db.models
 import django.http
 import django.shortcuts
 import django.urls
+import django.utils.timezone
 import django.utils.translation
 import django.views
 import django.views.generic
@@ -36,7 +39,14 @@ class VacancyView(django.views.generic.ListView):
         return vacancies.models.Vacancy.objects.select_related(
             "creater",
             "creater__profile",
-        ).filter(status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE)[:10]
+        ).filter(
+            status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+            hackaton_date__gte=(
+                django.utils.timezone.now() - datetime.timedelta(days=1)
+            ),
+        )[
+            :10
+        ]
 
 
 class VacancyDetailView(
@@ -47,7 +57,7 @@ class VacancyDetailView(
     context_object_name = "vacancy"
     form_class = vacancies.forms.CommentForm
 
-    def get_object(self):
+    def get_objects(self):
         queryset = (
             self.get_queryset()
             .select_related("creater", "creater__profile")
@@ -172,6 +182,10 @@ class UserResponsesView(
                         vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
                         vacancies.models.Vacancy.VacancyStatuses.EQUIPPED,
                     ],
+                    vacancy__hackaton_date__gte=(
+                        django.utils.timezone.now()
+                        - datetime.timedelta(days=1),
+                    ),
                 ),
             ),
         )
@@ -361,6 +375,10 @@ class RejectInvite(
         if (
             request.user == response.vacancy.creater
             and request.user != response.user
+            and response.vacancy.hackaton_date
+            >= (
+                django.utils.timezone.now() - datetime.timedelta(days=1)
+            ).date()
         ):
             response.status = (
                 vacancies.models.Response.ResponseStatuses.REJECTED
@@ -393,6 +411,10 @@ class KickUserFromVacancy(
             request.user == vacancy.creater
             and vacancy.status
             == vacancies.models.Vacancy.VacancyStatuses.ACTIVE
+            and vacancy.hackaton_date
+            >= (
+                django.utils.timezone.now() - datetime.timedelta(days=1)
+            ).date()
         ):
             user_id = kwargs.get("user_id")
             user = django.contrib.auth.get_user_model().objects.get(

@@ -3,12 +3,12 @@
 {% load notifications_tags %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
-  <a class="navbar-brand" href="{% url 'homepage:homepage' %}">
-    <img src="{% static 'logo/favicon.ico' %}" width="48">
-  </a>
-  {% with request.resolver_match.view_name as view_name %}
   <article class="navbar-nav list-group">
+    {% with request.resolver_match.view_name as view_name %}
+      {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
+    <a class="navbar-brand" href="{% url 'homepage:homepage' %}">
+      <img src="{% static 'logo/favicon.ico' %}" width="48">
+    </a>
     <a class="{% if view_name == 'homepage:homepage' %}list-group-item list-group-item-info {% endif %}" href="{% url 'homepage:homepage' %}">{% trans "Главная" %}</a>
     <a class="{% if view_name == 'vacancies:vacancies' %}list-group-item list-group-item-info {% endif %}" href="{% url 'vacancies:vacancies' %}">{% trans "Найти команду" %}</a>
     {% if not request.user.is_authenticated %}
@@ -26,13 +26,13 @@
             {% else %}
               <img src="{% static 'img/default-avatar.jpg' %}" alt="Default Avatar" class="dropdown-image">
             {% endif %}
-              <p class="dropdown-username">{{ request.user.username }}</p>
+              <p class="dropdown-username">{{ request.user.username|truncatechars:40 }}</p>
           </button>
           <ul class="dropdown-menu">
             {% if request.user.is_superuser %}
               <li><a href="/admin/" class="dropdown-item">{% trans "Админка" %}</a></li>
             {% endif %}
-            <li><a href="{% url 'users:profile' username=user %}" class="dropdown-item">{% trans "Профиль" %}</a></li>
+            <li><a href="{% url 'users:profile' username=request.user %}" class="dropdown-item">{% trans "Профиль" %}</a></li>
             <li><a href="{% url 'users:profile_edit' %}" class="dropdown-item">{% trans "Редактирование профиля" %}</a></li>
             <li><a href="{% url 'users:password_change' %}" class="dropdown-item">{% trans "Изменить пароль" %}</a></li>
             <li><a href="{% url 'users:password_reset' %}" class="dropdown-item">{% trans "Восстановить пароль" %}</a></li>
@@ -41,17 +41,6 @@
         </li>
       </ul>
     </div>
-  </article>
-  <form action="{% url 'set_language' %}" method="post" class="d-flex">
-		{% csrf_token %}
-		<input name="next" type="hidden" value="{{ request.get_full_path }}">
-		<select name="language" class="form-select">
-			{% get_current_language as LANGUAGE_CODE %}
-			<option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>Русский</option>
-			<option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
-		</select>
-		<button type="submit" class="btn border-white ms-2 btn-dark">{% trans "Сменить" %}</button>
-	</form>
   <div class="dropdown">
     {% with request.user.notifications.unread as unread_notifications %}
       <a href="#" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false" class="bell-link">
@@ -65,7 +54,7 @@
           {% for notification in unread_notifications %}
             <li class="notification-dropdown-item-li">
               <p class="dropdown-item dropdown-item-notify" href="#">
-                <a href="{% url 'users:profile' notification.actor %}" class="notification-profile-link">{{ notification.actor }}</a> {{ notification.verb }} - {{ notification.timestamp|date:"d.m.Y H:i" }}
+                <a href="{% url 'users:profile' notification.actor %}" class="notification-profile-link">{{ notification.actor|truncatechars:30 }}</a> {{ notification.verb }} - {{ notification.timestamp|date:"d.m.Y H:i" }}
               </p>
               <a href="{% url 'notify:readone_notification' notification.pk %}" class="readone_notification">⨯</a>
             </li>
@@ -86,4 +75,17 @@
   </div>
   {% endif %}
   {% endwith %}
+  </article>
+  <article>
+    <form action="{% url 'set_language' %}" method="post" class="d-flex set-language-form">
+      {% csrf_token %}
+		<input name="next" type="hidden" value="{{ request.get_full_path }}">
+      <select name="language" class="form-select">
+        {% get_current_language as LANGUAGE_CODE %}
+        <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>Русский</option>
+        <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+      </select>
+      <button type="submit" class="btn border-white ms-2 btn-dark">{% trans "Сменить" %}</button>
+    </form>
+  </article>
 </nav>

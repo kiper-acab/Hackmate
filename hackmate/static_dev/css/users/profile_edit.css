@@ -25,25 +25,18 @@ h1 {
     flex-direction: column;
 }
 
-label {
+.form-group>label {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-top: 20px;
     color: #555;
 }
 
-input, textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    color: #333;
-    background-color: #fff;
+.form-control{
+    margin: 3px;
 }
 
-textarea {
-    resize: vertical;
-    height: 100px;
+.add-new-link-title{
+    margin-top: 50px;
 }
 
 .current-avatar {
@@ -61,7 +54,6 @@ textarea {
 
 }
 
-
 .delete-link-btn:hover {
     background-color: rgba(220, 53, 69, 0.1);
     color: darkred;
@@ -71,18 +63,44 @@ textarea {
     display: inline-block;
     margin-left: 8px;
 }
-button {
-    align-self: flex-start;
-    padding: 12px 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
+
+.delete-link-button{
     border: none;
-    border-radius: 4px;
+    background: none;
+}
+
+.btn-confirm-changes {
+    border:none;
+    margin: 50px 20px 20px 20px;
+    text-decoration: none;
+    background:transparent;
+    --btn-width: 210px;
+    width: var(--btn-width);
+    min-height:45px;
+    background-color:rgb(71, 172, 255);
+    color:white;
+    font-weight:bold;
+    border-radius:50px;
+    
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-bottom: 20px;
+    box-sizing: content-box;
+    text-align:center;
+    
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+    --expand: 0px;
+    
+    position:relative;
+    transition: padding 0.5s, left 0.5s;
+    
+    padding-inline:var(--expand);
+    left: calc( var(--expand) * -1);
+    
+    &:hover, &:active {
+        --expand: calc( var(--btn-width) * .1);
+    }
 }
 
 
@@ -93,6 +111,10 @@ button {
 }
 .li-links>p{
     margin: auto 0;
+}
+
+.other-social-links-title{
+    margin-top: 50px;
 }
 
 .close{
