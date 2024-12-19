@@ -9,14 +9,16 @@
 
 {% block content %}
   <div class="container vacancy-container">
-    {% if request.user == vacancy.creater %}
-      <div class="dropdown">
-        <button class="btn-vacancy-menu" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'vacancies:change_vacancy' vacancy.pk %}">Изменить вакансию</a></li>
-          <li><a class="dropdown-item" href="{% url 'vacancies:delete_vacancy' vacancy.pk %}">Удалить вакансию</a></li>
-        </ul>
-      </div>
+    {% if vacancy.status == "active" %}
+      {% if request.user == vacancy.creater %}
+        <div class="dropdown">
+          <button class="btn-vacancy-menu" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'vacancies:change_vacancy' vacancy.pk %}">Изменить вакансию</a></li>
+            <li><a class="dropdown-item" href="{% url 'vacancies:delete_vacancy' vacancy.pk %}">Удалить вакансию</a></li>
+          </ul>
+        </div>
+      {% endif %}
     {% endif %}
     <h1 class="vacancy-title">{{ vacancy.title }}</h1>
     <p class="vacancy-description">{{ vacancy.description }}</p>
@@ -55,7 +57,7 @@
                 {% endif %}
                 <p class="teammate-username">{{ member.username }}</p>
               </a>
-              {% if request.user == vacancy.creater %}
+              {% if request.user == vacancy.creater and vacancy.status == 'active' %}
                 <a href="{% url 'vacancies:kick_user' vacancy.id member.pk %}"><i class="fa-solid fa-ban decline-user kick-teammate"></i></a>
               {% endif %}
             </article>
@@ -70,7 +72,7 @@
 
     {% if user.is_authenticated %}
       {% if user != vacancy.creater %}
-        {% if not is_deadline_passed and vacancy.need_count_users != 0 %}
+        {% if not is_deadline_passed and vacancy.need_count_users != 0  and request.user not in vacancy.team_composition.all %}
           <button id="respond-button" class="grow-button">Откликнуться</button>
         {% else %}
           <p class="deadline-message">Вы больше не можете откликнуться на эту вакансию.</p>

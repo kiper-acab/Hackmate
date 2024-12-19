@@ -25,22 +25,24 @@
         </a>
         <p class="vacancy-description">{{ vacancy.description|truncatechars:200 }}</p>
         <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
-        <div class="vacancy-responses">
-          <h3>Откликнувшиеся пользователи:</h3>
-          <article class="responses-users">
-            {% for response in vacancy.responses.all %}
-              <article class="">
-                <a href="{% url 'users:profile' response.user.username %}" class="user-profile-link">{{ response.user.username }}</a>
-              </article>
-              <article>
-                <a href="{% url 'vacancies:invite_user' response.id %}" class=""><i class="fa-solid fa-check accept-user"></i></a>
-                <a href="{% url 'vacancies:reject_user' response.id %}" class=""><i class="fa-solid fa-ban decline-user"></i></a>
-              </article>
-            {% empty %}
-              <a>Пока никто не откликнулся</a>
-            {% endfor %}
-          </article>
-        </div>
+        {% if vacancy.status == "active" %}
+          <div class="vacancy-responses">
+            <h3>Откликнувшиеся пользователи:</h3>
+            <article class="responses-users">
+                {% for response in vacancy.responses.all %}
+                  <article class="">
+                    <a href="{% url 'users:profile' response.user.username %}" class="user-profile-link">{{ response.user.username }}</a>
+                  </article>
+                  <article>
+                    <a href="{% url 'vacancies:invite_user' response.id %}" class=""><i class="fa-solid fa-check accept-user"></i></a>
+                    <a href="{% url 'vacancies:reject_user' response.id %}" class=""><i class="fa-solid fa-ban decline-user"></i></a>
+                  </article>
+                {% empty %}
+                  <a>Пока никто не откликнулся</a>
+                {% endfor %}
+            </article>
+          </div>
+        {% endif %}
       </div>
     {% empty %}
     <article class="nothing-container">

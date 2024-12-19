@@ -23,6 +23,12 @@ class Vacancy(django.db.models.Model):
         EQUIPPED = "equipped", "equipped"
         DELETED = "deleted", "deleted"
 
+    class RequiredExperienceСhoices(django.db.models.TextChoices):
+        NO_EXPIRIENCE = "no_expirience", "Нет опыта"
+        BIGGINER = "up_to_6_months", "До 6 месяцев"
+        MIDDLE = "6_to_12_months", "От 6 до 12 месяцев"
+        EXPERT = "more_than_12_months", "Более 1 года"
+
     creater = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
@@ -86,23 +92,12 @@ class Vacancy(django.db.models.Model):
         help_text="Крайний срок подачи заявок",
     )
 
-    required_experience = django.db.models.IntegerField(
-        verbose_name="требуемый опыт (в годах)",
-        null=True,
-        blank=True,
-        help_text=(
-            "Укажите количество лет опыта " "необходимого для кандидата"
-        ),
-        validators=[
-            django.core.validators.MinValueValidator(
-                0,
-                "Введите корректное значение",
-            ),
-            django.core.validators.MaxValueValidator(
-                100,
-                "Введите корректное значение",
-            ),
-        ],
+    required_experience = django.db.models.CharField(
+        max_length=300,
+        verbose_name="требуемый опыт",
+        help_text=("Укажите количество опыта необходимого для кандидата"),
+        choices=RequiredExperienceСhoices.choices,
+        default=RequiredExperienceСhoices.NO_EXPIRIENCE,
     )
 
     team_composition = django.db.models.ManyToManyField(

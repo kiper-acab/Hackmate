@@ -153,9 +153,10 @@ class UserResponsesView(
             active_vacancy=django.db.models.FilteredRelation(
                 "vacancy",
                 condition=django.db.models.Q(
-                    vacancy__status=(
-                        vacancies.models.Vacancy.VacancyStatuses.ACTIVE
-                    ),
+                    vacancy__status__in=[
+                        vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+                        vacancies.models.Vacancy.VacancyStatuses.EQUIPPED,
+                    ],
                 ),
             ),
         )
@@ -172,7 +173,10 @@ class UserVacanciesView(
     def get_queryset(self):
         return vacancies.models.Vacancy.objects.filter(
             creater=self.request.user,
-            status=vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+            status__in=[
+                vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+                vacancies.models.Vacancy.VacancyStatuses.EQUIPPED,
+            ],
         ).prefetch_related(
             django.db.models.Prefetch(
                 "responses",
@@ -268,7 +272,12 @@ class ChangeVacancyView(
     pk_url_kwarg = "pk"
 
     def get(self, request, *args, **kwargs):
-        if request.user != self.get_object().creater:
+        vacancy = self.get_object()
+        if (
+            request.user != vacancy.creater
+            or vacancy.status
+            != vacancies.models.Vacancy.VacancyStatuses.ACTIVE
+        ):
             raise django.http.Http404("not found")
 
         return super().get(request, *args, **kwargs)
