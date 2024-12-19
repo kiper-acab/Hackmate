@@ -29,11 +29,11 @@
       {% if vacancy.hackaton_title %}
         <p><strong>{% trans 'Хакатон:' %}</strong> {{ vacancy.hackaton_title }}</p>
       {% endif %}
-      {% if vacancy.deadline %}
-        <p><strong>{% trans 'Дедлайн:' %}</strong> {{ vacancy.deadline|date:"d.m.Y" }}</p>
+      {% if vacancy.hackaton_date %}
+        <p><strong>{% trans 'Дедлайн:' %}</strong> {{ vacancy.hackaton_date|date:"d.m.Y" }}</p>
       {% endif %}
       {% if vacancy.required_experience %}
-        <p><strong>{% trans 'Требуемый опыт:' %}</strong> {{ vacancy.required_experience }} лет</p>
+        <p><strong>{% trans 'Требуемый опыт:' %}</strong> {{ vacancy.get_required_experience_display }}</p>
       {% endif %}
       <p><strong>Необходимое количество человек в группе для участия в хакатоне</strong> {{ vacancy.need_count_users }}</p>
       <article class="command">

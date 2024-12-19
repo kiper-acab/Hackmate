@@ -26,5 +26,6 @@
 		<button type="submit" class="btn btn-primary">{% trans "Отправить" %}</button>
 	  </form>
 	</article>
+			<a href="{% url 'users:password_reset' %}" class="password">Восстановить пароль</a>
   </section>
 {% endblock %}

@@ -23,7 +23,6 @@ class Ip(django.db.models.Model):
 class Vacancy(django.db.models.Model):
     class VacancyStatuses(django.db.models.TextChoices):
         ACTIVE = "active", "active"
-        INACTIVE = "inactive", "inactive"
         EQUIPPED = "equipped", "equipped"
         DELETED = "deleted", "deleted"
 
@@ -111,7 +110,7 @@ class Vacancy(django.db.models.Model):
         ),
     )
 
-    deadline = django.db.models.DateField(
+    hackaton_date = django.db.models.DateField(
         verbose_name=django.utils.translation.gettext_lazy("дедлайн"),
         null=True,
         blank=True,
@@ -252,6 +251,7 @@ class Response(django.db.models.Model):
     class Meta:
         verbose_name = django.utils.translation.gettext_lazy("отклик")
         verbose_name_plural = django.utils.translation.gettext_lazy("отклики")
+        ordering = ["-created_at", "id"]
 
     def __str__(self):
         return f"{self.user} -> {self.vacancy}"

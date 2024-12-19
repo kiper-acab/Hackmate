@@ -12,9 +12,16 @@
   <section class="container profile-section">
     <div class="profile-header">
       <div class="profile-rating">
-        <div class="stars">
-          {% ratings user.profile %}
+       <div class="stars">
+          {% if request.user.username != profile.user.username %}
+	          <h4>Рейтинг {{ rating_count.average|floatformat:1 }}<br>
+	          Количество оценок {{ rating_count.count }}
+</h4>
+          {% else %}
+            {% ratings user.profile %}
+          {% endif %}
         </div>
+
       </div>
     </div>
     <div class="profile-avatar">
@@ -43,22 +50,6 @@
             <p><strong>{% trans 'День рождения' %}:</strong> {{ user.profile.birthday }}</p>
           {% else %}
             <p><strong>{% trans 'День рождения' %}:</strong> {% trans 'Информация не указана.' %}</p>
-          {% endif %}
-        </div>
-
-        <div class="profile-item">
-          {% if user.profile.country %}
-            <p><strong>{% trans 'Страна' %}:</strong> {{ user.profile.country.country.alternate_names }}</p>
-          {% else %}
-            <p><strong>{% trans 'Страна' %}:</strong> {% trans 'Информация не указана.' %}</p>
-          {% endif %}
-        </div>
-
-        <div class="profile-item">
-          {% if user.profile.city %}
-            <p><strong>{% trans 'Город' %}:</strong> {{ user.profile.city }}</p>
-          {% else %}
-            <p><strong>{% trans 'Город' %}:</strong> {% trans 'Информация не указана.' %}</p>
           {% endif %}
         </div>
 
@@ -94,6 +85,21 @@
         <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">{% trans 'Редактировать профиль' %}</a>
       </div>
     {% endif %}
+  <h2>Завершённые вакансии</h2>
+{% for vacancy in finished_vacancies %}
+    <div class="vacancy-card">
+        <h3 class="vacancy-title">
+            <a href="{% url 'vacancies:vacancy_detail' pk=vacancy.pk %}">
+                {{ vacancy.title }}
+            </a>
+        </h3>
+        <p class="vacancy-description">{{ vacancy.description }}</p>
+        <p class="vacancy-deadline">Дата хакатона: {{ vacancy.hackaton_date|date:"d.m.Y" }}</p>
+    </div>
+{% empty %}
+    <p class="no-vacancies">У пользователя {{ profile_user.username }} нет завершённых вакансий.</p>
+{% endfor %}
+
   </section>
 
   <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">

@@ -26,6 +26,7 @@
         <p class="vacancy-description">{{ vacancy.description|safe|truncatechars:200 }}</p>
         <p class="vacancy-stats">{% trans 'Откликов' %}: {{ vacancy.responses.count }}</p>
         {% if vacancy.status == "active" %}
+          <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
           <div class="vacancy-responses">
             <h3>{% trans 'Откликнувшиеся пользователи:' %}</h3>
             <article class="responses-users">
@@ -42,7 +43,7 @@
                 {% endfor %}
             </article>
           </div>
-        {% endif %}
+      {% endif %}
       </div>
     {% empty %}
     <article class="nothing-container">

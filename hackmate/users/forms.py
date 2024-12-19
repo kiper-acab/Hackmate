@@ -53,14 +53,10 @@ class UserCreateForm(
         }
 
 
-class ProfileChangeForm(BootstrapForm):
+class ProfileImageChangeForm(BootstrapForm):
     class Meta:
         model = users.models.Profile
-        fields = (
-            users.models.Profile.image.field.name,
-            users.models.Profile.birthday.field.name,
-            users.models.Profile.description.field.name,
-        )
+        fields = (users.models.Profile.image.field.name,)
 
         labels = {
             users.models.Profile.image.field.name: (
@@ -89,6 +85,28 @@ class ProfileChangeForm(BootstrapForm):
             instance.save()
 
         return instance
+
+
+class ProfileChangeForm(BootstrapForm):
+    class Meta:
+        model = users.models.Profile
+        fields = (
+            users.models.Profile.birthday.field.name,
+            users.models.Profile.description.field.name,
+        )
+
+        labels = {
+            users.models.Profile.description.field.name: "Описание",
+        }
+
+        widgets = {
+            users.models.Profile.birthday.field.name: django.forms.DateInput(
+                attrs={
+                    "type": "date",
+                },
+                format=("%Y-%m-%d"),
+            ),
+        }
 
 
 class ProfileLinkForm(BootstrapForm):
@@ -133,3 +151,17 @@ class AuthenticateForm(
     class Meta:
         model = django.contrib.auth.models.User
         fields = ["username", "password"]
+
+
+class PasswordChangeForm(django.contrib.auth.forms.PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control"
+
+
+class PasswordResetForm(django.contrib.auth.forms.PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control"
