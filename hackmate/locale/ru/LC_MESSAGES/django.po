@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-19 17:17+0400\n"
+"POT-Creation-Date: 2024-12-19 18:24+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,11 +29,11 @@ msgstr "О проекте"
 msgid "Апи"
 msgstr "Апи"
 
-#: hackmate/settings.py:126
+#: hackmate/settings.py:129
 msgid "Русский"
 msgstr "Русский"
 
-#: hackmate/settings.py:127
+#: hackmate/settings.py:130
 msgid "English"
 msgstr "Английский"
 
@@ -587,11 +587,11 @@ msgstr "Профиль"
 msgid "Редактирование профиля"
 msgstr "Редактирование профиля"
 
-#: templates/includes/header.html:37 templates/users/profile_edit.html:80
+#: templates/includes/header.html:37 templates/users/profile_edit.html:83
 msgid "Изменить пароль"
 msgstr "Изменить пароль"
 
-#: templates/includes/header.html:38 templates/users/profile_edit.html:81
+#: templates/includes/header.html:38 templates/users/profile_edit.html:84
 msgid "Восстановить пароль"
 msgstr "Восстановить пароль"
 
@@ -634,48 +634,39 @@ msgstr "Восстановить"
 msgid "Пароль успешно восстановили"
 msgstr "Пароль успешно восстановили"
 
-#: templates/users/profile.html:24 templates/vacancies/vacancies.html:27
+#: templates/users/profile.html:31 templates/vacancies/vacancies.html:27
 msgid "Default Avatar"
 msgstr "Аватар по умолчанию"
 
-#: templates/users/profile.html:30
+#: templates/users/profile.html:37
 msgid "Email"
 msgstr "Email"
 
-#: templates/users/profile.html:35 templates/users/profile.html:37
+#: templates/users/profile.html:42 templates/users/profile.html:44
 msgid "О себе"
 msgstr "О себе"
 
-#: templates/users/profile.html:37 templates/users/profile.html:45
-#: templates/users/profile.html:53 templates/users/profile.html:61
+#: templates/users/profile.html:44 templates/users/profile.html:52
 msgid "Информация не указана."
 msgstr "Информация не указана."
 
-#: templates/users/profile.html:43 templates/users/profile.html:45
+#: templates/users/profile.html:50 templates/users/profile.html:52
 msgid "День рождения"
 msgstr "День рождения"
 
-#: templates/users/profile.html:51 templates/users/profile.html:53
-msgid "Страна"
-msgstr "Страна"
-
-#: templates/users/profile.html:59 templates/users/profile.html:61
-msgid "Город"
-msgstr "Город"
-
-#: templates/users/profile.html:66
+#: templates/users/profile.html:57
 msgid "Дата регистрации"
 msgstr "Дата регистрации"
 
-#: templates/users/profile.html:72 templates/users/profile_edit.html:57
+#: templates/users/profile.html:63 templates/users/profile_edit.html:60
 msgid "Ссылки на другие сети"
 msgstr "Ссылки на другие сети"
 
-#: templates/users/profile.html:88 templates/users/profile_edit.html:77
+#: templates/users/profile.html:79 templates/users/profile_edit.html:80
 msgid "Ссылки отсутствуют."
 msgstr "Ссылки отсутствуют."
 
-#: templates/users/profile.html:94
+#: templates/users/profile.html:85
 msgid "Редактировать профиль"
 msgstr "Редактировать профиль"
 
@@ -695,11 +686,11 @@ msgstr "Удалить изображение"
 msgid "Аватар отсутствует"
 msgstr "Аватар отсутствует"
 
-#: templates/users/profile_edit.html:51
+#: templates/users/profile_edit.html:54
 msgid "Добавить новую ссылку"
 msgstr "Добавить новую ссылку"
 
-#: templates/users/profile_edit.html:55
+#: templates/users/profile_edit.html:58
 msgid "Сохранить изменения"
 msgstr "Сохранить изменения"
 
@@ -772,23 +763,23 @@ msgstr "Ваши вакансии"
 msgid "Откликов"
 msgstr "Откликов"
 
-#: templates/vacancies/user_vacancies.html:30
+#: templates/vacancies/user_vacancies.html:31
 msgid "Откликнувшиеся пользователи:"
 msgstr "Откликнувшиеся пользователи:"
 
-#: templates/vacancies/user_vacancies.html:41
+#: templates/vacancies/user_vacancies.html:42
 msgid "Пока никто не откликнулся"
 msgstr "Пока никто не откликнулся"
 
-#: templates/vacancies/user_vacancies.html:49
+#: templates/vacancies/user_vacancies.html:50
 msgid "У вас нет вакансий"
 msgstr "У вас нет вакансий"
 
-#: templates/vacancies/user_vacancies.html:50
+#: templates/vacancies/user_vacancies.html:51
 msgid "Если хотите создать анкету, то"
 msgstr "Если хотите создать анкету, то"
 
-#: templates/vacancies/user_vacancies.html:50
+#: templates/vacancies/user_vacancies.html:51
 msgid "перейдите сюда"
 msgstr "перейдите сюда"
 
@@ -852,27 +843,27 @@ msgstr "Активация аккаунта"
 msgid "Введите логин"
 msgstr "Введите логин"
 
-#: users/forms.py:67
+#: users/forms.py:63
 msgid "Выберите себе картинку"
 msgstr "Выберите себе картинку"
 
-#: users/forms.py:70
+#: users/forms.py:66
 msgid "Описание"
 msgstr "Описание"
 
-#: users/forms.py:105
+#: users/forms.py:123
 msgid "Тип сайта"
 msgstr "Тип сайта"
 
-#: users/forms.py:108
+#: users/forms.py:126
 msgid "Ссылка"
 msgstr "Ссылка"
 
-#: users/forms.py:123
+#: users/forms.py:141
 msgid "Пароль"
 msgstr "Пароль"
 
-#: users/forms.py:128
+#: users/forms.py:146
 #, fuzzy
 #| msgid "Адрес электронной почты."
 msgid "Введите электронную почту/логин"
@@ -930,11 +921,11 @@ msgstr "URL"
 msgid "Полная ссылка, например, https://example.com"
 msgstr "Полная ссылка, например, https://example.com"
 
-#: users/models.py:188
+#: users/models.py:196
 msgid "ссылка"
 msgstr "ссылка"
 
-#: users/models.py:189
+#: users/models.py:197
 msgid "ссылки"
 msgstr "ссылки"
 
@@ -942,49 +933,64 @@ msgstr "ссылки"
 msgid "Укажите корректную дату рождения."
 msgstr "Укажите корректную дату рождения"
 
-#: users/views.py:39
+#: users/validators.py:36 users/validators.py:44
+#, python-format
+msgid "Пароль может содержать максимум %(max_length)d символов."
+msgstr ""
+
+#: users/validators.py:62
+#, python-brace-format
+msgid "Неизвестный тип сайта: {site_type}"
+msgstr ""
+
+#: users/validators.py:70
+#, python-brace-format
+msgid "Ссылка должна начинаться с '{expected_prefix}'."
+msgstr ""
+
+#: users/views.py:42
 msgid "Вы не можете удалить эту ссылку."
 msgstr "Вы не можете удалить эту ссылку."
 
-#: users/views.py:112
+#: users/views.py:137
 msgid "Поля Email и Username обязательны для заполнения."
 msgstr "Поля Email и Username обязательны для заполнения."
 
-#: users/views.py:137
+#: users/views.py:163
 #, fuzzy
 #| msgid "Пароль успешно поменяли"
 msgid "Профиль успешно изменен!"
 msgstr "Пароль успешно поменяли"
 
-#: users/views.py:173
+#: users/views.py:200
 msgid "Чтобы подтвердить аккаунт перейдите по ссылке "
 msgstr "Чтобы подтвердить аккаунт перейдите по ссылке "
 
-#: users/views.py:179
+#: users/views.py:206
 msgid "Activate your account"
 msgstr "Активируйте свой аккаунт"
 
-#: users/views.py:191
+#: users/views.py:218
 #, fuzzy
 #| msgid "Пароль успешно поменяли"
 msgid "Пользователь успешно создан"
 msgstr "Пароль успешно поменяли"
 
-#: users/views.py:197
+#: users/views.py:224
 msgid "Активируйте профиль в письме, которое придет вам на почту"
 msgstr "Активируйте профиль в письме, которое придет вам на почту"
 
-#: users/views.py:215
+#: users/views.py:242
 msgid "Пользователь уже активирован"
 msgstr "Пользователь уже активирован"
 
-#: users/views.py:226
+#: users/views.py:253
 #, fuzzy
 #| msgid "Пароль успешно восстановили"
 msgid "Пользователь успешно активирован"
 msgstr "Пароль успешно восстановили"
 
-#: users/views.py:233
+#: users/views.py:260
 #, fuzzy
 #| msgid "Создать профиль бесплатно"
 msgid "Активация профиля была доступна в течение "
@@ -1032,183 +1038,183 @@ msgstr "Адрес: "
 msgid "IP адреса"
 msgstr "Адрес: "
 
-#: vacancies/models.py:32
+#: vacancies/models.py:31
 msgid "Нет опыта"
 msgstr "Нет опыта"
 
-#: vacancies/models.py:35
+#: vacancies/models.py:34
 msgid "До 6 месяцев"
 msgstr "До 6 месяцев"
 
-#: vacancies/models.py:38
+#: vacancies/models.py:37
 msgid "От 6 до 12 месяцев"
 msgstr "От 6 до 12 месяцев"
 
-#: vacancies/models.py:41
+#: vacancies/models.py:40
 msgid "Более 1 года"
 msgstr "Более 1 года"
 
-#: vacancies/models.py:48
+#: vacancies/models.py:47
 #, fuzzy
 #| msgid "Создать вакансию"
 msgid "создатель вакансии"
 msgstr "Создать вакансию"
 
-#: vacancies/models.py:55
+#: vacancies/models.py:54
 #, fuzzy
 #| msgid "Создание вакансии"
 msgid "название вакансии"
 msgstr "Создание вакансии"
 
-#: vacancies/models.py:61
+#: vacancies/models.py:60
 #, fuzzy
 #| msgid "Создание вакансии"
 msgid "описание вакансии"
 msgstr "Создание вакансии"
 
-#: vacancies/models.py:67
+#: vacancies/models.py:66
 #, fuzzy
 #| msgid "Дедлайн не может быть в прошлом."
 msgid "Описание не может быть таким коротким"
 msgstr "Дедлайн не может быть в прошлом."
 
-#: vacancies/models.py:73
+#: vacancies/models.py:72
 #, fuzzy
 #| msgid "Опыт работы не может быть отрицательным."
 msgid "Описание не может быть таким длинным"
 msgstr "Опыт работы не может быть отрицательным."
 
-#: vacancies/models.py:82
+#: vacancies/models.py:81
 #, fuzzy
 #| msgid "Создано:"
 msgid "создано"
 msgstr "Создано:"
 
-#: vacancies/models.py:87
+#: vacancies/models.py:86
 msgid "обновлено"
 msgstr "обновлено"
 
-#: vacancies/models.py:93
+#: vacancies/models.py:92
 msgid "cтатус"
 msgstr "cтатус"
 
-#: vacancies/models.py:105
+#: vacancies/models.py:104
 #, fuzzy
 #| msgid "Введите название хакатона"
 msgid "название хакатона"
 msgstr "Введите название хакатона"
 
-#: vacancies/models.py:110
+#: vacancies/models.py:109
 msgid "Название хакатона, к которому относится вакансия"
 msgstr "Название хакатона, к которому относится вакансия"
 
-#: vacancies/models.py:115
+#: vacancies/models.py:114
 #, fuzzy
 #| msgid "Дедлайн:"
 msgid "дедлайн"
 msgstr "Дедлайн:"
 
-#: vacancies/models.py:119
+#: vacancies/models.py:118
 msgid "Крайний срок подачи заявок"
 msgstr "Крайний срок подачи заявок"
 
-#: vacancies/models.py:125
+#: vacancies/models.py:124
 #, fuzzy
 #| msgid "Требуемый опыт:"
 msgid "требуемый опыт"
 msgstr "Требуемый опыт:"
 
-#: vacancies/models.py:127
+#: vacancies/models.py:126
 #, fuzzy
 #| msgid "Укажите количество лет опыта, необходимого для кандидата"
 msgid "Укажите количество опыта необходимого для кандидата"
 msgstr "Укажите количество лет опыта, необходимого для кандидата"
 
-#: vacancies/models.py:136
+#: vacancies/models.py:135
 #, fuzzy
 #| msgid "Найти команду"
 msgid "состав команды"
 msgstr "Найти команду"
 
-#: vacancies/models.py:142
+#: vacancies/models.py:141
 #, fuzzy
 #| msgid "интеграция с внешними сервисами для участия в хакатонах."
 msgid "необходимое количество человек в группе для участия в хакатоне"
 msgstr "интеграция с внешними сервисами для участия в хакатонах."
 
-#: vacancies/models.py:150 vacancies/models.py:156
+#: vacancies/models.py:149 vacancies/models.py:155
 #, fuzzy
 #| msgid "Укажите корректную дату рождения."
 msgid "Введите корректное значение"
 msgstr "Укажите корректную дату рождения"
 
-#: vacancies/models.py:163 vacancies/models.py:178 vacancies/models.py:238
+#: vacancies/models.py:162 vacancies/models.py:177 vacancies/models.py:237
 #, fuzzy
 #| msgid "Мои вакансии"
 msgid "вакансия"
 msgstr "Мои вакансии"
 
-#: vacancies/models.py:164
+#: vacancies/models.py:163
 #, fuzzy
 #| msgid "Мои вакансии"
 msgid "вакансии"
 msgstr "Мои вакансии"
 
-#: vacancies/models.py:183
+#: vacancies/models.py:182
 #, fuzzy
 #| msgid "Комментарии"
 msgid "комментарий"
 msgstr "Комментарии"
 
-#: vacancies/models.py:188
+#: vacancies/models.py:187
 #, fuzzy
 #| msgid "Введите ваш комментарий"
 msgid "Слишком короткий комментарий!"
 msgstr "Введите ваш комментарий"
 
-#: vacancies/models.py:194
+#: vacancies/models.py:193
 #, fuzzy
 #| msgid "Дедлайн не может быть в прошлом."
 msgid "Комментарий не может привышать 3000 символов!"
 msgstr "Дедлайн не может быть в прошлом."
 
-#: vacancies/models.py:203 vacancies/models.py:231
+#: vacancies/models.py:202 vacancies/models.py:230
 #, fuzzy
 #| msgid "Права пользователя"
 msgid "пользователь"
 msgstr "Права пользователя"
 
-#: vacancies/models.py:208
+#: vacancies/models.py:207
 #, fuzzy
 #| msgid "Создано:"
 msgid "cоздано"
 msgstr "Создано:"
 
-#: vacancies/models.py:213
+#: vacancies/models.py:212
 #, fuzzy
 #| msgid "Комментариев пока нет."
 msgid "комментарий к вакансии"
 msgstr "Комментариев пока нет."
 
-#: vacancies/models.py:216
+#: vacancies/models.py:215
 #, fuzzy
 #| msgid "Комментариев пока нет."
 msgid "комментарии к вакансиям"
 msgstr "Комментариев пока нет."
 
-#: vacancies/models.py:243
+#: vacancies/models.py:242
 #, fuzzy
 #| msgid "Мои отклики"
 msgid "дата отклика"
 msgstr "Мои отклики"
 
-#: vacancies/models.py:253
+#: vacancies/models.py:252
 #, fuzzy
 #| msgid "Откликов"
 msgid "отклик"
 msgstr "Откликов"
 
-#: vacancies/models.py:254
+#: vacancies/models.py:253
 #, fuzzy
 #| msgid "Мои отклики"
 msgid "отклики"
@@ -1248,6 +1254,12 @@ msgstr "Пользователь уже активирован"
 #| msgid "Пользователь уже активирован"
 msgid "Пользователь {user} удалён из команды"
 msgstr "Пользователь уже активирован"
+
+#~ msgid "Страна"
+#~ msgstr "Страна"
+
+#~ msgid "Город"
+#~ msgstr "Город"
 
 #, python-brace-format
 #~ msgid "Пользователь {username} откликнулся на вакансию {vacancy_title}."
