@@ -7,6 +7,7 @@ import django.contrib.auth.mixins
 import django.contrib.auth.models
 import django.contrib.auth.views
 import django.contrib.messages
+import django.core.exceptions
 import django.core.mail
 import django.forms
 import django.shortcuts
@@ -14,9 +15,11 @@ import django.urls
 import django.utils.timezone
 import django.views
 import django.views.generic
+import star_ratings.models
 
 import users.forms
 import users.models
+import vacancies.models
 
 User = django.contrib.auth.get_user_model()
 
@@ -51,8 +54,24 @@ class ProfileView(
             users.models.User.objects.select_related("profile"),
             username=username,
         )
+        finished_vacancies = (
+            vacancies.models.Vacancy.objects.filter(
+                creater_id=user.id,
+                status=vacancies.models.Vacancy.VacancyStatuses.EQUIPPED,
+            )
+            .select_related("creater")
+            .prefetch_related("responses")
+        )
 
         is_own_profile = user == request.user
+        try:
+            rating_user = star_ratings.models.Rating.objects.get(
+                object_id=user.id,
+            )
+        except django.core.exceptions.ObjectDoesNotExist:
+            rating_user = star_ratings.models.Rating.objects.create(
+                content_object=user,
+            )
 
         return django.shortcuts.render(
             request,
@@ -60,6 +79,8 @@ class ProfileView(
             {
                 "user": user,
                 "is_own_profile": is_own_profile,
+                "rating_count": rating_user,
+                "finished_vacancies": finished_vacancies,
             },
         )
 
@@ -73,7 +94,7 @@ class ProfileEditView(
         user = users.models.User.objects.select_related("profile").get(
             pk=request.user.pk,
         )
-
+        image_form = users.forms.ProfileImageChangeForm(instance=user.profile)
         form = users.forms.UserChangeForm(instance=user)
         profile_form = users.forms.ProfileChangeForm(instance=user.profile)
         link_form = users.forms.ProfileLinkForm()
@@ -85,6 +106,7 @@ class ProfileEditView(
             request,
             "users/profile_edit.html",
             {
+                "image_form": image_form,
                 "form": form,
                 "profile_form": profile_form,
                 "link_form": link_form,
@@ -96,11 +118,14 @@ class ProfileEditView(
         user = users.models.User.objects.select_related("profile").get(
             pk=request.user.pk,
         )
-
+        image_form = users.forms.ProfileImageChangeForm(
+            request.POST,
+            request.FILES,
+            instance=user.profile,
+        )
         form = users.forms.UserChangeForm(request.POST, instance=user)
         profile_form = users.forms.ProfileChangeForm(
             request.POST,
-            request.FILES,
             instance=user.profile,
         )
         link_form = users.forms.ProfileLinkForm(request.POST)
@@ -129,6 +154,7 @@ class ProfileEditView(
 
             user_form.save()
             profile_form.save()
+            image_form.save()
             django.contrib.messages.success(
                 request,
                 "Профиль успешно изменен!",
@@ -139,6 +165,7 @@ class ProfileEditView(
             request,
             "users/profile_edit.html",
             {
+                "image_form": image_form,
                 "form": form,
                 "profile_form": profile_form,
                 "link_form": link_form,

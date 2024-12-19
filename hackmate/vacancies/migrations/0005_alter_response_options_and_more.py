@@ -19,6 +19,11 @@ class Migration(django.db.migrations.Migration):
                 "verbose_name_plural": "отклики",
             },
         ),
+        django.db.migrations.RenameField(
+            model_name="vacancy",
+            old_name="deadline",
+            new_name="hackaton_date",
+        ),
         django.db.migrations.AlterField(
             model_name="vacancy",
             name="required_experience",
@@ -31,7 +36,7 @@ class Migration(django.db.migrations.Migration):
                 ],
                 default="no_expirience",
                 help_text=(
-                    "Укажите количество опыта необходимого для кандидата"
+                    "Укажите количество опыта необходимого для кандидата",
                 ),
                 max_length=300,
                 verbose_name="требуемый опыт",
@@ -43,7 +48,6 @@ class Migration(django.db.migrations.Migration):
             field=django.db.models.CharField(
                 choices=[
                     ("active", "active"),
-                    ("inactive", "inactive"),
                     ("equipped", "equipped"),
                     ("deleted", "deleted"),
                 ],

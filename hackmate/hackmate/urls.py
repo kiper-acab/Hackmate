@@ -32,7 +32,10 @@ urlpatterns += [
     ),
     django.urls.path(
         "ratings/",
-        django.urls.include("star_ratings.urls", namespace="ratings"),
+        django.urls.include(
+            ("star_ratings.urls"),
+            namespace="ratings",
+        ),
     ),
 ]
 

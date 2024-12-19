@@ -12,17 +12,20 @@ class VacancyForm(django.forms.ModelForm):
         for field in self.visible_fields():
             field.field.widget.attrs["class"] = "form-control"
 
-        self.fields["deadline"].widget.format = "%Y-%m-%d"
+        self.fields["hackaton_date"].widget.format = "%Y-%m-%d"
         self.fields["need_count_users"].required = True
 
-    def clean_deadline(self):
-        deadline = self.cleaned_data.get("deadline")
-        if deadline and deadline < django.utils.timezone.now().date():
+    def clean_hackaton_date(self):
+        hackaton_date = self.cleaned_data.get("hackaton_date")
+        if (
+            hackaton_date
+            and hackaton_date < django.utils.timezone.now().date()
+        ):
             raise django.forms.ValidationError(
                 "Дедлайн не может быть в прошлом.",
             )
 
-        return deadline
+        return hackaton_date
 
     class Meta:
         model = vacancies.models.Vacancy
@@ -31,7 +34,7 @@ class VacancyForm(django.forms.ModelForm):
             model.description.field.name,
             model.need_count_users.field.name,
             model.hackaton_title.field.name,
-            model.deadline.field.name,
+            model.hackaton_date.field.name,
             model.required_experience.field.name,
         ]
         widgets = {
@@ -44,7 +47,7 @@ class VacancyForm(django.forms.ModelForm):
             model.hackaton_title.field.name: django.forms.TextInput(
                 attrs={"placeholder": "Введите название хакатона"},
             ),
-            model.deadline.field.name: django.forms.DateInput(
+            model.hackaton_date.field.name: django.forms.DateInput(
                 attrs={
                     "type": "date",
                     "placeholder": "Выберите дедлайн",

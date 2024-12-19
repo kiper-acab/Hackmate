@@ -15,6 +15,7 @@ logout_view = django.contrib.auth.views.LogoutView.as_view(
     template_name="users/logout.html",
 )
 password_change_view = django.contrib.auth.views.PasswordChangeView.as_view(
+    form_class=users.forms.PasswordChangeForm,
     template_name="users/password_change.html",
 )
 password_change_done_view = (
@@ -23,6 +24,7 @@ password_change_done_view = (
     )
 )
 password_reset_view = django.contrib.auth.views.PasswordResetView.as_view(
+    form_class=users.forms.PasswordResetForm,
     template_name="users/password_reset.html",
 )
 password_reset_done_view = (

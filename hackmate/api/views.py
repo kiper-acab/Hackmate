@@ -40,9 +40,9 @@ class LoadMoreVacacncies(django.views.generic.View):
                             args=[vacancy.creater.username],
                         ),
                     },
-                    "deadline": (
-                        vacancy.deadline.strftime("%Y-%m-%d")
-                        if vacancy.deadline
+                    "hackaton_date": (
+                        vacancy.hackaton_date.strftime("%Y-%m-%d")
+                        if vacancy.hackaton_date
                         else None
                     ),
                     "required_experience": vacancy.required_experience,

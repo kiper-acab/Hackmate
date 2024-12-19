@@ -33,6 +33,8 @@
             {% endif %}
             <li><a href="{% url 'users:profile' username=user %}" class="dropdown-item">Профиль</a></li>
             <li><a href="{% url 'users:profile_edit' %}" class="dropdown-item">Редактирование профиля</a></li>
+	          <li><a href="{% url 'users:password_change' %}" class="dropdown-item">Изменить пароль</a></li>
+            <li><a href="{% url 'users:password_reset' %}" class="dropdown-item">Восстановить пароль</a></li>
             <li><a href="{% url 'users:logout' %}" class="dropdown-item">Выйти</a></li>
           </ul>
         </li>

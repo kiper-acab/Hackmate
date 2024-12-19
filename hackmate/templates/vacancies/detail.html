@@ -29,8 +29,8 @@
       {% if vacancy.hackaton_title %}
         <p><strong>Хакатон:</strong> {{ vacancy.hackaton_title }}</p>
       {% endif %}
-      {% if vacancy.deadline %}
-        <p><strong>Дедлайн:</strong> {{ vacancy.deadline|date:"d.m.Y" }}</p>
+      {% if vacancy.hackaton_date %}
+        <p><strong>Дедлайн:</strong> {{ vacancy.hackaton_date|date:"d.m.Y" }}</p>
       {% endif %}
       {% if vacancy.required_experience %}
         <p><strong>Требуемый опыт:</strong> {{ vacancy.get_required_experience_display }}</p>

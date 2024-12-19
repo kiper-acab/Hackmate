@@ -19,7 +19,6 @@ class Ip(django.db.models.Model):
 class Vacancy(django.db.models.Model):
     class VacancyStatuses(django.db.models.TextChoices):
         ACTIVE = "active", "active"
-        INACTIVE = "inactive", "inactive"
         EQUIPPED = "equipped", "equipped"
         DELETED = "deleted", "deleted"
 
@@ -85,7 +84,7 @@ class Vacancy(django.db.models.Model):
         help_text="Название хакатона, к которому относится вакансия",
     )
 
-    deadline = django.db.models.DateField(
+    hackaton_date = django.db.models.DateField(
         verbose_name="дедлайн",
         null=True,
         blank=True,

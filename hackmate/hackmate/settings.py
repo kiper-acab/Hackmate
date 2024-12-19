@@ -115,6 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
             ".password_validation.NumericPasswordValidator"
         ),
     },
+    {
+        "NAME": "users.validators.MaximumLengthValidator",
+    },
 ]
 
 LANGUAGE_CODE = "ru"
@@ -177,10 +180,12 @@ DJANGO_NOTIFICATIONS_CONFIG = {
     "USE_JSONFIELD": True,
 }
 
+STAR_RATINGS_RERATE_SAME_DELETE = True
+
 STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_STAR_WIDTH = 20
 
 
 MIGRATION_MODULES = {
-    "star_ratings": "hackmate.star_ratings_migrations",
+    "star_ratings": "users.star_ratings_migrations",
 }
