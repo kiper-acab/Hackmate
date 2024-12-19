@@ -4,6 +4,7 @@ import django.db.models.signals
 import django.dispatch
 import notifications.signals
 
+
 import vacancies.models
 
 

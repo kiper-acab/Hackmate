@@ -7,6 +7,7 @@ import sys
 import django.conf
 import django.contrib.auth.models
 import django.db.models
+import django.utils.translation
 import sorl.thumbnail
 
 import users.validators
@@ -85,8 +86,10 @@ class Profile(django.db.models.Model):
     birthday = django.db.models.DateField(
         null=True,
         blank=True,
-        verbose_name="день рождения",
-        help_text="Введите дату рождения",
+        verbose_name=django.utils.translation.gettext_lazy("день рождения"),
+        help_text=django.utils.translation.gettext_lazy(
+            "Введите дату рождения",
+        ),
         validators=[users.validators.validate_birthday],
     )
 
@@ -103,8 +106,8 @@ class Profile(django.db.models.Model):
     description = django.db.models.TextField(
         null=True,
         blank=True,
-        verbose_name="о себе",
-        help_text="Расскажите о себе",
+        verbose_name=django.utils.translation.gettext_lazy("о себе"),
+        help_text=django.utils.translation.gettext_lazy("Расскажите о себе"),
     )
 
     date_last_active = django.db.models.DateTimeField(null=True, blank=True)
@@ -132,8 +135,12 @@ class Profile(django.db.models.Model):
     list_display = "image_tmb"
 
     class Meta:
-        verbose_name = "дополнительная информация"
-        verbose_name_plural = "дополнительные данные"
+        verbose_name = django.utils.translation.gettext_lazy(
+            "дополнительная информация",
+        )
+        verbose_name_plural = django.utils.translation.gettext_lazy(
+            "дополнительные данные",
+        )
 
 
 class ProfileLink(django.db.models.Model):
@@ -150,16 +157,18 @@ class ProfileLink(django.db.models.Model):
         Profile,
         on_delete=django.db.models.CASCADE,
         related_name="links",
-        verbose_name="профиль",
+        verbose_name=django.utils.translation.gettext_lazy("профиль"),
     )
     site_type = django.db.models.CharField(
         max_length=20,
         choices=SOCIAL_NETWORKS,
-        verbose_name="тип сайта",
+        verbose_name=django.utils.translation.gettext_lazy("тип сайта"),
     )
     url = django.db.models.URLField(
-        verbose_name="URL",
-        help_text="Полная ссылка, например, https://example.com",
+        verbose_name=django.utils.translation.gettext_lazy("URL"),
+        help_text=django.utils.translation.gettext_lazy(
+            "Полная ссылка, например, https://example.com",
+        ),
         null=True,
         blank=True,
     )
@@ -176,5 +185,5 @@ class ProfileLink(django.db.models.Model):
         return fa_icons.get(self.site_type, "fa-link")
 
     class Meta:
-        verbose_name = "ссылка"
-        verbose_name_plural = "ссылки"
+        verbose_name = django.utils.translation.gettext_lazy("ссылка")
+        verbose_name_plural = django.utils.translation.gettext_lazy("ссылки")

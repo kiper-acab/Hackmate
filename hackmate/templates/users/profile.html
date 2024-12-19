@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load ratings %}
+{% load i18n %}
 
 {% block links %}
   <link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
@@ -20,55 +21,55 @@
         {% if user.profile.image %}
           <img src="{{ user.profile.image.url }}" alt="{{ user.username }}" class="avatar">
         {% else %}
-          <img src="{% static 'img/default-avatar.jpg' %}" alt="Default Avatar" class="avatar">
+          <img src="{% static 'img/default-avatar.jpg' %}" alt="{% trans 'Default Avatar' %}" class="avatar">
         {% endif %}
       </div>
     <div class="profile-info">
 
       <h1>{{ user.username }}</h1>
-      <p class="email">Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+      <p class="email">{% trans "Email" %}: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
 
       <div class="profile-details">
         <div class="profile-item">
           {% if user.profile.description %}
-            <p><strong>О себе:</strong> {{ user.profile.description }}</p>
+            <p><strong>{% trans 'О себе' %}:</strong> {{ user.profile.description }}</p>
           {% else %}
-            <p><strong>О себе:</strong> Информация не указана.</p>
+            <p><strong>{% trans 'О себе' %}:</strong> {% trans 'Информация не указана.' %}</p>
           {% endif %}
         </div>
 
         <div class="profile-item">
           {% if user.profile.birthday %}
-            <p><strong>День рождения:</strong> {{ user.profile.birthday }}</p>
+            <p><strong>{% trans 'День рождения' %}:</strong> {{ user.profile.birthday }}</p>
           {% else %}
-            <p><strong>День рождения:</strong> Информация не указана.</p>
+            <p><strong>{% trans 'День рождения' %}:</strong> {% trans 'Информация не указана.' %}</p>
           {% endif %}
         </div>
 
         <div class="profile-item">
           {% if user.profile.country %}
-            <p><strong>Страна:</strong> {{ user.profile.country.country.alternate_names }}</p>
+            <p><strong>{% trans 'Страна' %}:</strong> {{ user.profile.country.country.alternate_names }}</p>
           {% else %}
-            <p><strong>Страна:</strong> Информация не указана.</p>
+            <p><strong>{% trans 'Страна' %}:</strong> {% trans 'Информация не указана.' %}</p>
           {% endif %}
         </div>
 
         <div class="profile-item">
           {% if user.profile.city %}
-            <p><strong>Город:</strong> {{ user.profile.city }}</p>
+            <p><strong>{% trans 'Город' %}:</strong> {{ user.profile.city }}</p>
           {% else %}
-            <p><strong>Город:</strong> Информация не указана.</p>
+            <p><strong>{% trans 'Город' %}:</strong> {% trans 'Информация не указана.' %}</p>
           {% endif %}
         </div>
 
         <div class="profile-item">
-          <p><strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+          <p><strong>{% trans 'Дата регистрации' %}:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
         </div>
       </div>
     </div>
 
     <div class="links-section">
-      <h2>Ссылки на другие сети</h2>
+      <h2>{% trans 'Ссылки на другие сети' %}</h2>
 
       {% if user.profile.links.exists %}
         <ul class="social-links">
@@ -84,13 +85,13 @@
           {% endfor %}
         </ul>
       {% else %}
-        <p>Ссылки отсутствуют.</p>
+        <p>{% trans 'Ссылки отсутствуют.' %}</p>
       {% endif %}
     </div>
 
     {% if is_own_profile %}
       <div class="profile-actions">
-        <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">Редактировать профиль</a>
+        <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">{% trans 'Редактировать профиль' %}</a>
       </div>
     {% endif %}
   </section>

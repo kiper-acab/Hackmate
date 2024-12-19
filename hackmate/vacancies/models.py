@@ -3,6 +3,8 @@ __all__ = ()
 import django.conf
 import django.core.validators
 import django.db.models
+import django.utils.translation
+import tinymce.models
 
 
 class Ip(django.db.models.Model):
@@ -12,8 +14,10 @@ class Ip(django.db.models.Model):
         return self.ip
 
     class Meta:
-        verbose_name = "IP адрес"
-        verbose_name_plural = "IP адреса"
+        verbose_name = django.utils.translation.gettext_lazy("IP адрес")
+        verbose_name_plural = django.utils.translation.gettext_lazy(
+            "IP адреса",
+        )
 
 
 class Vacancy(django.db.models.Model):
@@ -32,16 +36,24 @@ class Vacancy(django.db.models.Model):
     creater = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
-        verbose_name="создатель вакансии",
+        verbose_name=django.utils.translation.gettext_lazy(
+            "создатель вакансии",
+        ),
     )
 
     title = django.db.models.CharField(
         max_length=255,
-        verbose_name="название вакансии",
+        verbose_name=django.utils.translation.gettext_lazy(
+            "название вакансии",
+        ),
     )
 
-    description = django.db.models.TextField(
-        verbose_name="описание вакансии",
+    description = tinymce.models.HTMLField(
+        
+        verbose_name=django.utils.translation.gettext_lazy(
+            "описание вакансии",
+        ),
+    ,
         validators=[
             django.core.validators.MinLengthValidator(
                 5,
@@ -57,18 +69,18 @@ class Vacancy(django.db.models.Model):
 
     created_at = django.db.models.DateTimeField(
         auto_now_add=True,
-        verbose_name="создано",
+        verbose_name=django.utils.translation.gettext_lazy("создано"),
     )
 
     updated_at = django.db.models.DateTimeField(
         auto_now=True,
-        verbose_name="обновлено",
+        verbose_name=django.utils.translation.gettext_lazy("обновлено"),
     )
 
     status = django.db.models.CharField(
         max_length=255,
         choices=VacancyStatuses.choices,
-        verbose_name="cтатус",
+        verbose_name=django.utils.translation.gettext_lazy("cтатус"),
     )
 
     views = django.db.models.ManyToManyField(
@@ -79,17 +91,23 @@ class Vacancy(django.db.models.Model):
 
     hackaton_title = django.db.models.CharField(
         max_length=255,
-        verbose_name="название хакатона",
+        verbose_name=django.utils.translation.gettext_lazy(
+            "название хакатона",
+        ),
         blank=True,
         null=True,
-        help_text="Название хакатона, к которому относится вакансия",
+        help_text=django.utils.translation.gettext_lazy(
+            "Название хакатона, к которому относится вакансия",
+        ),
     )
 
     deadline = django.db.models.DateField(
-        verbose_name="дедлайн",
+        verbose_name=django.utils.translation.gettext_lazy("дедлайн"),
         null=True,
         blank=True,
-        help_text="Крайний срок подачи заявок",
+        help_text=django.utils.translation.gettext_lazy(
+            "Крайний срок подачи заявок",
+        ),
     )
 
     required_experience = django.db.models.CharField(
@@ -123,8 +141,8 @@ class Vacancy(django.db.models.Model):
     )
 
     class Meta:
-        verbose_name = "вакансия"
-        verbose_name_plural = "вакансии"
+        verbose_name = django.utils.translation.gettext_lazy("вакансия")
+        verbose_name_plural = django.utils.translation.gettext_lazy("вакансии")
         ordering = ["-created_at"]
 
     def total_views(self):
@@ -138,12 +156,12 @@ class CommentVacancy(django.db.models.Model):
     vacancy = django.db.models.ForeignKey(
         "Vacancy",
         on_delete=django.db.models.CASCADE,
-        verbose_name="вакансия",
+        verbose_name=django.utils.translation.gettext_lazy("вакансия"),
         related_name="comments",
     )
 
     comment = django.db.models.TextField(
-        verbose_name="комментарий",
+        verbose_name=django.utils.translation.gettext_lazy("комментарий"),
         validators=[
             django.core.validators.MinLengthValidator(
                 5,
@@ -159,17 +177,21 @@ class CommentVacancy(django.db.models.Model):
     user = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
-        verbose_name="пользователь",
+        verbose_name=django.utils.translation.gettext_lazy("пользователь"),
     )
 
     created_at = django.db.models.DateTimeField(
         auto_now_add=True,
-        verbose_name="cоздано",
+        verbose_name=django.utils.translation.gettext_lazy("cоздано"),
     )
 
     class Meta:
-        verbose_name = "комментарий к вакансии"
-        verbose_name_plural = "комментарии к вакансиям"
+        verbose_name = django.utils.translation.gettext_lazy(
+            "комментарий к вакансии",
+        )
+        verbose_name_plural = django.utils.translation.gettext_lazy(
+            "комментарии к вакансиям",
+        )
         ordering = ["-created_at"]
 
 

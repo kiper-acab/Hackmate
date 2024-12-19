@@ -8,6 +8,7 @@ import django.core.mail
 import django.shortcuts
 import django.urls
 import django.utils.timezone
+import django.utils.translation
 
 import users.models
 
@@ -34,9 +35,9 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
             ):
                 django.contrib.messages.error(
                     request,
-                    (
+                    django.utils.translation.gettext_lazy(
                         "Неправильный логин/пароль. "
-                        "Убедитесь в корректности данных."
+                        "Убедитесь в корректности данных.",
                     ),
                 )
                 user.profile.attempts_count += 1
@@ -63,10 +64,10 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
 
         django.contrib.messages.error(
             request,
-            (
+            django.utils.translation.gettext_lazy(
                 "Вы превысили допустимое число попыток входа. "
                 "Пожалуйста, активируйте свой аккаунт. "
-                "Вам должно прийти письмо на почту с активацией."
+                "Вам должно прийти письмо на почту с активацией.",
             ),
         )
 
@@ -76,14 +77,17 @@ class EmailOrUsernameModelBackend(django.contrib.auth.backends.BaseBackend):
                 args=[user.username],
             )
             domain = request.get_host()
-            confirmation_link = (
+            confirmation_link = django.utils.translation.gettext_lazy(
                 "Замечена подозрительная активность аккаунта. "
                 "Для активации аккаунта нажмите на ссылку ниже: "
-                f"http://{domain}{activation_path}"
+                "http://{domain}{activation_path}",
+            ).format(
+                domain=domain,
+                activation_path=activation_path,
             )
 
             django.core.mail.send_mail(
-                "Активация аккаунта",
+                django.utils.translation.gettext_lazy("Активация аккаунта"),
                 confirmation_link,
                 django.conf.settings.EMAIL_HOST_USER,
                 [user.email],

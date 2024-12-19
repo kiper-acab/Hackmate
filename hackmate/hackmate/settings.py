@@ -4,6 +4,7 @@ import os
 import pathlib
 
 import django.urls
+import django.utils.translation
 import dotenv
 
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     "star_ratings",
     "sorl.thumbnail",
+    "tinymce",
     "notifications",
 ]
 
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -118,6 +121,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "ru"
+LOCALE_PATHS = (BASE_DIR / "locale/",)
+LANGUAGES = [
+    ("ru", django.utils.translation.gettext_lazy("Русский")),
+    ("en", django.utils.translation.gettext_lazy("English")),
+]
 
 TIME_ZONE = "UTC"
 

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block links %}
   <link rel="stylesheet" href="{% static 'css/vacancies/my_vacancies.css' %}">
 {% endblock %}
 
-
 {% block content %}
 <div class="container">
-  <h1 class="page-title">Ваши вакансии</h1>
+  <h1 class="page-title">{% trans 'Ваши вакансии' %}</h1>
   {% if messages %}
     <div class="messages" role="alert">
       {% for message in messages %}
@@ -23,11 +23,11 @@
         <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="vacancy-title">
           {{ vacancy.title }}
         </a>
-        <p class="vacancy-description">{{ vacancy.description|truncatechars:200 }}</p>
-        <p class="vacancy-stats">Откликов: {{ vacancy.responses.count }}</p>
+        <p class="vacancy-description">{{ vacancy.description|safe|truncatechars:200 }}</p>
+        <p class="vacancy-stats">{% trans 'Откликов' %}: {{ vacancy.responses.count }}</p>
         {% if vacancy.status == "active" %}
           <div class="vacancy-responses">
-            <h3>Откликнувшиеся пользователи:</h3>
+            <h3>{% trans 'Откликнувшиеся пользователи:' %}</h3>
             <article class="responses-users">
                 {% for response in vacancy.responses.all %}
                   <article class="">
@@ -38,7 +38,7 @@
                     <a href="{% url 'vacancies:reject_user' response.id %}" class=""><i class="fa-solid fa-ban decline-user"></i></a>
                   </article>
                 {% empty %}
-                  <a>Пока никто не откликнулся</a>
+                  <a>{% trans 'Пока никто не откликнулся' %}</a>
                 {% endfor %}
             </article>
           </div>
@@ -46,8 +46,8 @@
       </div>
     {% empty %}
     <article class="nothing-container">
-      <h2 class="nothing">У вас нет вакансий.</h2>
-      <p class="nothing">Если хотите создать анкету, то <a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-link">перейдите сюда</a></p>
+      <h2 class="nothing">{% trans 'У вас нет вакансий' %}</h2>
+      <p class="nothing">{% trans 'Если хотите создать анкету, то' %} <a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-link">{% trans 'перейдите сюда' %}</a></p>
     </article>
     {% endfor %}
   </div>

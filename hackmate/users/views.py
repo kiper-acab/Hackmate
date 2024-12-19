@@ -12,6 +12,7 @@ import django.forms
 import django.shortcuts
 import django.urls
 import django.utils.timezone
+import django.utils.translation
 import django.views
 import django.views.generic
 
@@ -34,7 +35,9 @@ class DeleteLinkView(django.views.generic.DeleteView):
         if self.object.profile.user != request.user:
             django.contrib.messages.error(
                 request,
-                "Вы не можете удалить эту ссылку.",
+                django.utils.translation.gettext_lazy(
+                    "Вы не можете удалить эту ссылку.",
+                ),
             )
             return django.shortcuts.redirect(self.success_url)
 
@@ -42,10 +45,7 @@ class DeleteLinkView(django.views.generic.DeleteView):
         return django.shortcuts.redirect(self.success_url)
 
 
-class ProfileView(
-    django.views.generic.View,
-):
-
+class ProfileView(django.views.generic.View):
     def get(self, request, username):
         user = django.shortcuts.get_object_or_404(
             users.models.User.objects.select_related("profile"),
@@ -108,7 +108,9 @@ class ProfileEditView(
         if not form.data.get("email") or not form.data.get("username"):
             django.contrib.messages.error(
                 request,
-                "Поля Email и Username обязательны для заполнения.",
+                django.utils.translation.gettext_lazy(
+                    "Поля Email и Username обязательны для заполнения.",
+                ),
             )
             return django.shortcuts.render(
                 request,
@@ -131,7 +133,9 @@ class ProfileEditView(
             profile_form.save()
             django.contrib.messages.success(
                 request,
-                "Профиль успешно изменен!",
+                django.utils.translation.gettext_lazy(
+                    "Профиль успешно изменен!",
+                ),
             )
             return django.shortcuts.redirect("users:profile_edit")
 
@@ -146,9 +150,7 @@ class ProfileEditView(
         )
 
 
-class SignUpView(
-    django.views.generic.FormView,
-):
+class SignUpView(django.views.generic.FormView):
     template_name = "users/signup.html"
     form_class = users.forms.UserCreateForm
     success_url = django.urls.reverse_lazy("users:login")
@@ -167,14 +169,16 @@ class SignUpView(
             url = django.urls.reverse("users:activate", args=[user.username])
             domain = self.request.get_host()
             confirmation_link = (
-                "Чтобы подтвердить аккаунт перейдите по ссылке "
-                f"http://{domain}{url}"
+                django.utils.translation.gettext_lazy(
+                    "Чтобы подтвердить аккаунт перейдите по ссылке ",
+                )
+                + f"http://{domain}{url}"
             )
 
             django.core.mail.send_mail(
-                "Activate your account",
+                django.utils.translation.gettext_lazy("Activate your account"),
                 confirmation_link,
-                django.conf.settings.EMAIL_HOST_USER,
+                django.conf.settings.DJANGO_MAIL,
                 [user.email],
                 fail_silently=False,
             )
@@ -183,11 +187,15 @@ class SignUpView(
 
         django.contrib.messages.success(
             self.request,
-            "Пользователь успешно создан",
+            django.utils.translation.gettext_lazy(
+                "Пользователь успешно создан",
+            ),
         )
         django.contrib.messages.info(
             self.request,
-            "Активируйте профиль в письме, которое придет вам на почту",
+            django.utils.translation.gettext_lazy(
+                "Активируйте профиль в письме, которое придет вам на почту",
+            ),
         )
 
         return super().form_valid(form)
@@ -203,7 +211,9 @@ class ActivateUserView(django.views.View):
         if user.is_active:
             django.contrib.messages.error(
                 request,
-                "Пользователь уже активирован",
+                django.utils.translation.gettext_lazy(
+                    "Пользователь уже активирован",
+                ),
             )
             return django.shortcuts.redirect("users:login")
 
@@ -212,14 +222,18 @@ class ActivateUserView(django.views.View):
             user.save()
             django.contrib.messages.success(
                 request,
-                "Пользователь успешно активирован",
+                django.utils.translation.gettext_lazy(
+                    "Пользователь успешно активирован",
+                ),
             )
         else:
             django.contrib.messages.error(
                 request,
-                "Активация профиля была доступна в течение "
-                f"{self.get_allowed_activation_time(user)} "
-                "часов после регистрации",
+                django.utils.translation.gettext_lazy(
+                    "Активация профиля была доступна в течение "
+                    f"{self.get_allowed_activation_time(user)} "
+                    "часов после регистрации",
+                ),
             )
 
         return django.shortcuts.redirect("users:login")

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block links %}
   <link rel="stylesheet" href="{% static 'css/homepage/homepage.css' %}">
@@ -7,39 +8,36 @@
 
 {% block content %}
   <section class="container">
-	<section class="team">
-	  <h1><i class="fa-solid fa-people-group"></i> Собери команду для хакатона за несколько кликов</h1>
-	  <p>Ищешь команду для участия в хакатоне или талантливых людей для своего проекта?</p>
-	  <p>HackMate — это платформа, где встречаются разработчики, дизайнеры, маркетологи,</p>
-	  <p>аналитики и другие энтузиасты, готовые создавать инновационные решения вместе.</p>
-	</section>
-	<section class="description">
-	  <h2><i class="fa-solid fa-magnifying-glass"></i> Что такое HackMate?</h2>
-	  <p>HackMate — это инструмент, который помогает находить единомышленников для </p>
-	  <p>участия в хакатонах. Мы понимаем, как сложно собрать сбалансированную команду или найти</p>
-	  <p>подходящий проект. Наша миссия — сделать этот процесс простым, быстрым и увлекательным.</p>
-	</section>
-	<section class="advantages">
-	  <h2>Как это работает?</h2>
-	  <ol class="gradient-list">
-		<li class="list-group-item"><b>Создай профиль.</b> Расскажи о своих навыках, опыте и интересах. Чем подробнее, тем легче найти идеальных сокомандников.</li>
-		<li class="list-group-item"><b>Просматривай команды и участников.</b> Используй фильтры для поиска участников с нужными компетенциями или найди уже сформированные команды.</li>
-		<li class="list-group-item"><b>Готовься к победе.</b> Сформируйте команду мечты и покорите хакатоны вместе!</li>
-	  </ol>
-	</section>
-	<hr>
-	<section class="important">
-	  <h2>Почему это важно?</h2>
-	  <ul class="gradient-list">
-		<li class="list-group-item"><b>Реальные связи.</b> Найди людей, с которыми ты будешь работать над своими мечтами.</li>
-		<li class="list-group-item"><b>Профессиональный рост.</b> Получи опыт работы в команде, покажи свои навыки и привлеки внимание работодателей.</li>
-		<li class="list-group-item"><b>Шанс на успех.</b> Вдохновляйся, учись у других и создавай проекты, которые смогут изменить мир.</li>
-	  </ul>
-	</section>
-	<hr>
-	<section class="ready">
-	  <h2>Готов начать?</h2>
-	  <p>Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для следующего хакатона. <a href="{% if not request.user.is_authenticated %}{% url 'users:signup' %}{% else %}{% url 'users:profile' username=user %}{% endif %}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Создать профиль бесплатно</a></p>
-	</section>
+    <section class="team">
+      <h1><i class="fa-solid fa-people-group"></i> {% trans "Собери команду для хакатона за несколько кликов" %}</h1>
+      <p>{% trans "Ищешь команду для участия в хакатоне или талантливых людей для своего проекта?" %}</p>
+      <p>{% trans "HackMate — это платформа, где встречаются разработчики, дизайнеры, маркетологи, аналитики и другие энтузиасты, готовые создавать инновационные решения вместе." %}</p>
+    </section>
+    <section class="description">
+      <h2><i class="fa-solid fa-magnifying-glass"></i> {% trans "Что такое HackMate?" %}</h2>
+      <p>{% trans "HackMate — это инструмент, который помогает находить единомышленников для участия в хакатонах. Мы понимаем, как сложно собрать сбалансированную команду или найти подходящий проект. Наша миссия — сделать этот процесс простым, быстрым и увлекательным." %}</p>
+    </section>
+    <section class="advantages">
+      <h2>{% trans "Как это работает?" %}</h2>
+      <ol class="gradient-list">
+        <li class="list-group-item"><b>{% trans "Создай профиль." %}</b> {% trans "Расскажи о своих навыках, опыте и интересах. Чем подробнее, тем легче найти идеальных сокомандников." %}</li>
+        <li class="list-group-item"><b>{% trans "Просматривай команды и участников." %}</b> {% trans "Используй фильтры для поиска участников с нужными компетенциями или найди уже сформированные команды." %}</li>
+        <li class="list-group-item"><b>{% trans "Готовься к победе." %}</b> {% trans "Сформируйте команду мечты и покорите хакатоны вместе!" %}</li>
+      </ol>
+    </section>
+    <hr>
+    <section class="important">
+      <h2>{% trans "Почему это важно?" %}</h2>
+      <ul class="gradient-list">
+        <li class="list-group-item"><b>{% trans "Реальные связи." %}</b> {% trans "Найди людей, с которыми ты будешь работать над своими мечтами." %}</li>
+        <li class="list-group-item"><b>{% trans "Профессиональный рост." %}</b> {% trans "Получите опыт работы в команде, покажите свои навыки и привлеките внимание работодателей." %}</li>
+        <li class="list-group-item"><b>{% trans "Шанс на успех." %}</b> {% trans "Вдохновляйтесь, учитесь у других и создавайте проекты, которые смогут изменить мир." %}</li>
+      </ul>
+    </section>
+    <hr>
+    <section class="ready">
+      <h2>{% trans "Готов начать?" %}</h2>
+      <p>{% trans "Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для следующего хакатона." %} <a href="{% if not request.user.is_authenticated %}{% url 'users:signup' %}{% else %}{% url 'users:profile' username=user %}{% endif %}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{% trans "Создать профиль бесплатно" %}</a></p>
+    </section>
   </section>
 {% endblock %}

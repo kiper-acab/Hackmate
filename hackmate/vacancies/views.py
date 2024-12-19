@@ -8,6 +8,7 @@ import django.db.models
 import django.http
 import django.shortcuts
 import django.urls
+import django.utils.translation
 import django.views
 import django.views.generic
 
@@ -76,7 +77,11 @@ class VacancyDetailView(
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return django.http.JsonResponse(
-                {"error": "Вы должны быть авторизованы"},
+                {
+                    "error": django.utils.translation.gettext_lazy(
+                        "Вы должны быть авторизованы",
+                    ),
+                },
                 status=403,
             )
 
@@ -104,7 +109,11 @@ class VacancyDetailView(
             ],
         ).exists():
             return django.http.JsonResponse(
-                {"message": "Вы уже откликнулись на эту вакансию"},
+                {
+                    "message": django.utils.translation.gettext_lazy(
+                        "Вы уже откликнулись на эту вакансию",
+                    ),
+                },
             )
 
         vacancies.models.Response.objects.create(
@@ -112,7 +121,13 @@ class VacancyDetailView(
             user=request.user,
         )
 
-        return django.http.JsonResponse({"message": "Ваш отклик отправлен!"})
+        return django.http.JsonResponse(
+            {
+                "message": django.utils.translation.gettext_lazy(
+                    "Ваш отклик отправлен!",
+                ),
+            },
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block links %}
   <link rel="stylesheet" href="{% static 'css/vacancies/vacancy_create.css' %}">
@@ -8,7 +9,7 @@
 
 {% block content %}
   <section class="container">
-    <h1>Изменить вакансию</h1>
+    <h1>{% trans 'Изменить вакансию' %}</h1>
 
     {% if messages %}
       <div class="messages" role="alert">
@@ -36,7 +37,7 @@
         {% endfor %}
       </div>
 
-      <button type="submit" class="btn btn-primary">Сохранить</button>
+      <button type="submit" class="btn btn-primary">{% trans 'Сохранить' %}</button>
     </form>
   </section>
 {% endblock %}

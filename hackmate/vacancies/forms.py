@@ -2,8 +2,10 @@ __all__ = ()
 
 import django.forms
 import django.utils.timezone
+import django.utils.translation
 
 import vacancies.models
+import tinymce.widgets
 
 
 class VacancyForm(django.forms.ModelForm):
@@ -17,9 +19,15 @@ class VacancyForm(django.forms.ModelForm):
 
     def clean_deadline(self):
         deadline = self.cleaned_data.get("deadline")
-        if deadline and deadline < django.utils.timezone.now().date():
+        current_date = django.utils.timezone.localdate(
+            django.utils.timezone.now(),
+        )
+
+        if deadline and deadline < current_date:
             raise django.forms.ValidationError(
-                "Дедлайн не может быть в прошлом.",
+                django.utils.translation.gettext_lazy(
+                    "Дедлайн не может быть в прошлом.",
+                ),
             )
 
         return deadline
@@ -36,18 +44,32 @@ class VacancyForm(django.forms.ModelForm):
         ]
         widgets = {
             model.title.field.name: django.forms.TextInput(
-                attrs={"placeholder": "Введите название вакансии"},
+                attrs={
+                    "placeholder": django.utils.translation.gettext_lazy(
+                        "Введите название вакансии",
+                    ),
+                },
             ),
-            model.description.field.name: django.forms.Textarea(
-                attrs={"placeholder": "Введите описание"},
+            model.description.field.name: tinymce.widgets.TinyMCE(
+                attrs={
+                    "placeholder": django.utils.translation.gettext_lazy(
+                        "Введите описание",
+                    ),
+                },
             ),
             model.hackaton_title.field.name: django.forms.TextInput(
-                attrs={"placeholder": "Введите название хакатона"},
+                attrs={
+                    "placeholder": django.utils.translation.gettext_lazy(
+                        "Введите название хакатона",
+                    ),
+                },
             ),
             model.deadline.field.name: django.forms.DateInput(
                 attrs={
                     "type": "date",
-                    "placeholder": "Выберите дедлайн",
+                    "placeholder": django.utils.translation.gettext_lazy(
+                        "Выберите дедлайн",
+                    ),
                 },
             ),
         }
@@ -72,7 +94,9 @@ class CommentForm(django.forms.ModelForm):
         widgets = {
             model.comment.field.name: django.forms.Textarea(
                 attrs={
-                    "placeholder": "Введите ваш комментарий",
+                    "placeholder": django.utils.translation.gettext_lazy(
+                        "Введите ваш комментарий",
+                    ),
                     "rows": 3,
                 },
             ),
