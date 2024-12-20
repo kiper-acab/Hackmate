@@ -125,7 +125,7 @@ cd hackmate
   ```
 - Выгрузка фикстур:
   ```bash
-  python -X utf8 manage.py dumpdata --indent 2 your_app > fixtures/data.json
+  python -X utf8 manage.py dumpdata --indent 2  your_app > fixtures/data.json
   ```
 
 ---
