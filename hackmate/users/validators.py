@@ -10,6 +10,7 @@ import django.utils.translation
 def validate_birthday(value):
     today = django.utils.timezone.now().date()
     oldest_allowed = today - datetime.timedelta(days=150 * 365)
+    youngest_allowed = today - datetime.timedelta(days=14 * 365)
     if value > today:
         raise django.core.exceptions.ValidationError(
             django.utils.translation.gettext_lazy(
@@ -21,6 +22,13 @@ def validate_birthday(value):
         raise django.core.exceptions.ValidationError(
             django.utils.translation.gettext_lazy(
                 "Укажите корректную дату рождения.",
+            ),
+        )
+
+    if value > youngest_allowed:
+        raise django.core.exceptions.ValidationError(
+            django.utils.translation.gettext_lazy(
+                "Для участия в хакатонах вам должно быть минимум 14 лет",
             ),
         )
 

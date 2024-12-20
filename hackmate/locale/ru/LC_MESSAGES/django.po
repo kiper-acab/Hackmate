@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 22:03+0400\n"
+"POT-Creation-Date: 2024-12-20 22:16+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -926,21 +926,25 @@ msgstr "ссылка"
 msgid "ссылки"
 msgstr "ссылки"
 
-#: users/validators.py:16 users/validators.py:23
+#: users/validators.py:17 users/validators.py:24
 msgid "Укажите корректную дату рождения."
 msgstr "Укажите корректную дату рождения."
 
-#: users/validators.py:36 users/validators.py:44
+#: users/validators.py:31
+msgid "Для участия в хакатонах вам должно быть минимум 14 лет"
+msgstr "Для участия в хакатонах вам должно быть минимум 14 лет"
+
+#: users/validators.py:44 users/validators.py:52
 #, python-format
 msgid "Пароль может содержать максимум %(max_length)d символов."
 msgstr "Пароль может содержать максимум %(max_length)d символов."
 
-#: users/validators.py:62
+#: users/validators.py:70
 #, python-brace-format
 msgid "Неизвестный тип сайта: {site_type}"
 msgstr "Неизвестный тип сайта: {site_type}"
 
-#: users/validators.py:70
+#: users/validators.py:78
 #, python-brace-format
 msgid "Ссылка должна начинаться с '{expected_prefix}'."
 msgstr "Ссылка должна начинаться с '{expected_prefix}'."
