@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 03:39+0300\n"
+"POT-Creation-Date: 2024-12-20 03:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,24 +98,16 @@ msgstr "Контакты"
 msgid "Email: "
 msgstr "Email: "
 
-#: .\templates\about\contact.html:15 .\templates\about\privacy.html:88
-msgid "Телефон: "
-msgstr "Телефон: "
+#: .\templates\about\contact.html:15
+#, fuzzy
+#| msgid "Телеграм секретаря: "
+msgid "Телеграм лидера: "
+msgstr "Телеграм секретаря: "
 
-#: .\templates\about\contact.html:16
-msgid "Адрес: "
-msgstr "Адрес: "
-
-#: .\templates\about\contact.html:17
-msgid "Телеграм руководителя: "
-msgstr "Телеграм руководителя: "
-
-#: .\templates\about\contact.html:18
-msgid "Телеграм службы поддержки: "
-msgstr "Телеграм службы поддержки: "
-
-#: .\templates\about\contact.html:19
-msgid "Телеграм секретаря: "
+#: .\templates\about\contact.html:16 .\templates\about\contact.html:17
+#, fuzzy
+#| msgid "Телеграм секретаря: "
+msgid "Телеграм разработчика: "
 msgstr "Телеграм секретаря: "
 
 #: .\templates\about\privacy.html:11 .\templates\includes\footer.html:18
@@ -379,6 +371,10 @@ msgstr ""
 #: .\templates\about\privacy.html:87
 msgid "Электронная почта: "
 msgstr "Электронная почта: "
+
+#: .\templates\about\privacy.html:88
+msgid "Телефон: "
+msgstr "Телефон: "
 
 #: .\templates\about\privacy.html:89
 msgid "Адрес: Москва, ул. Программистов, д. 1"
@@ -1197,6 +1193,15 @@ msgstr "Пользователь отклонён"
 #, python-brace-format
 msgid "Пользователь {user} удалён из команды"
 msgstr "Пользователь {user} удалён из команды"
+
+#~ msgid "Адрес: "
+#~ msgstr "Адрес: "
+
+#~ msgid "Телеграм руководителя: "
+#~ msgstr "Телеграм руководителя: "
+
+#~ msgid "Телеграм службы поддержки: "
+#~ msgstr "Телеграм службы поддержки: "
 
 #~ msgid "Восстановить"
 #~ msgstr "Восстановить"

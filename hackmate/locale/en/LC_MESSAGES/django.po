@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 03:39+0300\n"
+"POT-Creation-Date: 2024-12-20 03:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,24 +97,16 @@ msgstr "Contacts"
 msgid "Email: "
 msgstr "Email: "
 
-#: .\templates\about\contact.html:15 .\templates\about\privacy.html:88
-msgid "Телефон: "
-msgstr "Phone: "
+#: .\templates\about\contact.html:15
+#, fuzzy
+#| msgid "Телеграм секретаря: "
+msgid "Телеграм лидера: "
+msgstr "Telegram of the secretary: "
 
-#: .\templates\about\contact.html:16
-msgid "Адрес: "
-msgstr "Address: "
-
-#: .\templates\about\contact.html:17
-msgid "Телеграм руководителя: "
-msgstr "Telegram of the manager: "
-
-#: .\templates\about\contact.html:18
-msgid "Телеграм службы поддержки: "
-msgstr "Telegram of support service: "
-
-#: .\templates\about\contact.html:19
-msgid "Телеграм секретаря: "
+#: .\templates\about\contact.html:16 .\templates\about\contact.html:17
+#, fuzzy
+#| msgid "Телеграм секретаря: "
+msgid "Телеграм разработчика: "
 msgstr "Telegram of the secretary: "
 
 #: .\templates\about\privacy.html:11 .\templates\includes\footer.html:18
@@ -373,6 +365,10 @@ msgstr ""
 #: .\templates\about\privacy.html:87
 msgid "Электронная почта: "
 msgstr "Email: "
+
+#: .\templates\about\privacy.html:88
+msgid "Телефон: "
+msgstr "Phone: "
 
 #: .\templates\about\privacy.html:89
 msgid "Адрес: Москва, ул. Программистов, д. 1"
@@ -990,7 +986,7 @@ msgstr "The deadline cannot be in the past."
 
 #: .\vacancies\forms.py:49
 msgid "Введите название вакансии"
-msgstr "Enter the job title"
+msgstr "Enter the vacancy title"
 
 #: .\vacancies\forms.py:56
 msgid "Введите описание"
@@ -1040,11 +1036,11 @@ msgstr "vacancy creator"
 
 #: .\vacancies\models.py:54
 msgid "название вакансии"
-msgstr "job title"
+msgstr "vacancy title"
 
 #: .\vacancies\models.py:60
 msgid "описание вакансии"
-msgstr "job description"
+msgstr "vacancy description"
 
 #: .\vacancies\models.py:66
 msgid "Описание не может быть таким коротким"
@@ -1185,6 +1181,15 @@ msgstr "User rejected"
 #, python-brace-format
 msgid "Пользователь {user} удалён из команды"
 msgstr "User {user} removed from the team"
+
+#~ msgid "Адрес: "
+#~ msgstr "Address: "
+
+#~ msgid "Телеграм руководителя: "
+#~ msgstr "Telegram of the manager: "
+
+#~ msgid "Телеграм службы поддержки: "
+#~ msgstr "Telegram of support service: "
 
 #~ msgid "Восстановить"
 #~ msgstr "Reset"

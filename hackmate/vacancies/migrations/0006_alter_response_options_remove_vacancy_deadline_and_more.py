@@ -29,7 +29,7 @@ class Migration(django.db.migrations.Migration):
             model_name="vacancy",
             name="hackaton_date",
             field=django.db.models.DateField(
-                default="2025-01-03",
+                default="2025-01-01",
                 help_text="Крайний срок подачи заявок",
                 verbose_name="дедлайн",
             ),
@@ -39,9 +39,8 @@ class Migration(django.db.migrations.Migration):
             model_name="vacancy",
             name="description",
             field=tinymce.models.HTMLField(
-                help_text=(
-                    "Описание вакансии должно быть от 5 до 10000 символов",
-                ),
+                help_text="Описание вакансии должно быть "
+                "от 5 до 10000 символов",
                 validators=[
                     django.core.validators.MinLengthValidator(
                         5,
@@ -66,9 +65,8 @@ class Migration(django.db.migrations.Migration):
                     ("more_than_12_months", "Более 1 года"),
                 ],
                 default="no_expirience",
-                help_text=(
-                    "Укажите количество опыта необходимого для кандидата",
-                ),
+                help_text="Укажите количество опыта "
+                "необходимого для кандидата",
                 max_length=300,
                 verbose_name="требуемый опыт",
             ),

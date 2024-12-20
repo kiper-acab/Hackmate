@@ -1,0 +1,239 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "Алексей",
+      "email": "alexey@example.com",
+      "is_active": true
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "username": "Мария",
+      "email": "maria@example.com",
+      "is_active": true
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "username": "Иван",
+      "email": "ivan@example.com",
+      "is_active": true
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 1,
+    "fields": {
+      "creater": 1,
+      "title": "Ищем команду Frontend-разработчиков",
+      "description": "Требуется команда из нескольких человек для работы над интерфейсом сложного веб-приложения. Желателен опыт работы с React или Vue.js.",
+      "status": "active",
+      "hackaton_title": "Большой проект 2024",
+      "hackaton_date": "2024-12-31",
+      "required_experience": "middle",
+      "need_count_users": 4,
+      "team_composition": [2, 3],
+      "created_at": "2024-12-01T12:00:00Z",
+      "updated_at": "2024-12-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 2,
+    "fields": {
+      "creater": 2,
+      "title": "Backend-разработчик для сложного API",
+      "description": "Нужен специалист для разработки backend-части API. Желателен опыт работы с Django и PostgreSQL.",
+      "status": "active",
+      "hackaton_title": "Серверное решение 2025",
+      "hackaton_date": "2025-01-15",
+      "required_experience": "expert",
+      "need_count_users": 1,
+      "team_composition": [],
+      "created_at": "2024-12-01T12:00:00Z",
+      "updated_at": "2024-12-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 3,
+    "fields": {
+      "creater": 3,
+      "title": "Ищем дизайнера и frontend-разработчика",
+      "description": "Нужна пара из UI/UX дизайнера и frontend-разработчика для работы над пользовательским интерфейсом. Желаем работать с профессионалами!",
+      "status": "active",
+      "hackaton_title": "Улучшение интерфейсов",
+      "hackaton_date": "2025-02-10",
+      "required_experience": "bigginer",
+      "need_count_users": 2,
+      "team_composition": [2],
+      "created_at": "2024-11-15T10:00:00Z",
+      "updated_at": "2024-11-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 4,
+    "fields": {
+      "creater": 1,
+      "title": "Специалист по обработке данных",
+      "description": "Ищем профессионала для анализа данных, построения моделей и подготовки отчетности.",
+      "status": "active",
+      "hackaton_title": "Аналитика 2025",
+      "hackaton_date": "2025-03-20",
+      "required_experience": "expert",
+      "need_count_users": 1,
+      "team_composition": [],
+      "created_at": "2024-11-25T08:00:00Z",
+      "updated_at": "2024-11-25T08:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 5,
+    "fields": {
+      "creater": 2,
+      "title": "Ищем DevOps-инженера",
+      "description": "Требуется инженер для настройки CI/CD пайплайнов и поддержки инфраструктуры.",
+      "status": "active",
+      "hackaton_title": "Инфраструктура 2025",
+      "hackaton_date": "2025-04-01",
+      "required_experience": "middle",
+      "need_count_users": 1,
+      "team_composition": [],
+      "created_at": "2024-12-01T09:00:00Z",
+      "updated_at": "2024-12-01T09:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 6,
+    "fields": {
+      "creater": 3,
+      "title": "Команда разработчиков для мобильного приложения",
+      "description": "Ищем группу из 3 человек для разработки мобильного приложения под Android и iOS. Желателен опыт работы с Flutter или React Native.",
+      "status": "active",
+      "hackaton_title": "Мобильные технологии",
+      "hackaton_date": "2025-06-15",
+      "required_experience": "middle",
+      "need_count_users": 3,
+      "team_composition": [1, 2],
+      "created_at": "2024-12-05T15:00:00Z",
+      "updated_at": "2024-12-05T15:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 7,
+    "fields": {
+      "creater": 1,
+      "title": "Младший тестировщик",
+      "description": "Ищем начинающего тестировщика для работы над функциональным и нагрузочным тестированием продукта.",
+      "status": "active",
+      "hackaton_title": "Тестирование 2024",
+      "hackaton_date": "2024-12-20",
+      "required_experience": "bigginer",
+      "need_count_users": 1,
+      "team_composition": [],
+      "created_at": "2024-12-01T12:00:00Z",
+      "updated_at": "2024-12-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 8,
+    "fields": {
+      "creater": 2,
+      "title": "Менеджер проекта",
+      "description": "Ищем опытного менеджера для управления проектом и работы с командой разработки.",
+      "status": "active",
+      "hackaton_title": "Менеджмент 2025",
+      "hackaton_date": "2025-01-15",
+      "required_experience": "expert",
+      "need_count_users": 1,
+      "team_composition": [],
+      "created_at": "2024-12-10T09:00:00Z",
+      "updated_at": "2024-12-10T09:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 9,
+    "fields": {
+      "creater": 3,
+      "title": "Разработчик Python",
+      "description": "Нужен Python-разработчик для работы над микросервисами и API интеграцией.",
+      "status": "active",
+      "hackaton_title": "Python-разработка 2025",
+      "hackaton_date": "2025-02-01",
+      "required_experience": "middle",
+      "need_count_users": 1,
+      "team_composition": [],
+      "created_at": "2024-12-15T12:00:00Z",
+      "updated_at": "2024-12-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.vacancy",
+    "pk": 10,
+    "fields": {
+      "creater": 1,
+      "title": "Команда специалистов по аналитике данных",
+      "description": "Ищем команду из 3 человек для анализа данных, построения прогнозных моделей и подготовки отчётов.",
+      "status": "active",
+      "hackaton_title": "Большая аналитика 2025",
+      "hackaton_date": "2025-03-01",
+      "required_experience": "expert",
+      "need_count_users": 3,
+      "team_composition": [2, 3],
+      "created_at": "2024-12-20T15:00:00Z",
+      "updated_at": "2024-12-20T15:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.commentvacancy",
+    "pk": 1,
+    "fields": {
+      "vacancy": 1,
+      "comment": "Очень интересная задача, подходящий проект для нашей команды!",
+      "user": 2,
+      "created_at": "2024-12-01T16:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.commentvacancy",
+    "pk": 2,
+    "fields": {
+      "vacancy": 2,
+      "comment": "API — это моя специализация, готов откликнуться!",
+      "user": 3,
+      "created_at": "2024-12-02T14:00:00Z"
+    }
+  },
+  {
+    "model": "vacancies.response",
+    "pk": 1,
+    "fields": {
+      "user": 3,
+      "vacancy": 2,
+      "created_at": "2024-12-03T12:00:00Z",
+      "status": "accepted"
+    }
+  },
+  {
+    "model": "vacancies.response",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "vacancy": 1,
+      "created_at": "2024-12-04T10:00:00Z",
+      "status": "accepted"
+    }
+  }
+]
