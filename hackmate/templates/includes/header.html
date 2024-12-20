@@ -35,7 +35,6 @@
             <li><a href="{% url 'users:profile' username=request.user %}" class="dropdown-item">{% trans "Профиль" %}</a></li>
             <li><a href="{% url 'users:profile_edit' %}" class="dropdown-item">{% trans "Редактирование профиля" %}</a></li>
             <li><a href="{% url 'users:password_change' %}" class="dropdown-item">{% trans "Изменить пароль" %}</a></li>
-            <li><a href="{% url 'users:password_reset' %}" class="dropdown-item">{% trans "Восстановить пароль" %}</a></li>
             <li><a href="{% url 'users:logout' %}" class="dropdown-item">{% trans "Выйти" %}</a></li>
           </ul>
         </li>

@@ -26,6 +26,8 @@ password_change_done_view = (
 password_reset_view = django.contrib.auth.views.PasswordResetView.as_view(
     form_class=users.forms.PasswordResetForm,
     template_name="users/password_reset.html",
+    email_template_name="users/password_reset_email.html",
+    success_url=django.urls.reverse_lazy("users:password_reset_done"),
 )
 password_reset_done_view = (
     django.contrib.auth.views.PasswordResetDoneView.as_view(
@@ -35,11 +37,10 @@ password_reset_done_view = (
 password_reset_confirm_view = (
     django.contrib.auth.views.PasswordResetConfirmView.as_view(
         template_name="users/password_reset_confirm.html",
+        form_class=users.forms.PasswordResetCompleteForm,
     )
 )
-password_reset_complete_view = (
-    django.contrib.auth.views.PasswordResetCompleteView.as_view()
-)
+
 
 urlpatterns = [
     django.urls.path(
@@ -93,14 +94,9 @@ urlpatterns = [
         name="password_reset_done",
     ),
     django.urls.path(
-        "reset/<uidb64>/<token>/",
+        "password_reset/confirm/<uidb64>/<token>/",
         password_reset_confirm_view,
         name="password_reset_confirm",
-    ),
-    django.urls.path(
-        "reset/done/",
-        password_reset_complete_view,
-        name="password_reset_complete",
     ),
     django.urls.path(
         "activate/<str:username>/",

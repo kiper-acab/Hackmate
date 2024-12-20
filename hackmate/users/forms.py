@@ -162,3 +162,10 @@ class PasswordResetForm(django.contrib.auth.forms.PasswordResetForm):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
             field.field.widget.attrs["class"] = "form-control"
+
+
+class PasswordResetCompleteForm(django.contrib.auth.forms.SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control"
