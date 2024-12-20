@@ -57,11 +57,15 @@ class VacancyDetailView(
     context_object_name = "vacancy"
     form_class = vacancies.forms.CommentForm
 
-    def get_objects(self):
+    def get_object(self):
         queryset = (
             self.get_queryset()
             .select_related("creater", "creater__profile")
             .prefetch_related(
+                django.db.models.Prefetch(
+                    "team_composition",
+                    queryset=user_model.objects.select_related("profile"),
+                ),
                 "comments",
                 django.db.models.Prefetch(
                     "comments__user",
@@ -97,7 +101,7 @@ class VacancyDetailView(
 
         vacancy = self.get_object()
 
-        form = vacancies.forms.CommentForm(request.POST)
+        form = vacancies.forms.CommentForm(request.POST) or None
         if form.is_valid():
             comment = form.save(commit=False)
             comment.vacancy = vacancy
@@ -220,7 +224,7 @@ class UserVacanciesView(
 
 class CreateCommentView(
     django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.CreateView,
+    django.views.generic.View,
 ):
     model = vacancies.models.CommentVacancy
 
@@ -230,13 +234,19 @@ class CreateCommentView(
             args=[kwargs.get("pk")],
         )
 
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         vacancy = vacancies.models.Vacancy.objects.get(pk=kwargs.get("pk"))
-        vacancies.models.CommentVacancy.objects.create(
-            vacancy=vacancy,
-            user=request.user,
-            comment=request.POST.get("comment"),
-        )
+        comment = request.POST.get("comment")
+        if comment:
+            vacancies.models.CommentVacancy.objects.create(
+                vacancy=vacancy,
+                user=request.user,
+                comment=comment,
+            )
+
         return django.shortcuts.redirect(
             self.get_success_url(request, *args, **kwargs),
         )

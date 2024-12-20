@@ -9,7 +9,7 @@ h1 {
     margin: 10px;
     text-decoration: none;
     background:transparent;
-    --btn-width: 120px;
+    --btn-width: 210px;
     width: var(--btn-width);
     min-height:45px;
     background-color:rgb(71, 172, 255);
@@ -34,6 +34,6 @@ h1 {
     left: calc( var(--expand) * -1);
 
     &:hover, &:active {
-      --expand: calc( var(--btn-width) * .15);
+      --expand: calc( var(--btn-width) * .1);
     }
   }
