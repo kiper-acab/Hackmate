@@ -26,7 +26,8 @@
 				<label for="id_image">{% trans "Аватар" %}</label><br>
 
 				{% if user.profile.image %}
-					<img src="{{ user.profile.image.url }}" alt="{% trans 'Текущий аватар' %}" class="img-thumbnail mb-3 current-avatar">
+					<img src="{{ user.profile.image.url }}" alt="{% trans 'Текущий аватар' %}"
+					     class="img-thumbnail mb-3 current-avatar">
 					<form method="post">
 						{% csrf_token %}
 						<button type="submit" name="delete_image" value="true" class="btn btn-danger delete-profile-image">
@@ -52,27 +53,28 @@
 				{% for field in link_form %}
 					{% include "includes/form.html" %}
 				{% endfor %}
-				<button type="submit" name="add_link" class="grow-button btn-confirm-changes">{% trans "Сохранить изменения" %}</button>
+				<button type="submit" name="add_link"
+				        class="grow-button btn-confirm-changes">{% trans "Сохранить изменения" %}</button>
 		</form>
 
 		{% if user.profile.links.exists %}
 			<h2 class="other-social-links-title">{% trans "Ссылки на другие сети" %}</h2>
-				<ul>
-					{% for link in user.profile.links.all %}
-						<li class="li-links">
-							<a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
-								<i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
-								{{ link.site_type }}
-							</a>
-							<form method="post" action="{% url 'users:delete_link' pk=link.pk %}" class="delete-link-form">
-								{% csrf_token %}
-								<button type="submit" class="close delete-link-button" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</form>
-						</li>
-					{% endfor %}
-				</ul>
+			<ul>
+				{% for link in user.profile.links.all %}
+					<li class="li-links">
+						<a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}">
+							<i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
+							{{ link.site_type }}
+						</a>
+						<form method="post" action="{% url 'users:delete_link' pk=link.pk %}" class="delete-link-form">
+							{% csrf_token %}
+							<button type="submit" class="close delete-link-button" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</form>
+					</li>
+				{% endfor %}
+			</ul>
 		{% endif %}
 		<div class="password-container">
 			<a href="{% url 'users:password_change' %}" class="password">{% trans "Изменить пароль" %}</a>

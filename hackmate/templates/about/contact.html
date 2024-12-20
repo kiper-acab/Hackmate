@@ -3,19 +3,19 @@
 {% load i18n %}
 
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/pages.css' %}">
+	<link rel="stylesheet" href="{% static 'css/pages.css' %}">
 {% endblock %}
 
 {% block content %}
-<section class="page-content">
-  <div class="container my-5">
-    <h1 class="text-center">{% trans "Контакты" %}</h1>
-    <ul>
-      <li>{% trans "Email: " %}<a href="mailto:support@hackmate.ru">hackmatesup@yandex.ru</a></li>
-      <li>{% trans "Телеграм лидера: " %}@KIPERQW</li>
-      <li>{% trans "Телеграм разработчика: " %}@l_kharazyan</li>
-      <li>{% trans "Телеграм разработчика: " %}@shel_makar</li>
-    </ul>
-  </div>
-</section>
+	<section class="page-content">
+		<div class="container my-5">
+			<h1 class="text-center">{% trans "Контакты" %}</h1>
+			<ul>
+				<li>{% trans "Email: " %}<a href="mailto:support@hackmate.ru">hackmatesup@yandex.ru</a></li>
+				<li>{% trans "Телеграм лидера: " %}@KIPERQW</li>
+				<li>{% trans "Телеграм разработчика: " %}@l_kharazyan</li>
+				<li>{% trans "Телеграм разработчика: " %}@shel_makar</li>
+			</ul>
+		</div>
+	</section>
 {% endblock %}

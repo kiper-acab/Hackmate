@@ -4,52 +4,57 @@
 {% load i18n %}
 
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/vacancies/my_vacancies.css' %}">
+	<link rel="stylesheet" href="{% static 'css/vacancies/my_vacancies.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1 class="page-title">{% trans 'Ваши вакансии' %}</h1>
-  {% if messages %}
-    <div class="messages" role="alert">
-      {% for message in messages %}
-        <p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
-      {% endfor %}
-    </div>
-  {% endif %}
-  <div class="vacancy-list">
-    {% for vacancy in vacancies %}
-      <div class="vacancy-item">
-        <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="vacancy-title">
-          {{ vacancy.title }}
-        </a>
-        <p class="vacancy-description">{{ vacancy.description|safe|truncatechars:200 }}</p>
-        {% if vacancy.status == "active" %}
-          <p class="vacancy-stats">{% trans 'Откликов' %}: {{ vacancy.responses.count }}</p>
-          <div class="vacancy-responses">
-            <h3>{% trans 'Откликнувшиеся пользователи:' %}</h3>
-            <article class="responses-users">
-                {% for response in vacancy.responses.all %}
-                  <article class="">
-                    <a href="{% url 'users:profile' response.user.username %}" class="user-profile-link">{{ response.user.username }}</a>
-                  </article>
-                  <article>
-                    <a href="{% url 'vacancies:invite_user' response.id %}" class=""><i class="fa-solid fa-check accept-user"></i></a>
-                    <a href="{% url 'vacancies:reject_user' response.id %}" class=""><i class="fa-solid fa-ban decline-user"></i></a>
-                  </article>
-                {% empty %}
-                  <a>{% trans 'Пока никто не откликнулся' %}</a>
-                {% endfor %}
-            </article>
-          </div>
-      {% endif %}
-      </div>
-    {% empty %}
-    <article class="nothing-container">
-      <h2 class="nothing">{% trans 'У вас нет вакансий' %}</h2>
-      <p class="nothing">{% trans 'Если хотите создать анкету, то' %} <a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-link">{% trans 'перейдите сюда' %}</a></p>
-    </article>
-    {% endfor %}
-  </div>
-</div>
+	<div class="container">
+		<h1 class="page-title">{% trans 'Ваши вакансии' %}</h1>
+		{% if messages %}
+			<div class="messages" role="alert">
+				{% for message in messages %}
+					<p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
+				{% endfor %}
+			</div>
+		{% endif %}
+		<div class="vacancy-list">
+			{% for vacancy in vacancies %}
+				<div class="vacancy-item">
+					<a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="vacancy-title">
+						{{ vacancy.title }}
+					</a>
+					<p class="vacancy-description">{{ vacancy.description|safe|truncatechars:200 }}</p>
+					{% if vacancy.status == "active" %}
+						<p class="vacancy-stats">{% trans 'Откликов' %}: {{ vacancy.responses.count }}</p>
+						<div class="vacancy-responses">
+							<h3>{% trans 'Откликнувшиеся пользователи:' %}</h3>
+							<article class="responses-users">
+								{% for response in vacancy.responses.all %}
+									<article class="">
+										<a href="{% url 'users:profile' response.user.username %}"
+										   class="user-profile-link">{{ response.user.username }}</a>
+									</article>
+									<article>
+										<a href="{% url 'vacancies:invite_user' response.id %}" class=""><i
+												class="fa-solid fa-check accept-user"></i></a>
+										<a href="{% url 'vacancies:reject_user' response.id %}" class=""><i
+												class="fa-solid fa-ban decline-user"></i></a>
+									</article>
+									{% empty %}
+									<a>{% trans 'Пока никто не откликнулся' %}</a>
+								{% endfor %}
+							</article>
+						</div>
+					{% endif %}
+				</div>
+				{% empty %}
+				<article class="nothing-container">
+					<h2 class="nothing">{% trans 'У вас нет вакансий' %}</h2>
+					<p class="nothing">{% trans 'Если хотите создать анкету, то' %} <a href="{% url 'vacancies:vacancy_create' %}"
+					                                                                   class="btn btn-link">{% trans 'перейдите сюда' %}</a>
+					</p>
+				</article>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

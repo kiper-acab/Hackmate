@@ -9,97 +9,98 @@
 {% endblock %}
 
 {% block content %}
-  <section class="container profile-section">
-    <div class="profile-header">
-      <div class="profile-rating">
-       <div class="stars">
-          {% if is_own_profile %}
-            <article>
-              <h4>{% trans 'Рейтинг' %} {{ rating_user.average|floatformat:1 }}</h4>
-              <h4>{% trans 'Количество оценок' %} {{ rating_user.count }}</h4>
-            </article>
-          {% else %}
-            {% ratings user.profile %}
-          {% endif %}
-        </div>
+	<section class="container profile-section">
+		<div class="profile-header">
+			<div class="profile-rating">
+				<div class="stars">
+					{% if is_own_profile %}
+						<article>
+							<h4>{% trans 'Рейтинг' %} {{ rating_user.average|floatformat:1 }}</h4>
+							<h4>{% trans 'Количество оценок' %} {{ rating_user.count }}</h4>
+						</article>
+					{% else %}
+						{% ratings user.profile %}
+					{% endif %}
+				</div>
 
-      </div>
-    </div>
-    <div class="profile-avatar">
-        {% if user.profile.image %}
-          <img src="{{ user.profile.image.url }}" alt="{{ user.username }}" class="avatar">
-        {% else %}
-          <img src="{% static 'img/default-avatar.jpg' %}" alt="{% trans 'Default Avatar' %}" class="avatar">
-        {% endif %}
-      </div>
-    <div class="profile-info">
+			</div>
+		</div>
+		<div class="profile-avatar">
+			{% if user.profile.image %}
+				<img src="{{ user.profile.image.url }}" alt="{{ user.username }}" class="avatar">
+			{% else %}
+				<img src="{% static 'img/default-avatar.jpg' %}" alt="{% trans 'Default Avatar' %}" class="avatar">
+			{% endif %}
+		</div>
+		<div class="profile-info">
 
-      <h1>{{ user.username }}</h1>
-      <p class="email">{% trans "Email" %}: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+			<h1>{{ user.username }}</h1>
+			<p class="email">{% trans "Email" %}: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
 
-      <div class="profile-details">
-        <div class="profile-item">
-          {% if user.profile.description %}
-            <p><strong>О себе:</strong> {{ user.profile.description }}</p>
-          {% else %}
-            <p><strong>О себе:</strong> Информация не указана.</p>
-          {% endif %}
-        </div>
+			<div class="profile-details">
+				<div class="profile-item">
+					{% if user.profile.description %}
+						<p><strong>О себе:</strong> {{ user.profile.description }}</p>
+					{% else %}
+						<p><strong>О себе:</strong> Информация не указана.</p>
+					{% endif %}
+				</div>
 
-        <div class="profile-item">
-          {% if user.profile.birthday %}
-            <p><strong>{% trans 'День рождения' %}:</strong> {{ user.profile.birthday }}</p>
-          {% else %}
-            <p><strong>{% trans 'День рождения' %}:</strong> {% trans 'Информация не указана.' %}</p>
-          {% endif %}
-        </div>
+				<div class="profile-item">
+					{% if user.profile.birthday %}
+						<p><strong>{% trans 'День рождения' %}:</strong> {{ user.profile.birthday }}</p>
+					{% else %}
+						<p><strong>{% trans 'День рождения' %}:</strong> {% trans 'Информация не указана.' %}</p>
+					{% endif %}
+				</div>
 
-        <div class="profile-item">
-          <p><strong>{% trans 'Дата регистрации' %}:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
-        </div>
-      </div>
-    </div>
+				<div class="profile-item">
+					<p><strong>{% trans 'Дата регистрации' %}:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+				</div>
+			</div>
+		</div>
 
-    <div class="links-section">
-      <h2>{% trans 'Ссылки на другие сети' %}</h2>
+		<div class="links-section">
+			<h2>{% trans 'Ссылки на другие сети' %}</h2>
 
-      {% if user.profile.links.exists %}
-        <ul class="social-links">
-          {% for link in user.profile.links.all %}
-            <li>
-              <h5>
-                <a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}" class="btn btn-link">
-                  <i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
-	                {{ link.site_type }}
-                </a>
-              </h5>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>{% trans 'Ссылки отсутствуют.' %}</p>
-      {% endif %}
-    </div>
+			{% if user.profile.links.exists %}
+				<ul class="social-links">
+					{% for link in user.profile.links.all %}
+						<li>
+							<h5>
+								<a href="{{ link.url }}" target="_blank" title="{{ link.get_site_type_display }}" class="btn btn-link">
+									<i class="fab {{ link.get_fa_icon_class }} site-icon"></i>
+									{{ link.site_type }}
+								</a>
+							</h5>
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p>{% trans 'Ссылки отсутствуют.' %}</p>
+			{% endif %}
+		</div>
 
-    {% if is_own_profile %}
-      <div class="profile-actions">
-        <a href="{% url 'users:profile_edit' %}" class="btn btn-primary grow-button">{% trans 'Редактировать профиль' %}</a>
-      </div>
-    {% endif %}
+		{% if is_own_profile %}
+			<div class="profile-actions">
+				<a href="{% url 'users:profile_edit' %}"
+				   class="btn btn-primary grow-button">{% trans 'Редактировать профиль' %}</a>
+			</div>
+		{% endif %}
 
-    <h2 class="finished-vacancies-title">{% trans 'Завершённые вакансии' %}</h2>
-    {% for vacancy in finished_vacancies %}
-      <div class="card w-75 mb-3">
-        <div class="card-body">
-          <h5 class="card-title">{{ vacancy.title }}</h5>
-          <p class="card-text">{{ vacancy.description|truncatechars:200|safe }}</p>
-          <a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="grow-button">{% trans 'Детальнее' %}</a>
-        </div>
-      </div>
-    {% empty %}
-        <p class="no-vacancies">{% trans 'У пользователя' %} {{ user.username }} {% trans 'нет завершённых вакансий' %}.</p>
-    {% endfor %}
-  </section>
+		<h2 class="finished-vacancies-title">{% trans 'Завершённые вакансии' %}</h2>
+		{% for vacancy in finished_vacancies %}
+			<div class="card w-75 mb-3">
+				<div class="card-body">
+					<h5 class="card-title">{{ vacancy.title }}</h5>
+					<p class="card-text">{{ vacancy.description|truncatechars:200|safe }}</p>
+					<a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="grow-button">{% trans 'Детальнее' %}</a>
+				</div>
+			</div>
+			{% empty %}
+			<p class="no-vacancies">{% trans 'У пользователя' %} {{ user.username }} {% trans 'нет завершённых вакансий' %}.</p>
+		{% endfor %}
+	</section>
 
 	<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 	<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>

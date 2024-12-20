@@ -11,7 +11,8 @@
 		<div class="header">
 			<h1>{% trans 'Список вакансий' %}</h1>
 			<figure>
-				<a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-primary btn-circle creaete_vacancy">{% trans 'Создать вакансию' %}</a>
+				<a href="{% url 'vacancies:vacancy_create' %}"
+				   class="btn btn-primary btn-circle creaete_vacancy">{% trans 'Создать вакансию' %}</a>
 			</figure>
 		</div>
 		<section class="vacancies">
@@ -24,7 +25,8 @@
 							{% if vacancy.creater.profile.image %}
 								<img src="{{ vacancy.creater.profile.image.url }}" alt="" class="avatar">
 							{% else %}
-								<img src="{% static 'img/default-avatar.jpg' %}" alt="{% trans 'Default Avatar' %}" class="dropdown-image avatar">
+								<img src="{% static 'img/default-avatar.jpg' %}" alt="{% trans 'Default Avatar' %}"
+								     class="dropdown-image avatar">
 							{% endif %}
 							<p class="username">
 								{{ vacancy.creater.username|truncatewords:3 }}
@@ -33,11 +35,11 @@
 						<a href="{% url 'vacancies:vacancy_detail' vacancy.pk %}" class="grow-button">{% trans 'Детальнее' %}</a>
 					</div>
 				</div>
-			{% empty %}
-			<article class="nothing-container">
-				<h2 class="nothing">{% trans 'Ещё ни кто не разместил объявление о поиске.' %}</h2>
-				<p class="nothing">{% trans 'Стань первым!' %}</p>
-			</article>
+				{% empty %}
+				<article class="nothing-container">
+					<h2 class="nothing">{% trans 'Ещё ни кто не разместил объявление о поиске.' %}</h2>
+					<p class="nothing">{% trans 'Стань первым!' %}</p>
+				</article>
 			{% endfor %}
 		</section>
 	</section>

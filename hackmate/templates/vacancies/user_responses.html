@@ -4,29 +4,30 @@
 {% load i18n %}
 
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/vacancies/my_responses.css' %}">
+	<link rel="stylesheet" href="{% static 'css/vacancies/my_responses.css' %}">
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h1 class="page-title">{% trans 'Мои отклики' %}</h1>
-    <div class="response-list">
-      {% for response in responses %}
-        <div class="response-item">
-          <div>
-            <a href="{% url 'vacancies:vacancy_detail' response.vacancy.pk %}" class="response-title">
-              {{ response.vacancy.title }}
-            </a>
-            <p class="response-date">— {{ response.created_at|date:"d.m.Y H:i" }}</p>
-          </div>
-          <a href="{% url 'vacancies:vacancy_detail' response.vacancy.pk %}" class="view-button">{% trans 'Посмотреть вакансию' %}</a>
-        </div>
-      {% empty %}
-      <article class="nothing-container">
-        <h2 class="nothing">{% trans 'У вас нету откликов.' %}</h2>
-      </article>
-      {% endfor %}
-    </div>
-  </div>
+	<div class="container">
+		<h1 class="page-title">{% trans 'Мои отклики' %}</h1>
+		<div class="response-list">
+			{% for response in responses %}
+				<div class="response-item">
+					<div>
+						<a href="{% url 'vacancies:vacancy_detail' response.vacancy.pk %}" class="response-title">
+							{{ response.vacancy.title }}
+						</a>
+						<p class="response-date">— {{ response.created_at|date:"d.m.Y H:i" }}</p>
+					</div>
+					<a href="{% url 'vacancies:vacancy_detail' response.vacancy.pk %}"
+					   class="view-button">{% trans 'Посмотреть вакансию' %}</a>
+				</div>
+				{% empty %}
+				<article class="nothing-container">
+					<h2 class="nothing">{% trans 'У вас нету откликов.' %}</h2>
+				</article>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
 

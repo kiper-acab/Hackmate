@@ -5,28 +5,28 @@
 {% get_current_timezone as TIME_ZONE %}
 {% timezone TIME_ZONE %}
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-left">
-        <h1 id="year">{% trans "HackMate" %} {% now "Y" %}</h1>
-      </div>
-      <div class="footer-center">
-        <ul class="footer-links">
-          <li><a href="{% url 'about:about' %}">{% trans "О проекте" %}</a></li>
-          <li><a href="{% url 'about:contact' %}">{% trans "Контакты" %}</a></li>
-          <li><a href="{% url 'about:privacy' %}">{% trans "Политика конфиденциальности" %}</a></li>
-        </ul>
-      </div>
-      <div class="footer-right">
-        <ul class="social-links">
-          <li><a href="https://gitlab.crja72.ru/django/2024/autumn/course/projects/team-5" target="_blank">
-            <i class="fa-brands fa-gitlab"></i>
-            <p>{% trans "Проект на GitLab" %}</p>
-          </a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</footer>
+	<footer class="footer">
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-left">
+					<h1 id="year">{% trans "HackMate" %} {% now "Y" %}</h1>
+				</div>
+				<div class="footer-center">
+					<ul class="footer-links">
+						<li><a href="{% url 'about:about' %}">{% trans "О проекте" %}</a></li>
+						<li><a href="{% url 'about:contact' %}">{% trans "Контакты" %}</a></li>
+						<li><a href="{% url 'about:privacy' %}">{% trans "Политика конфиденциальности" %}</a></li>
+					</ul>
+				</div>
+				<div class="footer-right">
+					<ul class="social-links">
+						<li><a href="https://gitlab.crja72.ru/django/2024/autumn/course/projects/team-5" target="_blank">
+							<i class="fa-brands fa-gitlab"></i>
+							<p>{% trans "Проект на GitLab" %}</p>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 {% endtimezone %}

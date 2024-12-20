@@ -4,134 +4,142 @@
 {% load i18n %}
 
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/vacancies/detail.css' %}">
+	<link rel="stylesheet" href="{% static 'css/vacancies/detail.css' %}">
 {% endblock %}
 
 {% block content %}
-  <div class="container vacancy-container">
-    {% if vacancy.status == "active" %}
-      {% if request.user == vacancy.creater %}
-      <div class="dropdown">
-        <button class="btn-vacancy-menu" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'vacancies:change_vacancy' vacancy.pk %}">{% trans 'Изменить вакансию' %}</a></li>
-          <li><a class="dropdown-item" href="{% url 'vacancies:delete_vacancy' vacancy.pk %}">{% trans 'Удалить вакансию' %}</a></li>
-        </ul>
-      </div>
-      {% endif %}
-    {% endif %}
-    <h1 class="vacancy-title">{{ vacancy.title }}</h1>
-    <p class="vacancy-description">{{ vacancy.description|safe }}</p>
+	<div class="container vacancy-container">
+		{% if vacancy.status == "active" %}
+			{% if request.user == vacancy.creater %}
+				<div class="dropdown">
+					<button class="btn-vacancy-menu" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+							class="fa-solid fa-bars"></i></button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item"
+						       href="{% url 'vacancies:change_vacancy' vacancy.pk %}">{% trans 'Изменить вакансию' %}</a></li>
+						<li><a class="dropdown-item"
+						       href="{% url 'vacancies:delete_vacancy' vacancy.pk %}">{% trans 'Удалить вакансию' %}</a></li>
+					</ul>
+				</div>
+			{% endif %}
+		{% endif %}
+		<h1 class="vacancy-title">{{ vacancy.title }}</h1>
+		<p class="vacancy-description">{{ vacancy.description|safe }}</p>
 
-    <div class="vacancy-info">
-      <p><strong>{% trans 'Создатель:' %}</strong> {{ vacancy.creater.username|truncatechars:200 }}</p>
-      <p><strong>{% trans 'Создано:' %}</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
-      {% if vacancy.hackaton_title %}
-        <p><strong>{% trans 'Хакатон:' %}</strong> {{ vacancy.hackaton_title }}</p>
-      {% endif %}
-      {% if vacancy.hackaton_date %}
-        <p><strong>{% trans 'Дата проведения хакатона' %}</strong>: {{ vacancy.hackaton_date|date:"d.m.Y" }}</p>
-      {% endif %}
-      {% if vacancy.required_experience %}
-        <p><strong>{% trans 'Требуемый опыт:' %}</strong> {{ vacancy.get_required_experience_display }}</p>
-      {% endif %}
-      <p><strong>{% trans 'Необходимое количество человек в группе для участия в хакатоне' %}:</strong> {{ vacancy.need_count_users }}</p>
-      <article class="command">
-        <p><strong>{% trans 'Текущий состав команды' %}:</strong></p>
-        <article class="teammates">
-          <a href="{% url 'users:profile' vacancy.creater.username %}" class="teammate">
-            {% if vacancy.creater.profile.image %}
-              <img src="{{ vacancy.creater.profile.image.url }}" class="teammate-image">
-            {% else %}
-              <img src="{% static 'img/default-avatar.jpg' %}" class="teammate-image">
-            {% endif %}
-            <p class="teammate-username teammate-admin-username">{{ vacancy.creater.username|truncatechars:50 }}</p>
-          </a>
-          {% for member in vacancy.team_composition.all %}
-            <article class="teammate-article">
-              <a href="{% url 'users:profile' member.username %}" class="teammate">
-                {% if member.profile.image %}
-                  <img src="{{ member.profile.image.url }}" class="teammate-image">
-                {% else %}
-                  <img src="{% static 'img/default-avatar.jpg' %}" class="teammate-image">
-                {% endif %}
-                <p class="teammate-username">{{ member.username|truncatechars:50 }}</p>
-              </a>
-              {% if request.user == vacancy.creater and vacancy.status == 'active' %}
-                <a href="{% url 'vacancies:kick_user' vacancy.id member.pk %}"><i class="fa-solid fa-ban decline-user kick-teammate"></i></a>
-              {% endif %}
-            </article>
-          {% endfor %}
-        </article>
-      </article>
-    </div>
+		<div class="vacancy-info">
+			<p><strong>{% trans 'Создатель:' %}</strong> {{ vacancy.creater.username|truncatechars:200 }}</p>
+			<p><strong>{% trans 'Создано:' %}</strong> {{ vacancy.created_at|date:"d.m.Y H:i" }}</p>
+			{% if vacancy.hackaton_title %}
+				<p><strong>{% trans 'Хакатон:' %}</strong> {{ vacancy.hackaton_title }}</p>
+			{% endif %}
+			{% if vacancy.hackaton_date %}
+				<p><strong>{% trans 'Дата проведения хакатона' %}</strong>: {{ vacancy.hackaton_date|date:"d.m.Y" }}</p>
+			{% endif %}
+			{% if vacancy.required_experience %}
+				<p><strong>{% trans 'Требуемый опыт:' %}</strong> {{ vacancy.get_required_experience_display }}</p>
+			{% endif %}
+			<p>
+				<strong>{% trans 'Необходимое количество человек в группе для участия в хакатоне' %}:</strong> {{ vacancy.need_count_users }}
+			</p>
+			<article class="command">
+				<p><strong>{% trans 'Текущий состав команды' %}:</strong></p>
+				<article class="teammates">
+					<a href="{% url 'users:profile' vacancy.creater.username %}" class="teammate">
+						{% if vacancy.creater.profile.image %}
+							<img src="{{ vacancy.creater.profile.image.url }}" class="teammate-image">
+						{% else %}
+							<img src="{% static 'img/default-avatar.jpg' %}" class="teammate-image">
+						{% endif %}
+						<p class="teammate-username teammate-admin-username">{{ vacancy.creater.username|truncatechars:50 }}</p>
+					</a>
+					{% for member in vacancy.team_composition.all %}
+						<article class="teammate-article">
+							<a href="{% url 'users:profile' member.username %}" class="teammate">
+								{% if member.profile.image %}
+									<img src="{{ member.profile.image.url }}" class="teammate-image">
+								{% else %}
+									<img src="{% static 'img/default-avatar.jpg' %}" class="teammate-image">
+								{% endif %}
+								<p class="teammate-username">{{ member.username|truncatechars:50 }}</p>
+							</a>
+							{% if request.user == vacancy.creater and vacancy.status == 'active' %}
+								<a href="{% url 'vacancies:kick_user' vacancy.id member.pk %}"><i
+										class="fa-solid fa-ban decline-user kick-teammate"></i></a>
+							{% endif %}
+						</article>
+					{% endfor %}
+				</article>
+			</article>
+		</div>
 
-    <p class="views">
-      <i class="fa-regular fa-eye"></i>{{ vacancy.views.count }}
-    </p>
+		<p class="views">
+			<i class="fa-regular fa-eye"></i>{{ vacancy.views.count }}
+		</p>
 
-    {% if user.is_authenticated %}
-      {% if user != vacancy.creater %}
-        {% if not is_deadline_passed and vacancy.need_count_users != 0  and request.user not in vacancy.team_composition.all %}
-          <button id="respond-button" class="grow-button">{% trans 'Откликнуться' %}</button>
-        {% else %}
-          <p class="deadline-message">{% trans 'Вы больше не можете откликнуться на эту вакансию.' %}</p>
-        {% endif %}
-      {% endif %}
-    {% else %}
-      <p>{% trans 'Вы должны быть авторизованы, чтобы откликнуться.' %}</p>
-    {% endif %}
-    
-    <section class="commnets" id="comments-container">
-      <article class="create_comment">
-        <h2 class="comments-header">{% trans 'Комментарии' %}</h2>
-        <form method="post" action="{% url 'vacancies:create_comment' vacancy.pk %}">
-          {% csrf_token %}
-          <div class="form-group">
-            {{ field.as_p }}
-            {% for field in comment_form %}
-              <div class="mb-3">
-                {{ field }}
-                {% if field.help_text %}
-                  <div class="form-text">{{ field.help_text }}</div>
-                {% endif %}
-                {% for error in field.errors %}
-                  <div class="text-danger">{{ error }}</div>
-                {% endfor %}
-              </div>
-            {% endfor %}
-          </div>
-          <button type="submit" class="btn btn-primary send-comment">{% trans 'Отправить' %}</button>
-        </form>
-      </article>
-      <input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
-      <article class="comments">
-        {% for comment in vacancy.comments.all|slice:":10" %}
-          <div class="comment">
-              <header class="comment-header">
-                <a href="{% url 'users:profile' comment.user.username %}" class="user-a">
-                  {% if comment.user.profile.image %}
-                  <span class="comment-user"><img src="{{ comment.user.profile.image.url }}" class="user-image">{{ comment.user.username|truncatechars:50 }}</span>
-                  {% else %}
-                  <span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}" class="user-image">{{ comment.user.username|truncatechars:50 }}</span>
-                  {% endif %}
-                </a>
-                  <figure>
-                    <span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
-                    {% if comment.user == request.user or request.user.is_superuser %}
-                    <a href="{% url 'vacancies:delete_comment' comment.pk %}" class="delete-link-form">❌</a>
-                    {% endif %}
-                  </figure>
-              </header>
-              <p class="comment-text">{{ comment.comment }}</p>
-          </div>
-        {% empty %}
-          <p class="no-comments">{% trans 'Комментариев пока нет.' %}</p>
-        {% endfor %}
-    </article>
-    </section>
-  </div>
-  <input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
-  <script src="{% static 'js/load_more_comments.js' %}"></script>
-  <script src="{% static 'js/button_detail.js' %}"></script>
+		{% if user.is_authenticated %}
+			{% if user != vacancy.creater %}
+				{% if not is_deadline_passed and vacancy.need_count_users != 0  and request.user not in vacancy.team_composition.all %}
+					<button id="respond-button" class="grow-button">{% trans 'Откликнуться' %}</button>
+				{% else %}
+					<p class="deadline-message">{% trans 'Вы больше не можете откликнуться на эту вакансию.' %}</p>
+				{% endif %}
+			{% endif %}
+		{% else %}
+			<p>{% trans 'Вы должны быть авторизованы, чтобы откликнуться.' %}</p>
+		{% endif %}
+
+		<section class="commnets" id="comments-container">
+			<article class="create_comment">
+				<h2 class="comments-header">{% trans 'Комментарии' %}</h2>
+				<form method="post" action="{% url 'vacancies:create_comment' vacancy.pk %}">
+					{% csrf_token %}
+					<div class="form-group">
+						{{ field.as_p }}
+						{% for field in comment_form %}
+							<div class="mb-3">
+								{{ field }}
+								{% if field.help_text %}
+									<div class="form-text">{{ field.help_text }}</div>
+								{% endif %}
+								{% for error in field.errors %}
+									<div class="text-danger">{{ error }}</div>
+								{% endfor %}
+							</div>
+						{% endfor %}
+					</div>
+					<button type="submit" class="btn btn-primary send-comment">{% trans 'Отправить' %}</button>
+				</form>
+			</article>
+			<input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
+			<article class="comments">
+				{% for comment in vacancy.comments.all|slice:":10" %}
+					<div class="comment">
+						<header class="comment-header">
+							<a href="{% url 'users:profile' comment.user.username %}" class="user-a">
+								{% if comment.user.profile.image %}
+									<span class="comment-user"><img src="{{ comment.user.profile.image.url }}"
+									                                class="user-image">{{ comment.user.username|truncatechars:50 }}</span>
+								{% else %}
+									<span class="comment-user"><img src="{% static 'img/default-avatar.jpg' %}"
+									                                class="user-image">{{ comment.user.username|truncatechars:50 }}</span>
+								{% endif %}
+							</a>
+							<figure>
+								<span class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
+								{% if comment.user == request.user or request.user.is_superuser %}
+									<a href="{% url 'vacancies:delete_comment' comment.pk %}" class="delete-link-form">❌</a>
+								{% endif %}
+							</figure>
+						</header>
+						<p class="comment-text">{{ comment.comment }}</p>
+					</div>
+					{% empty %}
+					<p class="no-comments">{% trans 'Комментариев пока нет.' %}</p>
+				{% endfor %}
+			</article>
+		</section>
+	</div>
+	<input type="hidden" id="vacancy-id" value="{{ vacancy.id }}">
+	<script src="{% static 'js/load_more_comments.js' %}"></script>
+	<script src="{% static 'js/button_detail.js' %}"></script>
 {% endblock %}

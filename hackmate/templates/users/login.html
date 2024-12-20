@@ -4,28 +4,28 @@
 {% load i18n %}
 
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
+	<link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
 {% endblock %}
 
 {% block content %}
-  <section class="container">
-	{% if messages %}
-	  <div class="messages" role="alert">
-		{% for message in messages %}
-		  <p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
-		{% endfor %}
-	  </div>
-	{% endif %}
+	<section class="container">
+		{% if messages %}
+			<div class="messages" role="alert">
+				{% for message in messages %}
+					<p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
+				{% endfor %}
+			</div>
+		{% endif %}
 
-	<article class="form">
-	  <form method="post" enctype="multipart/form-data" class="form-group">
-		{% csrf_token %}
-		  {% for field in form %}
-			{% include "includes/form.html" %}
-		  {% endfor %}
-		<button type="submit" class="grow-button">{% trans "Отправить" %}</button>
-	  </form>
-	</article>
-	<a href="{% url 'users:password_reset' %}" class="password">{% trans "Восстановить пароль" %}</a>
-  </section>
+		<article class="form">
+			<form method="post" enctype="multipart/form-data" class="form-group">
+				{% csrf_token %}
+				{% for field in form %}
+					{% include "includes/form.html" %}
+				{% endfor %}
+				<button type="submit" class="grow-button">{% trans "Отправить" %}</button>
+			</form>
+		</article>
+		<a href="{% url 'users:password_reset' %}" class="password">{% trans "Восстановить пароль" %}</a>
+	</section>
 {% endblock %}
