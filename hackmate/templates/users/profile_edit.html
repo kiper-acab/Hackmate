@@ -29,7 +29,7 @@
 					<img src="{{ user.profile.image.url }}" alt="{% trans 'Текущий аватар' %}" class="img-thumbnail mb-3 current-avatar">
 					<form method="post">
 						{% csrf_token %}
-						<button type="submit" name="delete_image" value="true" class="btn btn-danger">
+						<button type="submit" name="delete_image" value="true" class="btn btn-danger delete-profile-image">
 							{% trans "Удалить изображение" %}
 						</button>
 					</form>
