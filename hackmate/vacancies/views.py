@@ -440,3 +440,15 @@ class KickUserFromVacancy(
         return django.http.HttpResponseNotFound(
             django.utils.translation.gettext_lazy("not found"),
         )
+
+
+class UserTeamsView(django.views.generic.ListView):
+    template_name = "vacancies/my_teams.html"
+    model = vacancies.models.Vacancy
+    context_object_name = "teams"
+
+    def get_queryset(self):
+        return vacancies.models.Vacancy.objects.filter(
+            django.db.models.Q(creater_id=self.request.user.pk)
+            | django.db.models.Q(team_composition=self.request.user.pk),
+        )

@@ -17,6 +17,7 @@ logout_view = django.contrib.auth.views.LogoutView.as_view(
 password_change_view = django.contrib.auth.views.PasswordChangeView.as_view(
     form_class=users.forms.PasswordChangeForm,
     template_name="users/password_change.html",
+    success_url=django.urls.reverse_lazy("users:password_change_done"),
 )
 password_change_done_view = (
     django.contrib.auth.views.PasswordChangeDoneView.as_view(

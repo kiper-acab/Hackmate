@@ -27,6 +27,11 @@ urlpatterns = [
         name="vacancy_create",
     ),
     django.urls.path(
+        "my-teams/",
+        vacancies.views.UserTeamsView.as_view(),
+        name="user_teams",
+    ),
+    django.urls.path(
         "delete_vacancy/<int:pk>/",
         vacancies.views.DeleteVacancy.as_view(),
         name="delete_vacancy",
