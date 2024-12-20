@@ -61,6 +61,40 @@
   color: #dcdcdc;
 }
 
+.grow-button {
+    border:none;
+    margin: 10px;
+    text-decoration: none;
+    background:transparent;
+    --btn-width: 210px;
+    width: var(--btn-width);
+    min-height:45px;
+    background-color:rgb(71, 172, 255);
+    color:white;
+    font-weight:bold;
+    border-radius:50px;
+
+    cursor: pointer;
+    box-sizing: content-box;
+    text-align:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    --expand: 0px;
+
+    position:relative;
+    transition: padding 0.5s, left 0.5s;
+
+    padding-inline:var(--expand);
+    left: calc( var(--expand) * -1);
+
+    &:hover, &:active {
+      --expand: calc( var(--btn-width) * .1);
+    }
+}
+
 .profile-section {
   display: flex;
   flex-direction: column;
@@ -148,10 +182,10 @@
 
 .grow-button {
   border:none;
-  margin: 10px;
+  margin: 5px 30px;
   text-decoration: none;
   background:transparent;
-  --btn-width: 120px;
+  --btn-width: 220px;
   width: var(--btn-width);
   min-height:45px;
   background-color:rgb(71, 172, 255);

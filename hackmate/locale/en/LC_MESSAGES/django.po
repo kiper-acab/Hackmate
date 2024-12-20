@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 02:04+0300\n"
+"POT-Creation-Date: 2024-12-20 03:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -573,27 +573,22 @@ msgstr "Edit profile"
 msgid "Изменить пароль"
 msgstr "Change password"
 
-#: .\templates\includes\header.html:38 .\templates\users\login.html:29
-#: .\templates\users\profile_edit.html:79
-msgid "Восстановить пароль"
-msgstr "Reset password"
-
-#: .\templates\includes\header.html:39
-#: .\templates\users\password_reset_complete.html:9
-#: .\templates\users\password_reset_confirm.html:9
+#: .\templates\includes\header.html:38
+#: .\templates\users\password_reset_complete.html:11
+#: .\templates\users\password_reset_confirm.html:16
 msgid "Выйти"
 msgstr "Log out"
 
-#: .\templates\includes\header.html:66
+#: .\templates\includes\header.html:65
 msgid "Отметить все как прочитанные"
 msgstr "Mark all as read"
 
-#: .\templates\includes\header.html:70
+#: .\templates\includes\header.html:69
 msgid "Нет новых уведомлений"
 msgstr "No new notifications"
 
-#: .\templates\includes\header.html:88
-#: .\templates\users\password_change.html:12
+#: .\templates\includes\header.html:87
+#: .\templates\users\password_change.html:18
 msgid "Сменить"
 msgstr "Change"
 
@@ -601,6 +596,10 @@ msgstr "Change"
 #: .\templates\vacancies\detail.html:104
 msgid "Отправить"
 msgstr "Send"
+
+#: .\templates\users\login.html:29
+msgid "Восстановить пароль"
+msgstr "Reset password"
 
 #: .\templates\users\logout.html:8
 msgid "Вы вышли из аккаунта"
@@ -610,12 +609,10 @@ msgstr "You have logged out"
 msgid "Пароль успешно поменяли"
 msgstr "Password changed successfully"
 
-#: .\templates\users\password_reset.html:9
-msgid "Восстановить"
-msgstr "Reset"
-
 #: .\templates\users\password_reset_done.html:8
-msgid "Пароль успешно восстановили"
+#, fuzzy
+#| msgid "Пароль успешно восстановили"
+msgid "Проверьте почту для успешного восттановления пароля"
 msgstr "Password reset successfully"
 
 #: .\templates\users\profile.html:18
@@ -634,17 +631,13 @@ msgstr "Default Avatar"
 msgid "Email"
 msgstr "Email"
 
-#: .\templates\users\profile.html:43 .\templates\users\profile.html:45
-msgid "О себе"
-msgstr "About me"
-
-#: .\templates\users\profile.html:45 .\templates\users\profile.html:53
-msgid "Информация не указана."
-msgstr "Information not provided."
-
 #: .\templates\users\profile.html:51 .\templates\users\profile.html:53
 msgid "День рождения"
 msgstr "Birthday"
+
+#: .\templates\users\profile.html:53
+msgid "Информация не указана."
+msgstr "Information not provided."
 
 #: .\templates\users\profile.html:58
 msgid "Дата регистрации"
@@ -805,7 +798,7 @@ msgid "Список вакансий"
 msgstr "List of vacancies"
 
 #: .\templates\vacancies\vacancies.html:14
-#: .\templates\vacancies\vacancy_form.html:40
+#: .\templates\vacancies\vacancy_form.html:39
 msgid "Создать вакансию"
 msgstr "Create vacancy"
 
@@ -945,43 +938,43 @@ msgstr "Unknown website type: {site_type}"
 msgid "Ссылка должна начинаться с '{expected_prefix}'."
 msgstr "The link must start with '{expected_prefix}'."
 
-#: .\users\views.py:42
+#: .\users\views.py:43
 msgid "Вы не можете удалить эту ссылку."
 msgstr "You cannot delete this link."
 
-#: .\users\views.py:132
+#: .\users\views.py:133
 msgid "Поля Email и Username обязательны для заполнения."
 msgstr "The Email and Username fields are required."
 
-#: .\users\views.py:158
+#: .\users\views.py:159
 msgid "Профиль успешно изменен!"
 msgstr "Profile successfully changed!"
 
-#: .\users\views.py:195
+#: .\users\views.py:196
 msgid "Чтобы подтвердить аккаунт перейдите по ссылке "
 msgstr "To confirm your account, please follow the link "
 
-#: .\users\views.py:201
+#: .\users\views.py:202
 msgid "Activate your account"
 msgstr "Activate your account"
 
-#: .\users\views.py:213
+#: .\users\views.py:214
 msgid "Пользователь успешно создан"
 msgstr "User successfully created"
 
-#: .\users\views.py:219
+#: .\users\views.py:220
 msgid "Активируйте профиль в письме, которое придет вам на почту"
 msgstr "Activate your profile in the email that will be sent to you"
 
-#: .\users\views.py:237
+#: .\users\views.py:238
 msgid "Пользователь уже активирован"
 msgstr "User is already activated"
 
-#: .\users\views.py:248
+#: .\users\views.py:249
 msgid "Пользователь успешно активирован"
 msgstr "User successfully activated"
 
-#: .\users\views.py:255
+#: .\users\views.py:256
 msgid "Активация профиля была доступна в течение "
 msgstr "Activation of the profile was available within "
 
@@ -1192,6 +1185,12 @@ msgstr "User rejected"
 #, python-brace-format
 msgid "Пользователь {user} удалён из команды"
 msgstr "User {user} removed from the team"
+
+#~ msgid "Восстановить"
+#~ msgstr "Reset"
+
+#~ msgid "О себе"
+#~ msgstr "About me"
 
 #~ msgid "Выберите дедлайн"
 #~ msgstr "Select the deadline"

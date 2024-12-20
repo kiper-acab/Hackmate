@@ -52,7 +52,7 @@
 				{% for field in link_form %}
 					{% include "includes/form.html" %}
 				{% endfor %}
-				<button type="submit" name="add_link" class="btn btn-primary btn-confirm-changes">{% trans "Сохранить изменения" %}</button>
+				<button type="submit" name="add_link" class="grow-button btn-confirm-changes">{% trans "Сохранить изменения" %}</button>
 		</form>
 
 		{% if user.profile.links.exists %}

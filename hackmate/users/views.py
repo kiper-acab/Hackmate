@@ -276,7 +276,7 @@ class ActivateUserView(django.views.View):
 class CustomPasswordResetCompleteView(
     django.contrib.auth.views.PasswordResetCompleteView,
 ):
-    template_name = "users/password_reset_complete.html"
+    template_name = "users/password_reset_confirm.html"
     form_class = users.forms.PasswordResetCompleteForm
 
     def get_context_data(self, **kwargs):

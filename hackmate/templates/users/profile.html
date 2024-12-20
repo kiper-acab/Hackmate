@@ -5,7 +5,7 @@
 {% load i18n %}
 
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
+	<link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -40,9 +40,9 @@
       <div class="profile-details">
         <div class="profile-item">
           {% if user.profile.description %}
-            <p><strong>{% trans 'О себе' %}:</strong> {{ user.profile.description }}</p>
+            <p><strong>О себе:</strong> {{ user.profile.description }}</p>
           {% else %}
-            <p><strong>{% trans 'О себе' %}:</strong> {% trans 'Информация не указана.' %}</p>
+            <p><strong>О себе:</strong> Информация не указана.</p>
           {% endif %}
         </div>
 
@@ -83,7 +83,7 @@
 
     {% if is_own_profile %}
       <div class="profile-actions">
-        <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">{% trans 'Редактировать профиль' %}</a>
+        <a href="{% url 'users:profile_edit' %}" class="btn btn-primary grow-button">{% trans 'Редактировать профиль' %}</a>
       </div>
     {% endif %}
 
@@ -101,6 +101,6 @@
     {% endfor %}
   </section>
 
-  <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-  <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+	<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 {% endblock %}
