@@ -1,0 +1,215 @@
+.container > section {
+    margin: 20px;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 20px;
+    margin: 20px;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.profile-avatar .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #fff;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.profile-info p {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #666;
+}
+
+.profile-info p:first-child {
+    margin-top: 0;
+}
+.user-rating {
+    display: flex;
+    font-size: 24px;
+}
+
+.star {
+    color: #ffd700;
+    margin-right: 2px;
+}
+
+.star.empty {
+  color: #dcdcdc;
+}
+
+.grow-button {
+    border:none;
+    margin: 10px;
+    text-decoration: none;
+    background:transparent;
+    --btn-width: 210px;
+    width: var(--btn-width);
+    min-height:45px;
+    background-color:rgb(71, 172, 255);
+    color:white;
+    font-weight:bold;
+    border-radius:50px;
+
+    cursor: pointer;
+    box-sizing: content-box;
+    text-align:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    --expand: 0px;
+
+    position:relative;
+    transition: padding 0.5s, left 0.5s;
+
+    padding-inline:var(--expand);
+    left: calc( var(--expand) * -1);
+
+    &:hover, &:active {
+      --expand: calc( var(--btn-width) * .1);
+    }
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.profile-avatar img.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile-rating .stars {
+  display: flex;
+  gap: 5px;
+}
+
+.profile-info {
+  font-size: 1.1rem;
+}
+
+.profile-info h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.profile-item {
+  margin-bottom: 15px;
+}
+
+.links-section {
+  margin-top: 30px;
+}
+
+.social-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.social-links li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.site-icon {
+  font-size: 1.5rem;
+  color: #3b5998;
+}
+
+.profile-actions {
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.star-ratings-rate-action{
+  width: 50px;
+  height: 50px;
+}
+
+.finished-vacancies-title{
+  margin-top: 50px;
+}
+
+.card{
+  margin: 50px auto;
+}
+
+.grow-button {
+  border:none;
+  margin: 5px 30px;
+  text-decoration: none;
+  background:transparent;
+  --btn-width: 220px;
+  width: var(--btn-width);
+  min-height:45px;
+  background-color:rgb(71, 172, 255);
+  color:white;
+  font-weight:bold;
+  border-radius:50px;
+  
+  cursor: pointer;
+  box-sizing: content-box;
+  text-align:center;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  --expand: 0px;
+  
+  position:relative;
+  transition: padding 0.5s, left 0.5s;
+  
+  padding-inline:var(--expand);
+  left: calc( var(--expand) * -1);
+
+  &:hover, &:active {
+    --expand: calc( var(--btn-width) * .15);
+  }
+}
