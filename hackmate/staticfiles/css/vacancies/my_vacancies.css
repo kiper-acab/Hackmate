@@ -1,0 +1,109 @@
+.container {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.vacancy-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.vacancy-item {
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.vacancy-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.vacancy-title {
+    font-size: 1.2rem;
+    color: #0056b3;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.vacancy-title:hover {
+    text-decoration: underline;
+}
+
+.vacancy-description {
+    margin: 5px 0 10px;
+    color: #555;
+}
+
+.vacancy-stats {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.nothing-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 200px;
+    align-items: center;
+    color: rgba(0, 0, 0, .6);
+}
+
+.user-profile-link{
+    color: #0056b3;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.user-profile-link:hover {
+    text-decoration: underline;
+}
+
+.responses-users{
+    display: flex;
+    justify-content: space-between;
+}
+
+.responses-users>article{
+    margin: 0 30px;
+}
+
+.responses-users>article>a{
+    margin: 0 20px;
+}
+
+
+.accept-user{
+    color: rgb(0, 129, 0);
+}
+
+.accept-user:hover{
+    transition: .3s;
+    color: rgba(16, 214, 16, .5);
+}
+
+.decline-user{
+    color: red;
+}
+
+.decline-user:hover{
+    transition:.3s;
+    color: rgba(255, 0, 0, .5);
+}
+
+.decline-user,
+.accept-user{
+    font-size: 20px;
+    cursor: pointer;
+
+}

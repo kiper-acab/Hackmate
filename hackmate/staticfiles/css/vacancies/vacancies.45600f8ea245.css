@@ -1,0 +1,86 @@
+.card{
+    margin: 50px auto;
+}
+
+.user-info{
+    text-decoration: none;
+    color: black;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.username{
+    margin: 0 5px;
+}
+
+.avatar{
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.grow-button {
+    border:none;
+    margin: 10px;
+    text-decoration: none;
+    background:transparent;
+    --btn-width: 120px;
+    width: var(--btn-width);
+    min-height:45px;
+    background-color:rgb(71, 172, 255);
+    color:white;
+    font-weight:bold;
+    border-radius:50px;
+    
+    cursor: pointer;
+    box-sizing: content-box;
+    text-align:center;
+  
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  
+    --expand: 0px;
+    
+    position:relative;
+    transition: padding 0.5s, left 0.5s;
+    
+    padding-inline:var(--expand);
+    left: calc( var(--expand) * -1);
+  
+    &:hover, &:active {
+      --expand: calc( var(--btn-width) * .15);
+    }
+  }
+
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 30px;
+}
+
+.header{
+    position: relative;
+}
+
+.header figure{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.creaete_vacancy{
+    display: flex;
+    align-items: end;
+    position: absolute;
+}
+
+.nothing-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 200px;
+    align-items: center;
+    color: rgba(0, 0, 0, .6);
+}
