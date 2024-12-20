@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 03:56+0300\n"
+"POT-Creation-Date: 2024-12-20 20:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -446,11 +446,11 @@ msgstr ""
 msgid "Как это работает?"
 msgstr "Как это работает?"
 
-#: .\templates\homepage\homepage.html:23
+#: .\templates\homepage\homepage.html:24
 msgid "Создай профиль."
 msgstr "Создай профиль."
 
-#: .\templates\homepage\homepage.html:23
+#: .\templates\homepage\homepage.html:24
 msgid ""
 "Расскажи о своих навыках, опыте и интересах. Чем подробнее, тем легче найти "
 "идеальных сокомандников."
@@ -458,43 +458,40 @@ msgstr ""
 "Расскажи о своих навыках, опыте и интересах. Чем подробнее, тем легче найти "
 "идеальных сокомандников."
 
-#: .\templates\homepage\homepage.html:24
+#: .\templates\homepage\homepage.html:27
 msgid "Просматривай команды и участников."
 msgstr "Просматривай команды и участников."
 
-#: .\templates\homepage\homepage.html:24
+#: .\templates\homepage\homepage.html:27
 msgid ""
-"Используй фильтры для поиска участников с нужными компетенциями или найди "
-"уже сформированные команды."
-msgstr ""
-"Используй фильтры для поиска участников с нужными компетенциями или найди "
-"уже сформированные команды."
+"Ищи участников, которые уже готовы к совместной работе."
+msgstr "Ищи участников, которые уже готовы к совместной работе."
 
-#: .\templates\homepage\homepage.html:25
+#: .\templates\homepage\homepage.html:30
 msgid "Готовься к победе."
 msgstr "Готовься к победе."
 
-#: .\templates\homepage\homepage.html:25
+#: .\templates\homepage\homepage.html:30
 msgid "Сформируйте команду мечты и покорите хакатоны вместе!"
 msgstr "Сформируйте команду мечты и покорите хакатоны вместе!"
 
-#: .\templates\homepage\homepage.html:30
+#: .\templates\homepage\homepage.html:36
 msgid "Почему это важно?"
 msgstr "Почему это важно?"
 
-#: .\templates\homepage\homepage.html:32
+#: .\templates\homepage\homepage.html:39
 msgid "Реальные связи."
 msgstr "Реальные связи."
 
-#: .\templates\homepage\homepage.html:32
+#: .\templates\homepage\homepage.html:39
 msgid "Найди людей, с которыми ты будешь работать над своими мечтами."
 msgstr "Найди людей, с которыми ты будешь работать над своими мечтами."
 
-#: .\templates\homepage\homepage.html:33
+#: .\templates\homepage\homepage.html:42
 msgid "Профессиональный рост."
 msgstr "Профессиональный рост."
 
-#: .\templates\homepage\homepage.html:33
+#: .\templates\homepage\homepage.html:42
 msgid ""
 "Получите опыт работы в команде, покажите свои навыки и привлеките внимание "
 "работодателей."
@@ -502,11 +499,11 @@ msgstr ""
 "Получите опыт работы в команде, покажите свои навыки и привлеките внимание "
 "работодателей."
 
-#: .\templates\homepage\homepage.html:34
+#: .\templates\homepage\homepage.html:45
 msgid "Шанс на успех."
 msgstr "Шанс на успех."
 
-#: .\templates\homepage\homepage.html:34
+#: .\templates\homepage\homepage.html:45
 msgid ""
 "Вдохновляйтесь, учитесь у других и создавайте проекты, которые смогут "
 "изменить мир."
@@ -514,11 +511,11 @@ msgstr ""
 "Вдохновляйтесь, учитесь у других и создавайте проекты, которые смогут "
 "изменить мир."
 
-#: .\templates\homepage\homepage.html:39
+#: .\templates\homepage\homepage.html:51
 msgid "Готов начать?"
 msgstr "Готов начать?"
 
-#: .\templates\homepage\homepage.html:40
+#: .\templates\homepage\homepage.html:52
 msgid ""
 "Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для "
 "следующего хакатона."
@@ -526,7 +523,7 @@ msgstr ""
 "Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для "
 "следующего хакатона."
 
-#: .\templates\homepage\homepage.html:40
+#: .\templates\homepage\homepage.html:55
 msgid "Создать профиль бесплатно"
 msgstr "Создать профиль бесплатно"
 
@@ -538,68 +535,68 @@ msgstr "HackMate"
 msgid "Проект на GitLab"
 msgstr "Проект на GitLab"
 
-#: .\templates\includes\header.html:12
+#: .\templates\includes\header.html:13
 msgid "Главная"
 msgstr "Главная"
 
-#: .\templates\includes\header.html:13
+#: .\templates\includes\header.html:15
 msgid "Найти команду"
 msgstr "Найти команду"
 
-#: .\templates\includes\header.html:15
+#: .\templates\includes\header.html:18
 msgid "Регистрация"
 msgstr "Регистрация"
 
-#: .\templates\includes\header.html:16
+#: .\templates\includes\header.html:20
 msgid "Авторизация"
 msgstr "Авторизация"
 
-#: .\templates\includes\header.html:18
+#: .\templates\includes\header.html:23
 #: .\templates\vacancies\user_responses.html:12
 msgid "Мои отклики"
 msgstr "Мои отклики"
 
-#: .\templates\includes\header.html:19
+#: .\templates\includes\header.html:25
 msgid "Мои вакансии"
 msgstr "Мои вакансии"
 
-#: .\templates\includes\header.html:33
+#: .\templates\includes\header.html:39
 msgid "Админка"
 msgstr "Админка"
 
-#: .\templates\includes\header.html:35
+#: .\templates\includes\header.html:42
 msgid "Профиль"
 msgstr "Профиль"
 
-#: .\templates\includes\header.html:36 .\templates\users\profile_edit.html:12
+#: .\templates\includes\header.html:44 .\templates\users\profile_edit.html:12
 msgid "Редактирование профиля"
 msgstr "Редактирование профиля"
 
-#: .\templates\includes\header.html:37 .\templates\users\profile_edit.html:78
+#: .\templates\includes\header.html:45 .\templates\users\profile_edit.html:80
 msgid "Изменить пароль"
 msgstr "Изменить пароль"
 
-#: .\templates\includes\header.html:38
+#: .\templates\includes\header.html:47
 #: .\templates\users\password_reset_complete.html:11
 #: .\templates\users\password_reset_confirm.html:16
 msgid "Выйти"
 msgstr "Выйти"
 
-#: .\templates\includes\header.html:65
+#: .\templates\includes\header.html:77
 msgid "Отметить все как прочитанные"
 msgstr "Отметить все как прочитанные"
 
-#: .\templates\includes\header.html:69
+#: .\templates\includes\header.html:82
 msgid "Нет новых уведомлений"
 msgstr "Нет новых уведомлений"
 
-#: .\templates\includes\header.html:87
+#: .\templates\includes\header.html:100
 #: .\templates\users\password_change.html:18
 msgid "Сменить"
 msgstr "Сменить"
 
 #: .\templates\users\login.html:26 .\templates\users\signup.html:24
-#: .\templates\vacancies\detail.html:104
+#: .\templates\vacancies\detail.html:106
 msgid "Отправить"
 msgstr "Отправить"
 
@@ -629,7 +626,7 @@ msgstr "Рейтинг"
 msgid "Количество оценок"
 msgstr "Количество оценок"
 
-#: .\templates\users\profile.html:32 .\templates\vacancies\vacancies.html:27
+#: .\templates\users\profile.html:32 .\templates\vacancies\vacancies.html:28
 msgid "Default Avatar"
 msgstr "Аватар по умолчанию"
 
@@ -649,7 +646,7 @@ msgstr "Информация не указана."
 msgid "Дата регистрации"
 msgstr "Дата регистрации"
 
-#: .\templates\users\profile.html:64 .\templates\users\profile_edit.html:59
+#: .\templates\users\profile.html:64 .\templates\users\profile_edit.html:61
 msgid "Ссылки на другие сети"
 msgstr "Ссылки на другие сети"
 
@@ -657,25 +654,25 @@ msgstr "Ссылки на другие сети"
 msgid "Ссылки отсутствуют."
 msgstr "Ссылки отсутствуют."
 
-#: .\templates\users\profile.html:86
+#: .\templates\users\profile.html:87
 msgid "Редактировать профиль"
 msgstr "Редактировать профиль"
 
-#: .\templates\users\profile.html:90
+#: .\templates\users\profile.html:91
 msgid "Завершённые вакансии"
 msgstr "Завершённые вакансии"
 
-#: .\templates\users\profile.html:96 .\templates\vacancies\vacancies.html:33
+#: .\templates\users\profile.html:97 .\templates\vacancies\vacancies.html:35
 msgid "Детальнее"
 msgstr "Детальнее"
 
-#: .\templates\users\profile.html:100
+#: .\templates\users\profile.html:101
 #, fuzzy
 #| msgid "пользователь"
 msgid "У пользователя"
 msgstr "У пользователя"
 
-#: .\templates\users\profile.html:100
+#: .\templates\users\profile.html:101
 #, fuzzy
 #| msgid "Завершённые вакансии"
 msgid "нет завершённых вакансий"
@@ -689,88 +686,84 @@ msgstr "Аватар"
 msgid "Текущий аватар"
 msgstr "Текущий аватар"
 
-#: .\templates\users\profile_edit.html:33
+#: .\templates\users\profile_edit.html:34
 msgid "Удалить изображение"
 msgstr "Удалить изображение"
 
-#: .\templates\users\profile_edit.html:38
+#: .\templates\users\profile_edit.html:39
 msgid "Аватар отсутствует"
 msgstr "Аватар отсутствует"
 
-#: .\templates\users\profile_edit.html:51
+#: .\templates\users\profile_edit.html:52
 msgid "Добавить новую ссылку"
 msgstr "Добавить новую ссылку"
 
-#: .\templates\users\profile_edit.html:55
+#: .\templates\users\profile_edit.html:57
 msgid "Сохранить изменения"
 msgstr "Сохранить изменения"
 
 #: .\templates\vacancies\change_vacancy.html:12
-#: .\templates\vacancies\detail.html:17
+#: .\templates\vacancies\detail.html:19
 msgid "Изменить вакансию"
 msgstr "Изменить вакансию"
 
-#: .\templates\vacancies\change_vacancy.html:41
+#: .\templates\vacancies\change_vacancy.html:40
 msgid "Сохранить"
 msgstr "Сохранить"
 
-#: .\templates\vacancies\detail.html:18
+#: .\templates\vacancies\detail.html:21
 msgid "Удалить вакансию"
 msgstr "Удалить вакансию"
 
-#: .\templates\vacancies\detail.html:27
+#: .\templates\vacancies\detail.html:30
 msgid "Создатель:"
 msgstr "Создатель:"
 
-#: .\templates\vacancies\detail.html:28
+#: .\templates\vacancies\detail.html:31
 msgid "Создано:"
 msgstr "Создано:"
 
-#: .\templates\vacancies\detail.html:30
+#: .\templates\vacancies\detail.html:33
 msgid "Хакатон:"
 msgstr "Хакатон:"
 
-#: .\templates\vacancies\detail.html:33
+#: .\templates\vacancies\detail.html:36
 msgid "Дата проведения хакатона"
 msgstr "Дата проведения хакатона"
 
-#: .\templates\vacancies\detail.html:36
+#: .\templates\vacancies\detail.html:39
 msgid "Требуемый опыт:"
 msgstr "Требуемый опыт:"
 
-#: .\templates\vacancies\detail.html:38
+#: .\templates\vacancies\detail.html:42
 msgid "Необходимое количество человек в группе для участия в хакатоне"
 msgstr "Необходимое количество человек в группе для участия в хакатоне"
 
-#: .\templates\vacancies\detail.html:40
+#: .\templates\vacancies\detail.html:45
 msgid "Текущий состав команды"
 msgstr "Состав команды"
 
-#: .\templates\vacancies\detail.html:76
+#: .\templates\vacancies\detail.html:81
 msgid "Откликнуться"
 msgstr "Откликнуться"
 
-#: .\templates\vacancies\detail.html:78
-msgid "Вы больше не можете откликнуться на эту вакансию."
-msgstr "Вы больше не можете откликнуться на эту вакансию."
-
-#: .\templates\vacancies\detail.html:82
+#: .\templates\vacancies\detail.html:84
 msgid "Вы должны быть авторизованы, чтобы откликнуться."
 msgstr "Вы должны быть авторизованы, чтобы откликнуться."
 
-#: .\templates\vacancies\detail.html:87
+#: .\templates\vacancies\detail.html:89
 msgid "Комментарии"
 msgstr "Комментарии"
 
-#: .\templates\vacancies\detail.html:129
+#: .\templates\vacancies\detail.html:133
 msgid "Комментариев пока нет."
 msgstr "Комментариев пока нет."
 
-#: .\templates\vacancies\user_responses.html:22
+#: .\templates\vacancies\user_responses.html:23
 msgid "Посмотреть вакансию"
 msgstr "Посмотреть вакансию"
 
-#: .\templates\vacancies\user_responses.html:26
+#: .\templates\vacancies\user_responses.html:27
 msgid "У вас нету откликов."
 msgstr "У вас нет откликов."
 
@@ -786,19 +779,19 @@ msgstr "Откликов"
 msgid "Откликнувшиеся пользователи:"
 msgstr "Откликнувшиеся пользователи:"
 
-#: .\templates\vacancies\user_vacancies.html:41
+#: .\templates\vacancies\user_vacancies.html:44
 msgid "Пока никто не откликнулся"
 msgstr "Пока никто не откликнулся"
 
-#: .\templates\vacancies\user_vacancies.html:49
+#: .\templates\vacancies\user_vacancies.html:52
 msgid "У вас нет вакансий"
 msgstr "У вас нет вакансий"
 
-#: .\templates\vacancies\user_vacancies.html:50
+#: .\templates\vacancies\user_vacancies.html:53
 msgid "Если хотите создать анкету, то"
 msgstr "Если хотите создать вакансию, то"
 
-#: .\templates\vacancies\user_vacancies.html:50
+#: .\templates\vacancies\user_vacancies.html:54
 msgid "перейдите сюда"
 msgstr "перейдите сюда"
 
@@ -806,16 +799,16 @@ msgstr "перейдите сюда"
 msgid "Список вакансий"
 msgstr "Список вакансий"
 
-#: .\templates\vacancies\vacancies.html:14
+#: .\templates\vacancies\vacancies.html:15
 #: .\templates\vacancies\vacancy_form.html:39
 msgid "Создать вакансию"
 msgstr "Создать вакансию"
 
-#: .\templates\vacancies\vacancies.html:38
+#: .\templates\vacancies\vacancies.html:40
 msgid "Ещё ни кто не разместил объявление о поиске."
 msgstr "Ещё никто не разместил объявление о поиске."
 
-#: .\templates\vacancies\vacancies.html:39
+#: .\templates\vacancies\vacancies.html:41
 msgid "Стань первым!"
 msgstr "Стань первым!"
 
@@ -1111,9 +1104,17 @@ msgstr "Состав команды"
 msgid "необходимое количество человек в группе для участия в хакатоне"
 msgstr "необходимое количество людей в группе для участия в хакатоне"
 
-#: .\vacancies\models.py:151 .\vacancies\models.py:157
-msgid "Введите корректное значение"
-msgstr "Введите корректное значение"
+#: .\vacancies\models.py:151
+#, fuzzy
+#| msgid "Описание не может быть таким коротким"
+msgid "В команде не может быть менее 2-ух людей"
+msgstr "В команде не может быть менее 2-ух людей"
+
+#: .\vacancies\models.py:157
+#, fuzzy
+#| msgid "Описание не может быть таким длинным"
+msgid "В команде не может быть более 20 людей"
+msgstr "В команде не может быть более 20 людей"
 
 #: .\vacancies\models.py:164 .\vacancies\models.py:179
 #: .\vacancies\models.py:239
@@ -1164,35 +1165,48 @@ msgstr "отклик"
 msgid "отклики"
 msgstr "отклики"
 
-#: .\vacancies\views.py:92
+#: .\vacancies\views.py:96
 msgid "Вы должны быть авторизованы"
 msgstr "Вы должны быть авторизованы"
 
-#: .\vacancies\views.py:124
+#: .\vacancies\views.py:128
 msgid "Вы уже откликнулись на эту вакансию"
 msgstr "Вы уже откликнулись на эту вакансию"
 
-#: .\vacancies\views.py:137
+#: .\vacancies\views.py:141
 msgid "Ваш отклик отправлен!"
 msgstr "Ваш отклик отправлен!"
 
-#: .\vacancies\views.py:270 .\vacancies\views.py:294 .\vacancies\views.py:315
-#: .\vacancies\views.py:358 .\vacancies\views.py:396 .\vacancies\views.py:441
+#: .\vacancies\views.py:287 .\vacancies\views.py:311 .\vacancies\views.py:332
+#: .\vacancies\views.py:375 .\vacancies\views.py:413 .\vacancies\views.py:458
 msgid "not found"
 msgstr "не найдено"
 
-#: .\vacancies\views.py:352
+#: .\vacancies\views.py:369
 msgid "Пользователь успешно приглашён в команду"
 msgstr "Пользователь успешно приглашён в команду"
 
-#: .\vacancies\views.py:390
+#: .\vacancies\views.py:407
 msgid "Пользователь отклонён"
 msgstr "Пользователь отклонён"
 
-#: .\vacancies\views.py:429
+#: .\vacancies\views.py:446
 #, python-brace-format
 msgid "Пользователь {user} удалён из команды"
 msgstr "Пользователь {user} удалён из команды"
+
+#~ msgid ""
+#~ "Используй фильтры для поиска участников с нужными компетенциями или найди "
+#~ "уже сформированные команды."
+#~ msgstr ""
+#~ "Используй фильтры для поиска участников с нужными компетенциями или найди "
+#~ "уже сформированные команды."
+
+#~ msgid "Вы больше не можете откликнуться на эту вакансию."
+#~ msgstr "Вы больше не можете откликнуться на эту вакансию."
+
+#~ msgid "Введите корректное значение"
+#~ msgstr "Введите корректное значение"
 
 #~ msgid "Адрес: "
 #~ msgstr "Адрес: "

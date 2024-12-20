@@ -2,31 +2,46 @@ let offset = 0;
 const limit = 10;
 const commentsContainer = document.querySelector('.comments');
 let isLoading = false;
+let hasMoreComments = true;
 const vacancyId = document.getElementById('vacancy-id').value;
 
 window.onscroll = function () {
-    if (commentsContainer && window.innerHeight + window.scrollY >= commentsContainer.offsetHeight && !isLoading) {
+    if (
+        commentsContainer &&
+        window.innerHeight + window.scrollY >= commentsContainer.offsetHeight &&
+        !isLoading &&
+        hasMoreComments
+    ) {
         loadMoreComments();
     }
 };
-
 
 function loadMoreComments() {
     isLoading = true;
     offset += limit;
 
-    const vacancyId = document.getElementById('vacancy-id').value;
     fetch(`/api/comments/${vacancyId}/?offset=${offset}&limit=${limit}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            if (data.length === 0) {
+                hasMoreComments = false;
+                return;
+            }
+
             data.forEach(comment => {
                 const commentElement = createCommentElement(comment, comment.current_user, comment.is_admin);
                 commentsContainer.appendChild(commentElement);
             });
-            isLoading = false;
         })
         .catch(error => {
             console.error('Ошибка загрузки комментариев:', error);
+        })
+        .finally(() => {
             isLoading = false;
         });
 }
@@ -69,7 +84,7 @@ function createCommentElement(comment, currentUser = '', isSuperuser = false) {
     });
 
     figure.appendChild(dateSpan);
-    if (comment.user === currentUser || comment.user === isSuperuser) {
+    if (comment.user === currentUser || isSuperuser) {
         const deleteLink = document.createElement('a');
         deleteLink.href = `/vacancies/delete_comment/${comment.id}`;
         deleteLink.classList.add('delete-link-form');

@@ -77,12 +77,8 @@
 		</p>
 
 		{% if user.is_authenticated %}
-			{% if user != vacancy.creater %}
-				{% if not is_deadline_passed and vacancy.need_count_users != 0  and request.user not in vacancy.team_composition.all %}
-					<button id="respond-button" class="grow-button">{% trans 'Откликнуться' %}</button>
-				{% else %}
-					<p class="deadline-message">{% trans 'Вы больше не можете откликнуться на эту вакансию.' %}</p>
-				{% endif %}
+			{% if user != vacancy.creater and not is_deadline_passed %}
+				<button id="respond-button" class="grow-button {% if request.user in vacancy.team_composition.all or user_is_responsed %} grow-gray-button {% endif %}">{% trans 'Откликнуться' %}</button>
 			{% endif %}
 		{% else %}
 			<p>{% trans 'Вы должны быть авторизованы, чтобы откликнуться.' %}</p>

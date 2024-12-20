@@ -148,13 +148,13 @@ class Vacancy(django.db.models.Model):
             django.core.validators.MinValueValidator(
                 2,
                 django.utils.translation.gettext_lazy(
-                    "Введите корректное значение",
+                    "В команде не может быть менее 2-ух людей",
                 ),
             ),
             django.core.validators.MaxValueValidator(
-                100,
+                20,
                 django.utils.translation.gettext_lazy(
-                    "Введите корректное значение",
+                    "В команде не может быть более 20 людей",
                 ),
             ),
         ],

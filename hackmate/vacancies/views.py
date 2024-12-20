@@ -143,9 +143,25 @@ class VacancyDetailView(
             },
         )
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context["comment_form"] = vacancies.forms.CommentForm()
+        if self.request.user.is_authenticated:
+            respnose_statuses = vacancies.models.Response.ResponseStatuses
+            context["user_is_responsed"] = (
+                self.get_object()
+                .responses.filter(
+                    user=self.request.user,
+                    status__in=[
+                        respnose_statuses.ACCEPTED,
+                        respnose_statuses.NOT_ANSWERED,
+                    ],
+                )
+                .exists()
+            )
+        else:
+            context["user_is_responsed"] = False
+
         return context
 
 
