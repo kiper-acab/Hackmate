@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 20:38+0300\n"
+"POT-Creation-Date: 2024-12-21 01:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,11 +29,11 @@ msgstr "About the project"
 msgid "Апи"
 msgstr "API"
 
-#: .\hackmate\settings.py:129
+#: .\hackmate\settings.py:130
 msgid "Русский"
 msgstr "Russian"
 
-#: .\hackmate\settings.py:130
+#: .\hackmate\settings.py:131
 msgid "English"
 msgstr "English"
 
@@ -454,8 +454,7 @@ msgid "Просматривай команды и участников."
 msgstr "Browse teams and participants."
 
 #: .\templates\homepage\homepage.html:27
-msgid ""
-"Ищи участников, которые уже готовы к совместной работе."
+msgid "Ищи участников, которые уже готовы к совместной работе."
 msgstr "Look for participants who are already ready to work together."
 
 #: .\templates\homepage\homepage.html:30
@@ -693,7 +692,7 @@ msgstr "Save changes"
 msgid "Изменить вакансию"
 msgstr "Edit vacancy"
 
-#: .\templates\vacancies\change_vacancy.html:40
+#: .\templates\vacancies\change_vacancy.html:51
 msgid "Сохранить"
 msgstr "Save"
 
@@ -787,7 +786,7 @@ msgid "Список вакансий"
 msgstr "List of vacancies"
 
 #: .\templates\vacancies\vacancies.html:15
-#: .\templates\vacancies\vacancy_form.html:39
+#: .\templates\vacancies\vacancy_form.html:50
 msgid "Создать вакансию"
 msgstr "Create vacancy"
 
@@ -908,24 +907,41 @@ msgstr "link"
 msgid "ссылки"
 msgstr "links"
 
-#: .\users\validators.py:16 .\users\validators.py:23
+#: .\users\validators.py:18 .\users\validators.py:25
 msgid "Укажите корректную дату рождения."
 msgstr "Specify a valid birth date."
 
-#: .\users\validators.py:36 .\users\validators.py:44
+#: .\users\validators.py:32
+msgid "Для участия в хакатонах вам должно быть минимум 14 лет"
+msgstr "You must be at least 14 years old to participate in hackathons"
+
+#: .\users\validators.py:45 .\users\validators.py:53
 #, python-format
 msgid "Пароль может содержать максимум %(max_length)d символов."
 msgstr "Password can contain a maximum of %(max_length)d characters."
 
-#: .\users\validators.py:62
-#, python-brace-format
-msgid "Неизвестный тип сайта: {site_type}"
+#: .\users\validators.py:70
+#, fuzzy
+#| msgid "Информация не указана."
+msgid "Тип сайта не указан."
+msgstr "Information not provided."
+
+#: .\users\validators.py:76
+#, fuzzy, python-brace-format
+#| msgid "Неизвестный тип сайта: {site_type}"
+msgid "Неизвестный тип сайта: {site_type}."
 msgstr "Unknown website type: {site_type}"
 
-#: .\users\validators.py:70
-#, python-brace-format
-msgid "Ссылка должна начинаться с '{expected_prefix}'."
+#: .\users\validators.py:85
+#, fuzzy, python-brace-format
+#| msgid "Ссылка должна начинаться с '{expected_prefix}'."
+msgid "Ссылка должна начинаться с '{expected_prefix}'. "
 msgstr "The link must start with '{expected_prefix}'."
+
+#: .\users\validators.py:95
+#, python-brace-format
+msgid "Некорректный URL: {value}"
+msgstr "Invalid URL: {value}"
 
 #: .\users\views.py:43
 msgid "Вы не можете удалить эту ссылку."
@@ -971,215 +987,224 @@ msgstr "Activation of the profile was available within "
 msgid "Вакансии"
 msgstr "Vacancies"
 
-#: .\vacancies\forms.py:29
+#: .\vacancies\forms.py:31
 #, fuzzy
 #| msgid "Дедлайн не может быть в прошлом."
 msgid "Хакатон может быть в прошлом."
 msgstr "The deadline cannot be in the past."
 
-#: .\vacancies\forms.py:49
+#: .\vacancies\forms.py:51
 msgid "Введите название вакансии"
 msgstr "Enter the vacancy title"
 
-#: .\vacancies\forms.py:56
+#: .\vacancies\forms.py:58
 msgid "Введите описание"
 msgstr "Enter the description"
 
-#: .\vacancies\forms.py:63
+#: .\vacancies\forms.py:65
 msgid "Введите название хакатона"
 msgstr "Enter the name of the hackathon"
 
-#: .\vacancies\forms.py:71
+#: .\vacancies\forms.py:73
 #, fuzzy
 #| msgid "Дата проведения хакатона"
 msgid "Выберите дату проведения хакатона"
 msgstr "Date of the hackathon"
 
-#: .\vacancies\forms.py:98
+#: .\vacancies\forms.py:131
 msgid "Введите ваш комментарий"
 msgstr "Enter your comment"
 
-#: .\vacancies\models.py:17
+#: .\vacancies\models.py:18
 msgid "IP адрес"
 msgstr "IP address"
 
-#: .\vacancies\models.py:19
+#: .\vacancies\models.py:20
 msgid "IP адреса"
 msgstr "IP addresses"
 
-#: .\vacancies\models.py:31
+#: .\vacancies\models.py:32
 msgid "Нет опыта"
 msgstr "No experience"
 
-#: .\vacancies\models.py:34
+#: .\vacancies\models.py:35
 msgid "До 6 месяцев"
 msgstr "Up to 6 months"
 
-#: .\vacancies\models.py:37
+#: .\vacancies\models.py:38
 msgid "От 6 до 12 месяцев"
 msgstr "From 6 to 12 months"
 
-#: .\vacancies\models.py:40
+#: .\vacancies\models.py:41
 msgid "Более 1 года"
 msgstr "More than 1 year"
 
-#: .\vacancies\models.py:47
+#: .\vacancies\models.py:48
 msgid "создатель вакансии"
 msgstr "vacancy creator"
 
-#: .\vacancies\models.py:54
+#: .\vacancies\models.py:55
 msgid "название вакансии"
 msgstr "vacancy title"
 
-#: .\vacancies\models.py:60
+#: .\vacancies\models.py:61
 msgid "описание вакансии"
 msgstr "vacancy description"
 
-#: .\vacancies\models.py:66
+#: .\vacancies\models.py:67
 msgid "Описание не может быть таким коротким"
 msgstr "Description cannot be that short"
 
-#: .\vacancies\models.py:72
+#: .\vacancies\models.py:73
 msgid "Описание не может быть таким длинным"
 msgstr "Description cannot be that long"
 
-#: .\vacancies\models.py:77
+#: .\vacancies\models.py:78
 msgid "Описание вакансии должно быть от 5 до 10000 символов"
 msgstr "Description cannot be that short"
 
-#: .\vacancies\models.py:83
+#: .\vacancies\models.py:84
 msgid "создано"
 msgstr "created"
 
-#: .\vacancies\models.py:88
+#: .\vacancies\models.py:89
 msgid "обновлено"
 msgstr "updated"
 
-#: .\vacancies\models.py:94
+#: .\vacancies\models.py:95
 msgid "cтатус"
 msgstr "status"
 
-#: .\vacancies\models.py:106
+#: .\vacancies\models.py:107
 msgid "название хакатона"
 msgstr "hackathon title"
 
-#: .\vacancies\models.py:111
+#: .\vacancies\models.py:112
 msgid "Название хакатона, к которому относится вакансия"
 msgstr "The name of the hackathon to which the vacancy belongs"
 
-#: .\vacancies\models.py:117
+#: .\vacancies\models.py:118
 msgid "Крайний срок подачи заявок"
 msgstr "Application deadline"
 
-#: .\vacancies\models.py:120
+#: .\vacancies\models.py:121
 msgid "Введите крайний срок подачи заявок"
 msgstr "Please indicate the deadline for submitting applications"
 
-#: .\vacancies\models.py:126
+#: .\vacancies\models.py:127
 msgid "требуемый опыт"
 msgstr "required experience"
 
-#: .\vacancies\models.py:128
+#: .\vacancies\models.py:129
 msgid "Укажите количество опыта необходимого для кандидата"
 msgstr "Specify the amount of experience required for the candidate"
 
-#: .\vacancies\models.py:137
+#: .\vacancies\models.py:138
 msgid "состав команды"
 msgstr "Team composition"
 
-#: .\vacancies\models.py:143
+#: .\vacancies\models.py:144
 msgid "необходимое количество человек в группе для участия в хакатоне"
 msgstr ""
 "the number of people required in the group to participate in the hackathon"
 
-#: .\vacancies\models.py:151
+#: .\vacancies\models.py:152
 #, fuzzy
 #| msgid "Описание не может быть таким коротким"
 msgid "В команде не может быть менее 2-ух людей"
-msgstr "There cannot be less than 2 people in a team"
+msgstr "Description cannot be that short"
 
-#: .\vacancies\models.py:157
+#: .\vacancies\models.py:158
+#, fuzzy
+#| msgid "Описание не может быть таким длинным"
 msgid "В команде не может быть более 20 людей"
-msgstr "There cannot be more than 20 people in a cell."
+msgstr "Description cannot be that long"
 
-#: .\vacancies\models.py:164 .\vacancies\models.py:179
-#: .\vacancies\models.py:239
+#: .\vacancies\models.py:165 .\vacancies\models.py:193
+#: .\vacancies\models.py:253
 msgid "вакансия"
 msgstr "vacancy"
 
-#: .\vacancies\models.py:165
+#: .\vacancies\models.py:166
 msgid "вакансии"
 msgstr "vacancies"
 
-#: .\vacancies\models.py:184
+#: .\vacancies\models.py:178
+msgid "Вакансия с таким названием и хакатоном уже существует."
+msgstr "A vacancy with this title and hackathon already exists."
+
+#: .\vacancies\models.py:198
 msgid "комментарий"
 msgstr "comment"
 
-#: .\vacancies\models.py:189
+#: .\vacancies\models.py:203
 msgid "Слишком короткий комментарий!"
 msgstr "Comment is too short!"
 
-#: .\vacancies\models.py:195
+#: .\vacancies\models.py:209
 msgid "Комментарий не может привышать 3000 символов!"
 msgstr "Comment cannot exceed 3000 characters!"
 
-#: .\vacancies\models.py:204 .\vacancies\models.py:232
+#: .\vacancies\models.py:218 .\vacancies\models.py:246
 msgid "пользователь"
 msgstr "user"
 
-#: .\vacancies\models.py:209
+#: .\vacancies\models.py:223
 msgid "cоздано"
 msgstr "created"
 
-#: .\vacancies\models.py:214
+#: .\vacancies\models.py:228
 msgid "комментарий к вакансии"
 msgstr "comment on the vacancy"
 
-#: .\vacancies\models.py:217
+#: .\vacancies\models.py:231
 msgid "комментарии к вакансиям"
 msgstr "comments on vacancies"
 
-#: .\vacancies\models.py:244
+#: .\vacancies\models.py:258
 msgid "дата отклика"
 msgstr "response date"
 
-#: .\vacancies\models.py:254
+#: .\vacancies\models.py:268
 msgid "отклик"
 msgstr "response"
 
-#: .\vacancies\models.py:255
+#: .\vacancies\models.py:269
 msgid "отклики"
 msgstr "responses"
 
-#: .\vacancies\views.py:96
+#: .\vacancies\views.py:97
 msgid "Вы должны быть авторизованы"
 msgstr "You must be logged in"
 
-#: .\vacancies\views.py:128
+#: .\vacancies\views.py:116
 msgid "Вы уже откликнулись на эту вакансию"
 msgstr "You have already responded to this vacancy"
 
-#: .\vacancies\views.py:141
+#: .\vacancies\views.py:129
 msgid "Ваш отклик отправлен!"
 msgstr "Your response has been sent!"
 
-#: .\vacancies\views.py:287 .\vacancies\views.py:311 .\vacancies\views.py:332
-#: .\vacancies\views.py:375 .\vacancies\views.py:413 .\vacancies\views.py:458
+#: .\vacancies\views.py:280 .\vacancies\views.py:304 .\vacancies\views.py:325
+#: .\vacancies\views.py:368 .\vacancies\views.py:406 .\vacancies\views.py:451
 msgid "not found"
 msgstr "not found"
 
-#: .\vacancies\views.py:369
+#: .\vacancies\views.py:362
 msgid "Пользователь успешно приглашён в команду"
 msgstr "User successfully invited to the team"
 
-#: .\vacancies\views.py:407
+#: .\vacancies\views.py:400
 msgid "Пользователь отклонён"
 msgstr "User rejected"
 
-#: .\vacancies\views.py:446
+#: .\vacancies\views.py:439
 #, python-brace-format
 msgid "Пользователь {user} удалён из команды"
 msgstr "User {user} removed from the team"
+
+#~ msgid "Вы больше не можете откликнуться на эту вакансию."
+#~ msgstr "You can no longer respond to this vacancy."
 
 #~ msgid ""
 #~ "Используй фильтры для поиска участников с нужными компетенциями или найди "
@@ -1187,12 +1212,6 @@ msgstr "User {user} removed from the team"
 #~ msgstr ""
 #~ "Use the filters to find participants with the necessary skills or find "
 #~ "already formed teams."
-
-#~ msgid "Вы больше не можете откликнуться на эту вакансию."
-#~ msgstr "You can no longer respond to this vacancy."
-
-#~ msgid "Введите корректное значение"
-#~ msgstr "Enter a valid value"
 
 #~ msgid "Адрес: "
 #~ msgstr "Address: "

@@ -206,7 +206,7 @@ class VacanciesTests(django.test.TestCase):
         count_comments = vacancies.models.CommentVacancy.objects.all().count()
         self.client.post(
             django.urls.reverse(
-                "vacancies:vacancy_detail",
+                "vacancies:create_comment",
                 args=[self.vacancy.id],
             ),
             data=data,

@@ -63,7 +63,7 @@
 
 .grow-button {
     border:none;
-    margin: 10px;
+    margin-top: 10px;
     text-decoration: none;
     background:transparent;
     --btn-width: 210px;
