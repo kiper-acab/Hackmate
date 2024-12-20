@@ -5,6 +5,7 @@ import django.core.validators
 import django.db.models
 import django.utils.translation
 import tinymce.models
+import django.core.exceptions
 
 
 class Ip(django.db.models.Model):
@@ -164,6 +165,19 @@ class Vacancy(django.db.models.Model):
         verbose_name = django.utils.translation.gettext_lazy("вакансия")
         verbose_name_plural = django.utils.translation.gettext_lazy("вакансии")
         ordering = ["-created_at"]
+        unique_together = ("title", "hackaton_title")
+
+    def clean(self):
+        if (
+            Vacancy.objects.exclude(pk=self.pk)
+            .filter(title=self.title, hackaton_title=self.hackaton_title)
+            .exists()
+        ):
+            raise django.core.exceptions.ValidationError(
+                django.utils.translation.gettext_lazy(
+                    "Вакансия с таким названием и хакатоном уже существует.",
+                ),
+            )
 
     def total_views(self):
         return self.views.count()
