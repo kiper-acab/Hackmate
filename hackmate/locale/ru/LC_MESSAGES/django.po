@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 22:16+0400\n"
+"POT-Creation-Date: 2024-12-21 11:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,49 +20,49 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: about/apps.py:10 templates/about/about.html:12
-#: templates/includes/footer.html:16
+#: .\about\apps.py:10 .\templates\about\about.html:12
+#: .\templates\includes\footer.html:16
 msgid "О проекте"
 msgstr "О проекте"
 
-#: api/apps.py:10
+#: .\api\apps.py:10
 msgid "Апи"
 msgstr "API"
 
-#: hackmate/settings.py:130
+#: .\hackmate\settings.py:130
 msgid "Русский"
 msgstr "Russian"
 
-#: hackmate/settings.py:131
+#: .\hackmate\settings.py:131
 msgid "English"
 msgstr "English"
 
-#: homepage/apps.py:10
+#: .\homepage\apps.py:10
 msgid "Главная страница"
 msgstr "Home page"
 
-#: notify/apps.py:10
+#: .\notify\apps.py:10
 msgid "Уведомления"
 msgstr "Notifications"
 
-#: notify/signals.py:21
+#: .\notify\signals.py:21
 msgid "оставил отклик на вашу вакансию"
 msgstr "left a response to your vacancy"
 
-#: notify/signals.py:25 notify/signals.py:43 notify/signals.py:60
+#: .\notify\signals.py:25 .\notify\signals.py:43 .\notify\signals.py:60
 #, python-brace-format
 msgid "Пользователь {instance.user.username}"
 msgstr "Пользователь {instance.user.username}"
 
-#: notify/signals.py:39
+#: .\notify\signals.py:39
 msgid "принял вас в команду"
 msgstr "accepted you into the team"
 
-#: notify/signals.py:56
+#: .\notify\signals.py:56
 msgid "отклонил ваш отклик"
 msgstr "rejected your response"
 
-#: templates/about/about.html:14
+#: .\templates\about\about.html:14
 msgid ""
 "HackMate — это платформа для поиска команды и сокомандников для участия в "
 "хакатонах."
@@ -70,7 +70,7 @@ msgstr ""
 "HackMate — это платформа для поиска команды и сокомандников для участия в "
 "хакатонах."
 
-#: templates/about/about.html:15
+#: .\templates\about\about.html:15
 msgid ""
 "Мы помогаем разработчикам, дизайнерам, аналитикам и другим профессионалам "
 "находить"
@@ -78,11 +78,11 @@ msgstr ""
 "Мы помогаем разработчикам, дизайнерам, аналитикам и другим профессионалам "
 "находить"
 
-#: templates/about/about.html:16
+#: .\templates\about\about.html:16
 msgid "единомышленников для совместной работы и реализации крутых идей."
 msgstr "единомышленников для совместной работы и реализации крутых идей."
 
-#: templates/about/about.html:19
+#: .\templates\about\about.html:19
 msgid ""
 "Наша цель — объединить людей с общими интересами и способствовать их "
 "профессиональному росту."
@@ -90,35 +90,35 @@ msgstr ""
 "Наша цель — объединить людей с общими интересами и способствовать их "
 "профессиональному росту."
 
-#: templates/about/contact.html:12 templates/includes/footer.html:17
+#: .\templates\about\contact.html:12 .\templates\includes\footer.html:17
 msgid "Контакты"
 msgstr "Контакты"
 
-#: templates/about/contact.html:14
+#: .\templates\about\contact.html:14
 msgid "Email: "
 msgstr "Email: "
 
-#: templates/about/contact.html:15
+#: .\templates\about\contact.html:15
 #, fuzzy
 #| msgid "Телеграм секретаря: "
 msgid "Телеграм лидера: "
 msgstr "Телеграм секретаря: "
 
-#: templates/about/contact.html:16 templates/about/contact.html:17
+#: .\templates\about\contact.html:16 .\templates\about\contact.html:17
 #, fuzzy
 #| msgid "Телеграм секретаря: "
 msgid "Телеграм разработчика: "
 msgstr "Телеграм секретаря: "
 
-#: templates/about/privacy.html:11 templates/includes/footer.html:18
+#: .\templates\about\privacy.html:11 .\templates\includes\footer.html:18
 msgid "Политика конфиденциальности"
 msgstr "Политика конфиденциальности"
 
-#: templates/about/privacy.html:13
+#: .\templates\about\privacy.html:13
 msgid "Общие положения"
 msgstr "Общие положения"
 
-#: templates/about/privacy.html:15
+#: .\templates\about\privacy.html:15
 msgid ""
 "Настоящая Политика конфиденциальности определяет порядок обработки и защиты "
 "персональных данных"
@@ -126,7 +126,7 @@ msgstr ""
 "Настоящая Политика конфиденциальности определяет порядок обработки и защиты "
 "персональных данных"
 
-#: templates/about/privacy.html:16
+#: .\templates\about\privacy.html:16
 msgid ""
 "пользователей платформы HackMate (далее — «Сайт»). Используя Сайт, вы "
 "соглашаетесь с условиями"
@@ -134,11 +134,11 @@ msgstr ""
 "пользователей платформы HackMate (далее — «Сайт»). Используя Сайт, вы "
 "соглашаетесь с условиями"
 
-#: templates/about/privacy.html:17
+#: .\templates\about\privacy.html:17
 msgid "данной Политики."
 msgstr "данной Политики."
 
-#: templates/about/privacy.html:20
+#: .\templates\about\privacy.html:20
 msgid ""
 "HackMate обязуется соблюдать требования законодательства Российской "
 "Федерации в области защиты"
@@ -146,7 +146,7 @@ msgstr ""
 "HackMate обязуется соблюдать требования законодательства Российской "
 "Федерации в области защиты"
 
-#: templates/about/privacy.html:21
+#: .\templates\about\privacy.html:21
 msgid ""
 "персональных данных, включая Федеральный закон «О персональных данных» № 152-"
 "ФЗ."
@@ -154,65 +154,65 @@ msgstr ""
 "персональных данных, включая Федеральный закон «О персональных данных» № 152-"
 "ФЗ."
 
-#: templates/about/privacy.html:24
+#: .\templates\about\privacy.html:24
 msgid "Сбор персональных данных"
 msgstr "Сбор персональных данных"
 
-#: templates/about/privacy.html:25
+#: .\templates\about\privacy.html:25
 msgid "Мы можем собирать следующие виды данных:"
 msgstr "Мы можем собирать следующие виды данных:"
 
-#: templates/about/privacy.html:27
+#: .\templates\about\privacy.html:27
 msgid "Имя и фамилия."
 msgstr "Имя и фамилия."
 
-#: templates/about/privacy.html:28
+#: .\templates\about\privacy.html:28
 msgid "Адрес электронной почты."
 msgstr "Адрес электронной почты."
 
-#: templates/about/privacy.html:29
+#: .\templates\about\privacy.html:29
 msgid "Номер телефона."
 msgstr "Номер телефона."
 
-#: templates/about/privacy.html:30
+#: .\templates\about\privacy.html:30
 msgid "Информация о профиле (например, навыки, интересы, проекты)."
 msgstr "Информация о профиле (например, навыки, интересы, проекты)."
 
-#: templates/about/privacy.html:31
+#: .\templates\about\privacy.html:31
 msgid ""
 "История взаимодействий с Сайтом (оценки, сообщения, отклики на проекты)."
 msgstr ""
 "История взаимодействий с Сайтом (оценки, сообщения, отклики на проекты)."
 
-#: templates/about/privacy.html:32
+#: .\templates\about\privacy.html:32
 msgid "Лог-файлы, IP-адреса, данные о браузере и операционной системе."
 msgstr "Лог-файлы, IP-адреса, данные о браузере и операционной системе."
 
-#: templates/about/privacy.html:35
+#: .\templates\about\privacy.html:35
 msgid "Цели обработки данных"
 msgstr "Цели обработки данных"
 
-#: templates/about/privacy.html:36
+#: .\templates\about\privacy.html:36
 msgid "Собранные данные используются для:"
 msgstr "Собранные данные используются для:"
 
-#: templates/about/privacy.html:38
+#: .\templates\about\privacy.html:38
 msgid "Регистрации и авторизации пользователей на платформе."
 msgstr "Регистрации и авторизации пользователей на платформе."
 
-#: templates/about/privacy.html:39
+#: .\templates\about\privacy.html:39
 msgid "Предоставления доступа к функционалу платформы."
 msgstr "Предоставления доступа к функционалу платформы."
 
-#: templates/about/privacy.html:40
+#: .\templates\about\privacy.html:40
 msgid "Улучшения качества работы Сайта."
 msgstr "Улучшения качества работы Сайта."
 
-#: templates/about/privacy.html:41
+#: .\templates\about\privacy.html:41
 msgid "Обеспечения связи с пользователями (например, рассылки уведомлений)."
 msgstr "Обеспечения связи с пользователями (например, рассылки уведомлений)."
 
-#: templates/about/privacy.html:42
+#: .\templates\about\privacy.html:42
 msgid ""
 "Анализа пользовательской активности для повышения удобства использования "
 "платформы."
@@ -220,15 +220,15 @@ msgstr ""
 "Анализа пользовательской активности для повышения удобства использования "
 "платформы."
 
-#: templates/about/privacy.html:43
+#: .\templates\about\privacy.html:43
 msgid "Соблюдения требований законодательства РФ."
 msgstr "Соблюдения требований законодательства РФ."
 
-#: templates/about/privacy.html:46
+#: .\templates\about\privacy.html:46
 msgid "Передача данных третьим лицам"
 msgstr "Передача данных третьим лицам"
 
-#: templates/about/privacy.html:47
+#: .\templates\about\privacy.html:47
 msgid ""
 "Мы не передаем ваши персональные данные третьим лицам, за исключением "
 "случаев:"
@@ -236,15 +236,15 @@ msgstr ""
 "Мы не передаем ваши персональные данные третьим лицам, за исключением "
 "случаев:"
 
-#: templates/about/privacy.html:49
+#: .\templates\about\privacy.html:49
 msgid "Установленных законодательством РФ."
 msgstr "Установленных законодательством РФ."
 
-#: templates/about/privacy.html:50
+#: .\templates\about\privacy.html:50
 msgid "Передачи данных с вашего согласия."
 msgstr "Передачи данных с вашего согласия."
 
-#: templates/about/privacy.html:51
+#: .\templates\about\privacy.html:51
 msgid ""
 "Необходимости передачи данных для выполнения обязательств перед "
 "пользователем (например,"
@@ -252,15 +252,15 @@ msgstr ""
 "Необходимости передачи данных для выполнения обязательств перед "
 "пользователем (например,"
 
-#: templates/about/privacy.html:52
+#: .\templates\about\privacy.html:52
 msgid "интеграция с внешними сервисами для участия в хакатонах)."
 msgstr "интеграция с внешними сервисами для участия в хакатонах)."
 
-#: templates/about/privacy.html:55
+#: .\templates\about\privacy.html:55
 msgid "Хранение данных"
 msgstr "Хранение данных"
 
-#: templates/about/privacy.html:57
+#: .\templates\about\privacy.html:57
 msgid ""
 "Персональные данные хранятся только на серверах, расположенных на территории "
 "Российской"
@@ -268,11 +268,11 @@ msgstr ""
 "Персональные данные хранятся только на серверах, расположенных на территории "
 "Российской"
 
-#: templates/about/privacy.html:58
+#: .\templates\about\privacy.html:58
 msgid "Федерации."
 msgstr "Федерации."
 
-#: templates/about/privacy.html:59
+#: .\templates\about\privacy.html:59
 msgid ""
 "Мы принимаем меры для защиты данных от несанкционированного доступа, "
 "изменения, раскрытия или"
@@ -280,11 +280,11 @@ msgstr ""
 "Мы принимаем меры для защиты данных от несанкционированного доступа, "
 "изменения, раскрытия или"
 
-#: templates/about/privacy.html:60
+#: .\templates\about\privacy.html:60
 msgid "уничтожения."
 msgstr "уничтожения."
 
-#: templates/about/privacy.html:61
+#: .\templates\about\privacy.html:61
 msgid ""
 "Срок хранения персональных данных ограничивается целью их обработки, если "
 "иное не"
@@ -292,19 +292,19 @@ msgstr ""
 "Срок хранения персональных данных ограничивается целью их обработки, если "
 "иное не"
 
-#: templates/about/privacy.html:62
+#: .\templates\about\privacy.html:62
 msgid "предусмотрено законодательством."
 msgstr "предусмотрено законодательством."
 
-#: templates/about/privacy.html:65
+#: .\templates\about\privacy.html:65
 msgid "Права пользователя"
 msgstr "Права пользователя"
 
-#: templates/about/privacy.html:66
+#: .\templates\about\privacy.html:66
 msgid "Вы имеете право:"
 msgstr "Вы имеете право:"
 
-#: templates/about/privacy.html:68
+#: .\templates\about\privacy.html:68
 msgid ""
 "Запросить информацию о своих персональных данных, которые обрабатываются на "
 "Сайте."
@@ -312,19 +312,19 @@ msgstr ""
 "Запросить информацию о своих персональных данных, которые обрабатываются на "
 "Сайте."
 
-#: templates/about/privacy.html:69
+#: .\templates\about\privacy.html:69
 msgid "Требовать изменения, удаления или ограничения обработки данных."
 msgstr "Требовать изменения, удаления или ограничения обработки данных."
 
-#: templates/about/privacy.html:70
+#: .\templates\about\privacy.html:70
 msgid "Отозвать свое согласие на обработку данных в любое время."
 msgstr "Отозвать свое согласие на обработку данных в любое время."
 
-#: templates/about/privacy.html:71
+#: .\templates\about\privacy.html:71
 msgid "Подать жалобу в уполномоченные органы в случае нарушения ваших прав."
 msgstr "Подать жалобу в уполномоченные органы в случае нарушения ваших прав."
 
-#: templates/about/privacy.html:74
+#: .\templates\about\privacy.html:74
 msgid ""
 "Для реализации этих прав свяжитесь с нами по указанным ниже контактным "
 "данным."
@@ -332,11 +332,11 @@ msgstr ""
 "Для реализации этих прав свяжитесь с нами по указанным ниже контактным "
 "данным."
 
-#: templates/about/privacy.html:77
+#: .\templates\about\privacy.html:77
 msgid "Безопасность"
 msgstr "Безопасность"
 
-#: templates/about/privacy.html:79
+#: .\templates\about\privacy.html:79
 msgid ""
 "Мы используем современные технологии и организационные меры для защиты ваших "
 "персональных данных."
@@ -344,7 +344,7 @@ msgstr ""
 "Мы используем современные технологии и организационные меры для защиты ваших "
 "персональных данных."
 
-#: templates/about/privacy.html:80
+#: .\templates\about\privacy.html:80
 msgid ""
 "Однако, несмотря на все меры предосторожности, ни одна система передачи "
 "данных через интернет не"
@@ -352,15 +352,15 @@ msgstr ""
 "Однако, несмотря на все меры предосторожности, ни одна система передачи "
 "данных через интернет не"
 
-#: templates/about/privacy.html:81
+#: .\templates\about\privacy.html:81
 msgid "может быть абсолютно безопасной."
 msgstr "может быть абсолютно безопасной."
 
-#: templates/about/privacy.html:84
+#: .\templates\about\privacy.html:84
 msgid "Контактные данные"
 msgstr "Контактные данные"
 
-#: templates/about/privacy.html:85
+#: .\templates\about\privacy.html:85
 msgid ""
 "Если у вас есть вопросы относительно Политики конфиденциальности, обратитесь "
 "к нам:"
@@ -368,23 +368,23 @@ msgstr ""
 "Если у вас есть вопросы относительно Политики конфиденциальности, обратитесь "
 "к нам:"
 
-#: templates/about/privacy.html:87
+#: .\templates\about\privacy.html:87
 msgid "Электронная почта: "
 msgstr "Электронная почта: "
 
-#: templates/about/privacy.html:88
+#: .\templates\about\privacy.html:88
 msgid "Телефон: "
 msgstr "Телефон: "
 
-#: templates/about/privacy.html:89
+#: .\templates\about\privacy.html:89
 msgid "Адрес: Москва, ул. Программистов, д. 1"
 msgstr "Адрес: Москва, ул. Программистов, д. 1"
 
-#: templates/about/privacy.html:92
+#: .\templates\about\privacy.html:92
 msgid "Изменения Политики"
 msgstr "Изменения Политики"
 
-#: templates/about/privacy.html:94
+#: .\templates\about\privacy.html:94
 msgid ""
 "HackMate оставляет за собой право обновлять настоящую Политику "
 "конфиденциальности. Изменения"
@@ -392,7 +392,7 @@ msgstr ""
 "HackMate оставляет за собой право обновлять настоящую Политику "
 "конфиденциальности. Изменения"
 
-#: templates/about/privacy.html:95
+#: .\templates\about\privacy.html:95
 msgid ""
 "вступают в силу с момента публикации новой версии на Сайте. Рекомендуем "
 "периодически проверять"
@@ -400,15 +400,15 @@ msgstr ""
 "вступают в силу с момента публикации новой версии на Сайте. Рекомендуем "
 "периодически проверять"
 
-#: templates/about/privacy.html:96
+#: .\templates\about\privacy.html:96
 msgid "Политику на наличие обновлений."
 msgstr "Политику на наличие обновлений."
 
-#: templates/homepage/homepage.html:12
+#: .\templates\homepage\homepage.html:12
 msgid "Собери команду для хакатона за несколько кликов"
 msgstr "Собери команду для хакатона за несколько кликов"
 
-#: templates/homepage/homepage.html:13
+#: .\templates\homepage\homepage.html:13
 msgid ""
 "Ищешь команду для участия в хакатоне или талантливых людей для своего "
 "проекта?"
@@ -416,7 +416,7 @@ msgstr ""
 "Ищешь команду для участия в хакатоне или талантливых людей для своего "
 "проекта?"
 
-#: templates/homepage/homepage.html:14
+#: .\templates\homepage\homepage.html:14
 msgid ""
 "HackMate — это платформа, где встречаются разработчики, дизайнеры, "
 "маркетологи, аналитики и другие энтузиасты, готовые создавать инновационные "
@@ -426,11 +426,11 @@ msgstr ""
 "маркетологи, аналитики и другие энтузиасты, готовые создавать инновационные "
 "решения вместе."
 
-#: templates/homepage/homepage.html:17
+#: .\templates\homepage\homepage.html:17
 msgid "Что такое HackMate?"
 msgstr "Что такое HackMate?"
 
-#: templates/homepage/homepage.html:18
+#: .\templates\homepage\homepage.html:18
 msgid ""
 "HackMate — это инструмент, который помогает находить единомышленников для "
 "участия в хакатонах. Мы понимаем, как сложно собрать сбалансированную "
@@ -442,15 +442,15 @@ msgstr ""
 "команду или найти подходящий проект. Наша миссия — сделать этот процесс "
 "простым, быстрым и увлекательным."
 
-#: templates/homepage/homepage.html:21
+#: .\templates\homepage\homepage.html:21
 msgid "Как это работает?"
 msgstr "Как это работает?"
 
-#: templates/homepage/homepage.html:24
+#: .\templates\homepage\homepage.html:24
 msgid "Создай профиль."
 msgstr "Создай профиль."
 
-#: templates/homepage/homepage.html:24
+#: .\templates\homepage\homepage.html:24
 msgid ""
 "Расскажи о своих навыках, опыте и интересах. Чем подробнее, тем легче найти "
 "идеальных сокомандников."
@@ -458,11 +458,11 @@ msgstr ""
 "Расскажи о своих навыках, опыте и интересах. Чем подробнее, тем легче найти "
 "идеальных сокомандников."
 
-#: templates/homepage/homepage.html:27
+#: .\templates\homepage\homepage.html:27
 msgid "Просматривай команды и участников."
 msgstr "Просматривай команды и участников."
 
-#: templates/homepage/homepage.html:27
+#: .\templates\homepage\homepage.html:27
 msgid ""
 "Используй фильтры для поиска участников с нужными компетенциями или найди "
 "уже сформированные команды."
@@ -470,31 +470,31 @@ msgstr ""
 "Используй фильтры для поиска участников с нужными компетенциями или найди "
 "уже сформированные команды."
 
-#: templates/homepage/homepage.html:30
+#: .\templates\homepage\homepage.html:30
 msgid "Готовься к победе."
 msgstr "Готовься к победе."
 
-#: templates/homepage/homepage.html:30
+#: .\templates\homepage\homepage.html:30
 msgid "Сформируйте команду мечты и покорите хакатоны вместе!"
 msgstr "Сформируйте команду мечты и покорите хакатоны вместе!"
 
-#: templates/homepage/homepage.html:36
+#: .\templates\homepage\homepage.html:36
 msgid "Почему это важно?"
 msgstr "Почему это важно?"
 
-#: templates/homepage/homepage.html:39
+#: .\templates\homepage\homepage.html:39
 msgid "Реальные связи."
 msgstr "Реальные связи."
 
-#: templates/homepage/homepage.html:39
+#: .\templates\homepage\homepage.html:39
 msgid "Найди людей, с которыми ты будешь работать над своими мечтами."
 msgstr "Найди людей, с которыми ты будешь работать над своими мечтами."
 
-#: templates/homepage/homepage.html:42
+#: .\templates\homepage\homepage.html:42
 msgid "Профессиональный рост."
 msgstr "Профессиональный рост."
 
-#: templates/homepage/homepage.html:42
+#: .\templates\homepage\homepage.html:42
 msgid ""
 "Получите опыт работы в команде, покажите свои навыки и привлеките внимание "
 "работодателей."
@@ -502,11 +502,11 @@ msgstr ""
 "Получите опыт работы в команде, покажите свои навыки и привлеките внимание "
 "работодателей."
 
-#: templates/homepage/homepage.html:45
+#: .\templates\homepage\homepage.html:45
 msgid "Шанс на успех."
 msgstr "Шанс на успех."
 
-#: templates/homepage/homepage.html:45
+#: .\templates\homepage\homepage.html:45
 msgid ""
 "Вдохновляйтесь, учитесь у других и создавайте проекты, которые смогут "
 "изменить мир."
@@ -514,11 +514,11 @@ msgstr ""
 "Вдохновляйтесь, учитесь у других и создавайте проекты, которые смогут "
 "изменить мир."
 
-#: templates/homepage/homepage.html:51
+#: .\templates\homepage\homepage.html:51
 msgid "Готов начать?"
 msgstr "Готов начать?"
 
-#: templates/homepage/homepage.html:52
+#: .\templates\homepage\homepage.html:52
 msgid ""
 "Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для "
 "следующего хакатона."
@@ -526,310 +526,327 @@ msgstr ""
 "Не откладывай! Зарегистрируйся прямо сейчас и найди свою команду для "
 "следующего хакатона."
 
-#: templates/homepage/homepage.html:55
+#: .\templates\homepage\homepage.html:55
 msgid "Создать профиль бесплатно"
 msgstr "Создать профиль бесплатно"
 
-#: templates/includes/footer.html:12
+#: .\templates\includes\footer.html:12
 msgid "HackMate"
 msgstr "HackMate"
 
-#: templates/includes/footer.html:25
+#: .\templates\includes\footer.html:25
 msgid "Проект на GitLab"
 msgstr "Проект на GitLab"
 
-#: templates/includes/header.html:13
+#: .\templates\includes\header.html:13
 msgid "Главная"
 msgstr "Главная"
 
-#: templates/includes/header.html:15
+#: .\templates\includes\header.html:15
 msgid "Найти команду"
 msgstr "Найти команду"
 
-#: templates/includes/header.html:18
+#: .\templates\includes\header.html:18
 msgid "Регистрация"
 msgstr "Регистрация"
 
-#: templates/includes/header.html:20
+#: .\templates\includes\header.html:20
 msgid "Авторизация"
 msgstr "Авторизация"
 
-#: templates/includes/header.html:23 templates/vacancies/user_responses.html:12
+#: .\templates\includes\header.html:23
+#: .\templates\vacancies\user_responses.html:12
 msgid "Мои отклики"
 msgstr "Мои отклики"
 
-#: templates/includes/header.html:25
+#: .\templates\includes\header.html:25
 msgid "Мои вакансии"
 msgstr "Мои вакансии"
 
-#: templates/includes/header.html:39
+#: .\templates\includes\header.html:27 .\templates\vacancies\my_teams.html:12
+#, fuzzy
+#| msgid "Найти команду"
+msgid "Мои команды"
+msgstr "Найти команду"
+
+#: .\templates\includes\header.html:41
 msgid "Админка"
 msgstr "Админка"
 
-#: templates/includes/header.html:42
+#: .\templates\includes\header.html:44
 msgid "Профиль"
 msgstr "Профиль"
 
-#: templates/includes/header.html:44 templates/users/profile_edit.html:12
+#: .\templates\includes\header.html:46 .\templates\users\profile_edit.html:12
 msgid "Редактирование профиля"
 msgstr "Редактирование профиля"
 
-#: templates/includes/header.html:45 templates/users/profile_edit.html:80
+#: .\templates\includes\header.html:47 .\templates\users\profile_edit.html:80
 msgid "Изменить пароль"
 msgstr "Изменить пароль"
 
-#: templates/includes/header.html:47
-#: templates/users/password_reset_complete.html:11
-#: templates/users/password_reset_confirm.html:16
+#: .\templates\includes\header.html:49
+#: .\templates\users\password_reset_complete.html:11
+#: .\templates\users\password_reset_confirm.html:16
 msgid "Выйти"
 msgstr "Выйти"
 
-#: templates/includes/header.html:77
+#: .\templates\includes\header.html:79
 msgid "Отметить все как прочитанные"
 msgstr "Отметить все как прочитанные"
 
-#: templates/includes/header.html:82
+#: .\templates\includes\header.html:84
 msgid "Нет новых уведомлений"
 msgstr "Нет новых уведомлений"
 
-#: templates/includes/header.html:100 templates/users/password_change.html:18
+#: .\templates\includes\header.html:102
+#: .\templates\users\password_change.html:18
 msgid "Сменить"
 msgstr "Сменить"
 
-#: templates/users/login.html:26 templates/users/signup.html:24
-#: templates/vacancies/detail.html:110
+#: .\templates\users\login.html:26 .\templates\users\signup.html:24
+#: .\templates\vacancies\detail.html:110
 msgid "Отправить"
 msgstr "Отправить"
 
-#: templates/users/login.html:29
+#: .\templates\users\login.html:29
 msgid "Восстановить пароль"
 msgstr "Восстановить пароль"
 
-#: templates/users/logout.html:8
+#: .\templates\users\logout.html:8
 msgid "Вы вышли из аккаунта"
 msgstr "Вы вышли из аккаунта"
 
-#: templates/users/password_change_done.html:8
+#: .\templates\users\password_change_done.html:8
 msgid "Пароль успешно поменяли"
 msgstr "Пароль успешно поменяли"
 
-#: templates/users/password_reset_done.html:8
+#: .\templates\users\password_reset_done.html:8
 #, fuzzy
 #| msgid "Пароль успешно восстановили"
 msgid "Проверьте почту для успешного восттановления пароля"
 msgstr "Пароль успешно восстановили"
 
-#: templates/users/profile.html:18
+#: .\templates\users\profile.html:18
 msgid "Рейтинг"
 msgstr "Рейтинг"
 
-#: templates/users/profile.html:19
+#: .\templates\users\profile.html:19
 msgid "Количество оценок"
 msgstr "Количество оценок"
 
-#: templates/users/profile.html:32 templates/vacancies/vacancies.html:28
+#: .\templates\users\profile.html:32 .\templates\vacancies\vacancies.html:28
 msgid "Default Avatar"
 msgstr "Аватар по умолчанию"
 
-#: templates/users/profile.html:38
+#: .\templates\users\profile.html:38
 msgid "Email"
 msgstr "Email"
 
-#: templates/users/profile.html:51 templates/users/profile.html:53
+#: .\templates\users\profile.html:51 .\templates\users\profile.html:53
 msgid "День рождения"
 msgstr "День рождения"
 
-#: templates/users/profile.html:53
+#: .\templates\users\profile.html:53
 msgid "Информация не указана."
 msgstr "Информация не указана."
 
-#: templates/users/profile.html:58
+#: .\templates\users\profile.html:58
 msgid "Дата регистрации"
 msgstr "Дата регистрации"
 
-#: templates/users/profile.html:64 templates/users/profile_edit.html:61
+#: .\templates\users\profile.html:64 .\templates\users\profile_edit.html:61
 msgid "Ссылки на другие сети"
 msgstr "Ссылки на другие сети"
 
-#: templates/users/profile.html:80
+#: .\templates\users\profile.html:80
 msgid "Ссылки отсутствуют."
 msgstr "Ссылки отсутствуют."
 
-#: templates/users/profile.html:87
+#: .\templates\users\profile.html:87
 msgid "Редактировать профиль"
 msgstr "Редактировать профиль"
 
-#: templates/users/profile.html:91
+#: .\templates\users\profile.html:91
 msgid "Завершённые вакансии"
 msgstr "Завершённые вакансии"
 
-#: templates/users/profile.html:97 templates/vacancies/vacancies.html:35
+#: .\templates\users\profile.html:97 .\templates\vacancies\vacancies.html:35
 msgid "Детальнее"
 msgstr "Детальнее"
 
-#: templates/users/profile.html:101
+#: .\templates\users\profile.html:101
 #, fuzzy
 #| msgid "пользователь"
 msgid "У пользователя"
 msgstr "У пользователя"
 
-#: templates/users/profile.html:101
+#: .\templates\users\profile.html:101
 #, fuzzy
 #| msgid "Завершённые вакансии"
 msgid "нет завершённых вакансий"
 msgstr "нет завершённых вакансии"
 
-#: templates/users/profile_edit.html:26
+#: .\templates\users\profile_edit.html:26
 msgid "Аватар"
 msgstr "Аватар"
 
-#: templates/users/profile_edit.html:29
+#: .\templates\users\profile_edit.html:29
 msgid "Текущий аватар"
 msgstr "Текущий аватар"
 
-#: templates/users/profile_edit.html:34
+#: .\templates\users\profile_edit.html:34
 msgid "Удалить изображение"
 msgstr "Удалить изображение"
 
-#: templates/users/profile_edit.html:39
+#: .\templates\users\profile_edit.html:39
 msgid "Аватар отсутствует"
 msgstr "Аватар отсутствует"
 
-#: templates/users/profile_edit.html:52
+#: .\templates\users\profile_edit.html:52
 msgid "Добавить новую ссылку"
 msgstr "Добавить новую ссылку"
 
-#: templates/users/profile_edit.html:57
+#: .\templates\users\profile_edit.html:57
 msgid "Сохранить изменения"
 msgstr "Сохранить изменения"
 
-#: templates/vacancies/change_vacancy.html:12
-#: templates/vacancies/detail.html:19
+#: .\templates\vacancies\change_vacancy.html:12
+#: .\templates\vacancies\detail.html:19
 msgid "Изменить вакансию"
 msgstr "Изменить вакансию"
 
-#: templates/vacancies/change_vacancy.html:51
+#: .\templates\vacancies\change_vacancy.html:51
 msgid "Сохранить"
 msgstr "Сохранить"
 
-#: templates/vacancies/detail.html:21
+#: .\templates\vacancies\detail.html:21
 msgid "Удалить вакансию"
 msgstr "Удалить вакансию"
 
-#: templates/vacancies/detail.html:30
+#: .\templates\vacancies\detail.html:30
 msgid "Создатель:"
 msgstr "Создатель:"
 
-#: templates/vacancies/detail.html:31
+#: .\templates\vacancies\detail.html:31
 msgid "Создано:"
 msgstr "Создано:"
 
-#: templates/vacancies/detail.html:33
+#: .\templates\vacancies\detail.html:33 .\templates\vacancies\my_teams.html:29
 msgid "Хакатон:"
 msgstr "Хакатон:"
 
-#: templates/vacancies/detail.html:36
+#: .\templates\vacancies\detail.html:36
 msgid "Дата проведения хакатона"
 msgstr "Дата проведения хакатона"
 
-#: templates/vacancies/detail.html:39
+#: .\templates\vacancies\detail.html:39
 msgid "Требуемый опыт:"
 msgstr "Требуемый опыт:"
 
-#: templates/vacancies/detail.html:42
+#: .\templates\vacancies\detail.html:42
 msgid "Необходимое количество человек в группе для участия в хакатоне"
 msgstr "Необходимое количество человек в группе для участия в хакатоне"
 
-#: templates/vacancies/detail.html:45
+#: .\templates\vacancies\detail.html:45
 msgid "Текущий состав команды"
 msgstr "Состав команды"
 
-#: templates/vacancies/detail.html:82
+#: .\templates\vacancies\detail.html:82
 msgid "Откликнуться"
 msgstr "Откликнуться"
 
-#: templates/vacancies/detail.html:84
+#: .\templates\vacancies\detail.html:84
 msgid "Вы больше не можете откликнуться на эту вакансию."
 msgstr "Вы больше не можете откликнуться на эту вакансию."
 
-#: templates/vacancies/detail.html:88
+#: .\templates\vacancies\detail.html:88
 msgid "Вы должны быть авторизованы, чтобы откликнуться."
 msgstr "Вы должны быть авторизованы, чтобы откликнуться."
 
-#: templates/vacancies/detail.html:93
+#: .\templates\vacancies\detail.html:93
 msgid "Комментарии"
 msgstr "Комментарии"
 
-#: templates/vacancies/detail.html:137
+#: .\templates\vacancies\detail.html:137
 msgid "Комментариев пока нет."
 msgstr "Комментариев пока нет."
 
-#: templates/vacancies/user_responses.html:23
-msgid "Посмотреть вакансию"
-msgstr "Посмотреть вакансию"
+#: .\templates\vacancies\my_teams.html:30
+#, fuzzy
+#| msgid "Дата проведения хакатона"
+msgid "Дата проведения:"
+msgstr "Дата проведения хакатона"
 
-#: templates/vacancies/user_responses.html:27
-msgid "У вас нету откликов."
-msgstr "У вас нет откликов."
-
-#: templates/vacancies/user_vacancies.html:12
-msgid "Ваши вакансии"
-msgstr "Ваши вакансии"
-
-#: templates/vacancies/user_vacancies.html:28
-msgid "Откликов"
-msgstr "Откликов"
-
-#: templates/vacancies/user_vacancies.html:30
-msgid "Откликнувшиеся пользователи:"
-msgstr "Откликнувшиеся пользователи:"
-
-#: templates/vacancies/user_vacancies.html:44
-msgid "Пока никто не откликнулся"
-msgstr "Пока никто не откликнулся"
-
-#: templates/vacancies/user_vacancies.html:52
+#: .\templates\vacancies\my_teams.html:34
+#: .\templates\vacancies\user_vacancies.html:52
 msgid "У вас нет вакансий"
 msgstr "У вас нет вакансий"
 
-#: templates/vacancies/user_vacancies.html:53
+#: .\templates\vacancies\my_teams.html:35
+#: .\templates\vacancies\user_vacancies.html:53
 msgid "Если хотите создать анкету, то"
 msgstr "Если хотите создать вакансию, то"
 
-#: templates/vacancies/user_vacancies.html:54
+#: .\templates\vacancies\my_teams.html:36
+#: .\templates\vacancies\user_vacancies.html:54
 msgid "перейдите сюда"
 msgstr "перейдите сюда"
 
-#: templates/vacancies/vacancies.html:12
+#: .\templates\vacancies\user_responses.html:23
+msgid "Посмотреть вакансию"
+msgstr "Посмотреть вакансию"
+
+#: .\templates\vacancies\user_responses.html:27
+msgid "У вас нету откликов."
+msgstr "У вас нет откликов."
+
+#: .\templates\vacancies\user_vacancies.html:12
+msgid "Ваши вакансии"
+msgstr "Ваши вакансии"
+
+#: .\templates\vacancies\user_vacancies.html:28
+msgid "Откликов"
+msgstr "Откликов"
+
+#: .\templates\vacancies\user_vacancies.html:30
+msgid "Откликнувшиеся пользователи:"
+msgstr "Откликнувшиеся пользователи:"
+
+#: .\templates\vacancies\user_vacancies.html:44
+msgid "Пока никто не откликнулся"
+msgstr "Пока никто не откликнулся"
+
+#: .\templates\vacancies\vacancies.html:12
 msgid "Список вакансий"
 msgstr "Список вакансий"
 
-#: templates/vacancies/vacancies.html:15
-#: templates/vacancies/vacancy_form.html:50
+#: .\templates\vacancies\vacancies.html:15
+#: .\templates\vacancies\vacancy_form.html:50
 msgid "Создать вакансию"
 msgstr "Создать вакансию"
 
-#: templates/vacancies/vacancies.html:40
+#: .\templates\vacancies\vacancies.html:40
 msgid "Ещё ни кто не разместил объявление о поиске."
 msgstr "Ещё никто не разместил объявление о поиске."
 
-#: templates/vacancies/vacancies.html:41
+#: .\templates\vacancies\vacancies.html:41
 msgid "Стань первым!"
 msgstr "Стань первым!"
 
-#: templates/vacancies/vacancy_form.html:11
+#: .\templates\vacancies\vacancy_form.html:11
 msgid "Создание вакансии"
 msgstr "Создание вакансии"
 
-#: users/apps.py:10
+#: .\users\apps.py:10
 msgid "Пользователи"
 msgstr "Пользователи"
 
-#: users/backends.py:39
+#: .\users\backends.py:39
 msgid "Неправильный логин/пароль. Убедитесь в корректности данных."
 msgstr "Неправильный логин/пароль. Убедитесь в корректности данных."
 
-#: users/backends.py:68
+#: .\users\backends.py:68
 msgid ""
 "Вы превысили допустимое число попыток входа. Пожалуйста, активируйте свой "
 "аккаунт. Вам должно прийти письмо на почту с активацией."
@@ -837,7 +854,7 @@ msgstr ""
 "Вы превысили допустимое число попыток входа. Пожалуйста, активируйте свой "
 "аккаунт. Вам должно прийти письмо на почту с активацией."
 
-#: users/backends.py:81
+#: .\users\backends.py:81
 #, python-brace-format
 msgid ""
 "Замечена подозрительная активность аккаунта. Для активации аккаунта нажмите "
@@ -846,355 +863,369 @@ msgstr ""
 "Замечена подозрительная активность аккаунта. Для активации аккаунта нажмите "
 "на ссылку ниже: http://{domain}{activation_path}"
 
-#: users/backends.py:90
+#: .\users\backends.py:90
 msgid "Активация аккаунта"
 msgstr "Активация аккаунта"
 
-#: users/forms.py:51
+#: .\users\forms.py:51
 msgid "Введите логин"
 msgstr "Введите логин"
 
-#: users/forms.py:63
+#: .\users\forms.py:63
 msgid "Выберите себе картинку"
 msgstr "Выберите изображение"
 
-#: users/forms.py:94
+#: .\users\forms.py:94
 msgid "Описание"
 msgstr "Описание"
 
-#: users/forms.py:120
+#: .\users\forms.py:120
 msgid "Тип сайта"
 msgstr "Тип сайта"
 
-#: users/forms.py:123
+#: .\users\forms.py:123
 msgid "Ссылка"
 msgstr "Ссылка"
 
-#: users/forms.py:138
+#: .\users\forms.py:138
 msgid "Пароль"
 msgstr "Пароль"
 
-#: users/forms.py:143
+#: .\users\forms.py:143
 msgid "Введите электронную почту/логин"
 msgstr "Введите электронную почту/логин"
 
-#: users/models.py:89
+#: .\users\models.py:89
 msgid "день рождения"
 msgstr "день рождения"
 
-#: users/models.py:91
+#: .\users\models.py:91
 msgid "Введите дату рождения"
 msgstr "Введите дату рождения"
 
-#: users/models.py:109
+#: .\users\models.py:109
 msgid "о себе"
 msgstr "о себе"
 
-#: users/models.py:110
+#: .\users\models.py:110
 msgid "Расскажите о себе"
 msgstr "Расскажите о себе"
 
-#: users/models.py:139
+#: .\users\models.py:139
 msgid "дополнительная информация"
 msgstr "дополнительная информация"
 
-#: users/models.py:142
+#: .\users\models.py:142
 msgid "дополнительные данные"
 msgstr "дополнительные данные"
 
-#: users/models.py:160
+#: .\users\models.py:160
 msgid "профиль"
 msgstr "профиль"
 
-#: users/models.py:165
+#: .\users\models.py:165
 msgid "тип сайта"
 msgstr "тип сайта"
 
-#: users/models.py:168
+#: .\users\models.py:168
 msgid "URL"
 msgstr "URL"
 
-#: users/models.py:170
+#: .\users\models.py:170
 msgid "Полная ссылка, например, https://example.com"
 msgstr "Полная ссылка, например, https://example.com"
 
-#: users/models.py:196
+#: .\users\models.py:196
 msgid "ссылка"
 msgstr "ссылка"
 
-#: users/models.py:197
+#: .\users\models.py:197
 msgid "ссылки"
 msgstr "ссылки"
 
-#: users/validators.py:17 users/validators.py:24
+#: .\users\validators.py:18 .\users\validators.py:25
 msgid "Укажите корректную дату рождения."
 msgstr "Укажите корректную дату рождения."
 
-#: users/validators.py:31
+#: .\users\validators.py:32
 msgid "Для участия в хакатонах вам должно быть минимум 14 лет"
 msgstr "Для участия в хакатонах вам должно быть минимум 14 лет"
 
-#: users/validators.py:44 users/validators.py:52
+#: .\users\validators.py:45 .\users\validators.py:53
 #, python-format
 msgid "Пароль может содержать максимум %(max_length)d символов."
 msgstr "Пароль может содержать максимум %(max_length)d символов."
 
-#: users/validators.py:70
-#, python-brace-format
-msgid "Неизвестный тип сайта: {site_type}"
+#: .\users\validators.py:70
+#, fuzzy
+#| msgid "Информация не указана."
+msgid "Тип сайта не указан."
+msgstr "Информация не указана."
+
+#: .\users\validators.py:76
+#, fuzzy, python-brace-format
+#| msgid "Неизвестный тип сайта: {site_type}"
+msgid "Неизвестный тип сайта: {site_type}."
 msgstr "Неизвестный тип сайта: {site_type}"
 
-#: users/validators.py:78
-#, python-brace-format
-msgid "Ссылка должна начинаться с '{expected_prefix}'."
+#: .\users\validators.py:85
+#, fuzzy, python-brace-format
+#| msgid "Ссылка должна начинаться с '{expected_prefix}'."
+msgid "Ссылка должна начинаться с '{expected_prefix}'. "
 msgstr "Ссылка должна начинаться с '{expected_prefix}'."
 
-#: users/views.py:43
+#: .\users\validators.py:95
+#, python-brace-format
+msgid "Некорректный URL: {value}"
+msgstr ""
+
+#: .\users\views.py:43
 msgid "Вы не можете удалить эту ссылку."
 msgstr "Вы не можете удалить эту ссылку."
 
-#: users/views.py:133
+#: .\users\views.py:133
 msgid "Поля Email и Username обязательны для заполнения."
 msgstr "Поля Email и Username обязательны."
 
-#: users/views.py:159
+#: .\users\views.py:159
 msgid "Профиль успешно изменен!"
 msgstr "Профиль успешно изменен!"
 
-#: users/views.py:196
+#: .\users\views.py:196
 msgid "Чтобы подтвердить аккаунт перейдите по ссылке "
 msgstr "Чтобы подтвердить аккаунт перейдите по ссылке "
 
-#: users/views.py:202
+#: .\users\views.py:202
 msgid "Activate your account"
 msgstr "Активируйте ваш аккаунт"
 
-#: users/views.py:214
+#: .\users\views.py:214
 msgid "Пользователь успешно создан"
 msgstr "Пользователь успешно создан"
 
-#: users/views.py:220
+#: .\users\views.py:220
 msgid "Активируйте профиль в письме, которое придет вам на почту"
 msgstr "Активируйте профиль в письме, которое придет вам на почту"
 
-#: users/views.py:238
+#: .\users\views.py:238
 msgid "Пользователь уже активирован"
 msgstr "Пользователь уже активирован"
 
-#: users/views.py:249
+#: .\users\views.py:249
 msgid "Пользователь успешно активирован"
 msgstr "Пользователь успешно активирован"
 
-#: users/views.py:256
+#: .\users\views.py:256
 msgid "Активация профиля была доступна в течение "
 msgstr "Активация профиля была доступна в течение "
 
-#: vacancies/apps.py:10
+#: .\vacancies\apps.py:10
 msgid "Вакансии"
 msgstr "Вакансии"
 
-#: vacancies/forms.py:29
+#: .\vacancies\forms.py:29
 #, fuzzy
 #| msgid "Дедлайн не может быть в прошлом."
 msgid "Хакатон может быть в прошлом."
 msgstr "Дедлайн не может быть в прошлом."
 
-#: vacancies/forms.py:49
+#: .\vacancies\forms.py:58
 msgid "Введите название вакансии"
 msgstr "Введите название вакансии"
 
-#: vacancies/forms.py:56
+#: .\vacancies\forms.py:65
 msgid "Введите описание"
 msgstr "Введите описание"
 
-#: vacancies/forms.py:63
+#: .\vacancies\forms.py:72
 msgid "Введите название хакатона"
 msgstr "Введите название хакатона"
 
-#: vacancies/forms.py:71
+#: .\vacancies\forms.py:80
 #, fuzzy
 #| msgid "Дата проведения хакатона"
 msgid "Выберите дату проведения хакатона"
 msgstr "Дата проведения хакатона"
 
-#: vacancies/forms.py:98
+#: .\vacancies\forms.py:117
 msgid "Введите ваш комментарий"
 msgstr "Введите ваш комментарий"
 
-#: vacancies/models.py:18
+#: .\vacancies\models.py:18
 msgid "IP адрес"
 msgstr "IP адрес"
 
-#: vacancies/models.py:20
+#: .\vacancies\models.py:20
 msgid "IP адреса"
 msgstr "IP адреса"
 
-#: vacancies/models.py:32
+#: .\vacancies\models.py:32
 msgid "Нет опыта"
 msgstr "Нет опыта"
 
-#: vacancies/models.py:35
+#: .\vacancies\models.py:35
 msgid "До 6 месяцев"
 msgstr "До 6 месяцев"
 
-#: vacancies/models.py:38
+#: .\vacancies\models.py:38
 msgid "От 6 до 12 месяцев"
 msgstr "От 6 до 12 месяцев"
 
-#: vacancies/models.py:41
+#: .\vacancies\models.py:41
 msgid "Более 1 года"
 msgstr "Более 1 года"
 
-#: vacancies/models.py:48
+#: .\vacancies\models.py:48
 msgid "создатель вакансии"
 msgstr "создатель вакансии"
 
-#: vacancies/models.py:55
+#: .\vacancies\models.py:55
 msgid "название вакансии"
 msgstr "название вакансии"
 
-#: vacancies/models.py:61
+#: .\vacancies\models.py:61
 msgid "описание вакансии"
 msgstr "описание вакансии"
 
-#: vacancies/models.py:67
+#: .\vacancies\models.py:67
 msgid "Описание не может быть таким коротким"
 msgstr "Описание не может быть таким коротким"
 
-#: vacancies/models.py:73
+#: .\vacancies\models.py:73
 msgid "Описание не может быть таким длинным"
 msgstr "Описание не может быть таким длинным"
 
-#: vacancies/models.py:78
+#: .\vacancies\models.py:78
 msgid "Описание вакансии должно быть от 5 до 10000 символов"
 msgstr "Описание не может быть таким коротким"
 
-#: vacancies/models.py:84
+#: .\vacancies\models.py:84
 msgid "создано"
 msgstr "создано"
 
-#: vacancies/models.py:89
+#: .\vacancies\models.py:89
 msgid "обновлено"
 msgstr "обновлено"
 
-#: vacancies/models.py:95
+#: .\vacancies\models.py:95
 msgid "cтатус"
 msgstr "статус"
 
-#: vacancies/models.py:107
+#: .\vacancies\models.py:107
 msgid "название хакатона"
 msgstr "название хакатона"
 
-#: vacancies/models.py:112
+#: .\vacancies\models.py:112
 msgid "Название хакатона, к которому относится вакансия"
 msgstr "Название хакатона, к которому относится вакансия"
 
-#: vacancies/models.py:118
+#: .\vacancies\models.py:118
 msgid "Крайний срок подачи заявок"
 msgstr "Крайний срок подачи заявок"
 
-#: vacancies/models.py:121
+#: .\vacancies\models.py:121
 msgid "Введите крайний срок подачи заявок"
 msgstr "Введите крайний срок подачи заявок"
 
-#: vacancies/models.py:127
+#: .\vacancies\models.py:127
 msgid "требуемый опыт"
 msgstr "требуемый опыт"
 
-#: vacancies/models.py:129
+#: .\vacancies\models.py:129
 msgid "Укажите количество опыта необходимого для кандидата"
 msgstr "Укажите необходимый опыт для кандидата"
 
-#: vacancies/models.py:138
+#: .\vacancies\models.py:138
 msgid "состав команды"
 msgstr "Состав команды"
 
-#: vacancies/models.py:144
+#: .\vacancies\models.py:144
 msgid "необходимое количество человек в группе для участия в хакатоне"
 msgstr "необходимое количество людей в группе для участия в хакатоне"
 
-#: vacancies/models.py:152 vacancies/models.py:158
+#: .\vacancies\models.py:152 .\vacancies\models.py:158
 msgid "Введите корректное значение"
 msgstr "Введите корректное значение"
 
-#: vacancies/models.py:165 vacancies/models.py:193 vacancies/models.py:253
+#: .\vacancies\models.py:165 .\vacancies\models.py:193
+#: .\vacancies\models.py:253
 msgid "вакансия"
 msgstr "вакансия"
 
-#: vacancies/models.py:166
+#: .\vacancies\models.py:166
 msgid "вакансии"
 msgstr "вакансии"
 
-#: vacancies/models.py:178
+#: .\vacancies\models.py:178
 msgid "Вакансия с таким названием и хакатоном уже существует."
 msgstr "Вакансия с таким названием и хакатоном уже существует."
 
-#: vacancies/models.py:198
+#: .\vacancies\models.py:198
 msgid "комментарий"
 msgstr "комментарий"
 
-#: vacancies/models.py:203
+#: .\vacancies\models.py:203
 msgid "Слишком короткий комментарий!"
 msgstr "Слишком короткий комментарий!"
 
-#: vacancies/models.py:209
+#: .\vacancies\models.py:209
 msgid "Комментарий не может привышать 3000 символов!"
 msgstr "Комментарий не может превышать 3000 символов!"
 
-#: vacancies/models.py:218 vacancies/models.py:246
+#: .\vacancies\models.py:218 .\vacancies\models.py:246
 msgid "пользователь"
 msgstr "пользователь"
 
-#: vacancies/models.py:223
+#: .\vacancies\models.py:223
 msgid "cоздано"
 msgstr "создано"
 
-#: vacancies/models.py:228
+#: .\vacancies\models.py:228
 msgid "комментарий к вакансии"
 msgstr "комментарий к вакансии"
 
-#: vacancies/models.py:231
+#: .\vacancies\models.py:231
 msgid "комментарии к вакансиям"
 msgstr "комментарии к вакансиям"
 
-#: vacancies/models.py:258
+#: .\vacancies\models.py:258
 msgid "дата отклика"
 msgstr "дата отклика"
 
-#: vacancies/models.py:268
+#: .\vacancies\models.py:268
 msgid "отклик"
 msgstr "отклик"
 
-#: vacancies/models.py:269
+#: .\vacancies\models.py:269
 msgid "отклики"
 msgstr "отклики"
 
-#: vacancies/views.py:96
+#: .\vacancies\views.py:96
 msgid "Вы должны быть авторизованы"
 msgstr "Вы должны быть авторизованы"
 
-#: vacancies/views.py:128
+#: .\vacancies\views.py:128
 msgid "Вы уже откликнулись на эту вакансию"
 msgstr "Вы уже откликнулись на эту вакансию"
 
-#: vacancies/views.py:141
+#: .\vacancies\views.py:141
 msgid "Ваш отклик отправлен!"
 msgstr "Ваш отклик отправлен!"
 
-#: vacancies/views.py:280 vacancies/views.py:304 vacancies/views.py:325
-#: vacancies/views.py:368 vacancies/views.py:406 vacancies/views.py:451
+#: .\vacancies\views.py:280 .\vacancies\views.py:304 .\vacancies\views.py:325
+#: .\vacancies\views.py:368 .\vacancies\views.py:406 .\vacancies\views.py:451
 msgid "not found"
 msgstr "не найдено"
 
-#: vacancies/views.py:362
+#: .\vacancies\views.py:362
 msgid "Пользователь успешно приглашён в команду"
 msgstr "Пользователь успешно приглашён в команду"
 
-#: vacancies/views.py:400
+#: .\vacancies\views.py:400
 msgid "Пользователь отклонён"
 msgstr "Пользователь отклонён"
 
-#: vacancies/views.py:439
+#: .\vacancies\views.py:439
 #, python-brace-format
 msgid "Пользователь {user} удалён из команды"
 msgstr "Пользователь {user} удалён из команды"

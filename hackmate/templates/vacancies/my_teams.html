@@ -5,6 +5,7 @@
 
 {% block links %}
 	<link rel="stylesheet" href="{% static 'css/vacancies/my_vacancies.css' %}">
+	<link rel="stylesheet" href="{% static 'css/vacancies/my_teams.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -26,9 +27,37 @@
 					</a>
 					</h4>
 					<p class="vacancy-description">{{ vacancy.description|safe|truncatechars:200 }}</p>
-					<p>Статус: {{ vacancy.get_status_display }}</p>
-					<p>Хакатон: {{ vacancy.hackaton_title }} ({{ vacancy.hackaton_date }})</p>
-
+					<p>{% trans 'Хакатон:' %} {{ vacancy.hackaton_title }}</p>
+					<p>{% trans 'Дата проведения:' %} {{ vacancy.hackaton_date }}</p>
+				<article class="command">
+					<p><strong>{% trans 'Текущий состав команды' %}:</strong></p>
+					<article class="teammates">
+						<a href="{% url 'users:profile' vacancy.creater.username %}" class="teammate">
+							{% if vacancy.creater.profile.image %}
+								<img src="{{ vacancy.creater.profile.image.url }}" class="teammate-image">
+							{% else %}
+								<img src="{% static 'img/default-avatar.jpg' %}" class="teammate-image">
+							{% endif %}
+							<p class="teammate-username teammate-admin-username">{{ vacancy.creater.username|truncatechars:50 }}</p>
+						</a>
+						{% for member in vacancy.team_composition.all %}
+							<article class="teammate-article">
+								<a href="{% url 'users:profile' member.username %}" class="teammate">
+									{% if member.profile.image %}
+										<img src="{{ member.profile.image.url }}" class="teammate-image">
+									{% else %}
+										<img src="{% static 'img/default-avatar.jpg' %}" class="teammate-image">
+									{% endif %}
+									<p class="teammate-username">{{ member.username|truncatechars:50 }}</p>
+								</a>
+								{% if request.user == vacancy.creater and vacancy.status == 'active' %}
+									<a href="{% url 'vacancies:kick_user' vacancy.id member.pk %}"><i
+											class="fa-solid fa-ban decline-user kick-teammate"></i></a>
+								{% endif %}
+							</article>
+						{% endfor %}
+					</article>
+				</article>
 				</div>
 				{% empty %}
 				<article class="nothing-container">

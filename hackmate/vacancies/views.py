@@ -458,7 +458,20 @@ class UserTeamsView(django.views.generic.ListView):
     context_object_name = "teams"
 
     def get_queryset(self):
-        return vacancies.models.Vacancy.objects.filter(
-            django.db.models.Q(creater_id=self.request.user.pk)
-            | django.db.models.Q(team_composition=self.request.user.pk),
+        return (
+            vacancies.models.Vacancy.objects.filter(
+                django.db.models.Q(creater_id=self.request.user.pk)
+                | django.db.models.Q(team_composition=self.request.user.pk),
+                status__in=[
+                    vacancies.models.Vacancy.VacancyStatuses.ACTIVE,
+                    vacancies.models.Vacancy.VacancyStatuses.EQUIPPED,
+                ],
+            )
+            .select_related("creater", "creater__profile")
+            .prefetch_related(
+                django.db.models.Prefetch(
+                    "team_composition",
+                    queryset=user_model.objects.select_related("profile"),
+                ),
+            )
         )
