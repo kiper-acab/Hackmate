@@ -23,6 +23,8 @@
 				   class="{% if view_name == 'vacancies:user_responses' %}list-group-item list-group-item-info {% endif %}">{% trans "Мои отклики" %}</a>
 				<a href="{% url 'vacancies:user_vacancies' %}"
 				   class="{% if view_name == 'vacancies:user_vacancies' %}list-group-item list-group-item-info {% endif %}">{% trans "Мои вакансии" %}</a>
+				<a href="{% url 'vacancies:user_teams' %}"
+				   class="{% if view_name == 'vacancies:user_teams' %}list-group-item list-group-item-info {% endif %}">{% trans "Мои команды" %}</a>
 				<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown">
