@@ -115,10 +115,10 @@ class Vacancy(django.db.models.Model):
 
     hackaton_date = django.db.models.DateField(
         verbose_name=django.utils.translation.gettext_lazy(
-            "Крайний срок подачи заявок",
+            "дата проведения хакатона",
         ),
         help_text=django.utils.translation.gettext_lazy(
-            "Введите крайний срок подачи заявок",
+            "Введите дата проведения хакатона",
         ),
     )
 

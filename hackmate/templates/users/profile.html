@@ -15,8 +15,8 @@
 				<div class="stars">
 					{% if is_own_profile %}
 						<article>
-							<h4>{% trans 'Рейтинг' %} {{ rating_user.average|floatformat:1 }}</h4>
-							<h4>{% trans 'Количество оценок' %} {{ rating_user.count }}</h4>
+							<h4>{% trans 'Рейтинг' %}: {{ rating_user.average|floatformat:1|default:"0" }}</h4>
+							<h4>{% trans 'Количество оценок' %}: {{ rating_user.count|default:"0" }}</h4>
 						</article>
 					{% else %}
 						{% ratings user.profile %}
@@ -35,14 +35,14 @@
 		<div class="profile-info">
 
 			<h1>{{ user.username }}</h1>
-			<p class="email">{% trans "Email" %}: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+			<p class="email"><strong>{% trans "Email" %}:</strong><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
 
 			<div class="profile-details">
 				<div class="profile-item">
 					{% if user.profile.description %}
-						<p><strong>О себе:</strong> {{ user.profile.description }}</p>
+						<p><strong>{% trans 'О себе' %} </strong> {{ user.profile.description }}</p>
 					{% else %}
-						<p><strong>О себе:</strong> Информация не указана.</p>
+						<p><strong>{% trans 'О себе' %}:</strong>{% trans 'Информация не указана' %}.</p>
 					{% endif %}
 				</div>
 

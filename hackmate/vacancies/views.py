@@ -101,19 +101,6 @@ class VacancyDetailView(
 
         vacancy = self.get_object()
 
-        form = vacancies.forms.CommentForm(request.POST) or None
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.vacancy = vacancy
-            comment.user = request.user
-            comment.save()
-            return django.shortcuts.redirect(
-                django.urls.reverse(
-                    "vacancies:vacancy_detail",
-                    kwargs={"pk": vacancy.pk},
-                ),
-            )
-
         if vacancies.models.Response.objects.filter(
             vacancy=vacancy,
             user=request.user,
