@@ -101,6 +101,10 @@
     }
 }
 
+.grow-gray-button{
+    background-color: gray !important;
+}
+
 .teammate-article{
     display: flex;
     align-items: center;

@@ -4,6 +4,7 @@ const vacanciesContainer = document.querySelector('.vacancies');
 let isLoading = false;
 let lastScrollTop = 0;
 let scrollThreshold = 40;
+let hasMoreVacancies = true;
 
 window.addEventListener('scroll', handleScroll);
 
@@ -12,7 +13,7 @@ function handleScroll() {
     const isScrollingDown = scrollTop - lastScrollTop > 0;
     const scrolledEnough = scrollTop - lastScrollTop > scrollThreshold;
 
-    if (isScrollingDown && scrolledEnough && isBottomOfPage() && !isLoading) {
+    if (isScrollingDown && scrolledEnough && isBottomOfPage() && !isLoading && hasMoreVacancies) {
         loadMoreVacancies();
     }
 
@@ -35,14 +36,20 @@ function loadMoreVacancies() {
             return response.json();
         })
         .then(data => {
+            if (data.length === 0) {
+                hasMoreVacancies = false;
+                return;
+            }
+
             data.forEach(vacancy => {
                 const vacancyElement = createVacancyElement(vacancy);
                 vacanciesContainer.appendChild(vacancyElement);
             });
-            isLoading = false;
         })
         .catch(error => {
             console.error('Ошибка загрузки вакансий:', error);
+        })
+        .finally(() => {
             isLoading = false;
         });
 }

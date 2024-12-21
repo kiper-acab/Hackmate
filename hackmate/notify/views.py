@@ -15,8 +15,16 @@ class ReadAllNotificationsView(
 ):
     def get(self, request, *args, **kwargs):
         request.user.notifications.mark_all_as_read()
+        previous_page = request.META.get("HTTP_REFERER")
+
         return django.shortcuts.redirect(
-            django.urls.reverse("homepage:homepage"),
+            (
+                previous_page
+                if previous_page
+                else django.urls.reverse(
+                    "homepage:homepage",
+                )
+            ),
         )
 
 
@@ -34,6 +42,14 @@ class ReadOneNotificationView(
         )
         notification.mark_as_read()
 
+        previous_page = request.META.get("HTTP_REFERER")
+
         return django.shortcuts.redirect(
-            django.urls.reverse("homepage:homepage"),
+            (
+                previous_page
+                if previous_page
+                else django.urls.reverse(
+                    "homepage:homepage",
+                )
+            ),
         )

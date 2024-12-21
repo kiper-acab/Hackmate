@@ -29,9 +29,9 @@ class Migration(django.db.migrations.Migration):
             model_name="vacancy",
             name="hackaton_date",
             field=django.db.models.DateField(
-                default="2025-01-01",
-                help_text="Крайний срок подачи заявок",
-                verbose_name="дедлайн",
+                default="2025-02-01",
+                help_text="Введите крайний срок подачи заявок",
+                verbose_name="Крайний срок подачи заявок",
             ),
             preserve_default=False,
         ),
@@ -39,8 +39,9 @@ class Migration(django.db.migrations.Migration):
             model_name="vacancy",
             name="description",
             field=tinymce.models.HTMLField(
-                help_text="Описание вакансии должно быть "
-                "от 5 до 10000 символов",
+                help_text=(
+                    "Описание вакансии должно быть от 5 до 10000 символов"
+                ),
                 validators=[
                     django.core.validators.MinLengthValidator(
                         5,
@@ -56,6 +57,26 @@ class Migration(django.db.migrations.Migration):
         ),
         django.db.migrations.AlterField(
             model_name="vacancy",
+            name="need_count_users",
+            field=django.db.models.PositiveSmallIntegerField(
+                validators=[
+                    django.core.validators.MinValueValidator(
+                        2,
+                        "В команде не может быть менее 2-ух людей",
+                    ),
+                    django.core.validators.MaxValueValidator(
+                        20,
+                        "В команде не может быть более 20 людей",
+                    ),
+                ],
+                verbose_name=(
+                    "необходимое количество человек в "
+                    "группе для участия в хакатоне"
+                ),
+            ),
+        ),
+        django.db.migrations.AlterField(
+            model_name="vacancy",
             name="required_experience",
             field=django.db.models.CharField(
                 choices=[
@@ -65,8 +86,9 @@ class Migration(django.db.migrations.Migration):
                     ("more_than_12_months", "Более 1 года"),
                 ],
                 default="no_expirience",
-                help_text="Укажите количество опыта "
-                "необходимого для кандидата",
+                help_text=(
+                    "Укажите количество опыта необходимого для кандидата"
+                ),
                 max_length=300,
                 verbose_name="требуемый опыт",
             ),
