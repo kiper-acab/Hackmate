@@ -3,20 +3,23 @@ name: Django CI on push in any branch
 on: [push, pull_request]
 
 jobs:
-  runs-on: ubuntu-latest
   black-cheack:
-    uses: actions/checkout@v3
+    runs-on: ubuntu-latest
     container:
       image: registry.gitlab.com/pipeline-components/black:latest
     steps:
-      run: black --config pyproject.toml --check .
-  
+      - name: Django CI on push in any branch
+        uses: actions/checkout@v3
+        run: black --config pyproject.toml --check .
   flake:
-    uses: actions/checkout@v3
+    runs-on: ubuntu-latest
     container:
       image: registry.gitlab.com/pipeline-components/flake8:latest
     steps:
-      - name: install requirements
+      - name: install checkout
+        uses: actions/checkout@v3
+
+      - name: install flake8 requirements
         run:
           pip install -r requirements/test.txt
 
@@ -25,12 +28,13 @@ jobs:
           flake8 --verbose
   
   tests:
+    runs-on: ubuntu-latest
     needs: [black-check, flake]
-    uses: actions/checkout@v3
     container:
       image: python:3.10
     steps:
       - name: install test requirements
+        uses: actions/checkout@v3
         run:
           pip install -r requirements/test.txt
       
