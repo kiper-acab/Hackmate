@@ -1,5 +1,5 @@
 # HackMate
-![pipeline status](https://github.com/kiper-acab/Hackmate/actions/workflows/github-ci.yaml/badge.svg)
+[![pipeline status](https://github.com/kiper-acab/Hackmate/actions/workflows/github-ci.yaml/badge.svg)](https://github.com/kiper-acab/Hackmate/)
 ## Удобный сервис по поиску сокомандников для хакатонов
 
 ---
