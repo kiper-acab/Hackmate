@@ -1,6 +1,5 @@
 # HackMate
-[![pipeline status](https://gitlab.crja72.ru/django/2024/autumn/course/projects/team-5/badges/main/pipeline.svg)](https://gitlab.crja72.ru/django/2024/autumn/course/projects/team-5/commits/main)
-
+![pipeline status](https://github.com/kiper-acab/Hackmate/actions/workflows/github-ci.yaml/badge.svg)
 ## Удобный сервис по поиску сокомандников для хакатонов
 
 ---
