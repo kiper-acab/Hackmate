@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 11:54+0300\n"
+"POT-Creation-Date: 2024-12-26 17:18+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -616,6 +616,10 @@ msgstr "Вы вышли из аккаунта"
 #: .\templates\users\password_change_done.html:8
 msgid "Пароль успешно поменяли"
 msgstr "Пароль успешно поменяли"
+
+#: .\templates\users\password_reset.html:17
+msgid "Восстановить"
+msgstr "Восстановить"
 
 #: .\templates\users\password_reset_done.html:8
 #, fuzzy
@@ -1271,9 +1275,6 @@ msgstr "Пользователь {user} удалён из команды"
 
 #~ msgid "Телеграм службы поддержки: "
 #~ msgstr "Телеграм службы поддержки: "
-
-#~ msgid "Восстановить"
-#~ msgstr "Восстановить"
 
 #~ msgid "Выберите дедлайн"
 #~ msgstr "Выберите дедлайн"

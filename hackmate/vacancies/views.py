@@ -1,7 +1,9 @@
 __all__ = ()
 
 import datetime
+import re
 
+import django.conf
 import django.contrib
 import django.contrib.auth.mixins
 import django.contrib.messages
@@ -243,11 +245,19 @@ class CreateCommentView(
     def post(self, request, *args, **kwargs):
         vacancy = vacancies.models.Vacancy.objects.get(pk=kwargs.get("pk"))
         comment = request.POST.get("comment")
-        if comment:
+        if not re.search(django.conf.settings.BAD_WORDS_PATTERN, comment):
             vacancies.models.CommentVacancy.objects.create(
                 vacancy=vacancy,
                 user=request.user,
                 comment=comment,
+            )
+        else:
+            django.contrib.messages.error(
+                request,
+                django.utils.translation.gettext_lazy(
+                    "В вашем комментарии присутствуют нецензурные слова"
+                    ", поэтому он не будет отправлен",
+                ),
             )
 
         return django.shortcuts.redirect(

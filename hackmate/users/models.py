@@ -184,14 +184,6 @@ class ProfileLink(django.db.models.Model):
         }
         return fa_icons.get(self.site_type, "fa-link")
 
-    def clean(self):
-        super().clean()
-        if self.url and self.site_type:
-            users.validators.validate_social_network_url(
-                self.url,
-                self.site_type,
-            )
-
     class Meta:
         verbose_name = django.utils.translation.gettext_lazy("ссылка")
         verbose_name_plural = django.utils.translation.gettext_lazy("ссылки")

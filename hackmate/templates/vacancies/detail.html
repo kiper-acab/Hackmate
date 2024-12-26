@@ -9,6 +9,13 @@
 
 {% block content %}
 	<div class="container vacancy-container">
+		{% if messages %}
+			<div class="messages" role="alert">
+				{% for message in messages %}
+					<p{% if message.tags %} class="alert alert-dark {{ message.tags }}"{% endif %}>{{ message }}</p>
+				{% endfor %}
+			</div>
+		{% endif %}
 		{% if vacancy.status == "active" %}
 			{% if request.user == vacancy.creater %}
 				<div class="dropdown">
@@ -17,6 +24,7 @@
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item"
 						       href="{% url 'vacancies:change_vacancy' vacancy.pk %}">{% trans 'Изменить вакансию' %}</a></li>
+						<hr>
 						<li><a class="dropdown-item"
 						       href="{% url 'vacancies:delete_vacancy' vacancy.pk %}">{% trans 'Удалить вакансию' %}</a></li>
 					</ul>
