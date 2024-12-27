@@ -75,6 +75,10 @@ html, body {
     margin: auto 10px;
 }
 
+.dropdown-menu{
+    padding: 0;
+}
+
 .dropdown-item{
     padding: 7px 3px;
     border-radius: 5%;

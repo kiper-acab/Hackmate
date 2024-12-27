@@ -1,0 +1,230 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    word-break: break-all;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: "Raleway", sans-serif;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-container {
+    flex: 1;
+}
+
+
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-brand img {
+    width: 48px;
+    height: 48px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-nav>a {
+    text-decoration: none;
+    color: #343a40;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-toggle{
+    color: black;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    border: none;
+}
+
+.dropdown-toggle[aria-expanded="true"],
+.dropdown-toggle:hover {
+    color: black;
+    background-color: white;
+}
+
+
+.dropdown-username{
+    margin: auto 10px;
+}
+
+.dropdown-menu{
+    padding: 0;
+}
+
+.dropdown-item{
+    padding: 7px 3px;
+    border-radius: 5%;
+}
+
+.dropdown-item:hover {
+    color: white;
+    background-color: rgb(51, 50, 50);
+    transition: .3s;
+}
+
+.dropdown-image{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.fa-bell{
+    color: #8599a1;
+}
+
+.fa-bell:hover{
+    transition: .3s;
+    color: #8ed2ec;
+}
+
+.dropdown-item-notify{
+    margin: auto;
+}
+
+.dropdown-item-notify:hover{
+    background-color: white !important;
+    color: black !important;
+}
+
+.notification-dropdown-item-li{
+    display: flex;
+}
+
+
+.readone_notification{
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+    margin: 0 5px;
+}
+
+.readone_notification:hover{
+    transition: .3s;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.bell-link{
+    text-decoration: none;
+}
+
+.text-muted{
+    margin: auto 0;
+}
+
+.notification-profile-link{
+    padding: 0;
+    text-decoration: none;
+}
+
+.set-language-form{
+    display: flex;
+    justify-content: end;
+    margin: 0 50px;
+    width: 500px;
+}
+
+.set-language-btn{
+    border-radius: 5%;
+}
+
+.form-select{
+    width: 200px;
+}
+
+.footer {
+    background-color: rgb(20, 20, 20);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.footer-left h1 {
+    font-size: 24px;
+}
+
+.footer-center ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-center ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.footer-center ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-right ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.footer-right ul li {
+    margin: 0 10px;
+}
+
+.footer-right ul li img {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-right ul li a {
+    color: #FC6D26;
+    font-size: 24px;
+    text-decoration: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer-right ul li a:hover {
+    transform: scale(1.1);
+    color: #FF7F50;
+}

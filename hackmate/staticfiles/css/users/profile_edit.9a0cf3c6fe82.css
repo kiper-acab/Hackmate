@@ -1,0 +1,134 @@
+.container > section {
+    margin: 30px;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 30px;
+}
+
+
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group>label {
+    font-weight: bold;
+    margin-top: 20px;
+    color: #555;
+}
+
+.form-control{
+    margin: 3px;
+}
+
+.add-new-link-title{
+    margin-top: 50px;
+}
+
+.current-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+    background-color: #eaeaea;
+}
+.delete-link-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+
+}
+
+.delete-link-btn:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: darkred;
+}
+
+.delete-link-form {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.delete-profile-image{
+    width: 200px;
+}
+
+.grow-button {
+    border:none;
+    margin: 30px;
+    text-decoration: none;
+    background:transparent;
+    --btn-width: 200px;
+    width: var(--btn-width);
+    min-height:45px;
+    background-color:rgb(71, 172, 255);
+    color:white;
+    font-weight:bold;
+    border-radius:50px;
+
+    cursor: pointer;
+    box-sizing: content-box;
+    text-align:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    --expand: 0px;
+
+    position:relative;
+    transition: padding 0.5s, left 0.5s;
+
+    padding-inline:var(--expand);
+    left: calc( var(--expand) * -1);
+
+    &:hover, &:active {
+      --expand: calc( var(--btn-width) * .15);
+    }
+  }
+
+
+.li-links{
+    display: flex;
+    align-items: center;
+    
+}
+.li-links>p{
+    margin: auto 0;
+}
+
+.other-social-links-title{
+    margin-top: 50px;
+}
+
+.close{
+    margin: auto 10px;
+    color: rgb(255, 0, 0);
+    background: transparent;
+    font-size: 30px;
+}
+
+.close:hover{
+    color: rgba(255, 0, 0, 0.5);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.password-container {
+    margin-bottom: 20px;
+}

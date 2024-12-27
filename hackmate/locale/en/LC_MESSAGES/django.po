@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-26 17:18+0300\n"
+"POT-Creation-Date: 2024-12-27 13:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -589,7 +589,7 @@ msgid "Сменить"
 msgstr "Change"
 
 #: .\templates\users\login.html:26 .\templates\users\signup.html:24
-#: .\templates\vacancies\detail.html:106
+#: .\templates\vacancies\detail.html:114
 msgid "Отправить"
 msgstr "Send"
 
@@ -704,7 +704,7 @@ msgid "Сохранить изменения"
 msgstr "Save changes"
 
 #: .\templates\vacancies\change_vacancy.html:12
-#: .\templates\vacancies\detail.html:19
+#: .\templates\vacancies\detail.html:26
 msgid "Изменить вакансию"
 msgstr "Edit vacancy"
 
@@ -712,52 +712,52 @@ msgstr "Edit vacancy"
 msgid "Сохранить"
 msgstr "Save"
 
-#: .\templates\vacancies\detail.html:21
+#: .\templates\vacancies\detail.html:29
 msgid "Удалить вакансию"
 msgstr "Delete vacancy"
 
-#: .\templates\vacancies\detail.html:30
+#: .\templates\vacancies\detail.html:38
 msgid "Создатель:"
 msgstr "Creator:"
 
-#: .\templates\vacancies\detail.html:31
+#: .\templates\vacancies\detail.html:39
 msgid "Создано:"
 msgstr "Created:"
 
-#: .\templates\vacancies\detail.html:33 .\templates\vacancies\my_teams.html:30
+#: .\templates\vacancies\detail.html:41 .\templates\vacancies\my_teams.html:30
 msgid "Хакатон:"
 msgstr "Hackathon:"
 
-#: .\templates\vacancies\detail.html:36
+#: .\templates\vacancies\detail.html:44
 msgid "Дата проведения хакатона"
 msgstr "Date of the hackathon"
 
-#: .\templates\vacancies\detail.html:39
+#: .\templates\vacancies\detail.html:47
 msgid "Требуемый опыт:"
 msgstr "Required experience:"
 
-#: .\templates\vacancies\detail.html:42
+#: .\templates\vacancies\detail.html:50
 msgid "Необходимое количество человек в группе для участия в хакатоне"
 msgstr ""
 "The number of people needed in the group to participate in the hackathon"
 
-#: .\templates\vacancies\detail.html:45 .\templates\vacancies\my_teams.html:33
+#: .\templates\vacancies\detail.html:53 .\templates\vacancies\my_teams.html:33
 msgid "Текущий состав команды"
 msgstr "Team composition"
 
-#: .\templates\vacancies\detail.html:81
+#: .\templates\vacancies\detail.html:89
 msgid "Откликнуться"
 msgstr "Respond"
 
-#: .\templates\vacancies\detail.html:84
+#: .\templates\vacancies\detail.html:92
 msgid "Вы должны быть авторизованы, чтобы откликнуться."
 msgstr "You must be logged in to respond."
 
-#: .\templates\vacancies\detail.html:89
+#: .\templates\vacancies\detail.html:97
 msgid "Комментарии"
 msgstr "Comments"
 
-#: .\templates\vacancies\detail.html:133
+#: .\templates\vacancies\detail.html:141
 msgid "Комментариев пока нет."
 msgstr "No comments yet."
 
@@ -809,7 +809,7 @@ msgid "Список вакансий"
 msgstr "List of vacancies"
 
 #: .\templates\vacancies\vacancies.html:15
-#: .\templates\vacancies\vacancy_form.html:50
+#: .\templates\vacancies\vacancy_form.html:49
 msgid "Создать вакансию"
 msgstr "Create vacancy"
 
@@ -922,11 +922,11 @@ msgstr "URL"
 msgid "Полная ссылка, например, https://example.com"
 msgstr "Full link, for example, https://example.com"
 
-#: .\users\models.py:196
+#: .\users\models.py:188
 msgid "ссылка"
 msgstr "link"
 
-#: .\users\models.py:197
+#: .\users\models.py:189
 msgid "ссылки"
 msgstr "links"
 
@@ -1196,32 +1196,40 @@ msgstr "response"
 msgid "отклики"
 msgstr "responses"
 
-#: .\vacancies\views.py:96
+#: .\vacancies\views.py:98
 msgid "Вы должны быть авторизованы"
 msgstr "You must be logged in"
 
-#: .\vacancies\views.py:115
+#: .\vacancies\views.py:117
 msgid "Вы уже откликнулись на эту вакансию"
 msgstr "You have already responded to this vacancy"
 
-#: .\vacancies\views.py:128
+#: .\vacancies\views.py:130
 msgid "Ваш отклик отправлен!"
 msgstr "Your response has been sent!"
 
-#: .\vacancies\views.py:283 .\vacancies\views.py:307 .\vacancies\views.py:328
-#: .\vacancies\views.py:371 .\vacancies\views.py:409 .\vacancies\views.py:454
+#: .\vacancies\views.py:258
+msgid ""
+"В вашем комментарии присутствуют нецензурные слова, поэтому он не будет "
+"отправлен"
+msgstr "Your comment contains obscene words, so it will not be "
+"sent"
+
+
+#: .\vacancies\views.py:293 .\vacancies\views.py:317 .\vacancies\views.py:338
+#: .\vacancies\views.py:381 .\vacancies\views.py:419 .\vacancies\views.py:464
 msgid "not found"
 msgstr "not found"
 
-#: .\vacancies\views.py:365
+#: .\vacancies\views.py:375
 msgid "Пользователь успешно приглашён в команду"
 msgstr "User successfully invited to the team"
 
-#: .\vacancies\views.py:403
+#: .\vacancies\views.py:413
 msgid "Пользователь отклонён"
 msgstr "User rejected"
 
-#: .\vacancies\views.py:442
+#: .\vacancies\views.py:452
 #, python-brace-format
 msgid "Пользователь {user} удалён из команды"
 msgstr "User {user} removed from the team"

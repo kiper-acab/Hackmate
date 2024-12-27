@@ -287,8 +287,6 @@ class CustomPasswordResetCompleteView(
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            feedback = form.cleaned_data["feedback"]
-            print(f"Отзыв получен: {feedback}")
             return django.http.HttpResponseRedirect(
                 django.urls.reverse_lazy("users:password_reset_complete"),
             )

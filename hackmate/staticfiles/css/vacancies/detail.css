@@ -9,9 +9,26 @@
     position: relative;
 }
 
+.messages{
+    margin-bottom: 50px;
+}
+
 .vacancy-container>.dropdown{
     position: absolute;
     right: 5%;
+}
+
+.vacancy-container>.dropdown .dropdown-menu{
+    padding: 0;
+}
+
+
+.vacancy-container>.dropdown .dropdown-item{
+    text-align: center;
+}
+
+.vacancy-container>.dropdown hr{
+    margin: 0;
 }
 
 .btn-vacancy-menu{
@@ -99,6 +116,10 @@
       --expand: calc( var(--btn-width) * .15);
       background-color:rgb(71, 172, 255);
     }
+}
+
+.grow-gray-button{
+    background-color: gray !important;
 }
 
 .teammate-article{
