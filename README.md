@@ -180,5 +180,5 @@ python manage.py runserver
   [GitHub](https://github.com/ShelMakar) | [Telegram](https://t.me/shel_makar)
 
 - **Харазян Левон**  
-  [Telegram](https://t.me/l_kharazyan)
+  [GitHub](https://github.com/KharazyanLevon) | [Telegram](https://t.me/l_kharazyan)
 
