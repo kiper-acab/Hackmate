@@ -367,6 +367,3 @@ python manage.py runserver
 
 - **Levon Kharazyan**  
   [Telegram](https://t.me/l_kharazyan)
-
-
-Translated with DeepL.com (free version)
