@@ -53,7 +53,7 @@ HackMate предоставляет простой и удобный инстр�
 ### Клонирование репозитория
 Клонируйте проект с помощью команды:
 ```bash
-git clone https://gitlab.crja72.ru/django/2024/autumn/course/projects/team-5.git
+git clone [https://gitlab.crja72.ru/django/2024/autumn/course/projects/team-5.git](https://github.com/kiper-acab/Hackmate.git)
 ```
 
 ### Создание виртуальной среды
